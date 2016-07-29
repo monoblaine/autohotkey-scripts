@@ -164,6 +164,12 @@ CoordMode, Mouse, Screen
 MouseMove, A_ScreenWidth / 2, A_ScreenHeight - 3
 Return
 
+; Move mouse pointer to somewhere safe (alternate-bottom-right)
+^!+n::
+CoordMode, Mouse, Screen
+MouseMove, A_ScreenWidth - 23, A_ScreenHeight - 3
+Return
+
 ; Media stuff
 ^!+Left::Send   {Media_Prev}
 ^!+Right::Send  {Media_Next}
