@@ -192,6 +192,8 @@ Return
 
 #IfWinActive, ahk_exe Meld.exe
     Esc::Send !{f4}
+#IfWinActive, ahk_exe 7zFM.exe
+    Esc::Send !{f4}
 #IfWinActive
 
 ; print [ ]
