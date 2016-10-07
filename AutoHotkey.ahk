@@ -149,7 +149,7 @@ Return
 ; Move mouse pointer to somewhere safe (alternate)
 ^!+e::
 CoordMode, Mouse, Screen
-MouseMove, A_ScreenWidth - 23, 50
+MouseMove, A_ScreenWidth - 65, 50
 Return
 
 ; Move mouse pointer to somewhere safe (alternate-bottom)
