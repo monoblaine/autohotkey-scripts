@@ -1,4 +1,4 @@
-#NoTrayIcon 
+#NoTrayIcon
 #SingleInstance force
 
 #a:: Winset, Alwaysontop, , A
@@ -90,8 +90,8 @@ Return
 		Send {Volume_Down}
 		return
 	}
-	
-	
+
+
 :*:;;today::  ; This hotstring replaces ";;today" with the current date and time via the commands below.
 FormatTime, CurrentDateTime,, yyy-MM-dd  ; It will look like 2009-10-13
 SendInput %CurrentDateTime%
