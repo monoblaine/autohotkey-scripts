@@ -207,13 +207,11 @@ return
 StringReplace, clipboard, clipboard, `\ , `/ , All
 return
 
-; ctrl+space to send, ctrl+shift+space to remove 4 spaces in firefox
-#IfWinActive, ahk_class MozillaWindowClass
-    ^Space::
-    SendInput {Space}{Space}{Space}{Space}
-    return
+; win+space to send, win+shift+space to remove 4 spaces
+#Space::
+SendInput {Space}{Space}{Space}{Space}
+return
 
-    ^+Space::
-    SendInput {Backspace}{Backspace}{Backspace}{Backspace}
-    return
-#IfWinActive
+#+Space::
+SendInput {Backspace}{Backspace}{Backspace}{Backspace}
+return
