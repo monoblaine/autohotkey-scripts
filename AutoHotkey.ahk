@@ -215,3 +215,10 @@ return
 #+Space::
 SendInput {Backspace}{Backspace}{Backspace}{Backspace}
 return
+
+#+Z:: ; Win + Shift + Z - Transparency ON
+WinSet, Transparent, 150, A ; the active window
+return
+#+A:: ; Win + Shift + A - Transparency OFF
+WinSet, Transparent, OFF, A ; the active window
+return
