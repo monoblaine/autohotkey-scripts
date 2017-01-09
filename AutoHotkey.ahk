@@ -1,224 +1,161 @@
 #NoTrayIcon
 #SingleInstance force
 
-#a:: Winset, Alwaysontop, , A
-
-;title: ClipChain
-;description: Clipboard utility for copying multiple strings into one long "chain"
-;author: Dustin Luck
-;version: 0.1
-;homepage: http://lifehacker.com/5306452/clipchain-copies-multiple-text-strings-for-easy-pasting
-
-;DEFINE COPY HOTKEY
-CapsLock & c::
-;clear the clipboard and send copy command
-Clipboard =
-Send ^c
-;wait for clipboard data
-ClipWait 1
-if ErrorLevel
-    return
-;append the newly copied data to the ClipChain
-;add the separator only if ClipChain has something in it
-if (ClipChain <> "") {
-    ClipChain = %ClipChain%%ClipSep%%Clipboard%
-} else {
-    ClipChain = %Clipboard%
-}
-return
-
-;DEFINE CUT HOTKEY
-CapsLock & x::
-;clear the clipboard and send cut command
-Clipboard =
-Send ^x
-;wait for clipboard data
-ClipWait 1
-if ErrorLevel
-    return
-;append the newly copied data to the ClipChain
-;add the separator only if ClipChain has something in it
-if (ClipChain <> "") {
-    ClipChain = %ClipChain%%ClipSep%%Clipboard%
-} else {
-    ClipChain = %Clipboard%
-}
-return
-
-;DEFINE PASTE HOTKEY
-CapsLock & v::
-;replace the clipboard contents with the stored ClipChain and send paste command
-Clipboard := ClipChain
-Send ^v
-;clear ClipChain
-ClipChain =
-return
-
-;DEFINE SEPARATOR HOTKEYS
-CapsLock & -::
-CapsLock & NumpadSub:: ClipSep := "-"
-CapsLock & ,:: ClipSep := ","
-CapsLock & |:: ClipSep := "|"
-CapsLock & /:: ClipSep := "/"
-CapsLock & Space:: ClipSep := A_Space
-CapsLock & Tab:: ClipSep := A_Tab
-CapsLock & Enter:: ClipSep := "`r`n"
-;no separator
-CapsLock & Esc:: ClipSep :=
-
-;DEFINE CLEAR CONTENTS HOTKEY
-CapsLock & BS:: ClipChain =
-
-;DEFINE raw paste
-^+v::                            ; Text–only paste from ClipBoard
-   Clip0 = %ClipBoardAll%
-   ClipBoard = %ClipBoard%       ; Convert to text
-   Send ^v                       ; For best compatibility: SendPlay
-   Sleep 50                      ; Don't change clipboard while it is pasted! (Sleep > 0)
-   ClipBoard = %Clip0%           ; Restore original ClipBoard
-   VarSetCapacity(Clip0, 0)      ; Free memory
+#a:: ; Win + A
+    ; Make the active window stay always on top
+    Winset, Alwaysontop, , A
 Return
 
-+^#Up::
-	{
-		Send {Volume_Up}
-		return
-	}
+^+v:: ; ctrl + shift + v
+    ; Text–only paste from ClipBoard
+    Clip0 = %ClipBoardAll%
+    ClipBoard = %ClipBoard%       ; Convert to text
+    Send ^v                       ; For best compatibility: SendPlay
+    Sleep 50                      ; Don't change clipboard while it is pasted! (Sleep > 0)
+    ClipBoard = %Clip0%           ; Restore original ClipBoard
+    VarSetCapacity(Clip0, 0)      ; Free memory
+Return
 
-+^#Down::
-	{
-		Send {Volume_Down}
-		return
-	}
++^#Up:: ; win + ctrl + shift + up arrow
+    Send {Volume_Up}
+Return
 
++^#Down:: ; win + ctrl + shift + down arrow
+    Send {Volume_Down}
+Return
 
-:*:;;today::  ; This hotstring replaces ";;today" with the current date and time via the commands below.
-FormatTime, CurrentDateTime,, yyy-MM-dd  ; It will look like 2009-10-13
-SendInput %CurrentDateTime%
-return
+:*:;;today::
+    ; Replace ";;today" with current date
+    FormatTime, CurrentDateTime,, yyy-MM-dd ; 2009-10-13
+    SendInput %CurrentDateTime%
+Return
 
-:*:;;now::  ; This hotstring replaces ";;now" with the current date and time via the commands below.
-FormatTime, CurrentDateTime,, yyy-MM-dd HH.mm  ; It will look like 2009-10-13 10.57
-SendInput %CurrentDateTime%
-return
+:*:;;now::
+    ; Replace ";;now" with current date and time
+    FormatTime, CurrentDateTime,, yyy-MM-dd HH.mm ; 2009-10-13 10.57
+    SendInput %CurrentDateTime%
+Return
 
-:*:;;vnow::  ; This hotstring replaces ";;vnow" with the current date and time via the commands below.
-FormatTime, CurrentDateTime,, yyyMMddHHmm  ; It will look like 200910131057
-SendInput %CurrentDateTime%
-return
+:*:;;vnow::
+    ; Replace ";;vnow" with current date and time without separators
+    FormatTime, CurrentDateTime,, yyyMMddHHmm ; 200910131057
+    SendInput %CurrentDateTime%
+Return
 
-:*:;;time::  ; This hotstring replaces ";;time" with the current time and date via the commands below.
-FormatTime, CurrentDateTime, L1055, d MMMM yyy dddd, HH.mm  ; It will look like 13 August 2013 Tuesday, 13.17
-SendInput %CurrentDateTime%
-return
+:*:;;time::
+    ; Replace ";;time" with current date, time and day of week
+    FormatTime, CurrentDateTime, L1055, d MMMM yyy dddd, HH.mm ; 13 August 2013 Tuesday, 13.17
+    SendInput %CurrentDateTime%
+Return
 
-:*:;;date::  ; This hotstring replaces ";;Date" with the current date via the commands below.
-FormatTime, CurrentDateTime, L1055, d MMMM yyy dddd  ; It will look like 26 April 2010 Monday
-SendInput %CurrentDateTime%
-return
+:*:;;date::
+    ; Replace ";;date" with current date and day of week
+    FormatTime, CurrentDateTime, L1055, d MMMM yyy dddd ; 26 April 2010 Monday
+    SendInput %CurrentDateTime%
+Return
 
 :*:;;pipe::
-SendInput {Raw}==============================================================================
-return
+    SendInput {Raw}==============================================================================
+Return
 
 :*:;;dash::
-SendInput {Raw}------------------------------------------------------------------------------
-return
-
-;RShift & Space::
-;Send {Space}
-;Send {Left down}{Left up}
-
-
-; double click
-^!+o::
-Send {Click 2}
-return
-
-; single click
-^!+q::
-Send {Click 1}
-return
-
-; Move mouse pointer to somewhere safe
-^!+w::
-CoordMode, Mouse, Screen
-MouseMove, A_ScreenWidth - 145, 0
+    SendInput {Raw}------------------------------------------------------------------------------
 Return
 
-; Move mouse pointer to somewhere safe (alternate)
-^!+e::
-CoordMode, Mouse, Screen
-MouseMove, A_ScreenWidth - 65, 50
+^!+o:: ;; ctrl + alt + shift + o
+    ; double click
+    Send {Click 2}
 Return
 
-; Move mouse pointer to somewhere safe (alternate-bottom)
-^!+b::
-CoordMode, Mouse, Screen
-MouseMove, A_ScreenWidth / 2, A_ScreenHeight - 3
+^!+q:: ; ctrl + alt + shift + q
+    ; single click
+    Send {Click 1}
 Return
 
-; Move mouse pointer to somewhere safe (alternate-bottom-right)
-^!+n::
-CoordMode, Mouse, Screen
-MouseMove, A_ScreenWidth - 23, A_ScreenHeight - 3
+^!+w:: ; ctrl + alt + shift + w
+    CoordMode, Mouse, Screen
+    ; Move mouse pointer to somewhere safe
+    MouseMove, A_ScreenWidth - 145, 0
+Return
+
+^!+e:: ; ctrl + alt + shift + e
+    CoordMode, Mouse, Screen
+    ; Move mouse pointer to somewhere safe (alternate)
+    MouseMove, A_ScreenWidth - 65, 50
+Return
+
+^!+b:: ; ctrl + alt + shift + b
+    CoordMode, Mouse, Screen
+    ; Move mouse pointer to somewhere safe (alternate-bottom)
+    MouseMove, A_ScreenWidth / 2, A_ScreenHeight - 3
+Return
+
+^!+n:: ; ctrl + alt + shift + n
+    CoordMode, Mouse, Screen
+    ; Move mouse pointer to somewhere safe (alternate-bottom-right)
+    MouseMove, A_ScreenWidth - 23, A_ScreenHeight - 3
 Return
 
 ; Media stuff
 ^!+Left::Send   {Media_Prev}
 ^!+Right::Send  {Media_Next}
 ^!+Down::Send   {Media_Play_Pause}
-^!+Up::Send   {Media_Stop}
+^!+Up::Send     {Media_Stop}
 
 ; Launch "Everything" when Ctrl + F is pressed within File Explorer
 #IfWinActive, ahk_class CabinetWClass
-^F::
-   ControlGetText, RunPath, ToolbarWindow323, A
-   RunPath := SubStr(RunPath, 10)
-   isnotauserfolder := ":\"
-   IfNotInString, RunPath, %isnotauserfolder%
-   {
-      RunPath := "%UserProfile%" . "\" . RunPath . "\"
-   }
-   Run, C:\Program Files\Everything\Everything.exe -p "%RunPath%"
-   Return
+    ^F:: ;; ctrl + f
+        ControlGetText, RunPath, ToolbarWindow323, A
+        RunPath := SubStr(RunPath, 10)
+        isnotauserfolder := ":\"
+        IfNotInString, RunPath, %isnotauserfolder%
+        {
+           RunPath := "%UserProfile%" . "\" . RunPath . "\"
+        }
+        Run, C:\Program Files\Everything\Everything.exe -p "%RunPath%"
+    Return
 #IfWinActive
 
+; Press Esc to close window (If it is either Meld or 7-Zip)
 #IfWinActive, ahk_exe Meld.exe
     Esc::Send !{f4}
 #IfWinActive, ahk_exe 7zFM.exe
     Esc::Send !{f4}
 #IfWinActive
 
-; print [ ]
-^!+x::
-SendInput [ ]{Space}
-return
+^!+x:: ; ctrl + alt + shift + x
+    ; print [ ]
+    SendInput [ ]{Space}
+Return
 
-; print * (But not in Visual Studio)
 #IfWinNotActive, ahk_exe devenv.exe
-    ^!+c::
-    SendInput *{Space}
-    return
+    ^!+c:: ;; ctrl + alt + shift + c
+        ; print * (But not in Visual Studio)
+        SendInput *{Space}
+    Return
 #IfWinNotActive
 
-; replace all the \ characters within the text in clipboard with /
-^!+h::
-StringReplace, clipboard, clipboard, `\ , `/ , All
-return
+^!+h:: ; ctrl + alt + shift + h
+    ; replace all the \ characters within the text in clipboard with /
+    StringReplace, clipboard, clipboard, `\ , `/ , All
+Return
 
-; win+space to send, win+shift+space to remove 4 spaces
-#Space::
-SendInput {Space}{Space}{Space}{Space}
-return
+#Space:: ; win + space
+    ; Send 4 spaces
+    SendInput {Space}{Space}{Space}{Space}
+Return
 
-#+Space::
-SendInput {Backspace}{Backspace}{Backspace}{Backspace}
-return
+#+Space:: ; win + shift + space
+    ; Remove 4 spaces
+    SendInput {Backspace}{Backspace}{Backspace}{Backspace}
+Return
 
-#+Z:: ; Win + Shift + Z - Transparency ON
-WinSet, Transparent, 150, A ; the active window
-return
-#+A:: ; Win + Shift + A - Transparency OFF
-WinSet, Transparent, OFF, A ; the active window
-return
+#+Z:: ; win + shift + z
+    ; Make active window semi-transparent
+    WinSet, Transparent, 150, A
+Return
+
+#+A:: ; win + shift + a
+    ; Make active window opaque
+    WinSet, Transparent, OFF, A
+Return
