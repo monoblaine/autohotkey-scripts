@@ -62,6 +62,10 @@ Return
     SendInput {Raw}------------------------------------------------------------------------------
 Return
 
+:*:;;mail::
+    SendInput {Raw}zerhan@gmail.com
+Return
+
 ^!+o:: ;; ctrl + alt + shift + o
     ; double click
     Send {Click 2}
