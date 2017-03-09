@@ -174,3 +174,6 @@ Return
     ; Make active window opaque
     WinSet, Transparent, OFF, A
 Return
+
+; Disable Windows Key + Tab
+#Tab::Return
