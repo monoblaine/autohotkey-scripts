@@ -106,11 +106,6 @@ Return
     MouseMove, A_ScreenWidth - 23, A_ScreenHeight - 3
 Return
 
-^!+t:: ; ctrl + alt + shift + t
-    ; Move mouse pointer to caret
-    MouseMove, % A_CaretX, % A_CaretY
-Return
-
 ; Media stuff
 ^!+Left::Send   {Media_Prev}
 ^!+Right::Send  {Media_Next}
