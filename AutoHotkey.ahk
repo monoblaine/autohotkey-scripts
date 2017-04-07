@@ -36,6 +36,12 @@ Return
     SendInput %CurrentDateTime%
 Return
 
+:*:;;snow::
+    ; Replace ";;snow" with current date and time (with seconds)
+    FormatTime, CurrentDateTime,, yyy-MM-dd HH:mm:ss ; 2009-10-13 10:57:23
+    SendInput %CurrentDateTime%
+Return
+
 :*:;;vnow::
     ; Replace ";;vnow" with current date and time without separators
     FormatTime, CurrentDateTime,, yyyMMddHHmm ; 200910131057
