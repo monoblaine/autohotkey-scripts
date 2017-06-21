@@ -132,7 +132,9 @@ Return
     Return
 #IfWinActive
 
-; Press Esc to close window (If it is 7-Zip)
+; Press Esc to close window (If it is either Meld or 7-Zip)
+#IfWinActive, ahk_exe Meld.exe
+    Esc::Send !{f4}
 #IfWinActive, ahk_exe 7zFM.exe
     Esc::Send !{f4}
 #IfWinActive
