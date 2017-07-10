@@ -149,6 +149,14 @@ Return
     Return
 #IfWinNotActive
 
+#IfWinNotActive, ahk_exe devenv.exe
+    ^!+g:: ;; ctrl + alt + shift + g
+        ; Get substring that comes after the last index of '/' (But not in Visual Studio)
+        ; Useful for copying commit id's from a url
+        clipboard := RegExReplace(clipboard, "([^/]+\/+)+", "")
+    Return
+#IfWinNotActive
+
 ^!+h:: ; ctrl + alt + shift + h
     ; replace all the \ characters within the text in clipboard with /
     StringReplace, clipboard, clipboard, `\ , `/ , All
