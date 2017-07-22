@@ -211,3 +211,9 @@ ToolTip, %msg%
 Sleep, 400	; SPECIFY DISPLAY TIME (ms)
 ToolTip		; remove
 return
+
+#IfWinActive, ahk_class XLMAIN
+    ^NumpadSub::Send ^{WheelDown}
+    ^NumpadAdd::Send ^{WheelUp}
+    Return
+#IfWinNotActive
