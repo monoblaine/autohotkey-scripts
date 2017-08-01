@@ -100,6 +100,30 @@ Return
     MouseMove, A_ScreenWidth - 65, 50
 Return
 
+#+a:: ; win + shift + a
+    CoordMode, Mouse, Screen
+    ; Move mouse pointer slightly to left
+    MouseMove, -38, 0, 2, R
+Return
+
+#+d:: ; win + shift + d
+    CoordMode, Mouse, Screen
+    ; Move mouse pointer slightly to right
+    MouseMove, 38, 0, 2, R
+Return
+
+#+s:: ; win + shift + s
+    CoordMode, Mouse, Screen
+    ; Move mouse pointer slightly to down
+    MouseMove, 0, 38, 2, R
+Return
+
+#+w:: ; win + shift + w
+    CoordMode, Mouse, Screen
+    ; Move mouse pointer slightly to up
+    MouseMove, 0, -38, 2, R
+Return
+
 ^!+b:: ; ctrl + alt + shift + b
     CoordMode, Mouse, Screen
     ; Move mouse pointer to somewhere safe (alternate-bottom)
