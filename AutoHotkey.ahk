@@ -172,16 +172,6 @@ Return
     SendInput {Backspace}{Backspace}{Backspace}{Backspace}
 Return
 
-#+Z:: ; win + shift + z
-    ; Make active window semi-transparent
-    WinSet, Transparent, 150, A
-Return
-
-#+A:: ; win + shift + a
-    ; Make active window opaque
-    WinSet, Transparent, OFF, A
-Return
-
 ; Disable Windows Key + Tab
 #Tab::Return
 
