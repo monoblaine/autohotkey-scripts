@@ -231,3 +231,15 @@ return
     ^NumpadAdd::Send ^{WheelUp}
     Return
 #IfWinNotActive
+
+#+e:: ; win + shift + e
+    ; open file path in clipboard with notepad++
+    Sleep 150
+    Run, C:\Program Files (x86)\Notepad++\notepad++.exe "%clipboard%"
+Return
+
+#+f:: ; win + shift + f
+    ; open file path in clipboard with explorer
+    Sleep 150
+    Run explorer.exe /select`, "%clipboard%"
+Return
