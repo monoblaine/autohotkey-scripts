@@ -230,7 +230,7 @@ return
     ^NumpadSub::Send ^{WheelDown}
     ^NumpadAdd::Send ^{WheelUp}
     Return
-#IfWinNotActive
+#IfWinActive
 
 #+e:: ; win + shift + e
     ; open file path in clipboard with notepad++
