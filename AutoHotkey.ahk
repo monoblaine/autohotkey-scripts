@@ -103,25 +103,43 @@ Return
 #+a:: ; win + shift + a
     CoordMode, Mouse, Screen
     ; Move mouse pointer slightly to left
-    MouseMove, -19, 0, 2, R
+    MouseMove, -9, 0, 0, R
+Return
+
+#+z:: ; win + shift + z
+    CoordMode, Mouse, Screen
+    ; Move mouse pointer slightly to left
+    MouseMove, -19, 0, 0, R
 Return
 
 #+d:: ; win + shift + d
     CoordMode, Mouse, Screen
     ; Move mouse pointer slightly to right
-    MouseMove, 19, 0, 2, R
+    MouseMove, 9, 0, 0, R
+Return
+
+#+c:: ; win + shift + c
+    CoordMode, Mouse, Screen
+    ; Move mouse pointer slightly to right
+    MouseMove, 19, 0, 0, R
 Return
 
 #+s:: ; win + shift + s
     CoordMode, Mouse, Screen
     ; Move mouse pointer slightly to down
-    MouseMove, 0, 19, 2, R
+    MouseMove, 0, 9, 0, R
+Return
+
+#+x:: ; win + shift + x
+    CoordMode, Mouse, Screen
+    ; Move mouse pointer slightly to down
+    MouseMove, 0, 19, 0, R
 Return
 
 #+w:: ; win + shift + w
     CoordMode, Mouse, Screen
     ; Move mouse pointer slightly to up
-    MouseMove, 0, -19, 2, R
+    MouseMove, 0, -9, 0, R
 Return
 
 ^!+b:: ; ctrl + alt + shift + b
