@@ -85,7 +85,7 @@ Return
 ^!+":: ; ctrl + alt + shift + "
     CoordMode, Mouse, Screen
     ; Move mouse pointer to "List all tabs" button (Firefox)
-    MouseMove, A_ScreenWidth - 170, 0
+    MouseMove, A_ScreenWidth - 195, 15
 Return
 
 ^!+w:: ; ctrl + alt + shift + w
@@ -97,7 +97,7 @@ Return
 ^!+e:: ; ctrl + alt + shift + e
     CoordMode, Mouse, Screen
     ; Move mouse pointer to somewhere safe (alternate)
-    MouseMove, A_ScreenWidth - 65, 50
+    MouseMove, A_ScreenWidth - 90, 50
 Return
 
 #+a:: ; win + shift + a
