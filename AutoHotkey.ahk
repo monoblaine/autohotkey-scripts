@@ -92,7 +92,7 @@ Return
 ^!+w:: ; ctrl + alt + shift + w
     CoordMode, Mouse, Screen
     ; Move mouse pointer to somewhere safe
-    MouseMove, A_ScreenWidth - 145, 0
+    MouseMove, A_ScreenWidth - 172, 0
 Return
 
 ^!+e:: ; ctrl + alt + shift + e
