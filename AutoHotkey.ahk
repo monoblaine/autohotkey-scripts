@@ -284,3 +284,9 @@ Return
         SendMessage, 0x114, 1, 0, %fcontrol%, A  ; 0x114=WM_HSCROLL; 1=SB_LINERIGHT
     return
 #IfWinActive
+
+#IfWinActive, ahk_exe Ssms.exe
+    ^!+s:: ; ctrl + alt + shift + s
+        Click, 263, 142
+    Return
+#IfWinActive
