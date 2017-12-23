@@ -287,6 +287,6 @@ Return
 
 #IfWinActive, ahk_exe Ssms.exe
     ^!+s:: ; ctrl + alt + shift + s
-        Click, 263, 142
+        Click, 263, 161
     Return
 #IfWinActive
