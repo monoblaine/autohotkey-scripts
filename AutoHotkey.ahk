@@ -267,6 +267,7 @@ Return
 
 #+f:: ; win + shift + f
     ; open file path in clipboard with explorer
+    ClipBoard := RegexReplace(ClipBoard, "\/", "\")
     Sleep 150
     Run explorer.exe /select`, "%clipboard%"
 Return
