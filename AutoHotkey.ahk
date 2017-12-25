@@ -253,11 +253,11 @@ Sleep, 400	; SPECIFY DISPLAY TIME (ms)
 ToolTip		; remove
 return
 
-#IfWinActive, ahk_class XLMAIN
+if WinActive("ahk_class XLMAIN") or WinActive("ahk_exe WINWORD.EXE") {
     ^NumpadSub::Send ^{WheelDown}
     ^NumpadAdd::Send ^{WheelUp}
-    Return
-#IfWinActive
+    return
+}
 
 #+e:: ; win + shift + e
     ; open file path in clipboard with notepad++
