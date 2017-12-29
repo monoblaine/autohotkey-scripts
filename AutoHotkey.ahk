@@ -6,16 +6,18 @@
     Winset, Alwaysontop, , A
 Return
 
-^+v:: ; ctrl + shift + v
-    ; Text–only paste from ClipBoard (Trims leading and trailing whitespaces)
-    Clip0 = %ClipBoardAll%
-    ClipBoard = %ClipBoard%       ; Convert to text
-    ClipBoard := RegexReplace(ClipBoard, "^\s+|\s+$")
-    Send ^v                       ; For best compatibility: SendPlay
-    Sleep 50                      ; Don't change clipboard while it is pasted! (Sleep > 0)
-    ClipBoard = %Clip0%           ; Restore original ClipBoard
-    VarSetCapacity(Clip0, 0)      ; Free memory
-Return
+#IfWinNotActive, ahk_exe Ssms.exe ; Exclude SQL Server Management Studio
+    ^+v:: ; ctrl + shift + v
+        ; Text–only paste from ClipBoard (Trims leading and trailing whitespaces)
+        Clip0 = %ClipBoardAll%
+        ClipBoard = %ClipBoard%       ; Convert to text
+        ClipBoard := RegexReplace(ClipBoard, "^\s+|\s+$")
+        Send ^v                       ; For best compatibility: SendPlay
+        Sleep 50                      ; Don't change clipboard while it is pasted! (Sleep > 0)
+        ClipBoard = %Clip0%           ; Restore original ClipBoard
+        VarSetCapacity(Clip0, 0)      ; Free memory
+    Return
+#IfWinNotActive
 
 +^#Up:: ; win + ctrl + shift + up arrow
     Send {Volume_Up}
@@ -297,4 +299,15 @@ Return
         ClipWait
         clipboard := RegexReplace(clipboard, "^\[[^\]]+\]\.\[([^\]]+)\]$", "$1")
     return
+
+    ^+v:: ; ctrl + shift + v
+        ; Text–only paste from ClipBoard (Replaces [ and ] with ")
+        Clip0 = %ClipBoardAll%
+        ClipBoard = %ClipBoard%       ; Convert to text
+        ClipBoard := RegexReplace(ClipBoard, "[\[\]]", """")
+        Send ^v                       ; For best compatibility: SendPlay
+        Sleep 50                      ; Don't change clipboard while it is pasted! (Sleep > 0)
+        ClipBoard = %Clip0%           ; Restore original ClipBoard
+        VarSetCapacity(Clip0, 0)      ; Free memory
+    Return
 #IfWinActive
