@@ -290,4 +290,11 @@ Return
     ^!+s:: ; ctrl + alt + shift + s
         Click, 263, 161
     Return
+
+    ^+c:: ; ctrl + shift + c
+        clipboard =
+        Send ^c
+        ClipWait
+        clipboard := RegexReplace(clipboard, "^\[[^\]]+\]\.\[([^\]]+)\]$", "$1")
+    return
 #IfWinActive
