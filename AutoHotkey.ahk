@@ -286,7 +286,7 @@ Return
     return
 #IfWinActive
 
-#IfWinActive, ahk_exe Ssms.exe
+#IfWinActive, ahk_exe Ssms.exe ; SQL Server Management Studio
     ^!+s:: ; ctrl + alt + shift + s
         Click, 263, 161
     Return
