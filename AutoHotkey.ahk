@@ -225,9 +225,6 @@ Return
     SendInput {Backspace}{Backspace}{Backspace}{Backspace}
 Return
 
-; Disable Windows Key + Tab
-#Tab::Return
-
 ;=============================================================================================
 ; Show a ToolTip that shows the current state of the lock keys (e.g. CapsLock) when one is pressed
 ;=============================================================================================
