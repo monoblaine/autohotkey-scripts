@@ -1,7 +1,7 @@
 #NoTrayIcon
 #SingleInstance force
 
-#a:: ; Win + A
+#^a:: ; Win + ctrl + A
     ; Make the active window stay always on top
     Winset, Alwaysontop, , A
 Return
