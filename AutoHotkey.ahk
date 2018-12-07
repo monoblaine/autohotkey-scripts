@@ -3,6 +3,12 @@
 
 GroupAdd, AppsThatHaveDefaultRawPasteDisabled, ahk_exe Ssms.exe ; SQL Server Management Studio
 GroupAdd, AppsThatHaveDefaultRawPasteDisabled, ahk_exe WinMergeU.exe ; WinMerge
+GroupAdd, AppsThatHaveDefaultRawPasteDisabled, ahk_class Notepad++
+GroupAdd, AppsThatHaveDefaultRawPasteDisabled, ahk_exe devenv.exe
+
+GroupAdd, AppsThatHaveExcessIndentRemovalEnabled, ahk_class Notepad++
+GroupAdd, AppsThatHaveExcessIndentRemovalEnabled, ahk_exe WinMergeU.exe
+GroupAdd, AppsThatHaveExcessIndentRemovalEnabled, ahk_exe devenv.exe
 Return
 
 #^a:: ; Win + ctrl + A
@@ -319,7 +325,7 @@ Return
     Return
 #IfWinActive
 
-#IfWinActive, ahk_exe WinMergeU.exe ; WinMerge
+#IfWinActive, ahk_group AppsThatHaveExcessIndentRemovalEnabled
     ^+v:: ; ctrl + shift + v
         Clip0 = %ClipBoardAll%
         RegExMatch(ClipBoard, "^([ \t]+)", Lw)
@@ -328,6 +334,10 @@ Return
         Sleep 50                      ; Don't change clipboard while it is pasted! (Sleep > 0)
         ClipBoard = %Clip0%           ; Restore original ClipBoard
         VarSetCapacity(Clip0, 0)      ; Free memory
-        Send {f5}
+
+        If WinActive("ahk_exe WinMergeU.exe")
+        {
+            Send {f5}
+        }
     Return
 #IfWinActive
