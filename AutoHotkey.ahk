@@ -1,12 +1,16 @@
 #NoTrayIcon
 #SingleInstance force
 
+GroupAdd, AppsThatHaveDefaultRawPasteDisabled, ahk_exe Ssms.exe ; SQL Server Management Studio
+GroupAdd, AppsThatHaveDefaultRawPasteDisabled, ahk_exe WinMergeU.exe ; WinMerge
+Return
+
 #^a:: ; Win + ctrl + A
     ; Make the active window stay always on top
     Winset, Alwaysontop, , A
 Return
 
-#IfWinNotActive, ahk_exe Ssms.exe ; Exclude SQL Server Management Studio
+#IfWinNotActive, ahk_group AppsThatHaveDefaultRawPasteDisabled
     ^+v:: ; ctrl + shift + v
         ; Text–only paste from ClipBoard (Trims leading and trailing whitespaces)
         Clip0 = %ClipBoardAll%
@@ -312,5 +316,18 @@ Return
         Sleep 50                      ; Don't change clipboard while it is pasted! (Sleep > 0)
         ClipBoard = %Clip0%           ; Restore original ClipBoard
         VarSetCapacity(Clip0, 0)      ; Free memory
+    Return
+#IfWinActive
+
+#IfWinActive, ahk_exe WinMergeU.exe ; WinMerge
+    ^+v:: ; ctrl + shift + v
+        Clip0 = %ClipBoardAll%
+        RegExMatch(ClipBoard, "^([ \t]+)", Lw)
+        ClipBoard := RegexReplace(ClipBoard, "(?:(\r?\n)" . Lw . ")|(^" . Lw . ")", "$1")
+        Send ^v                       ; For best compatibility: SendPlay
+        Sleep 50                      ; Don't change clipboard while it is pasted! (Sleep > 0)
+        ClipBoard = %Clip0%           ; Restore original ClipBoard
+        VarSetCapacity(Clip0, 0)      ; Free memory
+        Send {f5}
     Return
 #IfWinActive
