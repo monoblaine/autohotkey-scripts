@@ -334,10 +334,5 @@ Return
         Sleep 50                      ; Don't change clipboard while it is pasted! (Sleep > 0)
         ClipBoard = %Clip0%           ; Restore original ClipBoard
         VarSetCapacity(Clip0, 0)      ; Free memory
-
-        If WinActive("ahk_exe WinMergeU.exe")
-        {
-            Send {f5}
-        }
     Return
 #IfWinActive
