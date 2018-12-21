@@ -330,6 +330,7 @@ Return
         Clip0 = %ClipBoardAll%
         RegExMatch(ClipBoard, "^([ \t]+)", Lw)
         ClipBoard := RegexReplace(ClipBoard, "(?:(\r?\n)" . Lw . ")|(^" . Lw . ")", "$1")
+        ClipBoard := RegexReplace(ClipBoard, "\s+$") ; Remove the trailing spaces anyway
         Send ^v                       ; For best compatibility: SendPlay
         Sleep 50                      ; Don't change clipboard while it is pasted! (Sleep > 0)
         ClipBoard = %Clip0%           ; Restore original ClipBoard
