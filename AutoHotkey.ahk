@@ -4,6 +4,7 @@
 GroupAdd, AppsThatHaveDefaultRawPasteDisabled, ahk_exe WinMergeU.exe ; WinMerge
 GroupAdd, AppsThatHaveDefaultRawPasteDisabled, ahk_class Notepad++
 GroupAdd, AppsThatHaveDefaultRawPasteDisabled, ahk_exe devenv.exe
+GroupAdd, AppsThatHaveDefaultRawPasteDisabled, ahk_exe GitExtensions.exe
 
 GroupAdd, AppsThatHaveExcessIndentRemovalEnabled, ahk_class Notepad++
 GroupAdd, AppsThatHaveExcessIndentRemovalEnabled, ahk_exe WinMergeU.exe
@@ -319,6 +320,18 @@ Return
         RegExMatch(ClipBoard, "^([ \t]+)", Lw)
         ClipBoard := RegexReplace(ClipBoard, "(?:(\r?\n)" . Lw . ")|(^" . Lw . ")", "$1")
         ClipBoard := RegexReplace(ClipBoard, "\s+$") ; Remove the trailing spaces anyway
+        Send ^v                       ; For best compatibility: SendPlay
+        Sleep 50                      ; Don't change clipboard while it is pasted! (Sleep > 0)
+        ClipBoard = %Clip0%           ; Restore original ClipBoard
+        VarSetCapacity(Clip0, 0)      ; Free memory
+    Return
+#IfWinActive
+
+#IfWinActive, ahk_exe GitExtensions.exe
+    ^+v:: ; ctrl + shift + v
+        Clip0 = %ClipBoardAll%
+        ClipBoard = %ClipBoard%       ; Convert to text
+        ClipBoard := RegexReplace(ClipBoard, "\t", " -> ")
         Send ^v                       ; For best compatibility: SendPlay
         Sleep 50                      ; Don't change clipboard while it is pasted! (Sleep > 0)
         ClipBoard = %Clip0%           ; Restore original ClipBoard
