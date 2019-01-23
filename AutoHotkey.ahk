@@ -338,11 +338,3 @@ Return
         VarSetCapacity(Clip0, 0)      ; Free memory
     Return
 #IfWinActive
-
-^!z:: ;; ctrl + alt + z
-    Send <
-Return
-
-^!+z:: ;; ctrl + alt + shift + z
-    Send >
-Return
