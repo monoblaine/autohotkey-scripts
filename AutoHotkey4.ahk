@@ -1,14 +1,14 @@
 #NoTrayIcon
 #SingleInstance force
 
-LShift::
+CapsLock::
     Send <
 Return
 
-+LShift::
++CapsLock::
     Send >
 Return
 
-^!LShift::
+^!CapsLock::
     Send |
 Return
