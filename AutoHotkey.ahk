@@ -303,7 +303,7 @@ Return
 
 #IfWinActive, ahk_exe Ssms.exe ; SQL Server Management Studio
     ^!+s:: ; ctrl + alt + shift + s
-        Click, 370, 151
+        Click, 370, 121
     Return
 
     ^+c:: ; ctrl + shift + c
