@@ -306,6 +306,10 @@ Return
         Click, 370, 121
     Return
 
+    ^!+d:: ; ctrl + alt + shift + d
+        Click, 370, 202
+    Return
+
     ^+c:: ; ctrl + shift + c
         clipboard =
         Send ^c
