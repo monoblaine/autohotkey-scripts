@@ -311,6 +311,11 @@ Return
         MouseMove, A_ScreenWidth - 172, 0
     Return
 
+    ^!+r:: ; ctrl + alt + shift + r
+        Click, 774, 62
+        MouseMove, A_ScreenWidth - 172, 0
+    Return
+
     ^+c:: ; ctrl + shift + c
         clipboard =
         Send ^c
