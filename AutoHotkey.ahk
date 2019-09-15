@@ -308,6 +308,7 @@ Return
 
     ^!+d:: ; ctrl + alt + shift + d
         Click, 370, 202
+        MouseMove, A_ScreenWidth - 172, 0
     Return
 
     ^+c:: ; ctrl + shift + c
