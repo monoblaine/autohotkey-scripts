@@ -304,6 +304,7 @@ Return
 #IfWinActive, ahk_exe Ssms.exe ; SQL Server Management Studio
     ^!+s:: ; ctrl + alt + shift + s
         Click, 370, 121
+        MouseMove, A_ScreenWidth - 172, 0
     Return
 
     ^!+d:: ; ctrl + alt + shift + d
