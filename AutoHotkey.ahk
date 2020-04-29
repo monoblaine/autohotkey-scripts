@@ -194,6 +194,18 @@ Return
     Return
 #IfWinNotActive
 
+; Because Visual Studio 2019 broke my AltGr shortcuts!
+#IfWinActive, ahk_exe devenv.exe
+    <^>!+g::Send ^!+g
+    <^>!+c::Send ^!+c
+    <^>!+d::Send ^!+d
+    <^>!f3::Send ^!{f3}
+    <^>!+f3::Send ^!+{f3}
+    <^>!+s::Send ^!+s
+    <^>!+t::Send ^!+t
+    <^>!+u::Send ^!+u
+#IfWinActive
+
 ^!+h:: ; ctrl + alt + shift + h
     ; replace all the \ characters within the text in clipboard with /
     StringReplace, clipboard, clipboard, `\ , `/ , All
