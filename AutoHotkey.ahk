@@ -180,12 +180,21 @@ Return
     Esc::Send !{f4}
 #IfWinActive
 
-^!+x:: ; ctrl + alt + shift + x
-    ; print [ ]
-    SendInput [ ]{Space}
-Return
+#IfWinNotActive ahk_exe firefox.exe
+    ^!+x:: ; ctrl + alt + shift + x
+        ; print [ ]
+        SendInput [ ]{Space}
+    Return
+#IfWinNotActive
 
-#IfWinNotActive, ahk_exe devenv.exe
+#IfWinActive ahk_exe firefox.exe
+    ^!+x:: ; ctrl + alt + shift + x
+        ; print [TODO]
+        SendInput [TODO]{Space}
+    Return
+#IfWinNotActive
+
+#IfWinNotActive ahk_exe devenv.exe
     ^!+c:: ;; ctrl + alt + shift + c
         ; print * (But not in Visual Studio)
         SendInput *{Space}
