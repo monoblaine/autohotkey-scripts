@@ -16,7 +16,7 @@ Return
     Winset, Alwaysontop, , A
 Return
 
-#IfWinNotActive, ahk_group AppsThatHaveDefaultRawPasteDisabled
+#IfWinNotActive ahk_group AppsThatHaveDefaultRawPasteDisabled
     ^+v:: ; ctrl + shift + v
         ; Text–only paste from ClipBoard (Trims leading and trailing whitespaces)
         Clip0 = %ClipBoardAll%
@@ -156,7 +156,7 @@ Return
 ^!+Up::Send     {Media_Stop}
 
 ; Launch "Everything" when Ctrl + F is pressed within File Explorer
-#IfWinActive, ahk_class CabinetWClass
+#IfWinActive ahk_class CabinetWClass
     ^F:: ;; ctrl + f
         ControlGetText, RunPath, ToolbarWindow323, A
         RunPath := SubStr(RunPath, 10)
@@ -170,7 +170,7 @@ Return
 #IfWinActive
 
 ; Press Esc to close window (If it is 7-Zip)
-#IfWinActive, ahk_exe 7zFM.exe
+#IfWinActive ahk_exe 7zFM.exe
     Esc::Send !{f4}
 #IfWinActive
 
@@ -186,7 +186,7 @@ Return
     Return
 #IfWinNotActive
 
-#IfWinNotActive, ahk_exe devenv.exe
+#IfWinNotActive ahk_exe devenv.exe
     ^!+g:: ;; ctrl + alt + shift + g
         ; Get substring that comes after the last index of '/' (But not in Visual Studio)
         ; Useful for copying commit id's from a url
@@ -195,15 +195,15 @@ Return
 #IfWinNotActive
 
 ; Because Visual Studio 2019 broke my AltGr shortcuts!
-#IfWinActive, ahk_exe devenv.exe
-    <^>!+g::Send ^!+g
-    <^>!+c::Send ^!+c
-    <^>!+d::Send ^!+d
-    <^>!f3::Send ^!{f3}
-    <^>!+f3::Send ^!+{f3}
-    <^>!+s::Send ^!+s
-    <^>!+t::Send ^!+t
-    <^>!+u::Send ^!+u
+#IfWinActive ahk_exe devenv.exe
+    <^>!+g::Send, ^!+g
+    <^>!+c::Send, ^!+c
+    <^>!+d::Send, ^!+d
+    <^>!f3::Send, ^!{f3}
+    <^>!+f3::Send, ^!+{f3}
+    <^>!+s::Send, ^!+s
+    <^>!+t::Send, ^!+t
+    <^>!+u::Send, ^!+u
 #IfWinActive
 
 ^!+h:: ; ctrl + alt + shift + h
@@ -256,13 +256,13 @@ Sleep, 400	; SPECIFY DISPLAY TIME (ms)
 ToolTip		; remove
 return
 
-#IfWinActive, ahk_class XLMAIN
+#IfWinActive ahk_class XLMAIN
     ^NumpadSub::Send ^{WheelDown}
     ^NumpadAdd::Send ^{WheelUp}
     return
 #IfWinActive
 
-#IfWinActive, ahk_exe WINWORD.EXE
+#IfWinActive ahk_exe WINWORD.EXE
     ^NumpadSub::Send ^{WheelDown}
     ^NumpadAdd::Send ^{WheelUp}
     return
@@ -281,7 +281,7 @@ Return
     Run explorer.exe /select`, "%clipboard%"
 Return
 
-#IfWinActive, ahk_class Notepad++
+#IfWinActive ahk_class Notepad++
     ~Shift & WheelUp::  ; Scroll left
       ControlGetFocus, fcontrol, A
       Loop 3  ; <-- Increase this value to scroll faster.
@@ -295,7 +295,7 @@ Return
     return
 #IfWinActive
 
-#IfWinActive, ahk_exe Ssms.exe ; SQL Server Management Studio
+#IfWinActive ahk_exe Ssms.exe ; SQL Server Management Studio
     ^!+s:: ; ctrl + alt + shift + s
         Click, 370, 121
         MouseMove, A_ScreenWidth - 172, 0
@@ -319,7 +319,7 @@ Return
     return
 #IfWinActive
 
-#IfWinActive, ahk_group AppsThatHaveExcessIndentRemovalEnabled
+#IfWinActive ahk_group AppsThatHaveExcessIndentRemovalEnabled
     ^+v:: ; ctrl + shift + v
         Clip0 = %ClipBoardAll%
         RegExMatch(ClipBoard, "^([ \t]+)", Lw)
@@ -332,7 +332,7 @@ Return
     Return
 #IfWinActive
 
-#IfWinActive, ahk_exe GitExtensions.exe
+#IfWinActive ahk_exe GitExtensions.exe
     ^+v:: ; ctrl + shift + v
         Clip0 = %ClipBoardAll%
         ClipBoard = %ClipBoard%       ; Convert to text
