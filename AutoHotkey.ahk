@@ -140,13 +140,13 @@ Return
 ^!+b:: ; ctrl + alt + shift + b
     CoordMode, Mouse, Screen
     ; Move mouse pointer to somewhere safe (alternate-bottom)
-    MouseMove, A_ScreenWidth / 2, A_ScreenHeight - 3
+    MouseMove, A_ScreenWidth / 2, A_ScreenHeight - 18
 Return
 
 ^!+n:: ; ctrl + alt + shift + n
     CoordMode, Mouse, Screen
     ; Move mouse pointer to somewhere safe (alternate-bottom-right)
-    MouseMove, A_ScreenWidth - 23, A_ScreenHeight - 3
+    MouseMove, A_ScreenWidth - 23, A_ScreenHeight - 18
 Return
 
 ; Media stuff
