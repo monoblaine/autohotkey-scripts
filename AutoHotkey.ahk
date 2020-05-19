@@ -211,14 +211,6 @@ Return
     StringReplace, clipboard, clipboard, `\ , `/ , All
 Return
 
-^!+v:: ; ctrl + alt + shift + v
-    ; Replace comma + number + trailing spaces and newline characters with comma + number
-    clipboard := RegExReplace(clipboard, "\r?\n$", "")
-    clipboard := RegExReplace(clipboard, ",(\d+?)0*$", ".$1")
-    Send ^v                       ; For best compatibility: SendPlay
-    Sleep 50                      ; Don't change clipboard while it is pasted! (Sleep > 0)
-Return
-
 #Space:: ; win + space
     ; Send 4 spaces
     SendInput {Space}{Space}{Space}{Space}
