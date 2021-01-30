@@ -355,7 +355,7 @@ Return
 ^!+b:: ; ctrl + alt + shift + b
     Clip0 = %ClipBoardAll%
     ClipBoard = %ClipBoard%       ; Convert to text
-    ClipBoard := RegexReplace(clipboard, "^(git@gitlab\.com):([^#]+)#v?(.+)$", "git+ssh://$1/$2#v$3")
+    ClipBoard := RegexReplace(clipboard, "^(git@[^.]+\.com):([^#]+)#v?(.+)$", "git+ssh://$1/$2#v$3")
     Send ^v                       ; For best compatibility: SendPlay
     Sleep 50                      ; Don't change clipboard while it is pasted! (Sleep > 0)
     ClipBoard = %Clip0%           ; Restore original ClipBoard
