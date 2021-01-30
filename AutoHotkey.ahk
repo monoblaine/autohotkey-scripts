@@ -149,12 +149,6 @@ Return
     MouseMove, 23, A_ScreenHeight - 18
 Return
 
-^!+b:: ; ctrl + alt + shift + b
-    CoordMode, Mouse, Screen
-    ; Move mouse pointer to somewhere safe (alternate-bottom)
-    MouseMove, A_ScreenWidth / 2, A_ScreenHeight - 18
-Return
-
 ^!+n:: ; ctrl + alt + shift + n
     CoordMode, Mouse, Screen
     ; Move mouse pointer to somewhere safe (alternate-bottom-right)
