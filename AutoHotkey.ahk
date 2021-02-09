@@ -119,7 +119,7 @@ Return
     MouseMove, A_ScreenWidth - 90, 50
 Return
 
-+#Left:: ; win + shift + up arrow
++#Left:: ; win + shift + left arrow
     CoordMode, Mouse, Screen
     ; Move mouse pointer slightly to left
     MouseMove, -9, 0, 0, R
