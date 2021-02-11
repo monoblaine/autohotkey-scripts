@@ -363,3 +363,42 @@ Return
         VarSetCapacity(Clip0, 0)      ; Free memory
     return
 #If
+
+; Honor scroll lock state! (This is my greatest achievement ever)
+#If GetKeyState("ScrollLock", "T")
+    ;;==============================================================================
+    ;; SCROLL USING ARROW KEYS
+    ;;==============================================================================
+    Up::
+        ControlGetFocus, fcontrol, A
+        SendMessage, 0x115, 0, 0, %fcontrol%, A  ; 0x115=WM_VSCROLL; 0=SB_LINEUP
+    return
+
+    Down::
+        ControlGetFocus, fcontrol, A
+        SendMessage, 0x115, 1, 0, %fcontrol%, A  ; 0x115=WM_VSCROLL; 1=SB_LINEDOWN
+    return
+
+    Left::
+        ControlGetFocus, fcontrol, A
+        SendMessage, 0x114, 0, 0, %fcontrol%, A  ; 0x114=WM_HSCROLL; 0=SB_LINELEFT
+    return
+
+    Right::
+        ControlGetFocus, fcontrol, A
+        SendMessage, 0x114, 1, 0, %fcontrol%, A  ; 0x114=WM_HSCROLL; 1=SB_LINERIGHT
+    return
+
+    ;;==============================================================================
+    ;; SCROLL USING PgUp & PgDown
+    ;;==============================================================================
+    PgUp::
+        ControlGetFocus, fcontrol, A
+        SendMessage, 0x115, 2, 0, %fcontrol%, A  ; 0x115=WM_VSCROLL; 2=SB_PAGEUP
+    return
+
+    PgDn::
+        ControlGetFocus, fcontrol, A
+        SendMessage, 0x115, 3, 0, %fcontrol%, A  ; 0x115=WM_VSCROLL; 3=SB_PAGEDOWN
+    return
+#If
