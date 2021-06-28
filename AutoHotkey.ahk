@@ -365,7 +365,7 @@ Return
 #If
 
 ; Honor scroll lock state! (This is my greatest achievement ever)
-#If GetKeyState("ScrollLock", "T")
+#If !WinActive("ahk_exe EXCEL.EXE") && GetKeyState("ScrollLock", "T")
     ;;==============================================================================
     ;; SCROLL USING ARROW KEYS
     ;;==============================================================================
