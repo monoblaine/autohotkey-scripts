@@ -101,6 +101,10 @@ Return
     Send {Click 1}
 Return
 
+^!+l:: ; ctrl + alt + shift + l
+    Run, ClipToQuotedLines.exe
+Return
+
 ^!+":: ; ctrl + alt + shift + "
     CoordMode, Mouse, Screen
     ; Move mouse pointer to "List all tabs" button (Firefox)
