@@ -101,6 +101,11 @@ Return
     Click, Left
 Return
 
+^!+2:: ; ctrl + alt + shift + 2
+    ; Right click
+    Click, Right
+Return
+
 ^!+l:: ; ctrl + alt + shift + l
     Run, ClipToQuotedLines.exe
 Return
