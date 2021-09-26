@@ -98,7 +98,7 @@ Return
 
 ^!+1:: ; ctrl + alt + shift + 1
     ; Left click
-    Send {Click 1}
+    Click, Left
 Return
 
 ^!+l:: ; ctrl + alt + shift + l
