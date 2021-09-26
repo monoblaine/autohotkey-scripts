@@ -96,7 +96,7 @@ Return
     Send {Click 2}
 Return
 
-^!+q:: ; ctrl + alt + shift + q
+^!+1:: ; ctrl + alt + shift + 1
     ; single click
     Send {Click 1}
 Return
