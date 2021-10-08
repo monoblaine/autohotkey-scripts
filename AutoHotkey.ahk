@@ -128,6 +128,12 @@ Return
     MouseMove, A_ScreenWidth - 90, 50
 Return
 
+^!+j:: ; ctrl + alt + shift + j
+    CoordMode, Mouse, Screen
+    ; Move mouse pointer to the center of the screen
+    MouseMove, A_ScreenWidth / 2, A_ScreenHeight / 2
+Return
+
 #!Left:: ; win + alt + left arrow
     CoordMode, Mouse, Screen
     ; Move mouse pointer slightly to left
