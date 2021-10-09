@@ -140,10 +140,22 @@ Return
     MouseMove, -32, 0, 0, R
 Return
 
+#<+Left:: ; win + lshift + left arrow
+    CoordMode, Mouse, Screen
+    ; Move mouse pointer slightly leftward
+    MouseMove, -8, 0, 0, R
+Return
+
 #!Right:: ; win + alt + right arrow
     CoordMode, Mouse, Screen
     ; Move mouse pointer rightward
     MouseMove, 32, 0, 0, R
+Return
+
+#<+Right:: ; win + lshift + right arrow
+    CoordMode, Mouse, Screen
+    ; Move mouse pointer slightly rightward
+    MouseMove, 8, 0, 0, R
 Return
 
 #!Down:: ; win + alt + down arrow
@@ -152,10 +164,22 @@ Return
     MouseMove, 0, 32, 0, R
 Return
 
+#<+Down:: ; win + lshift + down arrow
+    CoordMode, Mouse, Screen
+    ; Move mouse pointer slightly downward
+    MouseMove, 0, 8, 0, R
+Return
+
 #!Up:: ; win + alt + up arrow
     CoordMode, Mouse, Screen
     ; Move mouse pointer upward
     MouseMove, 0, -32, 0, R
+Return
+
+#<+Up:: ; win + lshift + up arrow
+    CoordMode, Mouse, Screen
+    ; Move mouse pointer slightly upward
+    MouseMove, 0, -8, 0, R
 Return
 
 ^!+v:: ; ctrl + alt + shift + v
