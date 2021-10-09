@@ -136,25 +136,25 @@ Return
 
 #!Left:: ; win + alt + left arrow
     CoordMode, Mouse, Screen
-    ; Move mouse pointer slightly to left
+    ; Move mouse pointer leftward
     MouseMove, -32, 0, 0, R
 Return
 
 #!Right:: ; win + alt + right arrow
     CoordMode, Mouse, Screen
-    ; Move mouse pointer slightly to right
+    ; Move mouse pointer rightward
     MouseMove, 32, 0, 0, R
 Return
 
 #!Down:: ; win + alt + down arrow
     CoordMode, Mouse, Screen
-    ; Move mouse pointer slightly to down
+    ; Move mouse pointer downward
     MouseMove, 0, 32, 0, R
 Return
 
 #!Up:: ; win + alt + up arrow
     CoordMode, Mouse, Screen
-    ; Move mouse pointer slightly to up
+    ; Move mouse pointer upward
     MouseMove, 0, -32, 0, R
 Return
 
