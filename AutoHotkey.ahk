@@ -417,3 +417,17 @@ Return
         SendMessage, 0x115, 3, 0, %fcontrol%, A  ; 0x115=WM_VSCROLL; 3=SB_PAGEDOWN
     return
 #If
+
+^!+m:: ;; ctrl + alt + shift + m
+	SetTitleMatchMode, 2
+	DetectHiddenWindows, On
+
+    if WinExist(" - Mozilla Thunderbird") {
+        if (WinActive()) {
+            WinMinimize
+        }
+        else {
+            WinActivate
+        }
+    }
+return
