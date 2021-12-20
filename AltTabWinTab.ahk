@@ -12,4 +12,5 @@ SendMode Input
 Process, Priority,, R
 #SingleInstance force
 
-!Tab::Send ^+q
+!Tab::Send ^+q ; ctrl + shift + q
+#Tab::Send ^+y ; ctrl + shift + y
