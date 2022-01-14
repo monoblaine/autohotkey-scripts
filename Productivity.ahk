@@ -369,9 +369,9 @@ Return
     Return
 #IfWinActive
 
-; Convert a bower.json url to npm-friendly url (if scroll lock is on)
-#If GetKeyState("ScrollLock", "T")
-    ^!+b:: ; ctrl + alt + shift + b
+^!+b:: ; ctrl + alt + shift + b
+    if (GetKeyState("ScrollLock", "T")) {
+        ; Convert a bower.json url to npm-friendly url (if scroll lock is on)
         Clip0 = %ClipBoardAll%
         ClipBoard = %ClipBoard%       ; Convert to text
         ClipBoard := RegexReplace(clipboard, "^(git@[^.]+\.com):([^#]+)#v?(.+)$", "git+ssh://$1/$2#v$3")
@@ -379,8 +379,13 @@ Return
         Sleep 50                      ; Don't change clipboard while it is pasted! (Sleep > 0)
         ClipBoard = %Clip0%           ; Restore original ClipBoard
         VarSetCapacity(Clip0, 0)      ; Free memory
-    return
-#If
+    }
+    else {
+        CoordMode, Mouse, Screen
+        ; Move mouse pointer to somewhere safe (alternate-bottom-center)
+        MouseMove, A_ScreenWidth / 2, A_ScreenHeight - 138
+    }
+return
 
 ; Honor scroll lock state! (This is my greatest achievement ever)
 #If !WinActive("ahk_exe EXCEL.EXE") && GetKeyState("ScrollLock", "T")
