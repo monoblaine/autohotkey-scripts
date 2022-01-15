@@ -192,7 +192,7 @@ Return
 
 ; Press Esc to close window (If it is 7-Zip)
 #IfWinActive ahk_exe 7zFM.exe
-    Esc::Send !{f4}
+    Esc::Send {Alt Down}{f4}{Alt Up}
 #IfWinActive
 
 #IfWinNotActive ahk_exe firefox.exe
