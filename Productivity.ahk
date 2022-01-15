@@ -440,6 +440,8 @@ return
     }
 return
 
+#w::Send {Alt Down}{f4}{Alt Up} ; win+w to alt+f4 anything
+
 ; #IfWinActive Google Keep
 ;     ^q::Send ^[ ; ctrl + q
 ;     ^+q::Send ^] ; ctrl + shift + q
