@@ -29,13 +29,9 @@ Return
     Return
 #IfWinNotActive
 
-#^+Up:: ; win + ctrl + shift + up arrow
-    Send {Volume_Up}
-Return
+#^+Up::Volume_Up ; win + ctrl + shift + up arrow
 
-#^+Down:: ; win + ctrl + shift + down arrow
-    Send {Volume_Down}
-Return
+#^+Down::Volume_Down ; win + ctrl + shift + down arrow
 
 :*:;;today::
     ; Replace ";;today" with current date
@@ -153,10 +149,10 @@ Return
 Return
 
 ; Media stuff
-^!+Left::Send   {Media_Prev}
-^!+Right::Send  {Media_Next}
-^!+Down::Send   {Media_Play_Pause}
-^!+Up::Send     {Media_Stop}
+^!+Left::Media_Prev
+^!+Right::Media_Next
+^!+Down::Media_Play_Pause
+^!+Up::Media_Stop
 
 ; Launch "Everything" when Ctrl + F is pressed within File Explorer
 #IfWinActive ahk_class CabinetWClass
@@ -266,8 +262,8 @@ return
     return
 #IfWinActive
 
-#Numpad8::Send {WheelUp}
-#Numpad5::Send {WheelDown}
+#Numpad8::WheelUp
+#Numpad5::WheelDown
 #Numpad4::Send +{WheelUp}
 #Numpad6::Send +{WheelDown}
 
