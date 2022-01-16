@@ -284,8 +284,10 @@ return
     return
 #IfWinActive
 
-^+NumpadSub::Send {WheelUp}
-^+NumpadAdd::Send {WheelDown}
+#Numpad8::Send {WheelUp}
+#Numpad5::Send {WheelDown}
+#Numpad4::Send +{WheelUp}
+#Numpad6::Send +{WheelDown}
 
 #IfWinActive ahk_exe WINWORD.EXE
     ^NumpadSub::Send ^{WheelDown}
