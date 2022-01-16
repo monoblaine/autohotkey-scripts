@@ -128,12 +128,6 @@ Return
     MouseMove, A_ScreenWidth - 90, 50
 Return
 
-^!+j:: ; ctrl + alt + shift + j
-    CoordMode, Mouse, Screen
-    ; Move mouse pointer to the center of the screen
-    MouseMove, A_ScreenWidth / 2, A_ScreenHeight / 2
-Return
-
 #<+Left:: ; win + lshift + left arrow
     CoordMode, Mouse, Screen
     ; Move mouse pointer leftward
@@ -156,18 +150,6 @@ Return
     CoordMode, Mouse, Screen
     ; Move mouse pointer upward
     MouseMove, 0, -24, 0, R
-Return
-
-^!+v:: ; ctrl + alt + shift + v
-    CoordMode, Mouse, Screen
-    ; Move mouse pointer to somewhere safe (alternate-bottom-left)
-    MouseMove, 23, A_ScreenHeight - 18
-Return
-
-^!+n:: ; ctrl + alt + shift + n
-    CoordMode, Mouse, Screen
-    ; Move mouse pointer to somewhere safe (alternate-bottom-right)
-    MouseMove, A_ScreenWidth - 23, A_ScreenHeight - 18
 Return
 
 ; Media stuff
@@ -288,6 +270,51 @@ return
 #Numpad5::Send {WheelDown}
 #Numpad4::Send +{WheelUp}
 #Numpad6::Send +{WheelDown}
+
+#NumpadHome::
+    CoordMode, Mouse, Screen
+    MouseMove, A_ScreenWidth / 6, A_ScreenHeight / 6
+return
+
+#NumpadUp::
+    CoordMode, Mouse, Screen
+    MouseMove, A_ScreenWidth / 2, A_ScreenHeight / 6
+return
+
+#NumpadPgUp::
+    CoordMode, Mouse, Screen
+    MouseMove, A_ScreenWidth * 5 / 6, A_ScreenHeight / 6
+return
+
+#NumpadLeft::
+    CoordMode, Mouse, Screen
+    MouseMove, A_ScreenWidth / 6, A_ScreenHeight / 2
+return
+
+#NumpadClear::
+    CoordMode, Mouse, Screen
+    MouseMove, A_ScreenWidth / 2, A_ScreenHeight / 2
+return
+
+#NumpadRight::
+    CoordMode, Mouse, Screen
+    MouseMove, A_ScreenWidth * 5 / 6, A_ScreenHeight / 2
+return
+
+#NumpadEnd::
+    CoordMode, Mouse, Screen
+    MouseMove, A_ScreenWidth / 6, A_ScreenHeight * 5 / 6
+return
+
+#NumpadDown::
+    CoordMode, Mouse, Screen
+    MouseMove, A_ScreenWidth / 2, A_ScreenHeight * 5 / 6
+return
+
+#NumpadPgDn::
+    CoordMode, Mouse, Screen
+    MouseMove, A_ScreenWidth * 5 / 6, A_ScreenHeight * 5 / 6
+return
 
 #IfWinActive ahk_exe WINWORD.EXE
     ^NumpadSub::Send ^{WheelDown}
