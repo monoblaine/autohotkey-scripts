@@ -264,8 +264,18 @@ return
 
 #Numpad8::WheelUp
 #Numpad5::WheelDown
-#Numpad4::Send +{WheelUp}
-#Numpad6::Send +{WheelDown}
+
+#Numpad4::
+    ControlGetFocus, fcontrol, A
+    Loop 8  ; <-- Increase this value to scroll faster.
+      PostMessage, 0x114, 0, 0, %fcontrol%, A  ; 0x114=WM_HSCROLL; 0=SB_LINELEFT
+return
+
+#Numpad6::
+    ControlGetFocus, fcontrol, A
+    Loop 8  ; <-- Increase this value to scroll faster.
+      PostMessage, 0x114, 1, 0, %fcontrol%, A  ; 0x114=WM_HSCROLL; 1=SB_LINERIGHT
+return
 
 #NumpadHome::
     CoordMode, Mouse, Screen
