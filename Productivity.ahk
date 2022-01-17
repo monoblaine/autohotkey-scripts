@@ -20,11 +20,11 @@ GroupAdd, AppsThatHaveExcessIndentRemovalEnabled, ahk_class Notepad++
 GroupAdd, AppsThatHaveExcessIndentRemovalEnabled, ahk_exe WinMergeU.exe
 GroupAdd, AppsThatHaveExcessIndentRemovalEnabled, ahk_exe devenv.exe
 
-GroupAdd, Group_HScroll_ShiftWheel, ahk_exe GitExtensions.exe
 GroupAdd, Group_HScroll_ShiftWheel, ahk_class CabinetWClass
 GroupAdd, Group_HScroll_ShiftWheel, ahk_exe msedge.exe
 
 GroupAdd, Group_HScroll_WheelLeftRight, ahk_class MMCMainFrame
+GroupAdd, Group_HScroll_WheelLeftRight, ahk_exe GitExtensions.exe
 Return
 
 #^a:: ; Win + ctrl + A
