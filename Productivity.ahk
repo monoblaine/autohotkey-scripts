@@ -304,47 +304,47 @@ return
     #Numpad6::WheelRight
 #IfWinActive
 
-#NumpadHome::
+<#Numpad7::
     CoordMode, Mouse, Screen
     MouseMove, A_ScreenWidth / 6, A_ScreenHeight / 6
 return
 
-#NumpadUp::
+<#Numpad8::
     CoordMode, Mouse, Screen
     MouseMove, A_ScreenWidth / 2, A_ScreenHeight / 6
 return
 
-#NumpadPgUp::
+<#Numpad9::
     CoordMode, Mouse, Screen
     MouseMove, A_ScreenWidth * 5 / 6, A_ScreenHeight / 6
 return
 
-#NumpadLeft::
+<#Numpad4::
     CoordMode, Mouse, Screen
     MouseMove, A_ScreenWidth / 6, A_ScreenHeight / 2
 return
 
-#NumpadClear::
+<#Numpad5::
     CoordMode, Mouse, Screen
     MouseMove, A_ScreenWidth / 2, A_ScreenHeight / 2
 return
 
-#NumpadRight::
+<#Numpad6::
     CoordMode, Mouse, Screen
     MouseMove, A_ScreenWidth * 5 / 6, A_ScreenHeight / 2
 return
 
-#NumpadEnd::
+<#Numpad1::
     CoordMode, Mouse, Screen
     MouseMove, A_ScreenWidth / 6, A_ScreenHeight * 5 / 6
 return
 
-#NumpadDown::
+<#Numpad2::
     CoordMode, Mouse, Screen
     MouseMove, A_ScreenWidth / 2, A_ScreenHeight * 5 / 6
 return
 
-#NumpadPgDn::
+<#Numpad3::
     CoordMode, Mouse, Screen
     MouseMove, A_ScreenWidth * 5 / 6, A_ScreenHeight * 5 / 6
 return
