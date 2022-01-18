@@ -26,6 +26,8 @@ GroupAdd, Group_HScroll_ShiftWheel, ahk_exe msedge.exe
 GroupAdd, Group_HScroll_WheelLeftRight, ahk_class MMCMainFrame
 GroupAdd, Group_HScroll_WheelLeftRight, ahk_exe GitExtensions.exe
 
+LWin & Enter::Send {RWin Down}{Enter}{RWin Up}
+
 #^a:: ; Win + ctrl + A
     ; Make the active window stay always on top
     Winset, Alwaysontop, , A
