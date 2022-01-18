@@ -25,6 +25,7 @@ GroupAdd, AppsThatHaveExcessIndentRemovalEnabled, ahk_exe devenv.exe
 GroupAdd, Group_HScroll_WheelLeftRight, ahk_class MMCMainFrame
 GroupAdd, Group_HScroll_WheelLeftRight, ahk_exe GitExtensions.exe
 GroupAdd, Group_HScroll_WheelLeftRight, ahk_exe msedge.exe
+GroupAdd, Group_HScroll_WheelLeftRight, ahk_exe WINWORD.EXE
 
 LWin & Enter::Send {RWin Down}{Enter}{RWin Up}
 
