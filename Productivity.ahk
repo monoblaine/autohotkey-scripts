@@ -25,12 +25,11 @@ GroupAdd, Group_HScroll_ShiftWheel, ahk_exe msedge.exe
 
 GroupAdd, Group_HScroll_WheelLeftRight, ahk_class MMCMainFrame
 GroupAdd, Group_HScroll_WheelLeftRight, ahk_exe GitExtensions.exe
-Return
 
 #^a:: ; Win + ctrl + A
     ; Make the active window stay always on top
     Winset, Alwaysontop, , A
-Return
+return
 
 #IfWinNotActive ahk_group AppsThatHaveDefaultRawPasteDisabled
     ^+v:: ; ctrl + shift + v
@@ -42,7 +41,7 @@ Return
         Sleep 50                      ; Don't change clipboard while it is pasted! (Sleep > 0)
         ClipBoard = %Clip0%           ; Restore original ClipBoard
         VarSetCapacity(Clip0, 0)      ; Free memory
-    Return
+    return
 #IfWinNotActive
 
 #^+Up::Volume_Up ; win + ctrl + shift + up arrow
@@ -53,116 +52,116 @@ Return
     ; Replace ";;today" with current date
     FormatTime, CurrentDateTime,, yyy-MM-dd ; 2009-10-13
     SendInput %CurrentDateTime%
-Return
+return
 
 :*:;;now::
     ; Replace ";;now" with current date and time
     FormatTime, CurrentDateTime,, yyy-MM-dd HH.mm ; 2009-10-13 10.57
     SendInput %CurrentDateTime%
-Return
+return
 
 :*:;;snow::
     ; Replace ";;snow" with current date and time (with seconds)
     FormatTime, CurrentDateTime,, yyy-MM-dd HH:mm:ss ; 2009-10-13 10:57:23
     SendInput %CurrentDateTime%
-Return
+return
 
 :*:;;vnow::
     ; Replace ";;vnow" with current date and time without separators
     FormatTime, CurrentDateTime,, yyyMMddHHmm ; 200910131057
     SendInput %CurrentDateTime%
-Return
+return
 
 :*:;;time::
     ; Replace ";;time" with current date, time and day of week
     FormatTime, CurrentDateTime, L1055, d MMMM yyy dddd, HH.mm ; 13 August 2013 Tuesday, 13.17
     SendInput %CurrentDateTime%
-Return
+return
 
 :*:;;date::
     ; Replace ";;date" with current date and day of week
     FormatTime, CurrentDateTime, L1055, d MMMM yyy dddd ; 26 April 2010 Monday
     SendInput %CurrentDateTime%
-Return
+return
 
 :*:;;tm::
     ; Replace ";;tm" with current time surrounded by parentheses
     FormatTime, CurrentDateTime, L1055, HH.mm ; (13.17)
     SendInput (%CurrentDateTime%){Space}
-Return
+return
 
 :*:;;pipe::
     SendInput {Raw}==============================================================================
-Return
+return
 
 :*:;;dash::
     SendInput {Raw}------------------------------------------------------------------------------
-Return
+return
 
 :*:;;mail::
     SendInput {Raw}zerhan@gmail.com
-Return
+return
 
 ^!+o:: ;; ctrl + alt + shift + o
     ; double click
     Send {Click 2}
-Return
+return
 
 ^!+1:: ; ctrl + alt + shift + 1
     ; Left click
     Send {Click 1}
-Return
+return
 
 ^!+2:: ; ctrl + alt + shift + 2
     ; Right click
     Click, Right
-Return
+return
 
 ^!+l:: ; ctrl + alt + shift + l
     Run, ClipToQuotedLines.exe
-Return
+return
 
 ^!+":: ; ctrl + alt + shift + "
     CoordMode, Mouse, Screen
     ; Move mouse pointer to "List all tabs" button (Firefox)
     MouseMove, A_ScreenWidth - 195, 15
-Return
+return
 
 ^!+w:: ; ctrl + alt + shift + w
     CoordMode, Mouse, Screen
     ; Move mouse pointer to somewhere safe
     MouseMove, A_ScreenWidth - 172, 0
-Return
+return
 
 ^!+e:: ; ctrl + alt + shift + e
     CoordMode, Mouse, Screen
     ; Move mouse pointer to somewhere safe (alternate)
     MouseMove, A_ScreenWidth - 90, 50
-Return
+return
 
 #<+Left:: ; win + lshift + left arrow
     CoordMode, Mouse, Screen
     ; Move mouse pointer leftward
     MouseMove, -24, 0, 0, R
-Return
+return
 
 #<+Right:: ; win + lshift + right arrow
     CoordMode, Mouse, Screen
     ; Move mouse pointer rightward
     MouseMove, 24, 0, 0, R
-Return
+return
 
 #<+Down:: ; win + lshift + down arrow
     CoordMode, Mouse, Screen
     ; Move mouse pointer downward
     MouseMove, 0, 24, 0, R
-Return
+return
 
 #<+Up:: ; win + lshift + up arrow
     CoordMode, Mouse, Screen
     ; Move mouse pointer upward
     MouseMove, 0, -24, 0, R
-Return
+return
 
 ; Media stuff
 ^!+Left::Media_Prev
@@ -181,7 +180,7 @@ Return
            RunPath := "%UserProfile%" . "\" . RunPath . "\"
         }
         Run, C:\Program Files\Everything\Everything.exe -p "%RunPath%"
-    Return
+    return
 #IfWinActive
 
 ; Press Esc to close window (If it is 7-Zip)
@@ -193,21 +192,21 @@ Return
     ^!+x:: ; ctrl + alt + shift + x
         ; print [ ]
         SendInput [ ]{Space}
-    Return
+    return
 #IfWinNotActive
 
 #IfWinActive ahk_exe firefox.exe
     ^!+x:: ; ctrl + alt + shift + x
         ; print [TODO]
         SendInput [TODO]{Space}
-    Return
+    return
 #IfWinNotActive
 
 #IfWinNotActive ahk_exe devenv.exe
     ^!+c:: ;; ctrl + alt + shift + c
         ; print * (But not in Visual Studio)
         SendInput *{Space}
-    Return
+    return
 #IfWinNotActive
 
 #IfWinNotActive ahk_exe devenv.exe
@@ -215,7 +214,7 @@ Return
         ; Get substring that comes after the last index of '/' (But not in Visual Studio)
         ; Useful for copying commit id's from a url
         clipboard := RegExReplace(clipboard, "([^/]+\/+)+", "")
-    Return
+    return
 #IfWinNotActive
 
 ; Because Visual Studio 2019 broke my AltGr shortcuts!
@@ -233,49 +232,48 @@ Return
 ^!+h:: ; ctrl + alt + shift + h
     ; replace all the \ characters within the text in clipboard with /
     StringReplace, clipboard, clipboard, `\ , `/ , All
-Return
+return
 
 #Space:: ; win + space
     ; Send 4 spaces
     SendInput {Space}{Space}{Space}{Space}
-Return
+return
 
 #+Space:: ; win + shift + space
     ; Remove 4 spaces
     SendInput {Backspace}{Backspace}{Backspace}{Backspace}
-Return
+return
 
 ;=============================================================================================
 ; Show a ToolTip that shows the current state of the lock keys (e.g. CapsLock) when one is pressed
 ;=============================================================================================
 ~*NumLock::
-Sleep, 10	; drastically improves reliability on slower systems (took a loooong time to figure this out)
-msg := "Num Lock: " (GetKeyState("NumLock", "T") ? "ON" : "OFF")
-ToolTip, %msg%
-Sleep, 400	; SPECIFY DISPLAY TIME (ms)
-ToolTip		; remove
+    Sleep, 10	; drastically improves reliability on slower systems (took a loooong time to figure this out)
+    msg := "Num Lock: " (GetKeyState("NumLock", "T") ? "ON" : "OFF")
+    ToolTip, %msg%
+    Sleep, 400	; SPECIFY DISPLAY TIME (ms)
+    ToolTip		; remove
 return
 
 ~*CapsLock::
-Sleep, 10	; drastically improves reliability on slower systems (took a loooong time to figure this out)
-msg := "Caps Lock: " (GetKeyState("CapsLock", "T") ? "ON" : "OFF")
-ToolTip, %msg%
-Sleep, 400	; SPECIFY DISPLAY TIME (ms)
-ToolTip		; remove
+    Sleep, 10	; drastically improves reliability on slower systems (took a loooong time to figure this out)
+    msg := "Caps Lock: " (GetKeyState("CapsLock", "T") ? "ON" : "OFF")
+    ToolTip, %msg%
+    Sleep, 400	; SPECIFY DISPLAY TIME (ms)
+    ToolTip		; remove
 return
 
 ~*ScrollLock::
-Sleep, 10	; drastically improves reliability on slower systems (took a loooong time to figure this out)
-msg := "Scroll Lock: " (GetKeyState("ScrollLock", "T") ? "ON" : "OFF")
-ToolTip, %msg%
-Sleep, 400	; SPECIFY DISPLAY TIME (ms)
-ToolTip		; remove
+    Sleep, 10	; drastically improves reliability on slower systems (took a loooong time to figure this out)
+    msg := "Scroll Lock: " (GetKeyState("ScrollLock", "T") ? "ON" : "OFF")
+    ToolTip, %msg%
+    Sleep, 400	; SPECIFY DISPLAY TIME (ms)
+    ToolTip		; remove
 return
 
 #IfWinActive ahk_class XLMAIN
     ^NumpadSub::Send ^{WheelDown}
     ^NumpadAdd::Send ^{WheelUp}
-    return
 #IfWinActive
 
 #Numpad8::WheelUp
@@ -353,33 +351,32 @@ return
 #IfWinActive ahk_exe WINWORD.EXE
     ^NumpadSub::Send ^{WheelDown}
     ^NumpadAdd::Send ^{WheelUp}
-    return
 #IfWinActive
 
 #+e:: ; win + shift + e
     ; open file path in clipboard with notepad++
     Sleep 150
     Run, C:\Program Files (x86)\Notepad++\notepad++.exe "%clipboard%"
-Return
+return
 
 #+f:: ; win + shift + f
     ; open file path in clipboard with explorer
     ClipBoard := RegexReplace(ClipBoard, "\/", "\")
     Sleep 150
     Run explorer.exe /select`, "%clipboard%"
-Return
+return
 
 #IfWinActive ahk_class Notepad++
     ~Shift & WheelUp::  ; Scroll left
-      ControlGetFocus, fcontrol, A
-      Loop 3  ; <-- Increase this value to scroll faster.
-        SendMessage, 0x114, 0, 0, %fcontrol%, A  ; 0x114=WM_HSCROLL; 0=SB_LINELEFT
+        ControlGetFocus, fcontrol, A
+        Loop 3  ; <-- Increase this value to scroll faster.
+            SendMessage, 0x114, 0, 0, %fcontrol%, A  ; 0x114=WM_HSCROLL; 0=SB_LINELEFT
     return
 
     ~Shift & WheelDown::  ; Scroll right
-      ControlGetFocus, fcontrol, A
-      Loop 3  ; <-- Increase this value to scroll faster.
-        SendMessage, 0x114, 1, 0, %fcontrol%, A  ; 0x114=WM_HSCROLL; 1=SB_LINERIGHT
+        ControlGetFocus, fcontrol, A
+        Loop 3  ; <-- Increase this value to scroll faster.
+            SendMessage, 0x114, 1, 0, %fcontrol%, A  ; 0x114=WM_HSCROLL; 1=SB_LINERIGHT
     return
 #IfWinActive
 
@@ -387,17 +384,17 @@ Return
     ^!+s:: ; ctrl + alt + shift + s
         Click, 370, 121
         MouseMove, A_ScreenWidth - 172, 0
-    Return
+    return
 
     ^!+d:: ; ctrl + alt + shift + d
         Click, 370, 202
         MouseMove, A_ScreenWidth - 172, 0
-    Return
+    return
 
     ^!+r:: ; ctrl + alt + shift + r
         Click, 774, 62
         MouseMove, A_ScreenWidth - 172, 0
-    Return
+    return
 
     ^+c:: ; ctrl + shift + c
         clipboard =
@@ -417,7 +414,7 @@ Return
         Sleep 50                      ; Don't change clipboard while it is pasted! (Sleep > 0)
         ClipBoard = %Clip0%           ; Restore original ClipBoard
         VarSetCapacity(Clip0, 0)      ; Free memory
-    Return
+    return
 #IfWinActive
 
 #IfWinActive ahk_exe GitExtensions.exe
@@ -429,7 +426,7 @@ Return
         Sleep 50                      ; Don't change clipboard while it is pasted! (Sleep > 0)
         ClipBoard = %Clip0%           ; Restore original ClipBoard
         VarSetCapacity(Clip0, 0)      ; Free memory
-    Return
+    return
 #IfWinActive
 
 ; Convert a bower.json url to npm-friendly url (if scroll lock is on)
