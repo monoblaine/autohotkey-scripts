@@ -27,6 +27,8 @@ GroupAdd, Group_HScroll_WheelLeftRight, ahk_exe GitExtensions.exe
 GroupAdd, Group_HScroll_WheelLeftRight, ahk_exe msedge.exe
 GroupAdd, Group_HScroll_WheelLeftRight, ahk_exe WINWORD.EXE
 
+GroupAdd, Group_HScroll_ScrollLock, ahk_exe EXCEL.EXE
+
 LWin & Enter::Send {RWin Down}{Enter}{RWin Up}
 
 #^a:: ; Win + ctrl + A
@@ -282,6 +284,19 @@ return
     <#Up::WheelUp
     <#Down::WheelDown
 
+#If !GetKeyState("LControl") && !GetKeyState("LShift") && !GetKeyState("LAlt") && WinActive("ahk_group Group_HScroll_ScrollLock")
+    <#Left::
+        SetScrollLockState, On
+        Send, {Left}
+        SetScrollLockState, Off
+    return
+
+    <#Right::
+        SetScrollLockState, On
+        Send, {Right}
+        SetScrollLockState, Off
+    return
+
 #If !GetKeyState("LControl") && !GetKeyState("LShift") && !GetKeyState("LAlt") && WinActive("ahk_group Group_HScroll_ShiftWheel")
     <#Left::Send +{WheelUp}
     <#Right::Send +{WheelDown}
@@ -290,7 +305,7 @@ return
     <#Left::WheelLeft
     <#Right::WheelRight
 
-#If !GetKeyState("LControl") && !GetKeyState("LShift") && !GetKeyState("LAlt") && !WinActive("ahk_group Group_HScroll_ShiftWheel") && !WinActive("ahk_group Group_HScroll_WheelLeftRight")
+#If !GetKeyState("LControl") && !GetKeyState("LShift") && !GetKeyState("LAlt") && !WinActive("ahk_group Group_HScroll_ShiftWheel") && !WinActive("ahk_group Group_HScroll_WheelLeftRight") && !WinActive("ahk_group Group_HScroll_ScrollLock")
     <#Left::
         ControlGetFocus, fcontrol, A
         Loop 8  ; <-- Increase this value to scroll faster.
