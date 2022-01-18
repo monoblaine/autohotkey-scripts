@@ -46,9 +46,8 @@ return
     return
 #IfWinNotActive
 
-#^+Up::Volume_Up ; win + ctrl + shift + up arrow
-
-#^+Down::Volume_Down ; win + ctrl + shift + down arrow
+<#<^<+Up::Volume_Up ; lwin + lctrl + lshift + up arrow
+<#<^<+Down::Volume_Down ; lwin + lctrl + lshift + down arrow
 
 :*:;;today::
     ; Replace ";;today" with current date
@@ -141,25 +140,25 @@ return
     MouseMove, A_ScreenWidth - 90, 50
 return
 
-#<+Left:: ; win + lshift + left arrow
+#<+Left:: ; lwin + lshift + left arrow
     CoordMode, Mouse, Screen
     ; Move mouse pointer leftward
     MouseMove, -24, 0, 0, R
 return
 
-#<+Right:: ; win + lshift + right arrow
+<#<+Right:: ; lwin + lshift + right arrow
     CoordMode, Mouse, Screen
     ; Move mouse pointer rightward
     MouseMove, 24, 0, 0, R
 return
 
-#<+Down:: ; win + lshift + down arrow
+<#<+Down:: ; lwin + lshift + down arrow
     CoordMode, Mouse, Screen
     ; Move mouse pointer downward
     MouseMove, 0, 24, 0, R
 return
 
-#<+Up:: ; win + lshift + up arrow
+<#<+Up:: ; lwin + lshift + up arrow
     CoordMode, Mouse, Screen
     ; Move mouse pointer upward
     MouseMove, 0, -24, 0, R
@@ -236,12 +235,12 @@ return
     StringReplace, clipboard, clipboard, `\ , `/ , All
 return
 
-#Space:: ; win + space
+<#Space:: ; lwin + space
     ; Send 4 spaces
     SendInput {Space}{Space}{Space}{Space}
 return
 
-#+Space:: ; win + shift + space
+<#>+Space:: ; win + rshift + space
     ; Remove 4 spaces
     SendInput {Backspace}{Backspace}{Backspace}{Backspace}
 return
@@ -355,13 +354,13 @@ return
     ^NumpadAdd::Send ^{WheelUp}
 #IfWinActive
 
-#+e:: ; win + shift + e
+>#>+e:: ; rwin + rshift + e
     ; open file path in clipboard with notepad++
     Sleep 150
     Run, C:\Program Files (x86)\Notepad++\notepad++.exe "%clipboard%"
 return
 
-#+f:: ; win + shift + f
+>#>+f:: ; rwin + rshift + f
     ; open file path in clipboard with explorer
     ClipBoard := RegexReplace(ClipBoard, "\/", "\")
     Sleep 150
@@ -497,7 +496,7 @@ return
     }
 return
 
-#w::Send {Alt Down}{f4}{Alt Up} ; win+w to alt+f4 anything
+>#w::Send {Alt Down}{f4}{Alt Up} ; rwin+w to alt+f4 anything
 !End::Send {Alt Down}{f4}{Alt Up} ; alt+end to alt+f4 anything
 
 ; #IfWinActive Google Keep
