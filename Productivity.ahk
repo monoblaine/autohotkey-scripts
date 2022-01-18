@@ -20,11 +20,11 @@ GroupAdd, AppsThatHaveExcessIndentRemovalEnabled, ahk_class Notepad++
 GroupAdd, AppsThatHaveExcessIndentRemovalEnabled, ahk_exe WinMergeU.exe
 GroupAdd, AppsThatHaveExcessIndentRemovalEnabled, ahk_exe devenv.exe
 
-GroupAdd, Group_HScroll_ShiftWheel, ahk_class CabinetWClass
-GroupAdd, Group_HScroll_ShiftWheel, ahk_exe msedge.exe
+;GroupAdd, Group_HScroll_ShiftWheel, ahk_class CabinetWClass
 
 GroupAdd, Group_HScroll_WheelLeftRight, ahk_class MMCMainFrame
 GroupAdd, Group_HScroll_WheelLeftRight, ahk_exe GitExtensions.exe
+GroupAdd, Group_HScroll_WheelLeftRight, ahk_exe msedge.exe
 
 LWin & Enter::Send {RWin Down}{Enter}{RWin Up}
 
@@ -277,32 +277,31 @@ return
     ^NumpadAdd::Send ^{WheelUp}
 #IfWinActive
 
-#Numpad8::WheelUp
-#Numpad5::WheelDown
+#If !GetKeyState("LControl") && !GetKeyState("LShift") && !GetKeyState("LAlt")
+    <#Up::WheelUp
+    <#Down::WheelDown
 
-#If !WinActive("ahk_group Group_HScroll_ShiftWheel") && !WinActive("ahk_group Group_HScroll_WheelLeftRight")
-    #Numpad4::
+#If !GetKeyState("LControl") && !GetKeyState("LShift") && !GetKeyState("LAlt") && WinActive("ahk_group Group_HScroll_ShiftWheel")
+    <#Left::Send +{WheelUp}
+    <#Right::Send +{WheelDown}
+
+#If !GetKeyState("LControl") && !GetKeyState("LShift") && !GetKeyState("LAlt") && WinActive("ahk_group Group_HScroll_WheelLeftRight")
+    <#Left::WheelLeft
+    <#Right::WheelRight
+
+#If !GetKeyState("LControl") && !GetKeyState("LShift") && !GetKeyState("LAlt") && !WinActive("ahk_group Group_HScroll_ShiftWheel") && !WinActive("ahk_group Group_HScroll_WheelLeftRight")
+    <#Left::
         ControlGetFocus, fcontrol, A
         Loop 8  ; <-- Increase this value to scroll faster.
-          PostMessage, 0x114, 0, 0, %fcontrol%, A  ; 0x114=WM_HSCROLL; 0=SB_LINELEFT
+            PostMessage, 0x114, 0, 0, %fcontrol%, A  ; 0x114=WM_HSCROLL; 0=SB_LINELEFT
     return
 
-    #Numpad6::
+    <#Right::
         ControlGetFocus, fcontrol, A
         Loop 8  ; <-- Increase this value to scroll faster.
-          PostMessage, 0x114, 1, 0, %fcontrol%, A  ; 0x114=WM_HSCROLL; 1=SB_LINERIGHT
+            PostMessage, 0x114, 1, 0, %fcontrol%, A  ; 0x114=WM_HSCROLL; 1=SB_LINERIGHT
     return
 #If
-
-#IfWinActive ahk_group Group_HScroll_ShiftWheel
-    #Numpad4::Send +{WheelUp}
-    #Numpad6::Send +{WheelDown}
-#IfWinActive
-
-#IfWinActive ahk_group Group_HScroll_WheelLeftRight
-    #Numpad4::WheelLeft
-    #Numpad6::WheelRight
-#IfWinActive
 
 <#Numpad7::
     CoordMode, Mouse, Screen
