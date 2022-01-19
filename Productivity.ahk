@@ -30,7 +30,6 @@ GroupAdd, Group_HScroll_WheelLeftRight, ahk_exe WINWORD.EXE
 GroupAdd, Group_HScroll_ScrollLock, ahk_exe EXCEL.EXE
 
 LWin & Enter::Send {RWin Down}{Enter}{RWin Up}
-#w::Send, {Alt Down}{f15}{Alt Up}
 
 #^a:: ; Win + ctrl + A
     ; Make the active window stay always on top
@@ -423,6 +422,8 @@ return
         clipboard := RegexReplace(clipboard, "^\[[^\]]+\]\.\[([^\]]+)\]$", "$1")
     return
 #IfWinActive
+
+#w::Send, {Alt Down}{f15}{Alt Up}
 
 #IfWinActive ahk_group AppsThatHaveExcessIndentRemovalEnabled
     ^+v:: ; ctrl + shift + v
