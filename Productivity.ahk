@@ -421,6 +421,8 @@ return
         ClipWait
         clipboard := RegexReplace(clipboard, "^\[[^\]]+\]\.\[([^\]]+)\]$", "$1")
     return
+
+    #w::Send, {Alt Down}w{Alt Up}1
 #IfWinActive
 
 #w::Send, {Alt Down}{f15}{Alt Up}
