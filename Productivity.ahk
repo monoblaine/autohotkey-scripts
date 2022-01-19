@@ -30,6 +30,7 @@ GroupAdd, Group_HScroll_WheelLeftRight, ahk_exe WINWORD.EXE
 GroupAdd, Group_HScroll_ScrollLock, ahk_exe EXCEL.EXE
 
 LWin & Enter::Send {RWin Down}{Enter}{RWin Up}
+#w::Send, {Alt Down}{f15}{Alt Up}
 
 #^a:: ; Win + ctrl + A
     ; Make the active window stay always on top
@@ -514,7 +515,6 @@ return
     }
 return
 
->#w::Send {Alt Down}{f4}{Alt Up} ; rwin+w to alt+f4 anything
 !End::Send {Alt Down}{f4}{Alt Up} ; alt+end to alt+f4 anything
 
 <#End:: ; lwin + end
