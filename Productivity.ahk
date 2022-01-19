@@ -398,18 +398,21 @@ return
 
 #IfWinActive ahk_exe Ssms.exe ; SQL Server Management Studio
     ^!+s:: ; ctrl + alt + shift + s
+        MouseGetPos, xpos, ypos
         Click, 370, 121
-        MouseMove, A_ScreenWidth - 172, 0
+        MouseMove, %xpos%, %ypos%
     return
 
     ^!+d:: ; ctrl + alt + shift + d
+        MouseGetPos, xpos, ypos
         Click, 370, 202
-        MouseMove, A_ScreenWidth - 172, 0
+        MouseMove, %xpos%, %ypos%
     return
 
     ^!+r:: ; ctrl + alt + shift + r
+        MouseGetPos, xpos, ypos
         Click, 774, 62
-        MouseMove, A_ScreenWidth - 172, 0
+        MouseMove, %xpos%, %ypos%
     return
 
     ^+c:: ; ctrl + shift + c
