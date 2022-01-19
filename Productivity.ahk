@@ -517,6 +517,14 @@ return
 >#w::Send {Alt Down}{f4}{Alt Up} ; rwin+w to alt+f4 anything
 !End::Send {Alt Down}{f4}{Alt Up} ; alt+end to alt+f4 anything
 
+<#End:: ; lwin + end
+    CoordMode, Mouse, Screen
+    MouseGetPos, xpos, ypos
+    MouseMove, A_ScreenWidth / 2, A_ScreenHeight / 2
+    Click
+    MouseMove, %xpos%, %ypos%
+return
+
 ; #IfWinActive Google Keep
 ;     ^q::Send ^[ ; ctrl + q
 ;     ^+q::Send ^] ; ctrl + shift + q
