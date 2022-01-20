@@ -528,6 +528,26 @@ return
     MouseMove, %xpos%, %ypos%
 return
 
+; Credits: https://www.autohotkey.com/board/topic/119505-minimize-restore-active-window/
+!Del::
+    lastWindow:= WinExist("A")
+    WinMinimize, ahk_id %lastWindow%
+return
+
+!Ins::
+    IfWinExist, ahk_id %lastWindow%
+    {
+        WinGet, WinState, MinMax, ahk_id %lastWindow%
+
+        If WinState = -1
+            WinActivate
+        else
+            WinMinimize
+
+        lastWindow := ; remove this line if you want minimize/toggle only one window
+    }
+return
+
 ; #IfWinActive Google Keep
 ;     ^q::Send ^[ ; ctrl + q
 ;     ^+q::Send ^] ; ctrl + shift + q
