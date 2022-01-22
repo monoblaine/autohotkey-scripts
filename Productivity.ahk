@@ -549,6 +549,20 @@ return
     }
 return
 
+>#>+m:: ; rwin + rshift + m
+    if ProcessExist("AutoHideMouseCursor_x64_p.exe") {
+        Run, C:\Windows\System32\schtasks.exe /End /TN "AutoHideMouseCursor", , Hide
+    }
+    else {
+        Run, C:\Windows\System32\schtasks.exe /Run /TN "AutoHideMouseCursor", , Hide
+    }
+return
+
+ProcessExist(Name) {
+    Process, Exist, %Name%
+    return Errorlevel
+}
+
 ; #IfWinActive Google Keep
 ;     ^q::Send ^[ ; ctrl + q
 ;     ^+q::Send ^] ; ctrl + shift + q
