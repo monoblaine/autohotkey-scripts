@@ -108,11 +108,6 @@ return
     SendInput {Raw}zerhan@gmail.com
 return
 
-^!+o:: ;; ctrl + alt + shift + o
-    ; double click
-    Send {Click 2}
-return
-
 ^!+1:: ; ctrl + alt + shift + 1
     ; Left click
     Send {Click 1}
