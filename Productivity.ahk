@@ -108,16 +108,6 @@ return
     SendInput {Raw}zerhan@gmail.com
 return
 
-^!+1:: ; ctrl + alt + shift + 1
-    ; Left click
-    Send {Click 1}
-return
-
-^!+2:: ; ctrl + alt + shift + 2
-    ; Right click
-    Click, Right
-return
-
 ^!+l:: ; ctrl + alt + shift + l
     Run, ClipToQuotedLines.exe
 return
@@ -202,6 +192,14 @@ return
     CoordMode, Mouse, Screen
     MouseMove, A_ScreenWidth * 5 / 6, A_ScreenHeight * 5 / 6
 return
+
+CapsLock & Space::
+    SetCapsLockState % !GetKeyState("CapsLock", "T")
+    ;%
+return
+
+CapsLock & End::Send {Click 1}
+CapsLock & PgDn::Click, Right
 
 ; Media stuff
 ^!+Left::Media_Prev
@@ -544,6 +542,8 @@ ProcessExist(Name) {
     Process, Exist, %Name%
     return Errorlevel
 }
+
+*CapsLock:: return ; This forces capslock into a modifying key.
 
 ; #IfWinActive Google Keep
 ;     ^q::Send ^[ ; ctrl + q
