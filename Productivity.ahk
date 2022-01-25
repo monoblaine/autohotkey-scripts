@@ -158,6 +158,51 @@ return
     MouseMove, 0, -24, 0, R
 return
 
+<#Numpad7::
+    CoordMode, Mouse, Screen
+    MouseMove, A_ScreenWidth / 6, A_ScreenHeight / 6
+return
+
+<#Numpad8::
+    CoordMode, Mouse, Screen
+    MouseMove, A_ScreenWidth / 2, A_ScreenHeight / 6
+return
+
+<#Numpad9::
+    CoordMode, Mouse, Screen
+    MouseMove, A_ScreenWidth * 5 / 6, A_ScreenHeight / 6
+return
+
+<#Numpad4::
+    CoordMode, Mouse, Screen
+    MouseMove, A_ScreenWidth / 6, A_ScreenHeight / 2
+return
+
+<#Numpad5::
+    CoordMode, Mouse, Screen
+    MouseMove, A_ScreenWidth / 2, A_ScreenHeight / 2
+return
+
+<#Numpad6::
+    CoordMode, Mouse, Screen
+    MouseMove, A_ScreenWidth * 5 / 6, A_ScreenHeight / 2
+return
+
+<#Numpad1::
+    CoordMode, Mouse, Screen
+    MouseMove, A_ScreenWidth / 6, A_ScreenHeight * 5 / 6
+return
+
+<#Numpad2::
+    CoordMode, Mouse, Screen
+    MouseMove, A_ScreenWidth / 2, A_ScreenHeight * 5 / 6
+return
+
+<#Numpad3::
+    CoordMode, Mouse, Screen
+    MouseMove, A_ScreenWidth * 5 / 6, A_ScreenHeight * 5 / 6
+return
+
 ; Media stuff
 ^!+Left::Media_Prev
 ^!+Right::Media_Next
@@ -309,51 +354,6 @@ return
             PostMessage, 0x114, 1, 0, %fcontrol%, A  ; 0x114=WM_HSCROLL; 1=SB_LINERIGHT
     return
 #If
-
-<#Numpad7::
-    CoordMode, Mouse, Screen
-    MouseMove, A_ScreenWidth / 6, A_ScreenHeight / 6
-return
-
-<#Numpad8::
-    CoordMode, Mouse, Screen
-    MouseMove, A_ScreenWidth / 2, A_ScreenHeight / 6
-return
-
-<#Numpad9::
-    CoordMode, Mouse, Screen
-    MouseMove, A_ScreenWidth * 5 / 6, A_ScreenHeight / 6
-return
-
-<#Numpad4::
-    CoordMode, Mouse, Screen
-    MouseMove, A_ScreenWidth / 6, A_ScreenHeight / 2
-return
-
-<#Numpad5::
-    CoordMode, Mouse, Screen
-    MouseMove, A_ScreenWidth / 2, A_ScreenHeight / 2
-return
-
-<#Numpad6::
-    CoordMode, Mouse, Screen
-    MouseMove, A_ScreenWidth * 5 / 6, A_ScreenHeight / 2
-return
-
-<#Numpad1::
-    CoordMode, Mouse, Screen
-    MouseMove, A_ScreenWidth / 6, A_ScreenHeight * 5 / 6
-return
-
-<#Numpad2::
-    CoordMode, Mouse, Screen
-    MouseMove, A_ScreenWidth / 2, A_ScreenHeight * 5 / 6
-return
-
-<#Numpad3::
-    CoordMode, Mouse, Screen
-    MouseMove, A_ScreenWidth * 5 / 6, A_ScreenHeight * 5 / 6
-return
 
 #IfWinActive ahk_exe WINWORD.EXE
     ^NumpadSub::Send ^{WheelDown}
