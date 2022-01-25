@@ -285,19 +285,11 @@ return
 return
 
 ;=============================================================================================
-; Show a ToolTip that shows the current state of the lock keys (e.g. CapsLock) when one is pressed
+; Show a ToolTip that shows the current state of the lock keys (e.g. NumLock) when one is pressed
 ;=============================================================================================
 ~*NumLock::
     Sleep, 10	; drastically improves reliability on slower systems (took a loooong time to figure this out)
     msg := "Num Lock: " (GetKeyState("NumLock", "T") ? "ON" : "OFF")
-    ToolTip, %msg%
-    Sleep, 400	; SPECIFY DISPLAY TIME (ms)
-    ToolTip		; remove
-return
-
-~*CapsLock::
-    Sleep, 10	; drastically improves reliability on slower systems (took a loooong time to figure this out)
-    msg := "Caps Lock: " (GetKeyState("CapsLock", "T") ? "ON" : "OFF")
     ToolTip, %msg%
     Sleep, 400	; SPECIFY DISPLAY TIME (ms)
     ToolTip		; remove
