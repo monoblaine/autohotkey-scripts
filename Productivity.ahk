@@ -124,71 +124,71 @@ return
     MouseMove, A_ScreenWidth - 90, 50
 return
 
-#<+Left:: ; lwin + lshift + left arrow
+CapsLock & Left:: ; CapsLock + left arrow
     CoordMode, Mouse, Screen
     ; Move mouse pointer leftward
     MouseMove, -24, 0, 0, R
 return
 
-<#<+Right:: ; lwin + lshift + right arrow
+CapsLock & Right:: ; CapsLock + right arrow
     CoordMode, Mouse, Screen
     ; Move mouse pointer rightward
     MouseMove, 24, 0, 0, R
 return
 
-<#<+Down:: ; lwin + lshift + down arrow
+CapsLock & Down:: ; CapsLock + down arrow
     CoordMode, Mouse, Screen
     ; Move mouse pointer downward
     MouseMove, 0, 24, 0, R
 return
 
-<#<+Up:: ; lwin + lshift + up arrow
+CapsLock & Up:: ; CapsLock + up arrow
     CoordMode, Mouse, Screen
     ; Move mouse pointer upward
     MouseMove, 0, -24, 0, R
 return
 
-<#Numpad7::
+CapsLock & Numpad7::
     CoordMode, Mouse, Screen
     MouseMove, A_ScreenWidth / 6, A_ScreenHeight / 6
 return
 
-<#Numpad8::
+CapsLock & Numpad8::
     CoordMode, Mouse, Screen
     MouseMove, A_ScreenWidth / 2, A_ScreenHeight / 6
 return
 
-<#Numpad9::
+CapsLock & Numpad9::
     CoordMode, Mouse, Screen
     MouseMove, A_ScreenWidth * 5 / 6, A_ScreenHeight / 6
 return
 
-<#Numpad4::
+CapsLock & Numpad4::
     CoordMode, Mouse, Screen
     MouseMove, A_ScreenWidth / 6, A_ScreenHeight / 2
 return
 
-<#Numpad5::
+CapsLock & Numpad5::
     CoordMode, Mouse, Screen
     MouseMove, A_ScreenWidth / 2, A_ScreenHeight / 2
 return
 
-<#Numpad6::
+CapsLock & Numpad6::
     CoordMode, Mouse, Screen
     MouseMove, A_ScreenWidth * 5 / 6, A_ScreenHeight / 2
 return
 
-<#Numpad1::
+CapsLock & Numpad1::
     CoordMode, Mouse, Screen
     MouseMove, A_ScreenWidth / 6, A_ScreenHeight * 5 / 6
 return
 
-<#Numpad2::
+CapsLock & Numpad2::
     CoordMode, Mouse, Screen
     MouseMove, A_ScreenWidth / 2, A_ScreenHeight * 5 / 6
 return
 
-<#Numpad3::
+CapsLock & Numpad3::
     CoordMode, Mouse, Screen
     MouseMove, A_ScreenWidth * 5 / 6, A_ScreenHeight * 5 / 6
 return
