@@ -544,6 +544,8 @@ return
     }
     else {
         Run, C:\Windows\System32\schtasks.exe /Run /TN "AutoHideMouseCursor", , Hide
+        Sleep 200
+        Send, {Alt Down}{Home}{Alt Up}
     }
 return
 
