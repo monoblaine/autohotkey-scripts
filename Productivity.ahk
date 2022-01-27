@@ -127,25 +127,25 @@ return
 CapsLock & Left:: ; CapsLock + left arrow
     CoordMode, Mouse, Screen
     ; Move mouse pointer leftward
-    MouseMove, -24, 0, 0, R
+    MouseMove, -14, 0, 0, R
 return
 
 CapsLock & Right:: ; CapsLock + right arrow
     CoordMode, Mouse, Screen
     ; Move mouse pointer rightward
-    MouseMove, 24, 0, 0, R
+    MouseMove, 14, 0, 0, R
 return
 
 CapsLock & Down:: ; CapsLock + down arrow
     CoordMode, Mouse, Screen
     ; Move mouse pointer downward
-    MouseMove, 0, 24, 0, R
+    MouseMove, 0, 14, 0, R
 return
 
 CapsLock & Up:: ; CapsLock + up arrow
     CoordMode, Mouse, Screen
     ; Move mouse pointer upward
-    MouseMove, 0, -24, 0, R
+    MouseMove, 0, -14, 0, R
 return
 
 <#Numpad7::
