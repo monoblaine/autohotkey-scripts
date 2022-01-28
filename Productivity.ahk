@@ -540,10 +540,10 @@ return
 
 >#>+m:: ; rwin + rshift + m
     if ProcessExist("AutoHideMouseCursor_x64_p.exe") {
-        Run, C:\Windows\System32\schtasks.exe /End /TN "AutoHideMouseCursor", , Hide
+        Run, C:\Windows\System32\schtasks.exe /End /TN "AutoHideMouseCursor",, Hide
     }
     else {
-        Run, C:\Windows\System32\schtasks.exe /Run /TN "AutoHideMouseCursor", , Hide
+        Run, C:\Windows\System32\schtasks.exe /Run /TN "AutoHideMouseCursor",, Hide
         Sleep 200
         Send, {Alt Down}{Home}{Alt Up}
     }
