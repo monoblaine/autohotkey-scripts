@@ -12,12 +12,5 @@ SendMode Input
 Process, Priority,, R
 #SingleInstance force
 
-!Tab:: ; ctrl + shift + q
-    Send ^+q
-    Sleep 50
-    MouseMove, -10, 0, 0, R
-    Sleep 50
-    MouseMove, 10, 0, 0, R
-return
-
+!Tab::Send ^+q ; ctrl + shift + q
 #Tab::Send ^+y ; ctrl + shift + y
