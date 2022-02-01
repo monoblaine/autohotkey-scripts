@@ -315,6 +315,11 @@ return
     ^NumpadAdd::Send ^{WheelUp}
 #IfWinActive
 
+#IfWinActive ahk_exe WINWORD.EXE
+    ^NumpadSub::Send ^{WheelDown}
+    ^NumpadAdd::Send ^{WheelUp}
+#IfWinActive
+
 #If !GetKeyState("LControl") && !GetKeyState("LShift") && !GetKeyState("LAlt")
     <#Up::WheelUp
     <#Down::WheelDown
@@ -353,11 +358,6 @@ return
             PostMessage, 0x114, 1, 0, %fcontrol%, A  ; 0x114=WM_HSCROLL; 1=SB_LINERIGHT
     return
 #If
-
-#IfWinActive ahk_exe WINWORD.EXE
-    ^NumpadSub::Send ^{WheelDown}
-    ^NumpadAdd::Send ^{WheelUp}
-#IfWinActive
 
 >#>+e:: ; rwin + rshift + e
     ; open file path in clipboard with notepad++
