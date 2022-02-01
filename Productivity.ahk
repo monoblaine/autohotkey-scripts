@@ -538,6 +538,7 @@ return
     }
 return
 
+RButton & LButton::
 >#>+m:: ; rwin + rshift + m
     if ProcessExist("AutoHideMouseCursor_x64_p.exe") {
         Run, C:\Windows\System32\schtasks.exe /End /TN "AutoHideMouseCursor",, Hide
@@ -559,6 +560,7 @@ ProcessExist(Name) {
 }
 
 *CapsLock:: return ; This forces capslock into a modifying key.
+RButton::RButton ; restore the original RButton function
 
 ; #IfWinActive Google Keep
 ;     ^q::Send ^[ ; ctrl + q
