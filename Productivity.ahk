@@ -31,6 +31,9 @@ GroupAdd, Group_HScroll_WheelLeftRight, ahk_class MozillaWindowClass
 
 GroupAdd, Group_HScroll_ScrollLock, ahk_exe EXCEL.EXE
 
+Shell := ComObjCreate("WScript.Shell")
+AutoHideMouseCursorRunning := ProcessExist("AutoHideMouseCursor_x64_p.exe")
+
 LWin & Enter::Send, {RWin Down}{Enter}{RWin Up}
 
 #^a:: ; Win + ctrl + A
@@ -207,8 +210,20 @@ CapsLock & Space::
     ;%
 return
 
-CapsLock & End::Send, {Click 1}
-CapsLock & PgDn::Click, Right
+#If not AutoHideMouseCursorRunning
+    CapsLock & End::Send, {Click 1}
+    CapsLock & PgDn::Click, Right
+
+    #IfWinActive ahk_class XLMAIN
+        ^NumpadSub::Send, ^{WheelDown}
+        ^NumpadAdd::Send, ^{WheelUp}
+    #IfWinActive
+
+    #IfWinActive ahk_exe WINWORD.EXE
+        ^NumpadSub::Send, ^{WheelDown}
+        ^NumpadAdd::Send, ^{WheelUp}
+    #IfWinActive
+#If
 
 ; Media stuff
 ^!+Left::Media_Prev
@@ -310,21 +325,11 @@ return
     ToolTip		; remove
 return
 
-#IfWinActive ahk_class XLMAIN
-    ^NumpadSub::Send, ^{WheelDown}
-    ^NumpadAdd::Send, ^{WheelUp}
-#IfWinActive
-
-#IfWinActive ahk_exe WINWORD.EXE
-    ^NumpadSub::Send, ^{WheelDown}
-    ^NumpadAdd::Send, ^{WheelUp}
-#IfWinActive
-
-#If !GetKeyState("LControl") && !GetKeyState("LShift") && !GetKeyState("LAlt")
+#If !AutoHideMouseCursorRunning && !GetKeyState("LControl") && !GetKeyState("LShift") && !GetKeyState("LAlt")
     <#Up::WheelUp
     <#Down::WheelDown
 
-#If !GetKeyState("LControl") && !GetKeyState("LShift") && !GetKeyState("LAlt") && WinActive("ahk_group Group_HScroll_ScrollLock")
+#If !AutoHideMouseCursorRunning && !GetKeyState("LControl") && !GetKeyState("LShift") && !GetKeyState("LAlt") && WinActive("ahk_group Group_HScroll_ScrollLock")
     <#Left::
         SetScrollLockState, On
         Send, {Left}
@@ -337,15 +342,15 @@ return
         SetScrollLockState, Off
     return
 
-#If !GetKeyState("LControl") && !GetKeyState("LShift") && !GetKeyState("LAlt") && WinActive("ahk_group Group_HScroll_ShiftWheel")
+#If !AutoHideMouseCursorRunning && !GetKeyState("LControl") && !GetKeyState("LShift") && !GetKeyState("LAlt") && WinActive("ahk_group Group_HScroll_ShiftWheel")
     <#Left::Send, +{WheelUp}
     <#Right::Send, +{WheelDown}
 
-#If !GetKeyState("LControl") && !GetKeyState("LShift") && !GetKeyState("LAlt") && WinActive("ahk_group Group_HScroll_WheelLeftRight")
+#If !AutoHideMouseCursorRunning && !GetKeyState("LControl") && !GetKeyState("LShift") && !GetKeyState("LAlt") && WinActive("ahk_group Group_HScroll_WheelLeftRight")
     <#Left::WheelLeft
     <#Right::WheelRight
 
-#If !GetKeyState("LControl") && !GetKeyState("LShift") && !GetKeyState("LAlt") && !WinActive("ahk_group Group_HScroll_ShiftWheel") && !WinActive("ahk_group Group_HScroll_WheelLeftRight") && !WinActive("ahk_group Group_HScroll_ScrollLock")
+#If !AutoHideMouseCursorRunning && !GetKeyState("LControl") && !GetKeyState("LShift") && !GetKeyState("LAlt") && !WinActive("ahk_group Group_HScroll_ShiftWheel") && !WinActive("ahk_group Group_HScroll_WheelLeftRight") && !WinActive("ahk_group Group_HScroll_ScrollLock")
     <#Left::
         ControlGetFocus, fcontrol, A
         Loop 8  ; <-- Increase this value to scroll faster.
@@ -540,16 +545,17 @@ return
 
 RButton & LButton::
 >#>+m:: ; rwin + rshift + m
-    if ProcessExist("AutoHideMouseCursor_x64_p.exe") {
-        Run, C:\Windows\System32\schtasks.exe /End /TN "AutoHideMouseCursor",, Hide
+    if AutoHideMouseCursorRunning {
+        Process, Close, AutoHideMouseCursor_x64_p.exe
+        AutoHideMouseCursorRunning := 0
         Sleep 15
         MouseMove, 0, 5, 0, R
         Sleep 15
         MouseMove, 0, -5, 0, R
     }
     else {
-        Run, C:\Windows\System32\schtasks.exe /Run /TN "AutoHideMouseCursor",, Hide
-        Sleep 10
+        Shell.Run("C:\Users\Serhan\Documents\.tools\AutoHideMouseCursor\AutoHideMouseCursor_x64_p.exe", 0)
+        AutoHideMouseCursorRunning := 1
         Send, {Alt Down}{Home}{Alt Up}
     }
 return
