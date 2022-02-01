@@ -31,7 +31,7 @@ GroupAdd, Group_HScroll_WheelLeftRight, ahk_class MozillaWindowClass
 
 GroupAdd, Group_HScroll_ScrollLock, ahk_exe EXCEL.EXE
 
-LWin & Enter::Send {RWin Down}{Enter}{RWin Up}
+LWin & Enter::Send, {RWin Down}{Enter}{RWin Up}
 
 #^a:: ; Win + ctrl + A
     ; Make the active window stay always on top
@@ -44,7 +44,7 @@ return
         Clip0 = %ClipBoardAll%
         ClipBoard = %ClipBoard%       ; Convert to text
         ClipBoard := RegexReplace(ClipBoard, "^\s+|\s+$")
-        Send ^v                       ; For best compatibility: SendPlay
+        Send, ^v                      ; For best compatibility: SendPlay
         Sleep 50                      ; Don't change clipboard while it is pasted! (Sleep > 0)
         ClipBoard = %Clip0%           ; Restore original ClipBoard
         VarSetCapacity(Clip0, 0)      ; Free memory
@@ -207,7 +207,7 @@ CapsLock & Space::
     ;%
 return
 
-CapsLock & End::Send {Click 1}
+CapsLock & End::Send, {Click 1}
 CapsLock & PgDn::Click, Right
 
 ; Media stuff
@@ -232,7 +232,7 @@ CapsLock & PgDn::Click, Right
 
 ; Press Esc to close window (If it is 7-Zip)
 #IfWinActive ahk_exe 7zFM.exe
-    Esc::Send {Alt Down}{f4}{Alt Up}
+    Esc::Send, {Alt Down}{f4}{Alt Up}
 #IfWinActive
 
 #IfWinNotActive ahk_exe firefox.exe
@@ -311,13 +311,13 @@ return
 return
 
 #IfWinActive ahk_class XLMAIN
-    ^NumpadSub::Send ^{WheelDown}
-    ^NumpadAdd::Send ^{WheelUp}
+    ^NumpadSub::Send, ^{WheelDown}
+    ^NumpadAdd::Send, ^{WheelUp}
 #IfWinActive
 
 #IfWinActive ahk_exe WINWORD.EXE
-    ^NumpadSub::Send ^{WheelDown}
-    ^NumpadAdd::Send ^{WheelUp}
+    ^NumpadSub::Send, ^{WheelDown}
+    ^NumpadAdd::Send, ^{WheelUp}
 #IfWinActive
 
 #If !GetKeyState("LControl") && !GetKeyState("LShift") && !GetKeyState("LAlt")
@@ -338,8 +338,8 @@ return
     return
 
 #If !GetKeyState("LControl") && !GetKeyState("LShift") && !GetKeyState("LAlt") && WinActive("ahk_group Group_HScroll_ShiftWheel")
-    <#Left::Send +{WheelUp}
-    <#Right::Send +{WheelDown}
+    <#Left::Send, +{WheelUp}
+    <#Right::Send, +{WheelDown}
 
 #If !GetKeyState("LControl") && !GetKeyState("LShift") && !GetKeyState("LAlt") && WinActive("ahk_group Group_HScroll_WheelLeftRight")
     <#Left::WheelLeft
@@ -407,7 +407,7 @@ return
 
     ^+c:: ; ctrl + shift + c
         clipboard =
-        Send ^c
+        Send, ^c
         ClipWait
         clipboard := RegexReplace(clipboard, "^\[[^\]]+\]\.\[([^\]]+)\]$", "$1")
     return
@@ -423,7 +423,7 @@ return
         RegExMatch(ClipBoard, "^([ \t]+)", Lw)
         ClipBoard := RegexReplace(ClipBoard, "(?:(\r?\n)" . Lw . ")|(^" . Lw . ")", "$1")
         ClipBoard := RegexReplace(ClipBoard, "\s+$") ; Remove the trailing spaces anyway
-        Send ^v                       ; For best compatibility: SendPlay
+        Send, ^v                      ; For best compatibility: SendPlay
         Sleep 50                      ; Don't change clipboard while it is pasted! (Sleep > 0)
         ClipBoard = %Clip0%           ; Restore original ClipBoard
         VarSetCapacity(Clip0, 0)      ; Free memory
@@ -435,7 +435,7 @@ return
         Clip0 = %ClipBoardAll%
         ClipBoard = %ClipBoard%       ; Convert to text
         ClipBoard := RegexReplace(ClipBoard, "\t", " -> ")
-        Send ^v                       ; For best compatibility: SendPlay
+        Send, ^v                      ; For best compatibility: SendPlay
         Sleep 50                      ; Don't change clipboard while it is pasted! (Sleep > 0)
         ClipBoard = %Clip0%           ; Restore original ClipBoard
         VarSetCapacity(Clip0, 0)      ; Free memory
@@ -448,7 +448,7 @@ return
         Clip0 = %ClipBoardAll%
         ClipBoard = %ClipBoard%       ; Convert to text
         ClipBoard := RegexReplace(clipboard, "^(git@[^.]+\.com):([^#]+)#v?(.+)$", "git+ssh://$1/$2#v$3")
-        Send ^v                       ; For best compatibility: SendPlay
+        Send, ^v                      ; For best compatibility: SendPlay
         Sleep 50                      ; Don't change clipboard while it is pasted! (Sleep > 0)
         ClipBoard = %Clip0%           ; Restore original ClipBoard
         VarSetCapacity(Clip0, 0)      ; Free memory
@@ -508,7 +508,7 @@ return
     }
 return
 
-!End::Send {Alt Down}{f4}{Alt Up} ; alt+end to alt+f4 anything
+!End::Send, {Alt Down}{f4}{Alt Up} ; alt+end to alt+f4 anything
 
 <#End:: ; lwin + end
     CoordMode, Mouse, Screen
@@ -563,6 +563,6 @@ ProcessExist(Name) {
 RButton::RButton ; restore the original RButton function
 
 ; #IfWinActive Google Keep
-;     ^q::Send ^[ ; ctrl + q
-;     ^+q::Send ^] ; ctrl + shift + q
+;     ^q::Send, ^[ ; ctrl + q
+;     ^+q::Send, ^] ; ctrl + shift + q
 ; #IfWinActive
