@@ -495,8 +495,8 @@ return
 #If
 
 ^!+m:: ;; ctrl + alt + shift + m
-	SetTitleMatchMode, 2
-	DetectHiddenWindows, On
+    SetTitleMatchMode, 2
+    DetectHiddenWindows, On
 
     if WinExist(" - Mozilla Thunderbird") {
         if (WinActive()) {
