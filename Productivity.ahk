@@ -543,6 +543,9 @@ return
     }
 return
 
+<#+Up:: ; lwin + shift + Up
+<#+Down:: ; lwin + shift + Down
+CapsLock & Enter::
 RButton & LButton::
 >#>+m:: ; rwin + rshift + m
     if AutoHideMouseCursorRunning {
