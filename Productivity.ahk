@@ -543,9 +543,9 @@ RButton & LButton::
     if ProcessExist("AutoHideMouseCursor_x64_p.exe") {
         Run, C:\Windows\System32\schtasks.exe /End /TN "AutoHideMouseCursor",, Hide
         Sleep 15
-        MouseMove, -5, 0, 0, R
+        MouseMove, 0, 5, 0, R
         Sleep 15
-        MouseMove, 5, 0, 0, R
+        MouseMove, 0, -5, 0, R
     }
     else {
         Run, C:\Windows\System32\schtasks.exe /Run /TN "AutoHideMouseCursor",, Hide
