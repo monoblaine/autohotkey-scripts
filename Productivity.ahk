@@ -210,20 +210,18 @@ CapsLock & Space::
     ;%
 return
 
-#If not AutoHideMouseCursorRunning
-    CapsLock & End::Send, {Click 1}
-    CapsLock & PgDn::Click, Right
+CapsLock & End::Send, {Click 1}
+CapsLock & PgDn::Click, Right
 
-    #IfWinActive ahk_class XLMAIN
-        ^NumpadSub::Send, ^{WheelDown}
-        ^NumpadAdd::Send, ^{WheelUp}
-    #IfWinActive
+#IfWinActive ahk_class XLMAIN
+    ^NumpadSub::Send, ^{WheelDown}
+    ^NumpadAdd::Send, ^{WheelUp}
+#IfWinActive
 
-    #IfWinActive ahk_exe WINWORD.EXE
-        ^NumpadSub::Send, ^{WheelDown}
-        ^NumpadAdd::Send, ^{WheelUp}
-    #IfWinActive
-#If
+#IfWinActive ahk_exe WINWORD.EXE
+    ^NumpadSub::Send, ^{WheelDown}
+    ^NumpadAdd::Send, ^{WheelUp}
+#IfWinActive
 
 ; Media stuff
 ^!+Left::Media_Prev
@@ -325,11 +323,11 @@ return
     ToolTip		; remove
 return
 
-#If !AutoHideMouseCursorRunning && !GetKeyState("LControl") && !GetKeyState("LShift") && !GetKeyState("LAlt")
+#If !GetKeyState("LControl") && !GetKeyState("LShift") && !GetKeyState("LAlt")
     <#Up::WheelUp
     <#Down::WheelDown
 
-#If !AutoHideMouseCursorRunning && !GetKeyState("LControl") && !GetKeyState("LShift") && !GetKeyState("LAlt") && WinActive("ahk_group Group_HScroll_ScrollLock")
+#If !GetKeyState("LControl") && !GetKeyState("LShift") && !GetKeyState("LAlt") && WinActive("ahk_group Group_HScroll_ScrollLock")
     <#Left::
         SetScrollLockState, On
         Send, {Left}
@@ -342,15 +340,15 @@ return
         SetScrollLockState, Off
     return
 
-#If !AutoHideMouseCursorRunning && !GetKeyState("LControl") && !GetKeyState("LShift") && !GetKeyState("LAlt") && WinActive("ahk_group Group_HScroll_ShiftWheel")
+#If !GetKeyState("LControl") && !GetKeyState("LShift") && !GetKeyState("LAlt") && WinActive("ahk_group Group_HScroll_ShiftWheel")
     <#Left::Send, +{WheelUp}
     <#Right::Send, +{WheelDown}
 
-#If !AutoHideMouseCursorRunning && !GetKeyState("LControl") && !GetKeyState("LShift") && !GetKeyState("LAlt") && WinActive("ahk_group Group_HScroll_WheelLeftRight")
+#If !GetKeyState("LControl") && !GetKeyState("LShift") && !GetKeyState("LAlt") && WinActive("ahk_group Group_HScroll_WheelLeftRight")
     <#Left::WheelLeft
     <#Right::WheelRight
 
-#If !AutoHideMouseCursorRunning && !GetKeyState("LControl") && !GetKeyState("LShift") && !GetKeyState("LAlt") && !WinActive("ahk_group Group_HScroll_ShiftWheel") && !WinActive("ahk_group Group_HScroll_WheelLeftRight") && !WinActive("ahk_group Group_HScroll_ScrollLock")
+#If !GetKeyState("LControl") && !GetKeyState("LShift") && !GetKeyState("LAlt") && !WinActive("ahk_group Group_HScroll_ShiftWheel") && !WinActive("ahk_group Group_HScroll_WheelLeftRight") && !WinActive("ahk_group Group_HScroll_ScrollLock")
     <#Left::
         ControlGetFocus, fcontrol, A
         Loop 8  ; <-- Increase this value to scroll faster.
