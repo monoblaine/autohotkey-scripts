@@ -31,6 +31,9 @@ GroupAdd, Group_HScroll_WheelLeftRight, ahk_class MozillaWindowClass
 
 GroupAdd, Group_HScroll_ScrollLock, ahk_exe EXCEL.EXE
 
+GroupAdd, Group_CtrlRToF5, ahk_class CabinetWClass
+GroupAdd, Group_CtrlRToF5, ahk_exe GitExtensions.exe
+
 Shell := ComObjCreate("WScript.Shell")
 AutoHideMouseCursorRunning := ProcessExist("AutoHideMouseCursor_x64_p.exe")
 LastMouseCoordX := 0
@@ -544,6 +547,10 @@ ProcessExist(Name) {
     Process, Exist, %Name%
     return Errorlevel
 }
+
+#IfWinActive ahk_group Group_CtrlRToF5
+    ^r::Send, {f5}
+#IfWinActive
 
 *CapsLock:: return ; This forces capslock into a modifying key.
 RButton::RButton ; restore the original RButton function
