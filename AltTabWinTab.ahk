@@ -12,5 +12,21 @@ SendMode Input
 Process, Priority,, R
 #SingleInstance force
 
-!Tab::Send ^+q ; ctrl + shift + q
-#Tab::Send ^+y ; ctrl + shift + y
+shouldGoBack := 0
+
+!Tab::
+    shouldGoBack := 0
+    Send ^+q ; ctrl + shift + q
+return
+
+#Tab::
+    tmp := shouldGoBack
+    shouldGoBack := !shouldGoBack
+
+    if (tmp) {
+        Send, !+{Esc}
+    }
+    else {
+        Send, !{Esc}
+    }
+return
