@@ -33,6 +33,10 @@ GroupAdd, Group_HScroll_ScrollLock, ahk_exe EXCEL.EXE
 
 Shell := ComObjCreate("WScript.Shell")
 AutoHideMouseCursorRunning := ProcessExist("AutoHideMouseCursor_x64_p.exe")
+LastMouseCoordX := 0
+LastMouseCoordY := 0
+
+CoordMode, Mouse, Screen
 
 LWin & Enter::Send, {RWin Down}{Enter}{RWin Up}
 
@@ -115,100 +119,76 @@ return
     Run, ClipToQuotedLines.exe
 return
 
-^!+w:: ; ctrl + alt + shift + w
-    CoordMode, Mouse, Screen
-    ; Move mouse pointer to somewhere safe
-    MouseMove, A_ScreenWidth - 172, 0
-return
+ToggleMousePos(targetx, targety) {
+    global LastMouseCoordX
+    global LastMouseCoordY
 
-^!+e:: ; ctrl + alt + shift + e
-    CoordMode, Mouse, Screen
-    ; Move mouse pointer to somewhere safe (alternate)
-    MouseMove, A_ScreenWidth - 90, 50
-return
+    targetx := Floor(targetx)
+    targety := Floor(targety)
 
-CapsLock & Left:: ; CapsLock + left arrow
-    CoordMode, Mouse, Screen
-    ; Move mouse pointer leftward
-    MouseMove, -14, 0, 0, R
-return
+    MouseGetPos, xpos, ypos
 
-CapsLock & Right:: ; CapsLock + right arrow
-    CoordMode, Mouse, Screen
-    ; Move mouse pointer rightward
-    MouseMove, 14, 0, 0, R
-return
+    xpos := Floor(xpos)
+    ypos := Floor(ypos)
 
-CapsLock & Down:: ; CapsLock + down arrow
-    CoordMode, Mouse, Screen
-    ; Move mouse pointer downward
-    MouseMove, 0, 14, 0, R
-return
+    ;MsgBox, last: %LastMouseCoordX%,%LastMouseCoordY%`ncurrent: %xpos%,%ypos%`ntarget: %targetx%,%targety%
 
-CapsLock & Up:: ; CapsLock + up arrow
-    CoordMode, Mouse, Screen
-    ; Move mouse pointer upward
-    MouseMove, 0, -14, 0, R
-return
+    if (targetx = xpos) and (targety = ypos) {
+        MouseMove, %LastMouseCoordX%, %LastMouseCoordY%
+    }
+    else {
+        LastMouseCoordX := xpos
+        LastMouseCoordY := ypos
+        MouseMove, %targetx%, %targety%
+    }
+}
+
+; ctrl + alt + shift + w
+^!+w::ToggleMousePos(A_ScreenWidth - 172, 0) ; Move mouse pointer to somewhere safe
+
+; ctrl + alt + shift + e
+^!+e::ToggleMousePos(A_ScreenWidth - 90, 50) ; Move mouse pointer to somewhere safe (alternate)
+
+; CapsLock + left arrow
+CapsLock & Left::MouseMove, -14, 0, 0, R ; Move mouse pointer leftward
+
+; CapsLock + right arrow
+CapsLock & Right::MouseMove, 14, 0, 0, R ; Move mouse pointer rightward
+
+; CapsLock + down arrow
+CapsLock & Down::MouseMove, 0, 14, 0, R ; Move mouse pointer downward
+
+; CapsLock + up arrow
+CapsLock & Up::MouseMove, 0, -14, 0, R ; Move mouse pointer upward
 
 <#Numpad7::
-CapsLock & Numpad7::
-    CoordMode, Mouse, Screen
-    MouseMove, A_ScreenWidth / 6, A_ScreenHeight / 6
-return
+CapsLock & Numpad7::ToggleMousePos(A_ScreenWidth / 6, A_ScreenHeight / 6)
 
 <#Numpad8::
-CapsLock & Numpad8::
-    CoordMode, Mouse, Screen
-    MouseMove, A_ScreenWidth / 2, A_ScreenHeight / 6
-return
+CapsLock & Numpad8::ToggleMousePos(A_ScreenWidth / 2, A_ScreenHeight / 6)
 
 <#Numpad9::
-CapsLock & Numpad9::
-    CoordMode, Mouse, Screen
-    MouseMove, A_ScreenWidth * 5 / 6, A_ScreenHeight / 6
-return
+CapsLock & Numpad9::ToggleMousePos(A_ScreenWidth * 5 / 6, A_ScreenHeight / 6)
 
 <#Numpad4::
-CapsLock & Numpad4::
-    CoordMode, Mouse, Screen
-    MouseMove, A_ScreenWidth / 6, A_ScreenHeight / 2
-return
+CapsLock & Numpad4::ToggleMousePos(A_ScreenWidth / 6, A_ScreenHeight / 2)
 
 <#Numpad5::
-CapsLock & Numpad5::
-    CoordMode, Mouse, Screen
-    MouseMove, A_ScreenWidth / 2, A_ScreenHeight / 2
-return
+CapsLock & Numpad5::ToggleMousePos(A_ScreenWidth / 2, A_ScreenHeight / 2)
 
 <#Numpad6::
-CapsLock & Numpad6::
-    CoordMode, Mouse, Screen
-    MouseMove, A_ScreenWidth * 5 / 6, A_ScreenHeight / 2
-return
+CapsLock & Numpad6::ToggleMousePos(A_ScreenWidth * 5 / 6, A_ScreenHeight / 2)
 
 <#Numpad1::
-CapsLock & Numpad1::
-    CoordMode, Mouse, Screen
-    MouseMove, A_ScreenWidth / 6, A_ScreenHeight * 5 / 6
-return
+CapsLock & Numpad1::ToggleMousePos(A_ScreenWidth / 6, A_ScreenHeight * 5 / 6)
 
 <#Numpad2::
-CapsLock & Numpad2::
-    CoordMode, Mouse, Screen
-    MouseMove, A_ScreenWidth / 2, A_ScreenHeight * 5 / 6
-return
+CapsLock & Numpad2::ToggleMousePos(A_ScreenWidth / 2, A_ScreenHeight * 5 / 6)
 
 <#Numpad3::
-CapsLock & Numpad3::
-    CoordMode, Mouse, Screen
-    MouseMove, A_ScreenWidth * 5 / 6, A_ScreenHeight * 5 / 6
-return
+CapsLock & Numpad3::ToggleMousePos(A_ScreenWidth * 5 / 6, A_ScreenHeight * 5 / 6)
 
-CapsLock & Space::
-    SetCapsLockState % !GetKeyState("CapsLock", "T")
-    ;%
-return
+CapsLock & Space::SetCapsLockState % !GetKeyState("CapsLock", "T") ; %
 
 CapsLock & End::Send, {Click 1}
 CapsLock & PgDn::Click, Right
@@ -514,7 +494,6 @@ return
 !End::Send, {Alt Down}{f4}{Alt Up} ; alt+end to alt+f4 anything
 
 <#End:: ; lwin + end
-    CoordMode, Mouse, Screen
     MouseGetPos, xpos, ypos
     MouseMove, A_ScreenWidth / 2, A_ScreenHeight / 2
     Click
