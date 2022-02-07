@@ -129,6 +129,14 @@ ToggleMousePos(targetx, targety) {
     targetx := Floor(targetx)
     targety := Floor(targety)
 
+    if (targetx = -1) {
+        targetx := LastMouseCoordX
+    }
+
+    if (targety = -1) {
+        targety := LastMouseCoordY
+    }
+
     MouseGetPos, xpos, ypos
 
     xpos := Floor(xpos)
@@ -163,6 +171,18 @@ CapsLock & Down::MouseMove, 0, 14, 0, R ; Move mouse pointer downward
 
 ; CapsLock + up arrow
 CapsLock & Up::MouseMove, 0, -14, 0, R ; Move mouse pointer upward
+
+<#NumpadDiv::
+CapsLock & NumpadDiv::ToggleMousePos(A_ScreenWidth / 6, -1)
+
+<#NumpadMult::
+CapsLock & NumpadMult::ToggleMousePos(A_ScreenWidth * 5 / 6, -1)
+
+<#NumpadSub::
+CapsLock & NumpadSub::ToggleMousePos(-1, A_ScreenHeight / 6)
+
+<#NumpadAdd::
+CapsLock & NumpadAdd::ToggleMousePos(-1, A_ScreenHeight * 5 / 6)
 
 <#Numpad7::
 CapsLock & Numpad7::ToggleMousePos(A_ScreenWidth / 6, A_ScreenHeight / 6)
