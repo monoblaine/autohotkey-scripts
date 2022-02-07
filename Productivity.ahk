@@ -36,6 +36,10 @@ GroupAdd, Group_CtrlRToF5, ahk_exe GitExtensions.exe
 
 Shell := ComObjCreate("WScript.Shell")
 AutoHideMouseCursorRunning := ProcessExist("AutoHideMouseCursor_x64_p.exe")
+
+SavedMouseCoordX := -1
+SavedMouseCoordY := -1
+
 LastMouseCoordX := 0
 LastMouseCoordY := 0
 
@@ -171,6 +175,14 @@ CapsLock & Down::MouseMove, 0, 14, 0, R ; Move mouse pointer downward
 
 ; CapsLock + up arrow
 CapsLock & Up::MouseMove, 0, -14, 0, R ; Move mouse pointer upward
+
+; Save current Mouse Coord
+CapsLock & Ins::
+    MouseGetPos, SavedMouseCoordX, SavedMouseCoordY
+return
+
+; Go to saved Mouse Coord
+CapsLock & Home::ToggleMousePos(SavedMouseCoordX, SavedMouseCoordY)
 
 <#NumpadDiv::
 CapsLock & NumpadDiv::ToggleMousePos(A_ScreenWidth / 6, -1)
