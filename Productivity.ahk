@@ -177,9 +177,7 @@ CapsLock & Down::MouseMove, 0, 14, 0, R ; Move mouse pointer downward
 CapsLock & Up::MouseMove, 0, -14, 0, R ; Move mouse pointer upward
 
 ; Save current Mouse Coord
-CapsLock & Ins::
-    MouseGetPos, SavedMouseCoordX, SavedMouseCoordY
-return
+CapsLock & Ins::MouseGetPos, SavedMouseCoordX, SavedMouseCoordY
 
 ; Go to saved Mouse Coord
 CapsLock & Home::ToggleMousePos(SavedMouseCoordX, SavedMouseCoordY)
