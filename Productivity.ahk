@@ -124,6 +124,7 @@ CapsLock & Numpad3::ToggleMousePos(A_ScreenWidth * 5 / 6, A_ScreenHeight * 5 / 6
 
 CapsLock & End::                                                                  ; CapsLock + end
 <#End::                                                                           ; lwin + end
+<!End::                                                                           ; lalt + end
     MouseGetPos, xpos, ypos
     MouseMove, A_ScreenWidth / 2, A_ScreenHeight / 2
     Click
