@@ -158,6 +158,21 @@ ToggleMousePos(targetx, targety) {
     }
 }
 
+SavePosAndMouseMoveR(xDiff, yDiff) {
+    global LastMouseCoordX
+    global LastMouseCoordY
+
+    MouseGetPos, xpos, ypos
+
+    xpos := Floor(xpos)
+    ypos := Floor(ypos)
+
+    LastMouseCoordX := xpos
+    LastMouseCoordY := ypos
+
+    MouseMove, %xDiff%, %yDiff%, 0, R
+}
+
 ; ctrl + alt + shift + w
 ^!+w::ToggleMousePos(A_ScreenWidth - 172, 0) ; Move mouse pointer to somewhere safe
 
@@ -165,16 +180,16 @@ ToggleMousePos(targetx, targety) {
 ^!+e::ToggleMousePos(A_ScreenWidth - 90, 50) ; Move mouse pointer to somewhere safe (alternate)
 
 ; CapsLock + left arrow
-CapsLock & Left::MouseMove, -14, 0, 0, R ; Move mouse pointer leftward
+CapsLock & Left::SavePosAndMouseMoveR(-14, 0) ; Move mouse pointer leftward
 
 ; CapsLock + right arrow
-CapsLock & Right::MouseMove, 14, 0, 0, R ; Move mouse pointer rightward
+CapsLock & Right::SavePosAndMouseMoveR(14, 0) ; Move mouse pointer rightward
 
 ; CapsLock + down arrow
-CapsLock & Down::MouseMove, 0, 14, 0, R ; Move mouse pointer downward
+CapsLock & Down::SavePosAndMouseMoveR(0, 14) ; Move mouse pointer downward
 
 ; CapsLock + up arrow
-CapsLock & Up::MouseMove, 0, -14, 0, R ; Move mouse pointer upward
+CapsLock & Up::SavePosAndMouseMoveR(0, -14) ; Move mouse pointer upward
 
 ; Save current Mouse Coord
 CapsLock & Ins::MouseGetPos, SavedMouseCoordX, SavedMouseCoordY
