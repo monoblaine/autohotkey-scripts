@@ -21,7 +21,6 @@ GroupAdd, Group_RawPasteDisabled, ahk_exe GitExtensions.exe
 
 GroupAdd, Group_ExcessIndentRemovalEnabled, ahk_class Notepad++
 GroupAdd, Group_ExcessIndentRemovalEnabled, ahk_exe WinMergeU.exe
-GroupAdd, Group_ExcessIndentRemovalEnabled, ahk_exe devenv.exe
 
 GroupAdd, Group_ZoomableByWheel, ahk_exe WINWORD.EXE
 GroupAdd, Group_ZoomableByWheel, ahk_exe EXCEL.EXE
