@@ -13,6 +13,7 @@ SendMode Input
 
 GroupAdd, Group_CtrlRToF5, ahk_class CabinetWClass
 GroupAdd, Group_CtrlRToF5, ahk_exe GitExtensions.exe
+GroupAdd, Group_CtrlRToF5, ahk_exe WinMergeU.exe
 
 GroupAdd, Group_RawPasteDisabled, ahk_exe WinMergeU.exe ; WinMerge
 GroupAdd, Group_RawPasteDisabled, ahk_class Notepad++
