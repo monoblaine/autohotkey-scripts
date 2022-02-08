@@ -57,7 +57,8 @@ LWin & Enter::Send, {RWin Down}{Enter}{RWin Up}                                 
 #^a::Winset, Alwaysontop, , A                                                     ; win + ctrl + a               | Make the active window stay always on top
 <#<^<+Up::Volume_Up                                                               ; lwin + lctrl + lshift + up   | Increase volume
 <#<^<+Down::Volume_Down                                                           ; lwin + lctrl + lshift + down | Decrease volume
-!End::Send, {Alt Down}{f4}{Alt Up}                                                ; alt + end                    | Send alt + f4
+CapsLock & Del::                                                                  ; CapsLock + del
+!Del::Send, {Alt Down}{f4}{Alt Up}                                                ; alt + del                    | Send alt + f4
 ^!+l::Run, ClipToQuotedLines.exe                                                  ; ctrl + alt + shift + l       | ClipToQuotedLines.exe
 ^!+h::StringReplace, clipboard, clipboard, `\, `/, All                            ; ctrl + alt + shift + h       | Replace all the \ characters within the text in clipboard with /
 ^!+w::ToggleMousePos(A_ScreenWidth - 172, 0)                                      ; ctrl + alt + shift + w       | Move mouse pointer to somewhere safe
@@ -73,8 +74,14 @@ CapsLock & Up::SavePosAndMouseMoveR(0, -14)                                     
 CapsLock & Ins::MouseGetPos, SavedMouseCoordX, SavedMouseCoordY                   ; CapsLock + Insert            | Save current Mouse Coord
 CapsLock & Home::ToggleMousePos(SavedMouseCoordX, SavedMouseCoordY)               ; CapsLock + Home              | Go to saved Mouse Coord
 CapsLock & Space::SetCapsLockState % !GetKeyState("CapsLock", "T")              ;%; CapsLock + Space             | Toggle CapsLock state
-CapsLock & End::Send, {Click 1}                                                   ; CapsLock + End
-CapsLock & PgDn::Click, Right                                                     ; CapsLock + PgDn
+
+#If !GetKeyState("LAlt")
+    CapsLock & Enter::Send, {Click 1}
+#If
+
+#If GetKeyState("LAlt")
+    CapsLock & Enter::Click, Right
+#If
 
 <#NumpadDiv::                                                                     ; lwin + NumpadDiv
 CapsLock & NumpadDiv::ToggleMousePos(A_ScreenWidth / 6, -1)                       ; CapsLock + NumpadDiv
@@ -115,6 +122,7 @@ CapsLock & Numpad2::ToggleMousePos(A_ScreenWidth / 2, A_ScreenHeight * 5 / 6)   
 <#Numpad3::                                                                       ; lwin + Numpad3
 CapsLock & Numpad3::ToggleMousePos(A_ScreenWidth * 5 / 6, A_ScreenHeight * 5 / 6) ; CapsLock + Numpad3
 
+CapsLock & End::                                                                  ; CapsLock + end
 <#End::                                                                           ; lwin + end
     MouseGetPos, xpos, ypos
     MouseMove, A_ScreenWidth / 2, A_ScreenHeight / 2
@@ -123,12 +131,12 @@ CapsLock & Numpad3::ToggleMousePos(A_ScreenWidth * 5 / 6, A_ScreenHeight * 5 / 6
 return
 
 ; Credits: https://www.autohotkey.com/board/topic/119505-minimize-restore-active-window/
-!Del::                                                                            ; alt + Delete
+CapsLock & PgDn::                                                                 ; CapsLock + PgDn
     lastWindow := WinExist("A")
     WinMinimize, ahk_id %lastWindow%
 return
 
-!Ins::                                                                            ; alt + Insert
+CapsLock & PgUp::                                                                 ; CapsLock + PgUp
     IfWinExist, ahk_id %lastWindow%
     {
         WinGet, WinState, MinMax, ahk_id %lastWindow%
@@ -138,11 +146,11 @@ return
         else
             WinMinimize
 
-        lastWindow := ; remove this line if you want minimize/toggle only one window
+        lastWindow := "" ; remove this line if you want minimize/toggle only one window
     }
 return
 
-CapsLock & Enter::                                                                ; CapsLock + Enter
+CapsLock & Backspace::                                                            ; CapsLock + Backspace
 RButton & LButton::                                                               ; RButton + LButton
     if AutoHideMouseCursorRunning {
         Process, Close, AutoHideMouseCursor_x64_p.exe
