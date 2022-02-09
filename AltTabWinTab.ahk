@@ -13,4 +13,16 @@ Process, Priority,, R
 #SingleInstance force
 
 !Tab::Send ^+q ; ctrl + shift + q
-#Tab::Send ^+y ; ctrl + shift + y
+
+goForward := 1
+
+#Tab::
+    if (goForward) {
+        Send, !{Esc}
+    }
+    else {
+        Send, !+{Esc}
+    }
+
+    goForward := !goForward
+return
