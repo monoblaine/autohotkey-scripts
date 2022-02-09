@@ -12,7 +12,7 @@ SendMode Input
 Process, Priority,, R
 #SingleInstance force
 
-!Tab::Send ^+q ; ctrl + shift + q
+!Tab::Send, ^+q ; ctrl + shift + q
 
 goForward := 1
 
