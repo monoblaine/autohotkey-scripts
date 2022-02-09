@@ -11,19 +11,26 @@ SetControlDelay, -1
 SendMode Input
 Process, Priority,, R
 #SingleInstance force
+#Include .\VD.ahk\VD.ahk
+
+desktops := {}
 
 !Tab::Send, ^+q ; ctrl + shift + q
 
-lastActivatedWin := 0
-lastBuriedWin := 0
-
 #Tab::
+    currentDesktopNum := VD.getCurrentDesktopNum()
+
+    if (!desktops.hasKey(currentDesktopNum)) {
+        desktops[currentDesktopNum] := { lastActivatedWin: 0, lastBuriedWin: 0 }
+    }
+
+    currentDesktop := desktops[currentDesktopNum]
     visibleWindows := GetVisibleWindows()
     windowCount := visibleWindows.MaxIndex()
 
     if (windowCount < 2) {
-        lastActivatedWin := 0
-        lastBuriedWin := 0
+        currentDesktop.lastActivatedWin := 0
+        currentDesktop.lastBuriedWin := 0
         Send, !{Esc}
         return
     }
@@ -31,16 +38,18 @@ lastBuriedWin := 0
     ; firstWin := visibleWindows[1]
     ; secondWin := visibleWindows[2]
     ; lastWin := visibleWindows[windowCount]
+    ; lastActivatedWin := currentDesktop.lastActivatedWin
+    ; lastBuriedWin := currentDesktop.lastBuriedWin
     ; MsgBox, windowCount is %windowCount%`n1st win in list: %firstWin%`n2nd win in list: %secondWin%`nLast win in list: %lastWin%`nlastActivatedWin: %lastActivatedWin%`nlastBuriedWin: %lastBuriedWin%
 
-    if (lastActivatedWin = visibleWindows[1]) and (lastBuriedWin = visibleWindows[windowCount]) {
-        lastActivatedWin := 0
-        lastBuriedWin := 0
+    if (currentDesktop.lastActivatedWin = visibleWindows[1]) and (currentDesktop.lastBuriedWin = visibleWindows[windowCount]) {
+        currentDesktop.lastActivatedWin := 0
+        currentDesktop.lastBuriedWin := 0
         Send, !+{Esc}
     }
     else {
-        lastActivatedWin := visibleWindows[2]
-        lastBuriedWin := visibleWindows[1]
+        currentDesktop.lastActivatedWin := visibleWindows[2]
+        currentDesktop.lastBuriedWin := visibleWindows[1]
         Send, !{Esc}
     }
 return
