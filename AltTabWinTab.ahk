@@ -56,10 +56,16 @@ return
 
 !Home::
 #Home::
-    visibleWindows := GetVisibleWindows()
+    WinGetClass, activeWindowClass, A
 
-    if (visibleWindows.MaxIndex()) {
-        WinActivate, ahk_id %visibleWindows1%
+    if (activeWindowClass = "Shell_TrayWnd") or (activeWindowClass = "WorkerW") {
+        visibleWindows := GetVisibleWindows()
+
+        if (visibleWindows.MaxIndex()) {
+            firstWin := visibleWindows[1]
+            WinActivate, ahk_id %firstWin%
+            firstWin := ""
+        }
     }
 return
 
