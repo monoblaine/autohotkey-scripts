@@ -55,7 +55,6 @@ desktops := {}
 return
 
 !Home::
-#Home::
     WinGetClass, activeWindowClass, A
 
     if (activeWindowClass = "Shell_TrayWnd") or (activeWindowClass = "WorkerW") {
