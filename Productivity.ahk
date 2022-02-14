@@ -497,18 +497,18 @@ ToggleMousePos(targetx, targety) {
     targetx := Floor(targetx)
     targety := Floor(targety)
 
-    if (targetx = -1) {
-        targetx := LastMouseCoordX
-    }
-
-    if (targety = -1) {
-        targety := LastMouseCoordY
-    }
-
     MouseGetPos, xpos, ypos
 
     xpos := Floor(xpos)
     ypos := Floor(ypos)
+
+    if (targetx = -1) {
+        targetx := xpos
+    }
+
+    if (targety = -1) {
+        targety := ypos
+    }
 
     ; MsgBox, last: %LastMouseCoordX%,%LastMouseCoordY%`ncurrent: %xpos%,%ypos%`ntarget: %targetx%,%targety%
 
