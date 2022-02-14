@@ -90,10 +90,10 @@ CapsLock & NumpadDiv::ToggleMousePos(A_ScreenWidth / 6, -1)                     
 <#NumpadMult::                                                                    ; lwin + NumpadMult
 CapsLock & NumpadMult::ToggleMousePos(A_ScreenWidth * 5 / 6, -1)                  ; CapsLock + NumpadMult
 
-<#End::                                                                           ; lwin + end
 <#NumpadSub::                                                                     ; lwin + NumpadSub
 CapsLock & NumpadSub::ToggleMousePos(-1, A_ScreenHeight / 6)                      ; CapsLock + NumpadSub
 
+<#End::                                                                           ; lwin + end
 <#NumpadAdd::                                                                     ; lwin + NumpadAdd
 CapsLock & NumpadAdd::ToggleMousePos(-1, A_ScreenHeight * 5 / 6)                  ; CapsLock + NumpadAdd
 
