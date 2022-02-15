@@ -359,6 +359,22 @@ return
     return
 #IfWinActive
 
+#IfWinActive ahk_exe msedge.exe
+    ^b::
+        Send, ^t
+        Sleep, 200
+        SendRaw, edge://favorites/
+        Send, {Enter}
+    return
+
+    ^h::
+        Send, ^t
+        Sleep, 200
+        SendRaw, edge://history/all
+        Send, {Enter}
+    return
+#IfWinActive
+
 ; Honor scroll lock state (may or may not work)
 #If !WinActive("ahk_exe EXCEL.EXE") and GetKeyState("ScrollLock", "T")
     ;==============================================================================
