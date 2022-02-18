@@ -72,6 +72,7 @@ CapsLock & Left::SavePosAndMouseMoveR(-14, 0)                                   
 CapsLock & Right::SavePosAndMouseMoveR(14, 0)                                     ; CapsLock + right arrow       | Move mouse pointer rightward
 CapsLock & Down::SavePosAndMouseMoveR(0, 14)                                      ; CapsLock + down arrow        | Move mouse pointer downward
 CapsLock & Up::SavePosAndMouseMoveR(0, -14)                                       ; CapsLock + up arrow          | Move mouse pointer upward
+#Ins::
 CapsLock & Ins::MouseGetPos, SavedMouseCoordX, SavedMouseCoordY                   ; CapsLock + Insert            | Save current Mouse Coord
 #Home::                                                                           ; Win + Home
 CapsLock & Home::ToggleMousePos(SavedMouseCoordX, SavedMouseCoordY)               ; CapsLock + Home              | Go to saved Mouse Coord
