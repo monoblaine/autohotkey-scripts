@@ -177,6 +177,22 @@ RButton & LButton::                                                             
     }
 return
 
+#IfWinActive ahk_exe msedge.exe
+    ^b::
+        Send, ^t
+        Sleep, 200
+        SendRaw, edge://favorites/
+        Send, {Enter}
+    return
+
+    ^h::
+        Send, ^t
+        Sleep, 200
+        SendRaw, edge://history/all
+        Send, {Enter}
+    return
+#IfWinActive
+
 *CapsLock:: return ; This forces CapsLock into a modifying key.
 RButton::RButton   ; restore the original RButton function
 
@@ -364,22 +380,6 @@ return
         Sleep 50                             ; Don't change clipboard while it is pasted! (Sleep > 0)
         clipboard := originalClipboard       ; Restore original clipboard
         VarSetCapacity(originalClipboard, 0) ; Free memory
-    return
-#IfWinActive
-
-#IfWinActive ahk_exe msedge.exe
-    ^b::
-        Send, ^t
-        Sleep, 200
-        SendRaw, edge://favorites/
-        Send, {Enter}
-    return
-
-    ^h::
-        Send, ^t
-        Sleep, 200
-        SendRaw, edge://history/all
-        Send, {Enter}
     return
 #IfWinActive
 
