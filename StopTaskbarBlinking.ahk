@@ -1,3 +1,4 @@
+#NoTrayIcon
 #SingleInstance force
 #WinActivateForce           ; this may prevent task bar buttons from flashing when different windows are activated quickly one after the other
 
