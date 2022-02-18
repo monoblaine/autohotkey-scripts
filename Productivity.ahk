@@ -165,9 +165,15 @@ RButton & LButton::                                                             
         MouseMove, 0, -5, 0, R
     }
     else {
+        activeWindow := WinExist("A")
         Shell.Run("C:\Users\Serhan\Documents\.tools\AutoHideMouseCursor\AutoHideMouseCursor_x64_p.exe", 0)
         AutoHideMouseCursorRunning := 1
-        Send, {Alt Down}{Home}{Alt Up}
+
+        if (activeWindow) {
+            Sleep 150
+            WinActivate
+            activeWindow := ""
+        }
     }
 return
 
