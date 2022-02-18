@@ -11,47 +11,21 @@ SetControlDelay, -1
 SendMode Input
 Process, Priority,, R
 #SingleInstance force
-#Include .\VD.ahk\VD.ahk
-
-desktops := {}
+#WinActivateForce
 
 !Tab::Send, ^+q ; ctrl + shift + q
 
 #Tab::
-    currentDesktopNum := VD.getCurrentDesktopNum()
-
-    if (!desktops.hasKey(currentDesktopNum)) {
-        desktops[currentDesktopNum] := { lastActivatedWin: 0, lastBuriedWin: 0 }
-    }
-
-    currentDesktop := desktops[currentDesktopNum]
     visibleWindows := GetVisibleWindows()
     windowCount := visibleWindows.MaxIndex()
 
-    if (windowCount < 2) {
-        currentDesktop.lastActivatedWin := 0
-        currentDesktop.lastBuriedWin := 0
-        Send, !{Esc}
+    if (windowCount = 0) {
         return
     }
 
-    ; firstWin := visibleWindows[1]
-    ; secondWin := visibleWindows[2]
-    ; lastWin := visibleWindows[windowCount]
-    ; lastActivatedWin := currentDesktop.lastActivatedWin
-    ; lastBuriedWin := currentDesktop.lastBuriedWin
-    ; MsgBox, windowCount is %windowCount%`n1st win in list: %firstWin%`n2nd win in list: %secondWin%`nLast win in list: %lastWin%`nlastActivatedWin: %lastActivatedWin%`nlastBuriedWin: %lastBuriedWin%
-
-    if (currentDesktop.lastActivatedWin = visibleWindows[1]) and (currentDesktop.lastBuriedWin = visibleWindows[windowCount]) {
-        currentDesktop.lastActivatedWin := 0
-        currentDesktop.lastBuriedWin := 0
-        Send, !+{Esc}
-    }
-    else {
-        currentDesktop.lastActivatedWin := visibleWindows[2]
-        currentDesktop.lastBuriedWin := visibleWindows[1]
-        Send, !{Esc}
-    }
+    winToActivate := windowCount > 1 ? visibleWindows[2] : visibleWindows[1]
+    WinActivate, ahk_id %winToActivate%
+    winToActivate := ""
 return
 
 !Home::
