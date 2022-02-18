@@ -191,6 +191,14 @@ return
         SendRaw, edge://history/all
         Send, {Enter}
     return
+
+    ; Click "close this message" on StackOverflow
+    CapsLock & c::
+        MouseGetPos, xpos, ypos
+        MouseMove, A_ScreenWidth / 2, 140
+        Click
+        MouseMove, %xpos%, %ypos%
+    return
 #IfWinActive
 
 *CapsLock:: return ; This forces CapsLock into a modifying key.
