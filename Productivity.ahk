@@ -15,15 +15,6 @@ GroupAdd, Group_CtrlRToF5, ahk_class CabinetWClass
 GroupAdd, Group_CtrlRToF5, ahk_exe GitExtensions.exe
 GroupAdd, Group_CtrlRToF5, ahk_exe WinMergeU.exe
 
-GroupAdd, Group_RawPasteDisabled, ahk_exe WinMergeU.exe ; WinMerge
-GroupAdd, Group_RawPasteDisabled, ahk_class Notepad++
-GroupAdd, Group_RawPasteDisabled, ahk_exe devenv.exe
-GroupAdd, Group_RawPasteDisabled, ahk_exe GitExtensions.exe
-
-GroupAdd, Group_ExcessIndentRemovalEnabled, ahk_class Notepad++
-GroupAdd, Group_ExcessIndentRemovalEnabled, ahk_exe WinMergeU.exe
-GroupAdd, Group_ExcessIndentRemovalEnabled, ahk_exe devenv.exe
-
 GroupAdd, Group_ZoomableByWheel, ahk_exe WINWORD.EXE
 GroupAdd, Group_ZoomableByWheel, ahk_exe EXCEL.EXE
 
@@ -229,6 +220,17 @@ return
     }
 return
 
+; Text–only paste from clipboard (Trims leading and trailing whitespaces)
+^+v:: ; ctrl + shift + v
+    originalClipboard := ClipBoardAll
+    clipboard := clipboard               ; Convert to text
+    clipboard := RegexReplace(clipboard, "^\s+|\s+$")
+    Send, ^v                             ; For best compatibility: SendPlay
+    Sleep 50                             ; Don't change clipboard while it is pasted! (Sleep > 0)
+    clipboard := originalClipboard       ; Restore original ClipBoard
+    VarSetCapacity(originalClipboard, 0) ; Free memory
+return
+
 #If !GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt")
     <#Up::WheelUp
     <#Down::WheelDown
@@ -275,19 +277,6 @@ return
 #IfWinActive ahk_group Group_CtrlRToF5
     ^r::Send, {f5}
 #IfWinActive
-
-#IfWinNotActive ahk_group Group_RawPasteDisabled
-    ^+v:: ; ctrl + shift + v
-        ; Text–only paste from clipboard (Trims leading and trailing whitespaces)
-        originalClipboard := ClipBoardAll
-        clipboard := clipboard               ; Convert to text
-        clipboard := RegexReplace(clipboard, "^\s+|\s+$")
-        Send, ^v                             ; For best compatibility: SendPlay
-        Sleep 50                             ; Don't change clipboard while it is pasted! (Sleep > 0)
-        clipboard := originalClipboard       ; Restore original ClipBoard
-        VarSetCapacity(originalClipboard, 0) ; Free memory
-    return
-#IfWinNotActive
 
 #IfWinActive ahk_group Group_ZoomableByWheel
     ^NumpadSub::Send, ^{WheelDown}                                                ; ctrl + NumpadSub
@@ -366,19 +355,6 @@ return
     Esc::Send, {Alt Down}{f4}{Alt Up}                                             ; esc                          | Send alt + f4
 #IfWinActive
 
-#IfWinActive ahk_group Group_ExcessIndentRemovalEnabled
-    ^+v::                                                                         ; ctrl + shift + v
-        originalClipboard := ClipBoardAll
-        RegExMatch(clipboard, "^([ \t]+)", Lw)
-        clipboard := RegexReplace(clipboard, "(?:(\r?\n)" . Lw . ")|(^" . Lw . ")", "$1")
-        clipboard := RegexReplace(clipboard, "\s+$") ; Remove the trailing spaces anyway
-        Send, ^v                                     ; For best compatibility: SendPlay
-        Sleep 50                                     ; Don't change clipboard while it is pasted! (Sleep > 0)
-        clipboard := originalClipboard               ; Restore original clipboard
-        VarSetCapacity(originalClipboard, 0)         ; Free memory
-    return
-#IfWinActive
-
 ; Honor scroll lock state (may or may not work)
 #If !WinActive("ahk_exe EXCEL.EXE") and GetKeyState("ScrollLock", "T")
     ;==============================================================================
@@ -418,8 +394,9 @@ return
     return
 #If
 
-; Convert a bower.json url to npm-friendly url (if scroll lock is on)
+; if scroll lock is on
 #If GetKeyState("ScrollLock", "T")
+    ; Convert a bower.json url to npm-friendly url
     ^!+b::                                                                        ; ctrl + alt + shift + b
         originalClipboard := ClipBoardAll
         clipboard := clipboard               ; Convert to text
@@ -428,6 +405,18 @@ return
         Sleep 50                             ; Don't change clipboard while it is pasted! (Sleep > 0)
         clipboard := originalClipboard       ; Restore original clipboard
         VarSetCapacity(originalClipboard, 0) ; Free memory
+    return
+
+    ; Excess indent removal
+    ^+v::                                                                         ; ctrl + shift + v
+        originalClipboard := ClipBoardAll
+        RegExMatch(clipboard, "^([ \t]+)", Lw)
+        clipboard := RegexReplace(clipboard, "(?:(\r?\n)" . Lw . ")|(^" . Lw . ")", "$1")
+        clipboard := RegexReplace(clipboard, "\s+$") ; Remove the trailing spaces anyway
+        Send, ^v                                     ; For best compatibility: SendPlay
+        Sleep 50                                     ; Don't change clipboard while it is pasted! (Sleep > 0)
+        clipboard := originalClipboard               ; Restore original clipboard
+        VarSetCapacity(originalClipboard, 0)         ; Free memory
     return
 #If
 
