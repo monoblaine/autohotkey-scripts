@@ -379,18 +379,6 @@ return
     return
 #IfWinActive
 
-#IfWinActive ahk_exe GitExtensions.exe
-    ^+v::                                                                         ; ctrl + shift + v
-        originalClipboard := ClipBoardAll
-        clipboard := clipboard               ; Convert to text
-        clipboard := RegexReplace(clipboard, "\t", " -> ")
-        Send, ^v                             ; For best compatibility: SendPlay
-        Sleep 50                             ; Don't change clipboard while it is pasted! (Sleep > 0)
-        clipboard := originalClipboard       ; Restore original clipboard
-        VarSetCapacity(originalClipboard, 0) ; Free memory
-    return
-#IfWinActive
-
 ; Honor scroll lock state (may or may not work)
 #If !WinActive("ahk_exe EXCEL.EXE") and GetKeyState("ScrollLock", "T")
     ;==============================================================================
