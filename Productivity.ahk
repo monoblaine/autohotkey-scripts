@@ -353,6 +353,7 @@ return
 
 #IfWinActive ahk_exe 7zFM.exe                                                     ; if it is 7-Zip
     Esc::Send, {Alt Down}{f4}{Alt Up}                                             ; esc                          | Send alt + f4
+    !Up::Send, {Backspace}                                                        ; alt + up                     | Send backspace
 #IfWinActive
 
 ; Honor scroll lock state (may or may not work)
