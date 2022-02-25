@@ -28,6 +28,20 @@ Process, Priority,, R
     winToActivate := ""
 return
 
+; Go to MRU - 1
+#>+Tab::
+    visibleWindows := GetVisibleWindows()
+    windowCount := visibleWindows.MaxIndex()
+
+    if (windowCount < 3) {
+        return
+    }
+
+    winToActivate := visibleWindows[3]
+    WinActivate, ahk_id %winToActivate%
+    winToActivate := ""
+return
+
 !Home::
     WinGetClass, activeWindowClass, A
 
