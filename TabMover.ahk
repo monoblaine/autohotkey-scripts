@@ -17,6 +17,7 @@ hModule := DllCall("LoadLibrary", Str, "ActiveTabSpy.dll", Ptr)
 procHandle_MsEdge := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiveTabOnMsEdge", Ptr)
 procHandle_Firefox := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiveTabOnFirefox", Ptr)
 procHandle_Vs2019 := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiveTabOnVs2019", Ptr)
+procHandle_Vs2022 := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiveTabOnVs2022", Ptr)
 procHandle_Ssms18 := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiveTabOnSsms18", Ptr)
 procHandle_Foobar2000 := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiveTabOnFoobar2000", Ptr)
 procHandle_Cleanup := DllCall("GetProcAddress", Ptr, hModule, AStr, "cleanup", Ptr)
@@ -31,6 +32,7 @@ Exit:
    DllCall("CloseHandle", Ptr, procHandle_MsEdge)
    DllCall("CloseHandle", Ptr, procHandle_Firefox)
    DllCall("CloseHandle", Ptr, procHandle_Vs2019)
+   DllCall("CloseHandle", Ptr, procHandle_Vs2022)
    DllCall("CloseHandle", Ptr, procHandle_Ssms18)
    DllCall("CloseHandle", Ptr, procHandle_Foobar2000)
    DllCall("CloseHandle", Ptr, procHandle_Cleanup)
@@ -53,8 +55,8 @@ Exit:
 #IfWinActive
 
 #IfWinActive ahk_exe devenv.exe
-    ^!PgUp::MoveTab(1, -1, procHandle_Vs2019, MovementMethod.mouseClickDrag)
-    ^!PgDn::MoveTab(1, 1, procHandle_Vs2019, MovementMethod.mouseClickDrag)
+    ^!PgUp::MoveVisualStudioTab(-1)
+    ^!PgDn::MoveVisualStudioTab(1)
 #IfWinActive
 
 #IfWinActive ahk_exe Ssms.exe
@@ -67,11 +69,22 @@ Exit:
     ^!PgDn::MoveTab(1, 1, procHandle_Foobar2000, MovementMethod.foobar2000)
 #IfWinActive
 
-MoveTab(horizontal, directionMultiplier, procHandle, movementMethodId) {
+MoveVisualStudioTab(directionMultiplier) {
+    global procHandle_Vs2019
+    global procHandle_Vs2022
+    global MovementMethod
+
+    hWnd := WinExist("A")
+    WinGet, pathToVsExe, ProcessPath
+    procHandle := InStr(pathToVsExe, "2022") ? procHandle_Vs2022 : procHandle_Vs2019
+    MoveTab(1, directionMultiplier, procHandle, MovementMethod.mouseClickDrag, hWnd)
+}
+
+MoveTab(horizontal, directionMultiplier, procHandle, movementMethodId, maybeHWnd := 0) {
     global MovementMethod
 
     MouseGetPos, curX, curY
-    hWnd := WinExist("A")
+    hWnd := maybeHWnd ? maybeHWnd : WinExist("A")
     ptr_pointX := 0
     ptr_pointY := 0
     ptr_left := 0
