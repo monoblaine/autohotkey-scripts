@@ -26,6 +26,7 @@ GroupAdd, Group_HScroll_WheelLeftRight, ahk_exe msedge.exe
 GroupAdd, Group_HScroll_WheelLeftRight, ahk_exe WINWORD.EXE
 GroupAdd, Group_HScroll_WheelLeftRight, ahk_exe idea64.exe
 GroupAdd, Group_HScroll_WheelLeftRight, ahk_class MozillaWindowClass
+GroupAdd, Group_HScroll_WheelLeftRight, ahk_exe paintdotnet.exe
 
 GroupAdd, Group_HScroll_ScrollLock, ahk_exe EXCEL.EXE
 
