@@ -455,9 +455,9 @@ return
     SendInput %CurrentDateTime%
 return
 
-:*:;;tm::                                                      ; Replace ";;tm" with current time surrounded by parentheses
-    FormatTime, CurrentDateTime, L1055, HH.mm                  ; (13.17)
-    SendInput (%CurrentDateTime%){Space}
+:*:;;tm::                                                      ; Replace ";;tm" with current time surrounded by brackets
+    FormatTime, CurrentDateTime, L1055, HH.mm                  ; [13.17]
+    SendInput [%CurrentDateTime%]{Space}
 return
 
 :*:;;pipe::{Raw}==============================================================================
