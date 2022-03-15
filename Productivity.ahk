@@ -43,6 +43,8 @@ SavedMouseCoordY := -1
 LastMouseCoordX := 0
 LastMouseCoordY := 0
 
+ScreenGridSize := 6
+
 CoordMode, Mouse, Screen
 
 LWin & Enter::Send, {RWin Down}{Enter}{RWin Up}                                   ; lwin + Enter                 | Send rwin + Enter
@@ -77,45 +79,45 @@ CapsLock & Space::SetCapsLockState % !GetKeyState("CapsLock", "T")              
     CapsLock & Enter::Click, Right
 #If
 
-<#NumpadDiv::                                                                     ; lwin + NumpadDiv
-CapsLock & NumpadDiv::ToggleMousePos(A_ScreenWidth / 6, -1)                       ; CapsLock + NumpadDiv
+<#NumpadDiv::                                                                                                                                     ; lwin + NumpadDiv
+CapsLock & NumpadDiv::ToggleMousePos(A_ScreenWidth / ScreenGridSize, -1)                                                                          ; CapsLock + NumpadDiv
 
-<#NumpadMult::                                                                    ; lwin + NumpadMult
-CapsLock & NumpadMult::ToggleMousePos(A_ScreenWidth * 5 / 6, -1)                  ; CapsLock + NumpadMult
+<#NumpadMult::                                                                                                                                    ; lwin + NumpadMult
+CapsLock & NumpadMult::ToggleMousePos(A_ScreenWidth * (ScreenGridSize - 1) / ScreenGridSize, -1)                                                  ; CapsLock + NumpadMult
 
-<#NumpadSub::                                                                     ; lwin + NumpadSub
-CapsLock & NumpadSub::ToggleMousePos(-1, A_ScreenHeight / 6)                      ; CapsLock + NumpadSub
+<#NumpadSub::                                                                                                                                     ; lwin + NumpadSub
+CapsLock & NumpadSub::ToggleMousePos(-1, A_ScreenHeight / ScreenGridSize)                                                                         ; CapsLock + NumpadSub
 
-<#End::                                                                           ; lwin + end
-<#NumpadAdd::                                                                     ; lwin + NumpadAdd
-CapsLock & NumpadAdd::ToggleMousePos(-1, A_ScreenHeight * 5 / 6)                  ; CapsLock + NumpadAdd
+<#End::                                                                                                                                           ; lwin + end
+<#NumpadAdd::                                                                                                                                     ; lwin + NumpadAdd
+CapsLock & NumpadAdd::ToggleMousePos(-1, A_ScreenHeight * (ScreenGridSize - 1) / ScreenGridSize)                                                  ; CapsLock + NumpadAdd
 
-<#Numpad7::                                                                       ; lwin + Numpad7
-CapsLock & Numpad7::ToggleMousePos(A_ScreenWidth / 6, A_ScreenHeight / 6)         ; CapsLock + Numpad7
+<#Numpad7::                                                                                                                                       ; lwin + Numpad7
+CapsLock & Numpad7::ToggleMousePos(A_ScreenWidth / ScreenGridSize, A_ScreenHeight / ScreenGridSize)                                               ; CapsLock + Numpad7
 
-<#Numpad8::                                                                       ; lwin + Numpad8
-CapsLock & Numpad8::ToggleMousePos(A_ScreenWidth / 2, A_ScreenHeight / 6)         ; CapsLock + Numpad8
+<#Numpad8::                                                                                                                                       ; lwin + Numpad8
+CapsLock & Numpad8::ToggleMousePos(A_ScreenWidth / 2, A_ScreenHeight / ScreenGridSize)                                                            ; CapsLock + Numpad8
 
-<#Numpad9::                                                                       ; lwin + Numpad9
-CapsLock & Numpad9::ToggleMousePos(A_ScreenWidth * 5 / 6, A_ScreenHeight / 6)     ; CapsLock + Numpad9
+<#Numpad9::                                                                                                                                       ; lwin + Numpad9
+CapsLock & Numpad9::ToggleMousePos(A_ScreenWidth * (ScreenGridSize - 1) / ScreenGridSize, A_ScreenHeight / ScreenGridSize)                        ; CapsLock + Numpad9
 
-<#Numpad4::                                                                       ; lwin + Numpad4
-CapsLock & Numpad4::ToggleMousePos(A_ScreenWidth / 6, A_ScreenHeight / 2)         ; CapsLock + Numpad4
+<#Numpad4::                                                                                                                                       ; lwin + Numpad4
+CapsLock & Numpad4::ToggleMousePos(A_ScreenWidth / ScreenGridSize, A_ScreenHeight / 2)                                                            ; CapsLock + Numpad4
 
-<#Numpad5::                                                                       ; lwin + Numpad5
-CapsLock & Numpad5::ToggleMousePos(A_ScreenWidth / 2, A_ScreenHeight / 2)         ; CapsLock + Numpad5
+<#Numpad5::                                                                                                                                       ; lwin + Numpad5
+CapsLock & Numpad5::ToggleMousePos(A_ScreenWidth / 2, A_ScreenHeight / 2)                                                                         ; CapsLock + Numpad5
 
-<#Numpad6::                                                                       ; lwin + Numpad6
-CapsLock & Numpad6::ToggleMousePos(A_ScreenWidth * 5 / 6, A_ScreenHeight / 2)     ; CapsLock + Numpad6
+<#Numpad6::                                                                                                                                       ; lwin + Numpad6
+CapsLock & Numpad6::ToggleMousePos(A_ScreenWidth * (ScreenGridSize - 1) / ScreenGridSize, A_ScreenHeight / 2)                                     ; CapsLock + Numpad6
 
-<#Numpad1::                                                                       ; lwin + Numpad1
-CapsLock & Numpad1::ToggleMousePos(A_ScreenWidth / 6, A_ScreenHeight * 5 / 6)     ; CapsLock + Numpad1
+<#Numpad1::                                                                                                                                       ; lwin + Numpad1
+CapsLock & Numpad1::ToggleMousePos(A_ScreenWidth / ScreenGridSize, A_ScreenHeight * (ScreenGridSize - 1) / ScreenGridSize)                        ; CapsLock + Numpad1
 
-<#Numpad2::                                                                       ; lwin + Numpad2
-CapsLock & Numpad2::ToggleMousePos(A_ScreenWidth / 2, A_ScreenHeight * 5 / 6)     ; CapsLock + Numpad2
+<#Numpad2::                                                                                                                                       ; lwin + Numpad2
+CapsLock & Numpad2::ToggleMousePos(A_ScreenWidth / 2, A_ScreenHeight * (ScreenGridSize - 1) / ScreenGridSize)                                     ; CapsLock + Numpad2
 
-<#Numpad3::                                                                       ; lwin + Numpad3
-CapsLock & Numpad3::ToggleMousePos(A_ScreenWidth * 5 / 6, A_ScreenHeight * 5 / 6) ; CapsLock + Numpad3
+<#Numpad3::                                                                                                                                       ; lwin + Numpad3
+CapsLock & Numpad3::ToggleMousePos(A_ScreenWidth * (ScreenGridSize - 1) / ScreenGridSize, A_ScreenHeight * (ScreenGridSize - 1) / ScreenGridSize) ; CapsLock + Numpad3
 
 CapsLock & End::                                                                  ; CapsLock + end
 <!End::                                                                           ; lalt + end
