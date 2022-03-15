@@ -43,7 +43,7 @@ SavedMouseCoordY := -1
 LastMouseCoordX := 0
 LastMouseCoordY := 0
 
-ScreenGridSize := 6
+ScreenGridSize := 4
 
 CoordMode, Mouse, Screen
 
