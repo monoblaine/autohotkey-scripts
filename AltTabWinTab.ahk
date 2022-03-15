@@ -42,6 +42,24 @@ return
     winToActivate := ""
 return
 
+!Del::
+    activeWindow := WinExist("A")
+
+    if (activeWindow) {
+        WinClose, ahk_id %activeWindow%
+        WinWaitClose, ahk_id %activeWindow%,, 2
+        activeWindow := ""
+        Sleep 300
+        visibleWindows := GetVisibleWindows()
+
+        if (visibleWindows.MaxIndex()) {
+            firstWin := visibleWindows[1]
+            WinActivate, ahk_id %firstWin%
+            firstWin := ""
+        }
+    }
+return
+
 !Home::
     WinGetClass, activeWindowClass, A
 

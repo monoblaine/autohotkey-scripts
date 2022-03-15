@@ -50,8 +50,7 @@ LWin & Enter::Send, {RWin Down}{Enter}{RWin Up}                                 
 #^a::Winset, Alwaysontop, , A                                                     ; win + ctrl + a               | Make the active window stay always on top
 <#<^<+Up::Volume_Up                                                               ; lwin + lctrl + lshift + up   | Increase volume
 <#<^<+Down::Volume_Down                                                           ; lwin + lctrl + lshift + down | Decrease volume
-CapsLock & Del::                                                                  ; CapsLock + del
-!Del::Send, {Alt Down}{f4}{Alt Up}                                                ; alt + del                    | Send alt + f4
+CapsLock & Del::Send, {Alt Down}{f4}{Alt Up}                                      ; CapsLock + del               | Send alt + f4
 ^!+l::Run, ClipToQuotedLines.exe                                                  ; ctrl + alt + shift + l       | ClipToQuotedLines.exe
 ^!+h::StringReplace, clipboard, clipboard, `\, `/, All                            ; ctrl + alt + shift + h       | Replace all the \ characters within the text in clipboard with /
 ^!+w::ToggleMousePos(A_ScreenWidth - 172, 0)                                      ; ctrl + alt + shift + w       | Move mouse pointer to somewhere safe
