@@ -69,7 +69,7 @@ Exit:
     ^!PgDn::MoveTab(1, 1, procHandle_Foobar2000, MovementMethod.foobar2000)
 #IfWinActive
 
-MoveVisualStudioTab(directionMultiplier) {
+MoveVisualStudioTab(direction) {
     global procHandle_Vs2019
     global procHandle_Vs2022
     global MovementMethod
@@ -77,10 +77,10 @@ MoveVisualStudioTab(directionMultiplier) {
     hWnd := WinExist("A")
     WinGet, pathToVsExe, ProcessPath
     procHandle := InStr(pathToVsExe, "2022") ? procHandle_Vs2022 : procHandle_Vs2019
-    MoveTab(1, directionMultiplier, procHandle, MovementMethod.mouseClickDrag, hWnd)
+    MoveTab(1, direction, procHandle, MovementMethod.mouseClickDrag, hWnd)
 }
 
-MoveTab(horizontal, directionMultiplier, procHandle, movementMethodId, maybeHWnd := 0) {
+MoveTab(horizontal, direction, procHandle, movementMethodId, maybeHWnd := 0) {
     global MovementMethod
 
     MouseGetPos, curX, curY
@@ -113,8 +113,8 @@ MoveTab(horizontal, directionMultiplier, procHandle, movementMethodId, maybeHWnd
     ptr_bottom := ""
 
     ; MsgBox, pointX: %pointX%, pointY: %pointY%, left: %left%, right: %right%, top: %top%, bottom: %bottom%
-    targetX := horizontal ? (directionMultiplier < 0 ? (left - 1) : (right + 1)) : pointX
-    targetY := horizontal ? pointY : (directionMultiplier < 0 ? (top - 1) : (bottom + 1))
+    targetX := horizontal ? (direction < 0 ? (left - 1) : (right + 1)) : pointX
+    targetY := horizontal ? pointY : (direction < 0 ? (top - 1) : (bottom + 1))
 
     switch movementMethodId {
         case MovementMethod.mouseClickDrag:
@@ -135,7 +135,7 @@ MoveTab(horizontal, directionMultiplier, procHandle, movementMethodId, maybeHWnd
             KeyWait, Alt
             Send {AppsKey}
 
-            if (directionMultiplier < 0)
+            if (direction < 0)
                 Send m
             else
                 Send o
@@ -144,7 +144,7 @@ MoveTab(horizontal, directionMultiplier, procHandle, movementMethodId, maybeHWnd
             SetMouseDelay, 3
             SetDefaultMouseSpeed, 3
             width := right - left
-            targetX := horizontal ? (directionMultiplier < 0 ? (left - 1 - width) : (right + 1 + width)) : pointX
+            targetX := horizontal ? (direction < 0 ? (left - 1 - width) : (right + 1 + width)) : pointX
             SendEvent {Click %pointX% %pointY% Down}{Click %targetX% %targetY% Up}
     }
 
