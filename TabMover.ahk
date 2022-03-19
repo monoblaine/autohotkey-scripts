@@ -11,7 +11,7 @@ SendMode Input
 Process, Priority,, R
 ;OPTIMIZATIONS END
 
-MovementMethod := { mouseClickDrag: 1, sendEvent: 2, foobar2000: 3, thunderbird: 4 }
+MovementMethod := { mouseClickDrag: 1, sendEvent: 2, foobar2000: 3 }
 
 hModule := DllCall("LoadLibrary", Str, "ActiveTabSpy.dll", Ptr)
 procHandle_MsEdge := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiveTabOnMsEdge", Ptr)
@@ -45,8 +45,8 @@ Exit:
 #IfWinActive
 
 #IfWinActive ahk_exe thunderbird.exe
-    ^!PgUp::MoveTab(1, -1, procHandle_Firefox, MovementMethod.thunderbird)
-    ^!PgDn::MoveTab(1, 1, procHandle_Firefox, MovementMethod.thunderbird)
+    ^!PgUp::MoveTab(1, -1, procHandle_Firefox, MovementMethod.sendEvent, 0, 1)
+    ^!PgDn::MoveTab(1, 1, procHandle_Firefox, MovementMethod.sendEvent, 0, 1)
 #IfWinActive
 
 #IfWinActive ahk_class MozillaWindowClass
@@ -80,41 +80,45 @@ MoveVisualStudioTab(direction) {
     MoveTab(1, direction, procHandle, MovementMethod.mouseClickDrag, hWnd)
 }
 
-MoveTab(horizontal, direction, procHandle, movementMethodId, maybeHWnd := 0) {
+MoveTab(horizontal, direction, procHandle, movementMethodId, maybeHWnd := 0, widthHeightFactor := 0) {
     global MovementMethod
 
-    MouseGetPos, curX, curY
-    hWnd := maybeHWnd ? maybeHWnd : WinExist("A")
-    ptr_pointX := 0
-    ptr_pointY := 0
-    ptr_left := 0
-    ptr_right := 0
-    ptr_top := 0
-    ptr_bottom := 0
+    curX := 0
+    curY := 0
+    pointX := 0
+    pointY := 0
+    left := 0
+    right := 0
+    top := 0
+    bottom := 0
+    width := 0
+    height := 0
+    prevPointX := 0
+    prevPointY := 0
+    nextPointX := 0
+    nextPointY := 0
 
-    DllCall(procHandle, Int, hWnd, Int, horizontal, Ptr, &ptr_pointX, Ptr, &ptr_pointY, Ptr, &ptr_left, Ptr, &ptr_right, Ptr, &ptr_top, Ptr, &ptr_bottom)
+    CollectTabInfo(horizontal, procHandle, maybeHWnd
+                 , curX, curY
+                 , pointX, pointY
+                 , left, right
+                 , top, bottom
+                 , width, height
+                 , prevPointX, prevPointY
+                 , nextPointX, nextPointY)
 
-    if (A_LastError) {
-        MsgBox, Error: %A_LastError%
-    }
+    ; MsgBox, curX: %curX%, curY: %curY%, pointX: %pointX%, pointY: %pointY%, left: %left%, right: %right%, top: %top%, bottom: %bottom%, width: %width%, height: %height%, prevPointX: %prevPointX%, prevPointY: %prevPointY%
 
-    pointX := NumGet(&ptr_pointX)
-    pointY := NumGet(&ptr_pointY)
-    left := NumGet(&ptr_left)
-    right := NumGet(&ptr_right)
-    top := NumGet(&ptr_top)
-    bottom := NumGet(&ptr_bottom)
-
-    ptr_pointX := ""
-    ptr_pointY := ""
-    ptr_left := ""
-    ptr_right := ""
-    ptr_top := ""
-    ptr_bottom := ""
-
-    ; MsgBox, pointX: %pointX%, pointY: %pointY%, left: %left%, right: %right%, top: %top%, bottom: %bottom%
-    targetX := horizontal ? (direction < 0 ? (left - 1) : (right + 1)) : pointX
-    targetY := horizontal ? pointY : (direction < 0 ? (top - 1) : (bottom + 1))
+    targetX := horizontal
+        ? direction < 0
+            ? (left - 1 - width * widthHeightFactor)
+            : (right + 1 + width * widthHeightFactor)
+        : pointX
+    targetY := horizontal
+        ? pointY
+        : direction < 0
+            ? (top - 1 - height * widthHeightFactor)
+            : (bottom + 1 + height * widthHeightFactor)
 
     switch movementMethodId {
         case MovementMethod.mouseClickDrag:
@@ -139,14 +143,99 @@ MoveTab(horizontal, direction, procHandle, movementMethodId, maybeHWnd := 0) {
                 Send m
             else
                 Send o
-
-        case MovementMethod.thunderbird:
-            SetMouseDelay, 3
-            SetDefaultMouseSpeed, 3
-            width := right - left
-            targetX := horizontal ? (direction < 0 ? (left - 1 - width) : (right + 1 + width)) : pointX
-            SendEvent {Click %pointX% %pointY% Down}{Click %targetX% %targetY% Up}
     }
 
     MouseMove, %curX%, %curY%
+}
+
+ClickOnSiblingTab(horizontal, direction, procHandle, maybeHWnd := 0) {
+    curX := 0
+    curY := 0
+    pointX := 0
+    pointY := 0
+    left := 0
+    right := 0
+    top := 0
+    bottom := 0
+    width := 0
+    height := 0
+    prevPointX := 0
+    prevPointY := 0
+    nextPointX := 0
+    nextPointY := 0
+
+    CollectTabInfo(horizontal, procHandle, maybeHWnd
+                 , curX, curY
+                 , pointX, pointY
+                 , left, right
+                 , top, bottom
+                 , width, height
+                 , prevPointX, prevPointY
+                 , nextPointX, nextPointY)
+
+    targetX := direction < 0 ? prevPointX : nextPointX
+    targetY := direction < 0 ? prevPointY : nextPointY
+
+    SetMouseDelay, 1
+    SetDefaultMouseSpeed, 1
+    MouseMove, %targetX%, %targetY%
+    Click
+    MouseMove, %curX%, %curY%
+}
+
+CollectTabInfo(horizontal, procHandle, maybeHWnd
+             , ByRef curX, ByRef curY
+             , ByRef pointX, ByRef pointY
+             , ByRef left, ByRef right
+             , ByRef top, ByRef bottom
+             , ByRef width, ByRef height
+             , ByRef prevPointX, ByRef prevPointY
+             , ByRef nextPointX, ByRef nextPointY) {
+    MouseGetPos, curX, curY
+    hWnd := maybeHWnd ? maybeHWnd : WinExist("A")
+    ptr_pointX := 0
+    ptr_pointY := 0
+    ptr_prevPointX := 0
+    ptr_prevPointY := 0
+    ptr_nextPointX := 0
+    ptr_nextPointY := 0
+    ptr_left := 0
+    ptr_right := 0
+    ptr_top := 0
+    ptr_bottom := 0
+
+    DllCall(procHandle, Int, hWnd, Int, horizontal
+          , Ptr, &ptr_pointX, Ptr, &ptr_pointY
+          , Ptr, &ptr_left, Ptr, &ptr_right
+          , Ptr, &ptr_top, Ptr, &ptr_bottom
+          , Ptr, &ptr_prevPointX, Ptr, &ptr_prevPointY
+          , Ptr, &ptr_nextPointX, Ptr, &ptr_nextPointY)
+
+    if (A_LastError) {
+        MsgBox, Error: %A_LastError%
+    }
+
+    pointX := NumGet(&ptr_pointX)
+    pointY := NumGet(&ptr_pointY)
+    left := NumGet(&ptr_left)
+    right := NumGet(&ptr_right)
+    top := NumGet(&ptr_top)
+    bottom := NumGet(&ptr_bottom)
+    width := right - left
+    height := bottom - top
+    prevPointX := NumGet(&ptr_prevPointX)
+    prevPointY := NumGet(&ptr_prevPointY)
+    nextPointX := NumGet(&ptr_nextPointX)
+    nextPointY := NumGet(&ptr_nextPointY)
+
+    ptr_pointX := ""
+    ptr_pointY := ""
+    ptr_left := ""
+    ptr_right := ""
+    ptr_top := ""
+    ptr_bottom := ""
+    ptr_prevPointX := ""
+    ptr_prevPointY := ""
+    ptr_nextPointX := ""
+    ptr_nextPointY := ""
 }
