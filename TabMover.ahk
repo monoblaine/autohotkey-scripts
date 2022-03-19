@@ -20,6 +20,7 @@ procHandle_Vs2019 := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiv
 procHandle_Vs2022 := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiveTabOnVs2022", Ptr)
 procHandle_Ssms18 := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiveTabOnSsms18", Ptr)
 procHandle_Foobar2000 := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiveTabOnFoobar2000", Ptr)
+procHandle_WindowsTerminal := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiveTabOnWindowsTerminal", Ptr)
 procHandle_Cleanup := DllCall("GetProcAddress", Ptr, hModule, AStr, "cleanup", Ptr)
 
 CoordMode, Mouse, Screen
@@ -35,6 +36,7 @@ Exit:
    DllCall("CloseHandle", Ptr, procHandle_Vs2022)
    DllCall("CloseHandle", Ptr, procHandle_Ssms18)
    DllCall("CloseHandle", Ptr, procHandle_Foobar2000)
+   DllCall("CloseHandle", Ptr, procHandle_WindowsTerminal)
    DllCall("CloseHandle", Ptr, procHandle_Cleanup)
    DllCall("FreeLibrary", Ptr, hModule)
    ExitApp
@@ -67,6 +69,11 @@ Exit:
 #IfWinActive ahk_exe foobar2000.exe
     ^!PgUp::MoveTab(1, -1, procHandle_Foobar2000, MovementMethod.foobar2000)
     ^!PgDn::MoveTab(1, 1, procHandle_Foobar2000, MovementMethod.foobar2000)
+#IfWinActive
+
+#IfWinActive ahk_exe WindowsTerminal.exe
+    ^!PgUp::MoveTab(1, -1, procHandle_WindowsTerminal, MovementMethod.sendEvent, 0, 0.5)
+    ^!PgDn::MoveTab(1, 1, procHandle_WindowsTerminal, MovementMethod.sendEvent, 0, 0.5)
 #IfWinActive
 
 MoveVisualStudioTab(direction) {
