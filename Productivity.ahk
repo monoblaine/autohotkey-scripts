@@ -233,6 +233,14 @@ return
     VarSetCapacity(originalClipboard, 0) ; Free memory
 return
 
+^!+n::                                                                            ; ctrl + alt + shift + n
+    clipboard := ""
+    Send, ^c
+    ClipWait
+    clipboard := RegexReplace(clipboard, "\r?\n", " ")
+    clipboard := RegexReplace(clipboard, """", """""")
+return
+
 #If !GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt")
     <#Up::WheelUp
     <#Down::WheelDown
