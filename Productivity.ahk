@@ -270,7 +270,7 @@ return
     return
 #If
 
-#If !GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt") and !WinActive("ahk_group Group_HScroll_All")
+#If !GetKeyState("LControl") and !GetKeyState("LAlt") and !WinActive("ahk_group Group_HScroll_All")
     <#Left::
         ControlGetFocus, fcontrol, A
         Loop 8
@@ -281,6 +281,18 @@ return
         ControlGetFocus, fcontrol, A
         Loop 8
             PostMessage, 0x114, 1, 0, %fcontrol%, A  ; 0x114=WM_HSCROLL; 1=SB_LINERIGHT
+    return
+
+    ~Shift & WheelUp::                                                            ; Scroll left
+        ControlGetFocus, fcontrol, A
+        Loop 3
+            SendMessage, 0x114, 0, 0, %fcontrol%, A                               ; 0x114=WM_HSCROLL; 0=SB_LINELEFT
+    return
+
+    ~Shift & WheelDown::                                                          ; Scroll right
+        ControlGetFocus, fcontrol, A
+        Loop 3
+            SendMessage, 0x114, 1, 0, %fcontrol%, A                               ; 0x114=WM_HSCROLL; 1=SB_LINERIGHT
     return
 #If
 
@@ -303,20 +315,6 @@ return
            RunPath := "%UserProfile%" . "\" . RunPath . "\"
         }
         Run, C:\Program Files\Everything\Everything.exe -p "%RunPath%"            ; Launch "Everything"
-    return
-#IfWinActive
-
-#IfWinActive ahk_class Notepad++
-    ~Shift & WheelUp::                                                            ; Scroll left
-        ControlGetFocus, fcontrol, A
-        Loop 3
-            SendMessage, 0x114, 0, 0, %fcontrol%, A                               ; 0x114=WM_HSCROLL; 0=SB_LINELEFT
-    return
-
-    ~Shift & WheelDown::                                                          ; Scroll right
-        ControlGetFocus, fcontrol, A
-        Loop 3
-            SendMessage, 0x114, 1, 0, %fcontrol%, A                               ; 0x114=WM_HSCROLL; 1=SB_LINERIGHT
     return
 #IfWinActive
 
