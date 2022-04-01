@@ -241,6 +241,13 @@ return
     clipboard := RegexReplace(clipboard, """", """""")
 return
 
+<#ü::
+    clipboard := ""
+    Send, ^c
+    ClipWait
+    Send, #+ü ; execute copyq action
+return
+
 #If !GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt")
     <#Up::WheelUp
     <#Down::WheelDown
