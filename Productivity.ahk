@@ -186,7 +186,7 @@ return
     return
 
     ; Click "close this message" on StackOverflow
-    CapsLock & c::
+    CapsLock & x::
         MouseGetPos, xpos, ypos
         MouseMove, A_ScreenWidth / 2, 140
         Click
