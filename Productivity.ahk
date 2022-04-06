@@ -54,7 +54,7 @@ LWin & Enter::Send, {RWin Down}{Enter}{RWin Up}                                 
 <#<^<+Down::Volume_Down                                                           ; lwin + lctrl + lshift + down | Decrease volume
 CapsLock & Del::Send, {Alt Down}{f4}{Alt Up}                                      ; CapsLock + del               | Send alt + f4
 ^!+l::Run, ClipToQuotedLines.exe                                                  ; ctrl + alt + shift + l       | ClipToQuotedLines.exe
-^!+h::StringReplace, clipboard, clipboard, `\, `/, All                            ; ctrl + alt + shift + h       | Replace all the \ characters within the text in clipboard with /
+^!+h::clipboard := StrReplace(clipboard, "`\", "`/")                              ; ctrl + alt + shift + h       | Replace all the \ characters within the text in clipboard with /
 ^!+w::ToggleMousePos(A_ScreenWidth - 172, 0)                                      ; ctrl + alt + shift + w       | Move mouse pointer to somewhere safe
 ^!+e::ToggleMousePos(A_ScreenWidth - 90, 50)                                      ; ctrl + alt + shift + e       | Move mouse pointer to somewhere safe (alternate)
 ^!+Left::Media_Prev                                                               ; ctrl + alt + shift + left    | Media_Prev
@@ -207,7 +207,7 @@ RButton::RButton   ; restore the original RButton function
 return
 
 >#>+f::                                                                           ; rwin + rshift + f            | open file path in clipboard with explorer
-    clipboard := RegexReplace(clipboard, "\/", "\")
+    clipboard := StrReplace(clipboard, "`/", "`\")
     Sleep 150
     Run explorer.exe /select`, "%clipboard%"
 return
@@ -241,8 +241,7 @@ return
     clipboard := ""
     Send, ^c
     ClipWait
-    clipboard := RegexReplace(clipboard, "\r?\n", " ")
-    clipboard := RegexReplace(clipboard, """", """""")
+    clipboard := StrReplace(RegexReplace(clipboard, "\r?\n", " "), """", """""")
 return
 
 <#ü::
