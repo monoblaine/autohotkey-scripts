@@ -171,11 +171,15 @@ RButton & LButton::                                                             
 return
 
 #IfWinActive ahk_exe msedge.exe
-    ^b::
-        Send, ^t
-        Sleep, 200
-        SendRaw, edge://favorites/
-        Send, {Enter}
+    ~^b::
+        SetTitleMatchMode, 2
+
+        if !WinActive("Google D") {
+            Send, ^t
+            Sleep, 200
+            SendRaw, edge://favorites/
+            Send, {Enter}
+        }
     return
 
     ^h::
