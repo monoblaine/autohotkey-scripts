@@ -203,6 +203,28 @@ return
         Click
         MouseMove, %xpos%, %ypos%
     return
+
+    ~CapsLock & a::
+        SetTitleMatchMode, 2
+
+        if WinActive("Google D") {
+            MouseGetPos, xpos, ypos
+            MouseMove, 670, 160
+            Click
+            MouseMove, %xpos%, %ypos%
+        }
+    return
+
+    ~CapsLock & s::
+        SetTitleMatchMode, 2
+
+        if WinActive("Google D") {
+            MouseGetPos, xpos, ypos
+            MouseMove, 700, 160
+            Click
+            MouseMove, %xpos%, %ypos%
+        }
+    return
 #IfWinActive
 
 *CapsLock:: return ; This forces CapsLock into a modifying key.
