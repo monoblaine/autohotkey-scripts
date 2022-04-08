@@ -79,45 +79,45 @@ CapsLock & Space::SetCapsLockState % !GetKeyState("CapsLock", "T")              
     CapsLock & Enter::Click, Right
 #If
 
-<#NumpadDiv::                                                                                                                                     ; lwin + NumpadDiv
-CapsLock & NumpadDiv::ToggleMousePos(A_ScreenWidth / ScreenGridSize, -1)                                                                          ; CapsLock + NumpadDiv
+<#NumpadDiv::
+CapsLock & NumpadDiv::ToggleMousePos(A_ScreenWidth / ScreenGridSize, -1)
 
-<#NumpadMult::                                                                                                                                    ; lwin + NumpadMult
-CapsLock & NumpadMult::ToggleMousePos(A_ScreenWidth * (ScreenGridSize - 1) / ScreenGridSize, -1)                                                  ; CapsLock + NumpadMult
+<#NumpadMult::
+CapsLock & NumpadMult::ToggleMousePos(A_ScreenWidth * (ScreenGridSize - 1) / ScreenGridSize, -1)
 
-<#NumpadSub::                                                                                                                                     ; lwin + NumpadSub
-CapsLock & NumpadSub::ToggleMousePos(-1, A_ScreenHeight / ScreenGridSize)                                                                         ; CapsLock + NumpadSub
+<#NumpadSub::
+CapsLock & NumpadSub::ToggleMousePos(-1, A_ScreenHeight / ScreenGridSize)
 
-<#End::                                                                                                                                           ; lwin + end
-<#NumpadAdd::                                                                                                                                     ; lwin + NumpadAdd
-CapsLock & NumpadAdd::ToggleMousePos(-1, A_ScreenHeight * (ScreenGridSize - 1) / ScreenGridSize)                                                  ; CapsLock + NumpadAdd
+<#End::
+<#NumpadAdd::
+CapsLock & NumpadAdd::ToggleMousePos(-1, A_ScreenHeight * (ScreenGridSize - 1) / ScreenGridSize)
 
-<#Numpad7::                                                                                                                                       ; lwin + Numpad7
-CapsLock & Numpad7::ToggleMousePos(A_ScreenWidth / ScreenGridSize, A_ScreenHeight / ScreenGridSize)                                               ; CapsLock + Numpad7
+<#Numpad7::
+CapsLock & Numpad7::ToggleMousePos(A_ScreenWidth / ScreenGridSize, A_ScreenHeight / ScreenGridSize)
 
-<#Numpad8::                                                                                                                                       ; lwin + Numpad8
-CapsLock & Numpad8::ToggleMousePos(A_ScreenWidth / 2, A_ScreenHeight / ScreenGridSize)                                                            ; CapsLock + Numpad8
+<#Numpad8::
+CapsLock & Numpad8::ToggleMousePos(A_ScreenWidth / 2, A_ScreenHeight / ScreenGridSize)
 
-<#Numpad9::                                                                                                                                       ; lwin + Numpad9
-CapsLock & Numpad9::ToggleMousePos(A_ScreenWidth * (ScreenGridSize - 1) / ScreenGridSize, A_ScreenHeight / ScreenGridSize)                        ; CapsLock + Numpad9
+<#Numpad9::
+CapsLock & Numpad9::ToggleMousePos(A_ScreenWidth * (ScreenGridSize - 1) / ScreenGridSize, A_ScreenHeight / ScreenGridSize)
 
-<#Numpad4::                                                                                                                                       ; lwin + Numpad4
-CapsLock & Numpad4::ToggleMousePos(A_ScreenWidth / ScreenGridSize, A_ScreenHeight / 2)                                                            ; CapsLock + Numpad4
+<#Numpad4::
+CapsLock & Numpad4::ToggleMousePos(A_ScreenWidth / ScreenGridSize, A_ScreenHeight / 2)
 
-<#Numpad5::                                                                                                                                       ; lwin + Numpad5
-CapsLock & Numpad5::ToggleMousePos(A_ScreenWidth / 2, A_ScreenHeight / 2)                                                                         ; CapsLock + Numpad5
+<#Numpad5::
+CapsLock & Numpad5::ToggleMousePos(A_ScreenWidth / 2, A_ScreenHeight / 2)
 
-<#Numpad6::                                                                                                                                       ; lwin + Numpad6
-CapsLock & Numpad6::ToggleMousePos(A_ScreenWidth * (ScreenGridSize - 1) / ScreenGridSize, A_ScreenHeight / 2)                                     ; CapsLock + Numpad6
+<#Numpad6::
+CapsLock & Numpad6::ToggleMousePos(A_ScreenWidth * (ScreenGridSize - 1) / ScreenGridSize, A_ScreenHeight / 2)
 
-<#Numpad1::                                                                                                                                       ; lwin + Numpad1
-CapsLock & Numpad1::ToggleMousePos(A_ScreenWidth / ScreenGridSize, A_ScreenHeight * (ScreenGridSize - 1) / ScreenGridSize)                        ; CapsLock + Numpad1
+<#Numpad1::
+CapsLock & Numpad1::ToggleMousePos(A_ScreenWidth / ScreenGridSize, A_ScreenHeight * (ScreenGridSize - 1) / ScreenGridSize)
 
-<#Numpad2::                                                                                                                                       ; lwin + Numpad2
-CapsLock & Numpad2::ToggleMousePos(A_ScreenWidth / 2, A_ScreenHeight * (ScreenGridSize - 1) / ScreenGridSize)                                     ; CapsLock + Numpad2
+<#Numpad2::
+CapsLock & Numpad2::ToggleMousePos(A_ScreenWidth / 2, A_ScreenHeight * (ScreenGridSize - 1) / ScreenGridSize)
 
-<#Numpad3::                                                                                                                                       ; lwin + Numpad3
-CapsLock & Numpad3::ToggleMousePos(A_ScreenWidth * (ScreenGridSize - 1) / ScreenGridSize, A_ScreenHeight * (ScreenGridSize - 1) / ScreenGridSize) ; CapsLock + Numpad3
+<#Numpad3::
+CapsLock & Numpad3::ToggleMousePos(A_ScreenWidth * (ScreenGridSize - 1) / ScreenGridSize, A_ScreenHeight * (ScreenGridSize - 1) / ScreenGridSize)
 
 CapsLock & End::                                                                  ; CapsLock + end
 <!End::                                                                           ; lalt + end
