@@ -225,6 +225,10 @@ return
             MouseMove, %xpos%, %ypos%
         }
     return
+
+    ^!+x::SendInput [_]{Space}
+    ^!+c::SendInput [x]{Space}
+    ^!+z::SendInput [-]{Space}
 #IfWinActive
 
 *CapsLock:: return ; This forces CapsLock into a modifying key.
