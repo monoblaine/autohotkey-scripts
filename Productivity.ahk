@@ -170,6 +170,13 @@ RButton & LButton::                                                             
     }
 return
 
+CapsLock & c::
+    clipboard := ""
+    Send, ^c
+    ClipWait
+    clipboard := StrReplace(RegexReplace(clipboard, "^•+|(?!\r?\n)•+", ""), "•", " ")
+return
+
 #IfWinActive ahk_exe msedge.exe
     ~^b::
         SetTitleMatchMode, 2
