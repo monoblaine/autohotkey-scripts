@@ -284,6 +284,82 @@ return
     Send, #+ü ; execute copyq action
 return
 
+^'::
+Ctrl & "::
+    if GetKeyState("RShift") {
+        WrapTextWith("'", "'")
+    }
+    else {
+        WrapTextWith("""", """")
+    }
+return
+
+^SC056::WrapTextWith("<", ">")
+^+1::WrapTextWith("(", ")")
+^+2::WrapTextWith("[", "]")
+^+3::WrapTextWith("{", "}")
+^+4::WrapTextWith("``", "``")
+^+5::WrapTextWith("```````r`n", "`r`n``````")
+
+^+6::
+    Send, {Alt Down}{f17}{Alt Up} ; disable copyq
+    clipboard := ""
+    Send, ^c
+    ClipWait
+    clipboard := "``" . clipboard . "``"
+    strLengthPlus1 := StrLen(clipboard) - 1
+    RunWait %ComSpec% /c clipemdown | MarkdownForClipboard.exe,, Hide
+    Send, ^v
+    Sleep 250
+    SetTitleMatchMode, 2
+
+    if WinActive("Google D") {
+        loop {
+            clipboard := ""
+            Send, {Shift Down}{Left}{Shift Up}
+            Send, ^c
+            ClipWait
+            clipboard := clipboard
+        } until InStr(clipboard, "•") = 1
+
+        Send, {Shift Down}{Right}{Shift Up}
+        Send, {Del}
+        Send, {Shift Down}{Left}{Shift Up}
+        Send, {Ctrl Down}{Shift Down}{, 4}{Shift Up}{Ctrl Up} ; Decrease trailing bullet size
+        Send, {Shift Down}{Left %strLengthPlus1%}{Shift Up}
+        Send, {Ctrl Down}{Shift Down}{,}{Shift Up}{Ctrl Up} ; Decrease font size
+        Send, {Left}
+        Send, {Shift Down}{Right}{Shift Up}
+        Send, {Ctrl Down}{Shift Down}{, 4}{Shift Up}{Ctrl Up} ; Decrease leading bullet size
+        Send, {Left}
+    }
+
+    Send, {Alt Down}{f16}{Alt Up} ; Enable copyq and activate first item in copyq
+return
+
+^+7::
+    Send, {Alt Down}{f17}{Alt Up} ; disable copyq
+    clipboard := ""
+    Send, ^c
+    ClipWait
+    clipboard := clipboard
+    RunWait %ComSpec% /c clipemdown | MarkdownForClipboard.exe,, Hide
+    Send, ^v
+    Sleep 250
+    Send, {Alt Down}{f16}{Alt Up} ; Enable copyq and activate first item in copyq
+return
+
+WrapTextWith(left, right) {
+    Send, {Alt Down}{f17}{Alt Up} ; disable copyq
+    clipboard := ""
+    Send, ^c
+    ClipWait
+    clipboard := left . clipboard . right
+    Send, ^v
+    Sleep 250
+    Send, {Alt Down}{f16}{Alt Up} ; remove first item from copyq list
+}
+
 #If !GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt")
     <#Up::WheelUp
     <#Down::WheelDown

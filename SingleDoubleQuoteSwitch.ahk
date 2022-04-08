@@ -16,5 +16,4 @@ Process, Priority,, R
 
 "::'
 
-^'::Suspend
-^"::Suspend
+é::Suspend
