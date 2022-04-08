@@ -43,7 +43,8 @@ SavedMouseCoordY := -1
 LastMouseCoordX := 0
 LastMouseCoordY := 0
 
-ScreenGridSize := 6
+ScreenGridSizePrimary := 4
+ScreenGridSizeAlternate := 3
 
 CoordMode, Mouse, Screen
 
@@ -80,54 +81,53 @@ CapsLock & Space::SetCapsLockState % !GetKeyState("CapsLock", "T")              
 #If
 
 <#NumpadDiv::
-CapsLock & NumpadDiv::ToggleMousePos(A_ScreenWidth / ScreenGridSize, -1)
+CapsLock & NumpadDiv::ToggleMousePos(A_ScreenWidth / 2 - A_ScreenWidth / ScreenGridSizePrimary, -1)
 
 <#NumpadMult::
-CapsLock & NumpadMult::ToggleMousePos(A_ScreenWidth - A_ScreenWidth / ScreenGridSize, -1)
+CapsLock & NumpadMult::ToggleMousePos(A_ScreenWidth / 2 + A_ScreenWidth / ScreenGridSizePrimary, -1)
 
 <#NumpadSub::
-CapsLock & NumpadSub::ToggleMousePos(-1, A_ScreenHeight / ScreenGridSize)
+CapsLock & NumpadSub::ToggleMousePos(-1, A_ScreenHeight / 2 - A_ScreenHeight / ScreenGridSizePrimary)
 
 <#End::
 <#NumpadAdd::
-CapsLock & NumpadAdd::ToggleMousePos(-1, A_ScreenHeight - A_ScreenHeight / ScreenGridSize)
+CapsLock & NumpadAdd::ToggleMousePos(-1, A_ScreenHeight / 2 + A_ScreenHeight / ScreenGridSizePrimary)
 
 <#Numpad7::
-CapsLock & Numpad7::ToggleMousePos(A_ScreenWidth / ScreenGridSize, A_ScreenHeight / 4 - A_ScreenHeight / ScreenGridSize)
+CapsLock & Numpad7::ToggleMousePos(A_ScreenWidth / 2 - A_ScreenWidth / ScreenGridSizePrimary, A_ScreenHeight / 2 - A_ScreenHeight / ScreenGridSizePrimary)
+NumpadHome::ToggleMousePos(A_ScreenWidth / 2 - A_ScreenWidth / ScreenGridSizeAlternate, A_ScreenHeight / 2 - A_ScreenHeight / ScreenGridSizeAlternate)
 
 <#Numpad8::
-CapsLock & Numpad8::ToggleMousePos(A_ScreenWidth / 2, A_ScreenHeight / 4 - A_ScreenHeight / ScreenGridSize)
+CapsLock & Numpad8::ToggleMousePos(A_ScreenWidth / 2, A_ScreenHeight / 2 - A_ScreenHeight / ScreenGridSizePrimary)
+NumpadUp::ToggleMousePos(A_ScreenWidth / 2, A_ScreenHeight / 2 - A_ScreenHeight / ScreenGridSizeAlternate)
 
 <#Numpad9::
-CapsLock & Numpad9::ToggleMousePos(A_ScreenWidth - A_ScreenWidth / ScreenGridSize, A_ScreenHeight / 4 - A_ScreenHeight / ScreenGridSize)
+CapsLock & Numpad9::ToggleMousePos(A_ScreenWidth / 2 + A_ScreenWidth / ScreenGridSizePrimary, A_ScreenHeight / 2 - A_ScreenHeight / ScreenGridSizePrimary)
+NumpadPgUp::ToggleMousePos(A_ScreenWidth / 2 + A_ScreenWidth / ScreenGridSizeAlternate, A_ScreenHeight / 2 - A_ScreenHeight / ScreenGridSizeAlternate)
 
 <#Numpad4::
-CapsLock & Numpad4::ToggleMousePos(A_ScreenWidth / ScreenGridSize, A_ScreenHeight / 4)
+CapsLock & Numpad4::ToggleMousePos(A_ScreenWidth / 2 - A_ScreenWidth / ScreenGridSizePrimary, A_ScreenHeight / 2)
+NumpadLeft::ToggleMousePos(A_ScreenWidth / 2 - A_ScreenWidth / ScreenGridSizeAlternate, A_ScreenHeight / 2)
 
 <#Numpad5::
-CapsLock & Numpad5::ToggleMousePos(A_ScreenWidth / 2, A_ScreenHeight / 4)
+NumpadClear::
+CapsLock & Numpad5::ToggleMousePos(A_ScreenWidth / 2, A_ScreenHeight / 2)
 
 <#Numpad6::
-CapsLock & Numpad6::ToggleMousePos(A_ScreenWidth - A_ScreenWidth / ScreenGridSize, A_ScreenHeight / 4)
+CapsLock & Numpad6::ToggleMousePos(A_ScreenWidth / 2 + A_ScreenWidth / ScreenGridSizePrimary, A_ScreenHeight / 2)
+NumpadRight::ToggleMousePos(A_ScreenWidth / 2 + A_ScreenWidth / ScreenGridSizeAlternate, A_ScreenHeight / 2)
 
 <#Numpad1::
-CapsLock & Numpad1::ToggleMousePos(A_ScreenWidth / ScreenGridSize, A_ScreenHeight / 4 + A_ScreenHeight / ScreenGridSize)
+CapsLock & Numpad1::ToggleMousePos(A_ScreenWidth / 2 - A_ScreenWidth / ScreenGridSizePrimary, A_ScreenHeight / 2 + A_ScreenHeight / ScreenGridSizePrimary)
+NumpadEnd::ToggleMousePos(A_ScreenWidth / 2 - A_ScreenWidth / ScreenGridSizeAlternate, A_ScreenHeight / 2 + A_ScreenHeight / ScreenGridSizeAlternate)
 
 <#Numpad2::
-CapsLock & Numpad2::ToggleMousePos(A_ScreenWidth / 2, A_ScreenHeight / 4 + A_ScreenHeight / ScreenGridSize)
+CapsLock & Numpad2::ToggleMousePos(A_ScreenWidth / 2, A_ScreenHeight / 2 + A_ScreenHeight / ScreenGridSizePrimary)
+NumpadDown::ToggleMousePos(A_ScreenWidth / 2, A_ScreenHeight / 2 + A_ScreenHeight / ScreenGridSizeAlternate)
 
 <#Numpad3::
-CapsLock & Numpad3::ToggleMousePos(A_ScreenWidth - A_ScreenWidth / ScreenGridSize, A_ScreenHeight / 4 + A_ScreenHeight / ScreenGridSize)
-
-NumpadHome::ToggleMousePos(A_ScreenWidth / ScreenGridSize, 3 * A_ScreenHeight / 4 - A_ScreenHeight / ScreenGridSize)
-NumpadUp::ToggleMousePos(A_ScreenWidth / 2, 3 * A_ScreenHeight / 4 - A_ScreenHeight / ScreenGridSize)
-NumpadPgUp::ToggleMousePos(A_ScreenWidth - A_ScreenWidth / ScreenGridSize, 3 * A_ScreenHeight / 4 - A_ScreenHeight / ScreenGridSize)
-NumpadLeft::ToggleMousePos(A_ScreenWidth / ScreenGridSize, 3 * A_ScreenHeight / 4)
-NumpadClear::ToggleMousePos(A_ScreenWidth / 2, 3 * A_ScreenHeight / 4)
-NumpadRight::ToggleMousePos(A_ScreenWidth - A_ScreenWidth / ScreenGridSize, 3 * A_ScreenHeight / 4)
-NumpadEnd::ToggleMousePos(A_ScreenWidth / ScreenGridSize, 3 * A_ScreenHeight / 4 + A_ScreenHeight / ScreenGridSize)
-NumpadDown::ToggleMousePos(A_ScreenWidth / 2, 3 * A_ScreenHeight / 4 + A_ScreenHeight / ScreenGridSize)
-NumpadPgDn::ToggleMousePos(A_ScreenWidth - A_ScreenWidth / ScreenGridSize, 3 * A_ScreenHeight / 4 + A_ScreenHeight / ScreenGridSize)
+CapsLock & Numpad3::ToggleMousePos(A_ScreenWidth / 2 + A_ScreenWidth / ScreenGridSizePrimary, A_ScreenHeight / 2 + A_ScreenHeight / ScreenGridSizePrimary)
+NumpadPgDn::ToggleMousePos(A_ScreenWidth / 2 + A_ScreenWidth / ScreenGridSizeAlternate, A_ScreenHeight / 2 + A_ScreenHeight / ScreenGridSizeAlternate)
 
 CapsLock & End::                                                                  ; CapsLock + end
 <!End::                                                                           ; lalt + end
