@@ -43,7 +43,7 @@ SavedMouseCoordY := -1
 LastMouseCoordX := 0
 LastMouseCoordY := 0
 
-ScreenGridSize := 5
+ScreenGridSize := 6
 
 CoordMode, Mouse, Screen
 
@@ -83,41 +83,51 @@ CapsLock & Space::SetCapsLockState % !GetKeyState("CapsLock", "T")              
 CapsLock & NumpadDiv::ToggleMousePos(A_ScreenWidth / ScreenGridSize, -1)
 
 <#NumpadMult::
-CapsLock & NumpadMult::ToggleMousePos(A_ScreenWidth * (ScreenGridSize - 1) / ScreenGridSize, -1)
+CapsLock & NumpadMult::ToggleMousePos(A_ScreenWidth - A_ScreenWidth / ScreenGridSize, -1)
 
 <#NumpadSub::
 CapsLock & NumpadSub::ToggleMousePos(-1, A_ScreenHeight / ScreenGridSize)
 
 <#End::
 <#NumpadAdd::
-CapsLock & NumpadAdd::ToggleMousePos(-1, A_ScreenHeight * (ScreenGridSize - 1) / ScreenGridSize)
+CapsLock & NumpadAdd::ToggleMousePos(-1, A_ScreenHeight - A_ScreenHeight / ScreenGridSize)
 
 <#Numpad7::
-CapsLock & Numpad7::ToggleMousePos(A_ScreenWidth / ScreenGridSize, A_ScreenHeight / ScreenGridSize)
+CapsLock & Numpad7::ToggleMousePos(A_ScreenWidth / ScreenGridSize, A_ScreenHeight / 4 - A_ScreenHeight / ScreenGridSize)
 
 <#Numpad8::
-CapsLock & Numpad8::ToggleMousePos(A_ScreenWidth / 2, A_ScreenHeight / ScreenGridSize)
+CapsLock & Numpad8::ToggleMousePos(A_ScreenWidth / 2, A_ScreenHeight / 4 - A_ScreenHeight / ScreenGridSize)
 
 <#Numpad9::
-CapsLock & Numpad9::ToggleMousePos(A_ScreenWidth * (ScreenGridSize - 1) / ScreenGridSize, A_ScreenHeight / ScreenGridSize)
+CapsLock & Numpad9::ToggleMousePos(A_ScreenWidth - A_ScreenWidth / ScreenGridSize, A_ScreenHeight / 4 - A_ScreenHeight / ScreenGridSize)
 
 <#Numpad4::
-CapsLock & Numpad4::ToggleMousePos(A_ScreenWidth / ScreenGridSize, A_ScreenHeight / 2)
+CapsLock & Numpad4::ToggleMousePos(A_ScreenWidth / ScreenGridSize, A_ScreenHeight / 4)
 
 <#Numpad5::
-CapsLock & Numpad5::ToggleMousePos(A_ScreenWidth / 2, A_ScreenHeight / 2)
+CapsLock & Numpad5::ToggleMousePos(A_ScreenWidth / 2, A_ScreenHeight / 4)
 
 <#Numpad6::
-CapsLock & Numpad6::ToggleMousePos(A_ScreenWidth * (ScreenGridSize - 1) / ScreenGridSize, A_ScreenHeight / 2)
+CapsLock & Numpad6::ToggleMousePos(A_ScreenWidth - A_ScreenWidth / ScreenGridSize, A_ScreenHeight / 4)
 
 <#Numpad1::
-CapsLock & Numpad1::ToggleMousePos(A_ScreenWidth / ScreenGridSize, A_ScreenHeight * (ScreenGridSize - 1) / ScreenGridSize)
+CapsLock & Numpad1::ToggleMousePos(A_ScreenWidth / ScreenGridSize, A_ScreenHeight / 4 + A_ScreenHeight / ScreenGridSize)
 
 <#Numpad2::
-CapsLock & Numpad2::ToggleMousePos(A_ScreenWidth / 2, A_ScreenHeight * (ScreenGridSize - 1) / ScreenGridSize)
+CapsLock & Numpad2::ToggleMousePos(A_ScreenWidth / 2, A_ScreenHeight / 4 + A_ScreenHeight / ScreenGridSize)
 
 <#Numpad3::
-CapsLock & Numpad3::ToggleMousePos(A_ScreenWidth * (ScreenGridSize - 1) / ScreenGridSize, A_ScreenHeight * (ScreenGridSize - 1) / ScreenGridSize)
+CapsLock & Numpad3::ToggleMousePos(A_ScreenWidth - A_ScreenWidth / ScreenGridSize, A_ScreenHeight / 4 + A_ScreenHeight / ScreenGridSize)
+
+NumpadHome::ToggleMousePos(A_ScreenWidth / ScreenGridSize, 3 * A_ScreenHeight / 4 - A_ScreenHeight / ScreenGridSize)
+NumpadUp::ToggleMousePos(A_ScreenWidth / 2, 3 * A_ScreenHeight / 4 - A_ScreenHeight / ScreenGridSize)
+NumpadPgUp::ToggleMousePos(A_ScreenWidth - A_ScreenWidth / ScreenGridSize, 3 * A_ScreenHeight / 4 - A_ScreenHeight / ScreenGridSize)
+NumpadLeft::ToggleMousePos(A_ScreenWidth / ScreenGridSize, 3 * A_ScreenHeight / 4)
+NumpadClear::ToggleMousePos(A_ScreenWidth / 2, 3 * A_ScreenHeight / 4)
+NumpadRight::ToggleMousePos(A_ScreenWidth - A_ScreenWidth / ScreenGridSize, 3 * A_ScreenHeight / 4)
+NumpadEnd::ToggleMousePos(A_ScreenWidth / ScreenGridSize, 3 * A_ScreenHeight / 4 + A_ScreenHeight / ScreenGridSize)
+NumpadDown::ToggleMousePos(A_ScreenWidth / 2, 3 * A_ScreenHeight / 4 + A_ScreenHeight / ScreenGridSize)
+NumpadPgDn::ToggleMousePos(A_ScreenWidth - A_ScreenWidth / ScreenGridSize, 3 * A_ScreenHeight / 4 + A_ScreenHeight / ScreenGridSize)
 
 CapsLock & End::                                                                  ; CapsLock + end
 <!End::                                                                           ; lalt + end
