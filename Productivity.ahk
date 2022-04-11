@@ -498,6 +498,17 @@ WrapTextWith(left, right) {
         ClipWait
         clipboard := RegexReplace(clipboard, "^\[[^\]]+\]\.\[([^\]]+)\]$", "$1")
     return
+
+    f3::
+        Send {Right}{Left}
+        Send {f19}
+    return
+
+    +f3::
+        ; Send {End}{Home 2}
+        Send {Right}{Left}
+        Send +{f19}
+    return
 #IfWinActive
 
 #IfWinActive ahk_exe 7zFM.exe                                                     ; if it is 7-Zip
