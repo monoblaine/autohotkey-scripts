@@ -19,7 +19,8 @@ procHandle_MsEdge2 := DllCall("GetProcAddress", Ptr, hModule, AStr, "getMsEdgeTh
 procHandle_Firefox := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiveTabOnFirefox", Ptr)
 procHandle_Vs2019 := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiveTabOnVs2019", Ptr)
 procHandle_Vs2022 := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiveTabOnVs2022", Ptr)
-procHandle_Ssms18 := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiveTabOnSsms18", Ptr)
+procHandle_Ssms18_1 := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiveTabOnSsms18", Ptr)
+procHandle_Ssms18_2 := DllCall("GetProcAddress", Ptr, hModule, AStr, "getSsms18ResultsGridActiveColumnCoords", Ptr)
 procHandle_Foobar2000 := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiveTabOnFoobar2000", Ptr)
 procHandle_WindowsTerminal := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiveTabOnWindowsTerminal", Ptr)
 procHandle_Cleanup := DllCall("GetProcAddress", Ptr, hModule, AStr, "cleanup", Ptr)
@@ -36,7 +37,8 @@ Exit:
    DllCall("CloseHandle", Ptr, procHandle_Firefox)
    DllCall("CloseHandle", Ptr, procHandle_Vs2019)
    DllCall("CloseHandle", Ptr, procHandle_Vs2022)
-   DllCall("CloseHandle", Ptr, procHandle_Ssms18)
+   DllCall("CloseHandle", Ptr, procHandle_Ssms18_1)
+   DllCall("CloseHandle", Ptr, procHandle_Ssms18_2)
    DllCall("CloseHandle", Ptr, procHandle_Foobar2000)
    DllCall("CloseHandle", Ptr, procHandle_WindowsTerminal)
    DllCall("CloseHandle", Ptr, procHandle_Cleanup)
@@ -80,8 +82,50 @@ Exit:
 #IfWinActive
 
 #IfWinActive ahk_exe Ssms.exe
-    ^!PgUp::MoveTab(1, -1, procHandle_Ssms18, MovementMethod.mouseClickDrag)
-    ^!PgDn::MoveTab(1, 1, procHandle_Ssms18, MovementMethod.mouseClickDrag)
+    ^!PgUp::MoveTab(1, -1, procHandle_Ssms18_1, MovementMethod.mouseClickDrag)
+    ^!PgDn::MoveTab(1, 1, procHandle_Ssms18_1, MovementMethod.mouseClickDrag)
+
+    ^Enter::
+        hWnd := WinExist("A")
+        ptr_success := 0
+        ptr_left := 0
+        ptr_right := 0
+        ptr_top := 0
+        ptr_bottom := 0
+        DllCall(procHandle_Ssms18_2, Int, hWnd, Ptr, &ptr_success
+              , Ptr, &ptr_left, Ptr, &ptr_right
+              , Ptr, &ptr_top, Ptr, &ptr_bottom)
+
+        if (A_LastError) {
+            MsgBox, Error: %A_LastError%
+        }
+
+        success := NumGet(&ptr_success)
+        left := NumGet(&ptr_left)
+        right := NumGet(&ptr_right)
+        top := NumGet(&ptr_top)
+        bottom := NumGet(&ptr_bottom)
+        ptr_success := ""
+        ptr_left := ""
+        ptr_right := ""
+        ptr_top := ""
+        ptr_bottom := ""
+
+        ; MsgBox, success: %success%, left: %left%, right: %right%, top: %top%, bottom: %bottom%
+
+        if (success) {
+            curX := 0
+            curY := 0
+            targetY := top + (bottom - top) // 2
+
+            MouseGetPos, curX, curY
+            SetMouseDelay, -1
+            SetDefaultMouseSpeed, 0
+            MouseMove, %right%, %targetY%
+            Send, {Click 2}
+            MouseMove, %curX%, %curY%
+        }
+    return
 #IfWinActive
 
 #IfWinActive ahk_exe foobar2000.exe
