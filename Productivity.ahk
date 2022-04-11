@@ -214,7 +214,7 @@ return
         MouseMove, %xpos%, %ypos%
     return
 
-    ~CapsLock & a::
+    ~CapsLock & a:: ; text color
         SetTitleMatchMode, 2
 
         if WinActive("Google D") {
@@ -225,7 +225,7 @@ return
         }
     return
 
-    ~CapsLock & s::
+    ~CapsLock & s:: ; background color
         SetTitleMatchMode, 2
 
         if WinActive("Google D") {
