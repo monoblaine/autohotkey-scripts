@@ -236,6 +236,18 @@ return
         }
     return
 
+    ~CapsLock & ,:: ; auto number headings
+        SetTitleMatchMode, 2
+
+        if WinActive("Google D") {
+            Send {Alt Down}f{Alt Up}
+            Sleep 150
+            Send {Left}
+            Send {Down}
+            Send {Enter}
+        }
+    return
+
     ^!+x::SendInput [_]{Space}
     ^!+c::SendInput [x]{Space}
     ^!+z::SendInput [-]{Space}
