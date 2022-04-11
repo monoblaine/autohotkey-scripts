@@ -447,6 +447,8 @@ WrapTextWith(left, right) {
     return
 #IfWinActive
 
+VS_Handle_CtrlF := 1
+
 ; Because Visual Studio 2019 broke my AltGr shortcuts!
 #IfWinActive ahk_exe devenv.exe
     <^>!+g::Send, ^!+g
@@ -459,15 +461,47 @@ WrapTextWith(left, right) {
     <^>!+u::Send, ^!+u
 
     f3::
-        Send ^f
+        VS_Handle_CtrlF := 0
+        Send ^{f19}
         Send {Enter}
         Send {Esc}
+        VS_Handle_CtrlF := 1
     return
 
     +f3::
-        Send ^f
+        VS_Handle_CtrlF := 0
+        Send ^{f19}
         Send +{Enter}
         Send {Esc}
+        VS_Handle_CtrlF := 1
+    return
+
+    *^f::
+        if (VS_Handle_CtrlF = 0) {
+            return
+        }
+
+        VS_Handle_CtrlF := 0
+        VS_ShiftPressed := GetKeyState("Shift")
+        Send, {Alt Down}{f17}{Alt Up} ; disable copyq
+        clipboard := ""
+        Send ^c
+        ClipWait, 0.25
+
+        if (VS_ShiftPressed) {
+            Send ^+{f19}
+        }
+        else {
+            Send ^{f19}
+        }
+
+        if StrLen(clipboard) {
+            Send ^v
+            Sleep 250
+        }
+
+        Send, {Alt Down}{f16}{Alt Up} ; Enable copyq and activate first item in copyq
+        VS_Handle_CtrlF := 1
     return
 #IfWinActive
 
