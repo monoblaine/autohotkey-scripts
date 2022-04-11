@@ -316,8 +316,12 @@ return
     clipboard := ""
     Send, ^c
     ClipWait
-    clipboard := "``" . clipboard . "``"
-    strLengthPlus1 := StrLen(clipboard) - 1
+
+    if (SubStr(clipboard, 1, 1) != "``") {
+        clipboard := "``" . clipboard . "``"
+    }
+
+    strLengthPlus1 := StrLen(RegexReplace(clipboard, "^``([^``]+).+$", "$1")) + 1
     RunWait %ComSpec% /c clipemdown | MarkdownForClipboard.exe,, Hide
     Send, ^v
     Sleep 250
