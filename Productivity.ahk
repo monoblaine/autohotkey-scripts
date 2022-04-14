@@ -44,7 +44,7 @@ LastMouseCoordX := 0
 LastMouseCoordY := 0
 
 ScreenGridSizePrimary := 4
-ScreenGridSizeAlternate := 3
+ScreenGridSizeAlternate := 2.5
 
 CoordMode, Mouse, Screen
 
