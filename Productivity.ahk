@@ -257,6 +257,63 @@ return
     ^!+z::SendInput [-]{Space}
 #IfWinActive
 
+#IfWinActive ahk_exe firefox.exe
+    ; Click "close this message" on StackOverflow
+    CapsLock & x::
+        MouseGetPos, xpos, ypos
+        MouseMove, A_ScreenWidth / 2, 140
+        Click
+        MouseMove, %xpos%, %ypos%
+    return
+
+    ~CapsLock & a:: ; text color
+        SetTitleMatchMode, 2
+
+        if WinActive("Google D") {
+            MouseGetPos, xpos, ypos
+            MouseMove, 670, 160
+            Click
+            MouseMove, %xpos%, %ypos%
+        }
+    return
+
+    ~CapsLock & s:: ; background color
+        SetTitleMatchMode, 2
+
+        if WinActive("Google D") {
+            MouseGetPos, xpos, ypos
+            MouseMove, 700, 160
+            Click
+            MouseMove, %xpos%, %ypos%
+        }
+    return
+
+    ~CapsLock & ,:: ; auto number headings
+        SetTitleMatchMode, 2
+
+        if WinActive("Google D") {
+            Send {Alt Down}{Shift Down}f{Shift Up}{Alt Up}
+            Sleep 150
+            Send {Left}
+            Send {Down}
+            Send {Enter}
+        }
+    return
+
+    !f::!+f
+    !e::!+e
+    !v::!+v
+    !ı::!+ı
+    !o::!+o
+    !t::!+t
+    !n::!+n
+    !h::!+h
+
+    ^!+x::SendInput [_]{Space}
+    ^!+c::SendInput [x]{Space}
+    ^!+z::SendInput [-]{Space}
+#IfWinActive
+
 *CapsLock:: return ; This forces CapsLock into a modifying key.
 RButton::RButton   ; restore the original RButton function
 
