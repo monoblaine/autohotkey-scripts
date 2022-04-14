@@ -23,6 +23,7 @@ GroupAdd, Group_ZoomableByWheel, ahk_exe EXCEL.EXE
 GroupAdd, Group_HScroll_WheelLeftRight, ahk_class MMCMainFrame
 GroupAdd, Group_HScroll_WheelLeftRight, ahk_exe GitExtensions.exe
 GroupAdd, Group_HScroll_WheelLeftRight, ahk_exe msedge.exe
+GroupAdd, Group_HScroll_WheelLeftRight, ahk_exe chrome.exe
 GroupAdd, Group_HScroll_WheelLeftRight, ahk_exe WINWORD.EXE
 GroupAdd, Group_HScroll_WheelLeftRight, ahk_exe idea64.exe
 GroupAdd, Group_HScroll_WheelLeftRight, ahk_class MozillaWindowClass
@@ -33,6 +34,9 @@ GroupAdd, Group_HScroll_ScrollLock, ahk_exe EXCEL.EXE
 ; GroupAdd, Group_HScroll_All, ahk_group Group_HScroll_ShiftWheel
 GroupAdd, Group_HScroll_All, ahk_group Group_HScroll_WheelLeftRight
 GroupAdd, Group_HScroll_All, ahk_group Group_HScroll_ScrollLock
+
+GroupAdd, Group_ChromiumBasedApp, ahk_exe chrome.exe
+GroupAdd, Group_ChromiumBasedApp, ahk_exe msedge.exe
 
 Shell := ComObjCreate("WScript.Shell")
 AutoHideMouseCursorRunning := ProcessExist("AutoHideMouseCursor_x64_p.exe")
@@ -187,14 +191,14 @@ CapsLock & c::
     clipboard := StrReplace(RegexReplace(clipboard, "^•+|(?!\r?\n)•+", ""), "•", " ")
 return
 
-#IfWinActive ahk_exe msedge.exe
+#IfWinActive ahk_group Group_ChromiumBasedApp
     ~^b::
         SetTitleMatchMode, 2
 
         if !WinActive("Google D") {
             Send, ^t
             Sleep, 200
-            SendRaw, edge://favorites/
+            SendRaw, chrome://bookmarks/
             Send, {Enter}
         }
     return
@@ -202,7 +206,7 @@ return
     ^h::
         Send, ^t
         Sleep, 200
-        SendRaw, edge://history/all
+        SendRaw, chrome://history/all
         Send, {Enter}
     return
 
