@@ -306,7 +306,7 @@ return
 <#ü::
     clipboard := ""
     Send, ^c
-    ClipWait
+    ClipWait, 0.25
     Send, #+ü ; execute copyq action
 return
 
