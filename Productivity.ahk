@@ -412,12 +412,10 @@ return
         Send, {Shift Down}{Right}{Shift Up}
         Send, {Del}
         Send, {Shift Down}{Left}{Shift Up}
-        Send, {Ctrl Down}{Shift Down}{, 4}{Shift Up}{Ctrl Up} ; Decrease trailing bullet size
-        Send, {Shift Down}{Left %strLengthPlus1%}{Shift Up}
-        Send, {Ctrl Down}{Shift Down}{,}{Shift Up}{Ctrl Up} ; Decrease font size
-        Send, {Left}
-        Send, {Shift Down}{Right}{Shift Up}
-        Send, {Ctrl Down}{Shift Down}{, 4}{Shift Up}{Ctrl Up} ; Decrease leading bullet size
+        Send, {Ctrl Down}{,}{Ctrl Up} ; Make trailing bullet a subscript
+        Send, {Left %strLengthPlus1%}
+        Send, {Shift Down}{Left}{Shift Up}
+        Send, {Ctrl Down}{,}{Ctrl Up} ; Make leading bullet a subscript
         Send, {Left}
     }
 
