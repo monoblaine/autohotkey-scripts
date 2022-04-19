@@ -389,6 +389,7 @@ return
     clipboard := ""
     Send, ^c
     ClipWait
+    clipboard := RegexReplace(clipboard, "[\r\n]+$", "")
     firstChar := SubStr(clipboard, 1, 1)
 
     if (firstChar = "•") {
@@ -431,7 +432,7 @@ return
     clipboard := ""
     Send, ^c
     ClipWait
-    clipboard := clipboard
+    clipboard := RegexReplace(clipboard, "[\r\n]+$", "")
     RunWait %ComSpec% /c clipemdown | MarkdownForClipboard.exe,, Hide
     Send, ^v
     Sleep 250
@@ -443,7 +444,7 @@ WrapTextWith(left, right) {
     clipboard := ""
     Send, ^c
     ClipWait
-    clipboard := left . clipboard . right
+    clipboard := left . RegexReplace(clipboard, "[\r\n]+$", "") . right
     Send, ^v
     Sleep 250
     Send, {Alt Down}{f16}{Alt Up} ; Enable copyq and activate first item
