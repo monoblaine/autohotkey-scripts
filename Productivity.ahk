@@ -389,8 +389,9 @@ return
     clipboard := ""
     Send, ^c
     ClipWait
+    firstChar := SubStr(clipboard, 1, 1)
 
-    if (SubStr(clipboard, 1, 1) != "``") {
+    if (firstChar != "``") {
         clipboard := "``" . clipboard . "``"
     }
 
