@@ -419,7 +419,7 @@ return
         Send, {Left}
     }
 
-    Send, {Alt Down}{f16}{Alt Up} ; Enable copyq and activate first item in copyq
+    Send, {Alt Down}{f16}{Alt Up} ; Enable copyq and activate first item
 return
 
 ^+7::
@@ -431,7 +431,7 @@ return
     RunWait %ComSpec% /c clipemdown | MarkdownForClipboard.exe,, Hide
     Send, ^v
     Sleep 250
-    Send, {Alt Down}{f16}{Alt Up} ; Enable copyq and activate first item in copyq
+    Send, {Alt Down}{f16}{Alt Up} ; Enable copyq and activate first item
 return
 
 WrapTextWith(left, right) {
@@ -442,7 +442,7 @@ WrapTextWith(left, right) {
     clipboard := left . clipboard . right
     Send, ^v
     Sleep 250
-    Send, {Alt Down}{f16}{Alt Up} ; remove first item from copyq list
+    Send, {Alt Down}{f16}{Alt Up} ; Enable copyq and activate first item
 }
 
 #If !GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt")
@@ -575,7 +575,7 @@ VS_Handle_CtrlF := 1
             Sleep 250
         }
 
-        Send, {Alt Down}{f16}{Alt Up} ; Enable copyq and activate first item in copyq
+        Send, {Alt Down}{f16}{Alt Up} ; Enable copyq and activate first item
         VS_Handle_CtrlF := 1
     return
 #IfWinActive
