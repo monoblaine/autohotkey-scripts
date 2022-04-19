@@ -391,7 +391,10 @@ return
     ClipWait
     firstChar := SubStr(clipboard, 1, 1)
 
-    if (firstChar != "``") {
+    if (firstChar = "•") {
+        clipboard := RegexReplace(clipboard, "^•([^•]+).+$", "``$1``")
+    }
+    else if (firstChar != "``") {
         clipboard := "``" . clipboard . "``"
     }
 
