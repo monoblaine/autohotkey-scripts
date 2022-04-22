@@ -645,6 +645,13 @@ VS_Handle_CtrlF := 1
     return
 #IfWinActive
 
+#IfWinActive ahk_exe soffice.bin
+    ^Space::
+        Send, ^!+{f16}
+        Send, ^0
+    return
+#IfWinActive
+
 ; Honor scroll lock state (may or may not work)
 #If !WinActive("ahk_exe EXCEL.EXE") and GetKeyState("ScrollLock", "T")
     ;==============================================================================
