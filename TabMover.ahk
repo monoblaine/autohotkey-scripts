@@ -91,6 +91,11 @@ Exit:
     return
 #IfWinActive
 
+#IfWinActive ahk_exe catsxp.exe
+    ^!PgUp::Send, ^+{PgUp}
+    ^!PgDn::Send, ^+{PgDn}
+#IfWinActive
+
 #IfWinActive ahk_exe thunderbird.exe
     ^!PgUp::MoveTab(1, -1, procHandle_Firefox, MovementMethod.sendEvent, 0, 1)
     ^!PgDn::MoveTab(1, 1, procHandle_Firefox, MovementMethod.sendEvent, 0, 1)
