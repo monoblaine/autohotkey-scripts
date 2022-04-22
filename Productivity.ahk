@@ -401,13 +401,14 @@ return
         clipboard := "``" . clipboard . "``"
     }
 
-    strLengthPlus1 := StrLen(RegexReplace(clipboard, "^``([^``]+).+$", "$1")) + 1
+    sendLeftCount := StrLen(RegexReplace(clipboard, "^``([^``]+).+$", "$1"))
     RunWait %ComSpec% /c clipemdown | MarkdownForClipboard.exe,, Hide
     Send, ^v
     Sleep 250
+    isLibreOfficeWriter := WinActive("ahk_exe soffice.bin")
     SetTitleMatchMode, 2
 
-    if WinActive("Google D") {
+    if WinActive("Google D") or isLibreOfficeWriter {
         loop {
             clipboard := ""
             Send, {Shift Down}{Left}{Shift Up}
@@ -420,7 +421,12 @@ return
         Send, {Del}
         Send, {Shift Down}{Left}{Shift Up}
         Send, {Ctrl Down}{,}{Ctrl Up} ; Make trailing bullet a subscript
-        Send, {Left %strLengthPlus1%}
+
+        if (!isLibreOfficeWriter) {
+            sendLeftCount := sendLeftCount + 1
+        }
+
+        Send, {Left %sendLeftCount%}
         Send, {Shift Down}{Left}{Shift Up}
         Send, {Ctrl Down}{,}{Ctrl Up} ; Make leading bullet a subscript
         Send, {Left}
