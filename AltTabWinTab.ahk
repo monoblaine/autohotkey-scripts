@@ -60,7 +60,7 @@ return
     }
 return
 
-!Home::
+~!Home::
     visibleWindows := GetVisibleWindows()
 
     if (visibleWindows.MaxIndex()) {
