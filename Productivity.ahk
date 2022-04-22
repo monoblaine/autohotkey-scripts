@@ -24,6 +24,7 @@ GroupAdd, Group_HScroll_WheelLeftRight, ahk_class MMCMainFrame
 GroupAdd, Group_HScroll_WheelLeftRight, ahk_exe GitExtensions.exe
 GroupAdd, Group_HScroll_WheelLeftRight, ahk_exe msedge.exe
 GroupAdd, Group_HScroll_WheelLeftRight, ahk_exe chrome.exe
+GroupAdd, Group_HScroll_WheelLeftRight, ahk_exe catsxp.exe
 GroupAdd, Group_HScroll_WheelLeftRight, ahk_exe WINWORD.EXE
 GroupAdd, Group_HScroll_WheelLeftRight, ahk_exe idea64.exe
 GroupAdd, Group_HScroll_WheelLeftRight, ahk_class MozillaWindowClass
@@ -37,6 +38,7 @@ GroupAdd, Group_HScroll_All, ahk_group Group_HScroll_ScrollLock
 
 GroupAdd, Group_ChromiumBasedApp, ahk_exe chrome.exe
 GroupAdd, Group_ChromiumBasedApp, ahk_exe msedge.exe
+GroupAdd, Group_ChromiumBasedApp, ahk_exe catsxp.exe
 
 Shell := ComObjCreate("WScript.Shell")
 AutoHideMouseCursorRunning := ProcessExist("AutoHideMouseCursor_x64_p.exe")
