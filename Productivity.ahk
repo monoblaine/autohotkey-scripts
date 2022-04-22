@@ -630,6 +630,13 @@ VS_Handle_CtrlF := 1
     !Up::Send, {Backspace}                                                        ; alt + up                     | Send backspace
 #IfWinActive
 
+#IfWinActive ahk_exe notepad++.exe
+    ^+Tab::
+        Send, !w
+        Send, w
+    return
+#IfWinActive
+
 ; Honor scroll lock state (may or may not work)
 #If !WinActive("ahk_exe EXCEL.EXE") and GetKeyState("ScrollLock", "T")
     ;==============================================================================
