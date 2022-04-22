@@ -18,6 +18,7 @@ procHandle_MsEdge1 := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActi
 procHandle_MsEdge2 := DllCall("GetProcAddress", Ptr, hModule, AStr, "getMsEdgeThreeDotBtnStatus", Ptr)
 procHandle_Chromium1 := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiveTabOnChromium", Ptr)
 procHandle_Chromium2 := DllCall("GetProcAddress", Ptr, hModule, AStr, "getChromiumThreeDotBtnStatus", Ptr)
+procHandle_Catsxp := DllCall("GetProcAddress", Ptr, hModule, AStr, "getCatsxpThreeDotBtnStatus", Ptr)
 procHandle_Firefox := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiveTabOnFirefox", Ptr)
 procHandle_Vs2019 := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiveTabOnVs2019", Ptr)
 procHandle_Vs2022 := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiveTabOnVs2022", Ptr)
@@ -38,6 +39,7 @@ Exit:
    DllCall("CloseHandle", Ptr, procHandle_MsEdge2)
    DllCall("CloseHandle", Ptr, procHandle_Chromium1)
    DllCall("CloseHandle", Ptr, procHandle_Chromium2)
+   DllCall("CloseHandle", Ptr, procHandle_Catsxp)
    DllCall("CloseHandle", Ptr, procHandle_Firefox)
    DllCall("CloseHandle", Ptr, procHandle_Vs2019)
    DllCall("CloseHandle", Ptr, procHandle_Vs2022)
@@ -94,6 +96,22 @@ Exit:
 #IfWinActive ahk_exe catsxp.exe
     ^!PgUp::Send, ^+{PgUp}
     ^!PgDn::Send, ^+{PgDn}
+
+    ~LAlt::
+        if GetKeyState("Ctrl") {
+            return
+        }
+
+        hWnd := WinExist("A")
+        ptr_isFocused := 0
+        DllCall(procHandle_Catsxp, Int, hWnd, Ptr, &ptr_isFocused)
+        isFocused := NumGet(&ptr_isFocused)
+        ptr_isFocused := ""
+
+        if (isFocused = 1) {
+            Send, {Esc}
+        }
+    return
 #IfWinActive
 
 #IfWinActive ahk_exe thunderbird.exe
