@@ -40,6 +40,10 @@ GroupAdd, Group_ChromiumBasedApp, ahk_exe chrome.exe
 GroupAdd, Group_ChromiumBasedApp, ahk_exe msedge.exe
 GroupAdd, Group_ChromiumBasedApp, ahk_exe catsxp.exe
 
+GroupAdd, Group_SendInputCheckBoxVariants, ahk_group Group_ChromiumBasedApp
+GroupAdd, Group_SendInputCheckBoxVariants, ahk_exe soffice.bin
+GroupAdd, Group_SendInputCheckBoxVariants, ahk_exe firefox.exe
+
 Shell := ComObjCreate("WScript.Shell")
 AutoHideMouseCursorRunning := ProcessExist("AutoHideMouseCursor_x64_p.exe")
 
@@ -193,6 +197,12 @@ CapsLock & c::
     clipboard := StrReplace(RegexReplace(clipboard, "^•+|(?!\r?\n)•+", ""), "•", " ")
 return
 
+#IfWinActive ahk_group Group_SendInputCheckBoxVariants
+    ^!+x::SendInput [_]{Space}
+    ^!+c::SendInput [x]{Space}
+    ^!+z::SendInput [-]{Space}
+#IfWinActive
+
 #IfWinActive ahk_group Group_ChromiumBasedApp
     ~^b::
         SetTitleMatchMode, 2
@@ -253,10 +263,6 @@ return
             Send {Enter}
         }
     return
-
-    ^!+x::SendInput [_]{Space}
-    ^!+c::SendInput [x]{Space}
-    ^!+z::SendInput [-]{Space}
 #IfWinActive
 
 #IfWinActive ahk_exe firefox.exe
@@ -310,10 +316,6 @@ return
     !t::!+t
     !n::!+n
     !h::!+h
-
-    ^!+x::SendInput [_]{Space}
-    ^!+c::SendInput [x]{Space}
-    ^!+z::SendInput [-]{Space}
 #IfWinActive
 
 *CapsLock:: return ; This forces CapsLock into a modifying key.
