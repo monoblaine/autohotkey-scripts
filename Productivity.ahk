@@ -190,13 +190,6 @@ RButton & LButton::                                                             
     }
 return
 
-CapsLock & c::
-    clipboard := ""
-    Send, ^c
-    ClipWait
-    clipboard := StrReplace(RegexReplace(clipboard, "^•+|(?!\r?\n)•+", ""), "•", " ")
-return
-
 #IfWinActive ahk_group Group_SendInputCheckBoxVariants
     ^!+x::SendInput [_]{Space}
     ^!+c::SendInput [x]{Space}
@@ -396,53 +389,10 @@ return
     clipboard := RegexReplace(clipboard, "[\r\n]+$", "")
     firstChar := SubStr(clipboard, 1, 1)
 
-    if (firstChar = "•") {
-        clipboard := RegexReplace(clipboard, "^•([^•]+).+$", "``$1``")
-    }
-    else if (firstChar != "``") {
+    if (firstChar != "``") {
         clipboard := "``" . clipboard . "``"
     }
 
-    sendLeftCount := StrLen(RegexReplace(clipboard, "^``([^``]+).+$", "$1"))
-    RunWait %ComSpec% /c clipemdown | MarkdownForClipboard.exe,, Hide
-    Send, ^v
-    Sleep 250
-    isLibreOfficeWriter := WinActive("ahk_exe soffice.bin")
-    SetTitleMatchMode, 2
-
-    if WinActive("Google D") or isLibreOfficeWriter {
-        loop {
-            clipboard := ""
-            Send, {Shift Down}{Left}{Shift Up}
-            Send, ^c
-            ClipWait
-            clipboard := clipboard
-        } until InStr(clipboard, "•") = 1
-
-        Send, {Shift Down}{Right}{Shift Up}
-        Send, {Del}
-        Send, {Shift Down}{Left}{Shift Up}
-        Send, {Ctrl Down}{,}{Ctrl Up} ; Make trailing bullet a subscript
-
-        if (!isLibreOfficeWriter) {
-            sendLeftCount := sendLeftCount + 1
-        }
-
-        Send, {Left %sendLeftCount%}
-        Send, {Shift Down}{Left}{Shift Up}
-        Send, {Ctrl Down}{,}{Ctrl Up} ; Make leading bullet a subscript
-        Send, {Left}
-    }
-
-    Send, {Alt Down}{f16}{Alt Up} ; Enable copyq and activate first item
-return
-
-^+7::
-    Send, {Alt Down}{f17}{Alt Up} ; disable copyq
-    clipboard := ""
-    Send, ^c
-    ClipWait
-    clipboard := RegexReplace(clipboard, "[\r\n]+$", "")
     RunWait %ComSpec% /c clipemdown | MarkdownForClipboard.exe,, Hide
     Send, ^v
     Sleep 250
