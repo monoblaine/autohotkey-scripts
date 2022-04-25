@@ -315,7 +315,7 @@ return
     ~^Numpad0::
         SetTitleMatchMode, 2
 
-        if WinActive(" ‎- Fotoğraflar") {
+        if WinActive("Fotoğraflar") {
             Send, ^0
         }
     return
@@ -323,7 +323,7 @@ return
     ~^Numpad1::
         SetTitleMatchMode, 2
 
-        if WinActive(" ‎- Fotoğraflar") {
+        if WinActive("Fotoğraflar") {
             Send, ^1
         }
     return
