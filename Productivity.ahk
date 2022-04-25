@@ -54,8 +54,8 @@ SavedMouseCoordY := -1
 LastMouseCoordX := 0
 LastMouseCoordY := 0
 
-ScreenGridSizePrimary := 4
-ScreenGridSizeAlternate := 2.5
+ScreenGridSizePrimary := 2.5
+ScreenGridSizeAlternate := 4
 
 CoordMode, Mouse, Screen
 
@@ -93,73 +93,61 @@ CapsLock & Space::SetCapsLockState % !GetKeyState("CapsLock", "T")              
 
 <#NumpadDiv::
 CapsLock & NumpadDiv::
-    ToggleMousePos(A_ScreenWidth  / 2 - A_ScreenWidth  / ScreenGridSizePrimary, -1)
+    ToggleMousePos(A_ScreenWidth  / 2 - A_ScreenWidth  / ScreenGridSizeAlternate, -1)
 return
 
 <#NumpadMult::
 CapsLock & NumpadMult::
-    ToggleMousePos(A_ScreenWidth  / 2 + A_ScreenWidth  / ScreenGridSizePrimary, -1)
+    ToggleMousePos(A_ScreenWidth  / 2 + A_ScreenWidth  / ScreenGridSizeAlternate, -1)
 return
 
 <#NumpadSub::
 CapsLock & NumpadSub::
     ToggleMousePos(-1
-                 , A_ScreenHeight / 2 - A_ScreenHeight / ScreenGridSizePrimary)
+                 , A_ScreenHeight / 2 - A_ScreenHeight / ScreenGridSizeAlternate)
 return
 
 <#End::
 <#NumpadAdd::
 CapsLock & NumpadAdd::
     ToggleMousePos(-1
-                 , A_ScreenHeight / 2 + A_ScreenHeight / ScreenGridSizePrimary)
+                 , A_ScreenHeight / 2 + A_ScreenHeight / ScreenGridSizeAlternate)
 return
+
+GetGridSize() {
+    global ScreenGridSizeAlternate
+    global ScreenGridSizePrimary
+
+    return GetKeyState("LAlt") ? ScreenGridSizeAlternate : ScreenGridSizePrimary
+}
 
 <#Numpad7::
 CapsLock & Numpad7::
-    ToggleMousePos(A_ScreenWidth  / 2 - A_ScreenWidth  / ScreenGridSizeAlternate
-                 , A_ScreenHeight / 2 - A_ScreenHeight / ScreenGridSizeAlternate)
-return
-
-NumpadHome::
-    ToggleMousePos(A_ScreenWidth  / 2 - A_ScreenWidth  / ScreenGridSizePrimary
-                 , A_ScreenHeight / 2 - A_ScreenHeight / ScreenGridSizePrimary)
+    gridSize := GetGridSize()
+    ToggleMousePos(A_ScreenWidth  / 2 - A_ScreenWidth  / gridSize
+                 , A_ScreenHeight / 2 - A_ScreenHeight / gridSize)
 return
 
 <#Numpad8::
 CapsLock & Numpad8::
     ToggleMousePos(A_ScreenWidth  / 2
-                 , A_ScreenHeight / 2 - A_ScreenHeight / ScreenGridSizeAlternate)
-return
-
-NumpadUp::
-    ToggleMousePos(A_ScreenWidth  / 2
-                 , A_ScreenHeight / 2 - A_ScreenHeight / ScreenGridSizePrimary)
+                 , A_ScreenHeight / 2 - A_ScreenHeight / GetGridSize())
 return
 
 <#Numpad9::
 CapsLock & Numpad9::
-    ToggleMousePos(A_ScreenWidth  / 2 + A_ScreenWidth  / ScreenGridSizeAlternate
-                 , A_ScreenHeight / 2 - A_ScreenHeight / ScreenGridSizeAlternate)
-return
-
-NumpadPgUp::
-    ToggleMousePos(A_ScreenWidth  / 2 + A_ScreenWidth  / ScreenGridSizePrimary
-                 , A_ScreenHeight / 2 - A_ScreenHeight / ScreenGridSizePrimary)
+    gridSize := GetGridSize()
+    ToggleMousePos(A_ScreenWidth  / 2 + A_ScreenWidth  / gridSize
+                 , A_ScreenHeight / 2 - A_ScreenHeight / gridSize)
 return
 
 <#Numpad4::
 CapsLock & Numpad4::
-    ToggleMousePos(A_ScreenWidth  / 2 - A_ScreenWidth / ScreenGridSizeAlternate
-                 , A_ScreenHeight / 2)
-return
-
-NumpadLeft::
-    ToggleMousePos(A_ScreenWidth  / 2 - A_ScreenWidth / ScreenGridSizePrimary
+    ToggleMousePos(A_ScreenWidth  / 2 - A_ScreenWidth / GetGridSize()
                  , A_ScreenHeight / 2)
 return
 
 <#Numpad5::
-NumpadClear::
 CapsLock & Numpad5::
     ToggleMousePos(A_ScreenWidth  / 2
                  , A_ScreenHeight / 2)
@@ -167,46 +155,28 @@ return
 
 <#Numpad6::
 CapsLock & Numpad6::
-    ToggleMousePos(A_ScreenWidth  / 2 + A_ScreenWidth / ScreenGridSizeAlternate
-                 , A_ScreenHeight / 2)
-return
-
-NumpadRight::
-    ToggleMousePos(A_ScreenWidth  / 2 + A_ScreenWidth / ScreenGridSizePrimary
+    ToggleMousePos(A_ScreenWidth  / 2 + A_ScreenWidth / GetGridSize()
                  , A_ScreenHeight / 2)
 return
 
 <#Numpad1::
 CapsLock & Numpad1::
-    ToggleMousePos(A_ScreenWidth  / 2 - A_ScreenWidth  / ScreenGridSizeAlternate
-                 , A_ScreenHeight / 2 + A_ScreenHeight / ScreenGridSizeAlternate)
-return
-
-NumpadEnd::
-    ToggleMousePos(A_ScreenWidth  / 2 - A_ScreenWidth  / ScreenGridSizePrimary
-                 , A_ScreenHeight / 2 + A_ScreenHeight / ScreenGridSizePrimary)
+    gridSize := GetGridSize()
+    ToggleMousePos(A_ScreenWidth  / 2 - A_ScreenWidth  / gridSize
+                 , A_ScreenHeight / 2 + A_ScreenHeight / gridSize)
 return
 
 <#Numpad2::
 CapsLock & Numpad2::
     ToggleMousePos(A_ScreenWidth  / 2
-                 , A_ScreenHeight / 2 + A_ScreenHeight / ScreenGridSizeAlternate)
-return
-
-NumpadDown::
-    ToggleMousePos(A_ScreenWidth  / 2
-                 , A_ScreenHeight / 2 + A_ScreenHeight / ScreenGridSizePrimary)
+                 , A_ScreenHeight / 2 + A_ScreenHeight / GetGridSize())
 return
 
 <#Numpad3::
 CapsLock & Numpad3::
-    ToggleMousePos(A_ScreenWidth  / 2 + A_ScreenWidth  / ScreenGridSizeAlternate
-                 , A_ScreenHeight / 2 + A_ScreenHeight / ScreenGridSizeAlternate)
-return
-
-NumpadPgDn::
-    ToggleMousePos(A_ScreenWidth  / 2 + A_ScreenWidth  / ScreenGridSizePrimary
-                 , A_ScreenHeight / 2 + A_ScreenHeight / ScreenGridSizePrimary)
+    gridSize := GetGridSize()
+    ToggleMousePos(A_ScreenWidth  / 2 + A_ScreenWidth  / gridSize
+                 , A_ScreenHeight / 2 + A_ScreenHeight / gridSize)
 return
 
 CapsLock & End::                                                                  ; CapsLock + end
