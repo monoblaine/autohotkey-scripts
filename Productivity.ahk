@@ -17,6 +17,7 @@ GroupAdd, Group_CtrlRToF5, ahk_exe WinMergeU.exe
 
 GroupAdd, Group_ZoomableByWheel, ahk_exe WINWORD.EXE
 GroupAdd, Group_ZoomableByWheel, ahk_exe EXCEL.EXE
+GroupAdd, Group_ZoomableByWheel, ahk_exe soffice.bin
 
 ; GroupAdd, Group_HScroll_ShiftWheel, ahk_class CabinetWClass
 
