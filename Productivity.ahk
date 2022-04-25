@@ -327,6 +327,22 @@ return
             Send, ^1
         }
     return
+
+    ~NumpadAdd::
+        SetTitleMatchMode, 2
+
+        if WinActive("Fotoğraflar") {
+            Send, ^{NumpadAdd}
+        }
+    return
+
+    ~NumpadSub::
+        SetTitleMatchMode, 2
+
+        if WinActive("Fotoğraflar") {
+            Send, ^{NumpadSub}
+        }
+    return
 #IfWinActive
 
 *CapsLock:: return ; This forces CapsLock into a modifying key.
