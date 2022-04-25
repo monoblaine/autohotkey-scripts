@@ -311,6 +311,24 @@ return
     !h::!+h
 #IfWinActive
 
+#IfWinActive ahk_exe ApplicationFrameHost.exe
+    ~^Numpad0::
+        SetTitleMatchMode, 2
+
+        if WinActive(" ‎- Fotoğraflar") {
+            Send, ^0
+        }
+    return
+
+    ~^Numpad1::
+        SetTitleMatchMode, 2
+
+        if WinActive(" ‎- Fotoğraflar") {
+            Send, ^1
+        }
+    return
+#IfWinActive
+
 *CapsLock:: return ; This forces CapsLock into a modifying key.
 RButton::RButton   ; restore the original RButton function
 
