@@ -484,9 +484,11 @@ WrapTextWith(left, right) {
     Send, {Alt Down}{f16}{Alt Up} ; Enable copyq and activate first item
 }
 
+; Credits for the debouncer code: https://www.autohotkey.com/boards/viewtopic.php?p=117262#p117262
+
 #If !GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt")
-    <#Up::WheelUp
-    <#Down::WheelDown
+    <#Up::Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}{WheelUp}" ;%;
+    <#Down::Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}{WheelDown}" ;%;
 #If
 
 ; #If !GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt") and WinActive("ahk_group Group_HScroll_ShiftWheel")
@@ -495,8 +497,8 @@ WrapTextWith(left, right) {
 ; #If
 
 #If !GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt") and WinActive("ahk_group Group_HScroll_WheelLeftRight")
-    <#Left::WheelLeft
-    <#Right::WheelRight
+    <#Left::Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}{WheelLeft}" ;%;
+    <#Right::Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}{WheelRight}" ;%;
 #If
 
 #If !GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt") and WinActive("ahk_group Group_HScroll_ScrollLock")
@@ -544,8 +546,8 @@ WrapTextWith(left, right) {
 #IfWinActive
 
 #IfWinActive ahk_group Group_ZoomableByWheel
-    ^NumpadSub::Send, ^{WheelDown}                                                ; ctrl + NumpadSub
-    ^NumpadAdd::Send, ^{WheelUp}                                                  ; ctrl + NumpadAdd
+    ^NumpadSub::Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}^{WheelDown}" ;%;
+    ^NumpadAdd::Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}{WheelUp}" ;%;
 #IfWinActive
 
 #IfWinActive ahk_class CabinetWClass                                              ; if it is Windows File Explorer
