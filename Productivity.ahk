@@ -498,8 +498,8 @@ WrapTextWith(left, right) {
 #If
 
 #If !GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt") and WinActive("ahk_group Group_HScroll_SupportsNativeHWheel")
-    <#Left::Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}{Left up}{WheelLeft}" ;%;
-    <#Right::Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}{Right up}{WheelRight}" ;%;
+    <#Left::WheelLeft
+    <#Right::WheelRight
 #If
 
 #If !GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt") and WinActive("ahk_group Group_HScroll_HonorsScrollLockState")
