@@ -678,6 +678,12 @@ VS_Handle_CtrlF := 1
         Send, ^!+{f16}
         Send, ^0
     return
+
+    ^Right::
+        Send {Right}
+        Send ^+m
+        Send {Right}{Left}
+    return
 #IfWinActive
 
 ; Honor scroll lock state (may or may not work)
