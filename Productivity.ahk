@@ -488,8 +488,8 @@ WrapTextWith(left, right) {
 ; Credits for the debouncer code: https://www.autohotkey.com/boards/viewtopic.php?p=117262#p117262
 
 #If !GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt")
-    <#Up::Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}{WheelUp}" ;%;
-    <#Down::Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}{WheelDown}" ;%;
+    <#Up::Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}{Up up}{WheelUp}" ;%;
+    <#Down::Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}{Down up}{WheelDown}" ;%;
 #If
 
 #If !GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt") and WinActive("ahk_group Group_HScroll_SupportsShiftWheel")
@@ -498,8 +498,8 @@ WrapTextWith(left, right) {
 #If
 
 #If !GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt") and WinActive("ahk_group Group_HScroll_SupportsNativeHWheel")
-    <#Left::Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}{WheelLeft}" ;%;
-    <#Right::Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}{WheelRight}" ;%;
+    <#Left::Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}{Left up}{WheelLeft}" ;%;
+    <#Right::Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}{Right up}{WheelRight}" ;%;
 #If
 
 #If !GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt") and WinActive("ahk_group Group_HScroll_HonorsScrollLockState")
@@ -547,8 +547,8 @@ WrapTextWith(left, right) {
 #IfWinActive
 
 #IfWinActive ahk_group Group_ZoomableByWheel
-    ^NumpadSub::Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}{WheelDown}" ;%;
-    ^NumpadAdd::Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}{WheelUp}" ;%;
+    ^NumpadSub::Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}{NumpadSub up}{WheelDown}" ;%;
+    ^NumpadAdd::Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}{NumpadAdd up}{WheelUp}" ;%;
 #IfWinActive
 
 #IfWinActive ahk_class CabinetWClass                                              ; if it is Windows File Explorer
