@@ -297,6 +297,9 @@ return
             Send {Enter}
         }
     return
+
+    <#<+Up::WheelLeft
+    <#<+Down::WheelRight
 #IfWinActive
 
 #IfWinActive ahk_exe firefox.exe
