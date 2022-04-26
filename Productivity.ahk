@@ -547,7 +547,7 @@ WrapTextWith(left, right) {
 #IfWinActive
 
 #IfWinActive ahk_group Group_ZoomableByWheel
-    ^NumpadSub::Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}^{WheelDown}" ;%;
+    ^NumpadSub::Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}{WheelDown}" ;%;
     ^NumpadAdd::Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}{WheelUp}" ;%;
 #IfWinActive
 
