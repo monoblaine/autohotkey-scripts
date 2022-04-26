@@ -516,6 +516,8 @@ WrapTextWith(left, right) {
     return
 #If
 
+; Sending WM_HSCROLL messages is the fallback scrolling mode
+
 #If !GetKeyState("LControl") and !GetKeyState("LAlt") and !WinActive("ahk_group Group_HScroll_All")
     <#Left::
         ControlGetFocus, fcontrol, A
