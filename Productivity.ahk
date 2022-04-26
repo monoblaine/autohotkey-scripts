@@ -687,7 +687,7 @@ VS_Handle_CtrlF := 1
 
     ^Right::
         Send {Right}
-        Send ^+m
+        Send ^+m ; Select word
         Send {Right}{Left}
     return
 #IfWinActive
