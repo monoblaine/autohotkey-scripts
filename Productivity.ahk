@@ -679,6 +679,8 @@ VS_Handle_CtrlF := 1
     return
 #IfWinActive
 
+LibreOfficeWriterEndOfWordExtendInProgress := 0
+
 #IfWinActive ahk_exe soffice.bin
     ^Space::
         Send, ^!+{f16}
@@ -689,6 +691,45 @@ VS_Handle_CtrlF := 1
         Send {Right}
         Send ^+m ; Select word
         Send {Right}{Left}
+    return
+
+    ^+Right::
+
+    if (LibreOfficeWriterEndOfWordExtendInProgress) {
+        return
+    }
+
+    LibreOfficeWriterEndOfWordExtendInProgress := 1
+
+    LibreOfficeWriterEndOfWordExtend:
+        Send {Alt Down}{f17}{Alt Up} ; disable copyq
+        clipboard := ""
+        Send ^c
+        ClipWait 0.25 ; There may be no selection yet.
+        clipboard := clipboard
+        originalSelectedText := clipboard
+        Send !+{Right}
+        clipboard := ""
+        Send ^c
+        ClipWait 0.25
+        clipboard := clipboard
+        newSelectedText := clipboard
+        Send {Alt Down}{f16}{Alt Up} ; Enable copyq and activate first item
+        foundPos := RegExMatch(newSelectedText, "s)^(.*?)\s+$", match)
+
+        if (foundPos = 0) {
+            LibreOfficeWriterEndOfWordExtendInProgress := 0
+            return
+        }
+
+        if (originalSelectedText = match1) {
+            GoSub LibreOfficeWriterEndOfWordExtend
+        }
+        else {
+            numOfWhitespaceChars := StrLen(newSelectedText) - StrLen(match1)
+            Send +{Left %numOfWhitespaceChars%}
+            LibreOfficeWriterEndOfWordExtendInProgress := 0
+        }
     return
 #IfWinActive
 
