@@ -19,7 +19,8 @@ GroupAdd, Group_ZoomableByWheel, ahk_exe WINWORD.EXE
 GroupAdd, Group_ZoomableByWheel, ahk_exe EXCEL.EXE
 GroupAdd, Group_ZoomableByWheel, ahk_exe soffice.bin
 
-; GroupAdd, Group_HScroll_ShiftWheel, ahk_class CabinetWClass
+GroupAdd, Group_HScroll_ShiftWheel, ahk_exe notepad++.exe
+GroupAdd, Group_HScroll_ShiftWheel, ahk_exe devenv.exe
 
 GroupAdd, Group_HScroll_WheelLeftRight, ahk_class MMCMainFrame
 GroupAdd, Group_HScroll_WheelLeftRight, ahk_exe GitExtensions.exe
@@ -33,7 +34,7 @@ GroupAdd, Group_HScroll_WheelLeftRight, ahk_exe paintdotnet.exe
 
 GroupAdd, Group_HScroll_ScrollLock, ahk_exe EXCEL.EXE
 
-; GroupAdd, Group_HScroll_All, ahk_group Group_HScroll_ShiftWheel
+GroupAdd, Group_HScroll_All, ahk_group Group_HScroll_ShiftWheel
 GroupAdd, Group_HScroll_All, ahk_group Group_HScroll_WheelLeftRight
 GroupAdd, Group_HScroll_All, ahk_group Group_HScroll_ScrollLock
 
@@ -491,10 +492,10 @@ WrapTextWith(left, right) {
     <#Down::Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}{WheelDown}" ;%;
 #If
 
-; #If !GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt") and WinActive("ahk_group Group_HScroll_ShiftWheel")
-;     <#Left::Send, +{WheelUp}
-;     <#Right::Send, +{WheelDown}
-; #If
+#If !GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt") and WinActive("ahk_group Group_HScroll_ShiftWheel")
+    <#Left::Send, +{WheelUp}
+    <#Right::Send, +{WheelDown}
+#If
 
 #If !GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt") and WinActive("ahk_group Group_HScroll_WheelLeftRight")
     <#Left::Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}{WheelLeft}" ;%;
