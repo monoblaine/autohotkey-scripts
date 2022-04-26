@@ -19,24 +19,24 @@ GroupAdd, Group_ZoomableByWheel, ahk_exe WINWORD.EXE
 GroupAdd, Group_ZoomableByWheel, ahk_exe EXCEL.EXE
 GroupAdd, Group_ZoomableByWheel, ahk_exe soffice.bin
 
-GroupAdd, Group_HScroll_ShiftWheel, ahk_exe notepad++.exe
-GroupAdd, Group_HScroll_ShiftWheel, ahk_exe devenv.exe
+GroupAdd, Group_HScroll_SupportsShiftWheel, ahk_exe notepad++.exe
+GroupAdd, Group_HScroll_SupportsShiftWheel, ahk_exe devenv.exe
 
-GroupAdd, Group_HScroll_WheelLeftRight, ahk_class MMCMainFrame
-GroupAdd, Group_HScroll_WheelLeftRight, ahk_exe GitExtensions.exe
-GroupAdd, Group_HScroll_WheelLeftRight, ahk_exe msedge.exe
-GroupAdd, Group_HScroll_WheelLeftRight, ahk_exe chrome.exe
-GroupAdd, Group_HScroll_WheelLeftRight, ahk_exe catsxp.exe
-GroupAdd, Group_HScroll_WheelLeftRight, ahk_exe WINWORD.EXE
-GroupAdd, Group_HScroll_WheelLeftRight, ahk_exe idea64.exe
-GroupAdd, Group_HScroll_WheelLeftRight, ahk_class MozillaWindowClass
-GroupAdd, Group_HScroll_WheelLeftRight, ahk_exe paintdotnet.exe
+GroupAdd, Group_HScroll_SupportsNativeHWheel, ahk_class MMCMainFrame
+GroupAdd, Group_HScroll_SupportsNativeHWheel, ahk_exe GitExtensions.exe
+GroupAdd, Group_HScroll_SupportsNativeHWheel, ahk_exe msedge.exe
+GroupAdd, Group_HScroll_SupportsNativeHWheel, ahk_exe chrome.exe
+GroupAdd, Group_HScroll_SupportsNativeHWheel, ahk_exe catsxp.exe
+GroupAdd, Group_HScroll_SupportsNativeHWheel, ahk_exe WINWORD.EXE
+GroupAdd, Group_HScroll_SupportsNativeHWheel, ahk_exe idea64.exe
+GroupAdd, Group_HScroll_SupportsNativeHWheel, ahk_class MozillaWindowClass
+GroupAdd, Group_HScroll_SupportsNativeHWheel, ahk_exe paintdotnet.exe
 
-GroupAdd, Group_HScroll_ScrollLock, ahk_exe EXCEL.EXE
+GroupAdd, Group_HScroll_HonorsScrollLockState, ahk_exe EXCEL.EXE
 
-GroupAdd, Group_HScroll_All, ahk_group Group_HScroll_ShiftWheel
-GroupAdd, Group_HScroll_All, ahk_group Group_HScroll_WheelLeftRight
-GroupAdd, Group_HScroll_All, ahk_group Group_HScroll_ScrollLock
+GroupAdd, Group_HScroll_All, ahk_group Group_HScroll_SupportsShiftWheel
+GroupAdd, Group_HScroll_All, ahk_group Group_HScroll_SupportsNativeHWheel
+GroupAdd, Group_HScroll_All, ahk_group Group_HScroll_HonorsScrollLockState
 
 GroupAdd, Group_ChromiumBasedApp, ahk_exe chrome.exe
 GroupAdd, Group_ChromiumBasedApp, ahk_exe msedge.exe
@@ -492,17 +492,17 @@ WrapTextWith(left, right) {
     <#Down::Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}{WheelDown}" ;%;
 #If
 
-#If !GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt") and WinActive("ahk_group Group_HScroll_ShiftWheel")
+#If !GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt") and WinActive("ahk_group Group_HScroll_SupportsShiftWheel")
     <#Left::Send, +{WheelUp}
     <#Right::Send, +{WheelDown}
 #If
 
-#If !GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt") and WinActive("ahk_group Group_HScroll_WheelLeftRight")
+#If !GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt") and WinActive("ahk_group Group_HScroll_SupportsNativeHWheel")
     <#Left::Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}{WheelLeft}" ;%;
     <#Right::Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}{WheelRight}" ;%;
 #If
 
-#If !GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt") and WinActive("ahk_group Group_HScroll_ScrollLock")
+#If !GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt") and WinActive("ahk_group Group_HScroll_HonorsScrollLockState")
     <#Left::
         SetScrollLockState, On
         Send, {Left}
