@@ -687,6 +687,26 @@ LibreOfficeWriterEndOfWordExtendInProgress := 0
         Send, ^0
     return
 
+    ^!+2::
+        Send ^!+{f15} ; Convert to numbered list
+        Send ^!+{f14} ; Restart numbering
+    return
+
+    ^'::
+    Ctrl & "::
+        if GetKeyState("RShift") {
+            if GetKeyState("Alt") {
+                Send {Blind}{f13} ; Apply "Source Text" character style
+                return
+            }
+
+            WrapTextWith("‘", "’")
+        }
+        else {
+            WrapTextWith("“", "”")
+        }
+    return
+
     ^Right::
         Send {Right} ; does not work if there are multiple spaces, but that's acceptable.
         Send ^+m ; Select word
