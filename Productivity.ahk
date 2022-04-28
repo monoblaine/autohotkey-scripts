@@ -180,6 +180,7 @@ CapsLock & Numpad3::
                  , A_ScreenHeight / 2 + A_ScreenHeight / gridSize)
 return
 
+ClickOnCenter:
 CapsLock & End::                                                                  ; CapsLock + end
 <!End::                                                                           ; lalt + end
     MouseGetPos, xpos, ypos
@@ -676,6 +677,18 @@ VS_Handle_CtrlF := 1
     ^+Tab::
         Send, !w
         Send, w
+    return
+
+    !PgUp::
+        GoSub ClickOnCenter
+        Sleep 15
+        Send ^!+{PgUp} ; SCI_STUTTEREDPAGEUP
+    return
+
+    !PgDn::
+        GoSub ClickOnCenter
+        Sleep 15
+        Send ^!+{PgDn} ; SCI_STUTTEREDPAGEDOWN
     return
 #IfWinActive
 
