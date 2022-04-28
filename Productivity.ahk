@@ -690,6 +690,8 @@ VS_Handle_CtrlF := 1
         Sleep 15
         Send ^!+{PgDn} ; SCI_STUTTEREDPAGEDOWN
     return
+
+    <^>!+İ::Send ^!+{I}
 #IfWinActive
 
 LibreOfficeWriterEndOfWordExtendInProgress := 0
