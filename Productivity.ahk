@@ -695,8 +695,8 @@ VS_Handle_CtrlF := 1
 LibreOfficeWriterEndOfWordExtendInProgress := 0
 
 #IfWinActive ahk_exe soffice.bin
-    ^Space::
-        Send, ^!+{f16}
+    ^+Space::
+        Send, ^{Space}
         Send, ^0
     return
 
