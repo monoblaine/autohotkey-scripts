@@ -688,7 +688,7 @@ LibreOfficeWriterEndOfWordExtendInProgress := 0
     return
 
     ^Right::
-        Send {Right}
+        Send {Right} ; does not work if there are multiple spaces, but that's acceptable.
         Send ^+m ; Select word
         Send {Right}{Left}
     return
