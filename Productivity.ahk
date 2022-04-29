@@ -696,16 +696,6 @@ VS_Handle_CtrlF := 1
 #IfWinActive
 
 #IfWinActive ahk_exe soffice.bin
-    ^+Space::
-        Send, ^{Space}
-        Send, ^0
-    return
-
-    ^!+2::
-        Send ^!+{f15} ; Convert to numbered list
-        Send ^!+{f14} ; Restart numbering
-    return
-
     ^'::
     Ctrl & "::
         if GetKeyState("RShift") {

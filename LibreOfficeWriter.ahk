@@ -12,6 +12,16 @@ SendMode Input
 #SingleInstance force
 
 #IfWinActive ahk_exe soffice.bin
+    ^+Space::
+        Send, ^{Space}
+        Send, ^0
+    return
+
+    ^!+2::
+        Send ^!+{f15} ; Convert to numbered list
+        Send ^!+{f14} ; Restart numbering
+    return
+
     ^Right::
     CtrlRight:
         Send {Right} ; does not work if there are multiple spaces, but that's OK.
