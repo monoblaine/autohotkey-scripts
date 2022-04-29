@@ -133,7 +133,7 @@ Exit:
     ^!PgUp::MoveTab(1, -1, procHandle_Ssms18_1, MovementMethod.mouseClickDrag)
     ^!PgDn::MoveTab(1, 1, procHandle_Ssms18_1, MovementMethod.mouseClickDrag)
 
-    ^Enter::
+    ^NumpadAdd::
         hWnd := WinExist("A")
         ptr_success := 0
         ptr_left := 0
