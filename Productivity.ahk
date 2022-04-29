@@ -720,12 +720,6 @@ VS_Handle_CtrlF := 1
             WrapTextWith("“", "”")
         }
     return
-
-    ^Right::
-        Send {Right} ; does not work if there are multiple spaces, but that's acceptable.
-        Send ^+m ; Select word
-        Send {Right}{Left}
-    return
 #IfWinActive
 
 ; Honor scroll lock state (may or may not work)
