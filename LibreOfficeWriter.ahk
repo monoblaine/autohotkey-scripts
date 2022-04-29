@@ -37,6 +37,20 @@ SendMode Input
 
         SetTimer, Selection_TrimRight, -250
     return
+
+    !PgUp::
+        MouseGetPos, xpos, ypos
+        MouseMove, A_ScreenWidth / 2, 120
+        Click
+        MouseMove, %xpos%, %ypos%
+    return
+
+    !PgDn::
+        MouseGetPos, xpos, ypos
+        MouseMove, A_ScreenWidth / 2, A_ScreenHeight - 120
+        Click
+        MouseMove, %xpos%, %ypos%
+    return
 #IfWinActive
 
 Selection_TrimRight:
