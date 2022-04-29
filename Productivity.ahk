@@ -266,40 +266,6 @@ return
         MouseMove, %xpos%, %ypos%
     return
 
-    ~CapsLock & a:: ; text color
-        SetTitleMatchMode, 2
-
-        if WinActive("Google D") {
-            MouseGetPos, xpos, ypos
-            MouseMove, 670, 160
-            Click
-            MouseMove, %xpos%, %ypos%
-        }
-    return
-
-    ~CapsLock & s:: ; background color
-        SetTitleMatchMode, 2
-
-        if WinActive("Google D") {
-            MouseGetPos, xpos, ypos
-            MouseMove, 700, 160
-            Click
-            MouseMove, %xpos%, %ypos%
-        }
-    return
-
-    ~CapsLock & ,:: ; auto number headings
-        SetTitleMatchMode, 2
-
-        if WinActive("Google D") {
-            Send {Alt Down}f{Alt Up}
-            Sleep 150
-            Send {Left}
-            Send {Down}
-            Send {Enter}
-        }
-    return
-
     <#<+Up::WheelLeft
     <#<+Down::WheelRight
 #IfWinActive
@@ -311,40 +277,6 @@ return
         MouseMove, A_ScreenWidth / 2, 140
         Click
         MouseMove, %xpos%, %ypos%
-    return
-
-    ~CapsLock & a:: ; text color
-        SetTitleMatchMode, 2
-
-        if WinActive("Google D") {
-            MouseGetPos, xpos, ypos
-            MouseMove, 670, 160
-            Click
-            MouseMove, %xpos%, %ypos%
-        }
-    return
-
-    ~CapsLock & s:: ; background color
-        SetTitleMatchMode, 2
-
-        if WinActive("Google D") {
-            MouseGetPos, xpos, ypos
-            MouseMove, 700, 160
-            Click
-            MouseMove, %xpos%, %ypos%
-        }
-    return
-
-    ~CapsLock & ,:: ; auto number headings
-        SetTitleMatchMode, 2
-
-        if WinActive("Google D") {
-            Send {Alt Down}{Shift Down}f{Shift Up}{Alt Up}
-            Sleep 150
-            Send {Left}
-            Send {Down}
-            Send {Enter}
-        }
     return
 
     !f::!+f
