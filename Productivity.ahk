@@ -62,11 +62,11 @@ ScreenGridSizeAlternate := 4
 CoordMode, Mouse, Screen
 
 LWin & Enter::Send, {RWin Down}{Enter}{RWin Up}                                   ; lwin + Enter                 | Send rwin + Enter
-#w::Send, {Alt Down}{f15}{Alt Up}                                                 ; win + w                      | Send alt + f15
+#w::Send, !{f15}                                                                  ; win + w                      | Send alt + f15
 #^a::Winset, Alwaysontop, , A                                                     ; win + ctrl + a               | Make the active window stay always on top
 <#<^<+Up::Volume_Up                                                               ; lwin + lctrl + lshift + up   | Increase volume
 <#<^<+Down::Volume_Down                                                           ; lwin + lctrl + lshift + down | Decrease volume
-CapsLock & Del::Send, {Alt Down}{f4}{Alt Up}                                      ; CapsLock + del               | Send alt + f4
+CapsLock & Del::Send, !{f4}                                                       ; CapsLock + del               | Send alt + f4
 ^!+l::Run, ClipToQuotedLines.exe                                                  ; ctrl + alt + shift + l       | ClipToQuotedLines.exe
 ^!+h::clipboard := StrReplace(clipboard, "`\", "`/")                              ; ctrl + alt + shift + h       | Replace all the \ characters within the text in clipboard with /
 ^!+w::ToggleMousePos(A_ScreenWidth - 172, 0)                                      ; ctrl + alt + shift + w       | Move mouse pointer to somewhere safe
@@ -394,7 +394,7 @@ return
 ^+5::WrapTextWith("```````r`n", "`r`n``````")
 
 ^+6::
-    Send, {Alt Down}{f17}{Alt Up} ; disable copyq
+    Send, !{f17} ; disable copyq
     clipboard := ""
     Send, ^c
     ClipWait
@@ -408,18 +408,18 @@ return
     RunWait %ComSpec% /c clipemdown | MarkdownForClipboard.exe,, Hide
     Send, ^v
     Sleep 250
-    Send, {Alt Down}{f16}{Alt Up} ; Enable copyq and activate first item
+    Send, !{f16} ; Enable copyq and activate first item
 return
 
 WrapTextWith(left, right) {
-    Send, {Alt Down}{f17}{Alt Up} ; disable copyq
+    Send, !{f17} ; disable copyq
     clipboard := ""
     Send, ^c
     ClipWait
     clipboard := left . RegexReplace(clipboard, "[\r\n]+$", "") . right
     Send, ^v
     Sleep 250
-    Send, {Alt Down}{f16}{Alt Up} ; Enable copyq and activate first item
+    Send, !{f16} ; Enable copyq and activate first item
 }
 
 ; Credits for the debouncer code: https://www.autohotkey.com/boards/viewtopic.php?p=117262#p117262
@@ -539,7 +539,7 @@ VS_Handle_CtrlF := 1
 
         VS_Handle_CtrlF := 0
         VS_ShiftPressed := GetKeyState("Shift")
-        Send, {Alt Down}{f17}{Alt Up} ; disable copyq
+        Send, !{f17} ; disable copyq
         clipboard := ""
         Send ^c
         ClipWait, 0.25
@@ -556,7 +556,7 @@ VS_Handle_CtrlF := 1
             Sleep 250
         }
 
-        Send, {Alt Down}{f16}{Alt Up} ; Enable copyq and activate first item
+        Send, !{f16} ; Enable copyq and activate first item
         VS_Handle_CtrlF := 1
     return
 #IfWinActive
@@ -602,7 +602,7 @@ VS_Handle_CtrlF := 1
 #IfWinActive
 
 #IfWinActive ahk_exe 7zFM.exe                                                     ; if it is 7-Zip
-    Esc::Send, {Alt Down}{f4}{Alt Up}                                             ; esc                          | Send alt + f4
+    Esc::Send, !{f4}                                                              ; esc                          | Send alt + f4
     !Up::Send, {Backspace}                                                        ; alt + up                     | Send backspace
 #IfWinActive
 

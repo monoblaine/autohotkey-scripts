@@ -28,13 +28,13 @@ GroupAdd, ExcludedApps, ahk_exe Ssms.exe
 #IfWinNotActive
 
 Selection_TrimRight:
-    Send {Alt Down}{f17}{Alt Up} ; disable copyq
+    Send !{f17} ; disable copyq
     clipboard := ""
     Send ^c
     ClipWait 0.25 ; There may be no selection yet.
     clipboard := clipboard
     selection := clipboard
-    Send {Alt Down}{f16}{Alt Up} ; Enable copyq and activate first item
+    Send !{f16} ; Enable copyq and activate first item
 
     if (StrLen(selection) = 0) {
         return
