@@ -699,11 +699,6 @@ VS_Handle_CtrlF := 1
     ^'::
     Ctrl & "::
         if GetKeyState("RShift") {
-            if GetKeyState("Alt") {
-                Send {Blind}{f13} ; Apply "Source Text" character style
-                return
-            }
-
             WrapTextWith("‘", "’")
         }
         else {
