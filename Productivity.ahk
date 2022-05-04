@@ -83,7 +83,7 @@ CapsLock & Up::SavePosAndMouseMoveR(0, -14)                                     
 CapsLock & Ins::MouseGetPos, SavedMouseCoordX, SavedMouseCoordY                   ; CapsLock + Insert            | Save current Mouse Coord
 #Home::                                                                           ; Win + Home
 CapsLock & Home::ToggleMousePos(SavedMouseCoordX, SavedMouseCoordY)               ; CapsLock + Home              | Go to saved Mouse Coord
-CapsLock & Space::SetCapsLockState % !GetKeyState("CapsLock", "T")              ;%; CapsLock + Space             | Toggle CapsLock state
+CapsLock & Space::SetCapsLockState % !GetKeyState("CapsLock", "T")                ; CapsLock + Space             | Toggle CapsLock state
 
 #If !GetKeyState("LAlt")
     CapsLock & Enter::Send, {Click 1}
@@ -377,7 +377,7 @@ return
 return
 
 ^'::
-Ctrl & "::
+Ctrl & ":: ;"
     if GetKeyState("RShift") {
         WrapTextWith("'", "'")
     }
@@ -425,8 +425,8 @@ WrapTextWith(left, right) {
 ; Credits for the debouncer code: https://www.autohotkey.com/boards/viewtopic.php?p=117262#p117262
 
 #If !GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt")
-    <#Up::Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}{Up up}{WheelUp}" ;%;
-    <#Down::Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}{Down up}{WheelDown}" ;%;
+    <#Up::Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}{Up up}{WheelUp}"
+    <#Down::Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}{Down up}{WheelDown}"
 #If
 
 #If !GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt") and WinActive("ahk_group Group_HScroll_SupportsShiftWheel")
@@ -486,8 +486,8 @@ WrapTextWith(left, right) {
 #IfWinActive
 
 #IfWinActive ahk_group Group_ZoomableByWheel
-    ^NumpadSub::Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}{NumpadSub up}{WheelDown}" ;%;
-    ^NumpadAdd::Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}{NumpadAdd up}{WheelUp}" ;%;
+    ^NumpadSub::Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}{NumpadSub up}{WheelDown}"
+    ^NumpadAdd::Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}{NumpadAdd up}{WheelUp}"
 #IfWinActive
 
 #IfWinActive ahk_class CabinetWClass                                              ; if it is Windows File Explorer
@@ -629,7 +629,7 @@ VS_Handle_CtrlF := 1
 
 #IfWinActive ahk_exe soffice.bin
     ^'::
-    Ctrl & "::
+    Ctrl & ":: ;"
         if GetKeyState("RShift") {
             WrapTextWith("‘", "’")
         }
