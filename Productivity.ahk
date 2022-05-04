@@ -829,8 +829,3 @@ SavePosAndMouseMoveR(xDiff, yDiff) {
 
     MouseMove, %xDiff%, %yDiff%, 0, R
 }
-
-; #IfWinActive Google Keep
-;     ^q::Send, ^[ ; ctrl + q
-;     ^+q::Send, ^] ; ctrl + shift + q
-; #IfWinActive
