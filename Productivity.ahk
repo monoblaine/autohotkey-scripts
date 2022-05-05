@@ -648,6 +648,16 @@ VS_Handle_CtrlF := 1
     return
 #IfWinActive
 
+#IfWinActive ahk_exe WinMergeU.exe
+    ~n::
+        SetTitleMatchMode, 3
+
+        if WinActive("Save modified files?") {
+            Send !{r}
+        }
+    return
+#IfWinActive
+
 ; Honor scroll lock state (may or may not work)
 #If !WinActive("ahk_exe EXCEL.EXE") and GetKeyState("ScrollLock", "T")
     ;==============================================================================
