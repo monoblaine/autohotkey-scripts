@@ -15,6 +15,7 @@ Process, Priority,, R
 GroupAdd, ExcludedApps, ahk_exe notepad++.exe
 GroupAdd, ExcludedApps, ahk_exe devenv.exe
 GroupAdd, ExcludedApps, ahk_exe Ssms.exe
+GroupAdd, ExcludedApps, ahk_exe soffice.bin
 
 #IfWinNotActive ahk_group ExcludedApps
     ~^+Right::
