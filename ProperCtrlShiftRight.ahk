@@ -18,7 +18,6 @@ GroupAdd, ExcludedApps, ahk_exe Ssms.exe
 
 #IfWinNotActive ahk_group ExcludedApps
     ~^+Right::
-    ~^+Left::
         if ((A_PriorHotkey = A_ThisHotkey) && (A_TimeSincePriorHotkey < 250)) {
             SetTimer, Selection_TrimRight, Off
         }
