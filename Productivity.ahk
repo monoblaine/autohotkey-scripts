@@ -116,6 +116,11 @@ Return
     Up::SavePosAndMouseMoveR(0, -14)
 #If
 
+#If !GetKeyState("NumLock", "T")
+    NumpadHome::Send, {Click 1}
+    NumpadPgup::Click, Right
+#If
+
 #Ins::
 CapsLock & Ins::MouseGetPos, SavedMouseCoordX, SavedMouseCoordY                   ; CapsLock + Insert            | Save current Mouse Coord
 #Home::                                                                           ; Win + Home
