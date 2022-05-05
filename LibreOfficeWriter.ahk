@@ -24,7 +24,7 @@ SendMode Input
 
     !PgUp::
         MouseGetPos, xpos, ypos
-        MouseMove, A_ScreenWidth / 2, 120
+        MouseMove, A_ScreenWidth / 2, 159 ; 1 adet toolbar için 39 çıkar
         Click
         MouseMove, %xpos%, %ypos%
     return
