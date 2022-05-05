@@ -22,13 +22,6 @@ SendMode Input
         Send ^!+{f14} ; Restart numbering
     return
 
-    ^Right::
-    CtrlRight:
-        Send {Right} ; does not work if there are multiple spaces, but that's OK.
-        Send ^+m ; Select word
-        Send {Right}{Left}
-    return
-
     !PgUp::
         MouseGetPos, xpos, ypos
         MouseMove, A_ScreenWidth / 2, 120
