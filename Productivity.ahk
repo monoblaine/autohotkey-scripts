@@ -124,6 +124,7 @@ GetGridSize() {
 }
 
 <#Numpad7::
+CapsLock & NumpadHome::
 CapsLock & Numpad7::
     gridSize := GetGridSize()
     ToggleMousePos(A_ScreenWidth  / 2 - A_ScreenWidth  / gridSize
@@ -131,12 +132,14 @@ CapsLock & Numpad7::
 return
 
 <#Numpad8::
+CapsLock & NumpadUp::
 CapsLock & Numpad8::
     ToggleMousePos(A_ScreenWidth  / 2
                  , A_ScreenHeight / 2 - A_ScreenHeight / GetGridSize())
 return
 
 <#Numpad9::
+CapsLock & NumpadPgup::
 CapsLock & Numpad9::
     gridSize := GetGridSize()
     ToggleMousePos(A_ScreenWidth  / 2 + A_ScreenWidth  / gridSize
@@ -144,24 +147,28 @@ CapsLock & Numpad9::
 return
 
 <#Numpad4::
+CapsLock & NumpadLeft::
 CapsLock & Numpad4::
     ToggleMousePos(A_ScreenWidth  / 2 - A_ScreenWidth / GetGridSize()
                  , A_ScreenHeight / 2)
 return
 
 <#Numpad5::
+CapsLock & NumpadClear::
 CapsLock & Numpad5::
     ToggleMousePos(A_ScreenWidth  / 2
                  , A_ScreenHeight / 2)
 return
 
 <#Numpad6::
+CapsLock & NumpadRight::
 CapsLock & Numpad6::
     ToggleMousePos(A_ScreenWidth  / 2 + A_ScreenWidth / GetGridSize()
                  , A_ScreenHeight / 2)
 return
 
 <#Numpad1::
+CapsLock & NumpadEnd::
 CapsLock & Numpad1::
     gridSize := GetGridSize()
     ToggleMousePos(A_ScreenWidth  / 2 - A_ScreenWidth  / gridSize
@@ -169,12 +176,14 @@ CapsLock & Numpad1::
 return
 
 <#Numpad2::
+CapsLock & NumpadDown::
 CapsLock & Numpad2::
     ToggleMousePos(A_ScreenWidth  / 2
                  , A_ScreenHeight / 2 + A_ScreenHeight / GetGridSize())
 return
 
 <#Numpad3::
+CapsLock & NumpadPgdn::
 CapsLock & Numpad3::
     gridSize := GetGridSize()
     ToggleMousePos(A_ScreenWidth  / 2 + A_ScreenWidth  / gridSize
