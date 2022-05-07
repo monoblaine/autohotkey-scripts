@@ -32,6 +32,7 @@ GroupAdd, Group_HScroll_SupportsNativeHWheel, ahk_exe WINWORD.EXE
 GroupAdd, Group_HScroll_SupportsNativeHWheel, ahk_exe idea64.exe
 GroupAdd, Group_HScroll_SupportsNativeHWheel, ahk_class MozillaWindowClass
 GroupAdd, Group_HScroll_SupportsNativeHWheel, ahk_exe paintdotnet.exe
+GroupAdd, Group_HScroll_SupportsNativeHWheel, ahk_exe soffice.bin
 
 GroupAdd, Group_HScroll_HonorsScrollLockState, ahk_exe EXCEL.EXE
 
