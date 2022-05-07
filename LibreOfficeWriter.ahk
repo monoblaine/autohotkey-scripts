@@ -36,3 +36,12 @@ SendMode Input
         MouseMove, %xpos%, %ypos%
     return
 #IfWinActive
+
+#IfWinActive Fields ahk_class SALSUBFRAME ahk_exe soffice.bin
+    ~Enter::
+        Sleep 15
+        Send !c   ; Close window
+        Sleep 15
+        Send {f5} ; Run the "RefineTextButton" macro
+    Return
+#IfWinActive
