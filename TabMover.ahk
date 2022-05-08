@@ -25,6 +25,7 @@ procHandle_Vs2019 := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiv
 procHandle_Vs2022 := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiveTabOnVs2022", Ptr)
 procHandle_Ssms18_1 := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiveTabOnSsms18", Ptr)
 procHandle_Ssms18_2 := DllCall("GetProcAddress", Ptr, hModule, AStr, "getSsms18ResultsGridActiveColumnCoords", Ptr)
+procHandle_Ssms18_3 := DllCall("GetProcAddress", Ptr, hModule, AStr, "isSsms18ResultsTabActive", Ptr)
 procHandle_Foobar2000 := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiveTabOnFoobar2000", Ptr)
 procHandle_WindowsTerminal := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiveTabOnWindowsTerminal", Ptr)
 procHandle_Cleanup := DllCall("GetProcAddress", Ptr, hModule, AStr, "cleanup", Ptr)
@@ -47,6 +48,7 @@ Exit:
    DllCall("CloseHandle", Ptr, procHandle_Vs2022)
    DllCall("CloseHandle", Ptr, procHandle_Ssms18_1)
    DllCall("CloseHandle", Ptr, procHandle_Ssms18_2)
+   DllCall("CloseHandle", Ptr, procHandle_Ssms18_3)
    DllCall("CloseHandle", Ptr, procHandle_Foobar2000)
    DllCall("CloseHandle", Ptr, procHandle_WindowsTerminal)
    DllCall("CloseHandle", Ptr, procHandle_Cleanup)
@@ -188,6 +190,18 @@ Exit:
             MouseMove, %curX%, %curY%
         }
     return
+
+    ~Esc::
+        hWnd := WinExist("A")
+        ptr_isResultsTabActive := 0
+        DllCall(procHandle_Ssms18_3, Int, hWnd, Ptr, &ptr_isResultsTabActive)
+        isResultsTabActive := NumGet(&ptr_isResultsTabActive)
+        ptr_isResultsTabActive := ""
+
+        if (isResultsTabActive = 1) {
+            Send, +{f6}
+        }
+    Return
 #IfWinActive
 
 #IfWinActive ahk_exe foobar2000.exe
