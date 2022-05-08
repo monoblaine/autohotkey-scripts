@@ -35,6 +35,9 @@ SendMode Input
         Click
         MouseMove, %xpos%, %ypos%
     return
+
+    !Right::Send ^+{f15} ; StatefulJumpModule / JumpToLink
+    !Left::Send ^+{f16}  ; StatefulJumpModule / ReturnFromJump
 #IfWinActive
 
 #IfWinActive Fields ahk_class SALSUBFRAME ahk_exe soffice.bin
