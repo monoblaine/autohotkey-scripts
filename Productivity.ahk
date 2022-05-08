@@ -774,6 +774,7 @@ VS_Handle_CtrlF := 1
         Sleep 50                             ; Don't change clipboard while it is pasted! (Sleep > 0)
         clipboard := originalClipboard       ; Restore original clipboard
         VarSetCapacity(originalClipboard, 0) ; Free memory
+        SetScrollLockState, Off
     return
 
     ; Excess indent removal
@@ -786,6 +787,7 @@ VS_Handle_CtrlF := 1
         Sleep 50                                     ; Don't change clipboard while it is pasted! (Sleep > 0)
         clipboard := originalClipboard               ; Restore original clipboard
         VarSetCapacity(originalClipboard, 0)         ; Free memory
+        SetScrollLockState, Off
     return
 #If
 
