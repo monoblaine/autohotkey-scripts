@@ -467,7 +467,15 @@ WrapTextWith(left, right) {
     Send, !{f17} ; disable copyq
     clipboard := ""
     Send, ^c
-    ClipWait
+    ClipWait, 0.25
+    clipboard := clipboard
+
+    if not StrLen(clipboard) {
+        Send ^+{Left}
+        Send, ^c
+        ClipWait, 0.25
+    }
+
     clipboard := left . RegexReplace(clipboard, "[\r\n]+$", "") . right
     Send, ^v
     Sleep 250
