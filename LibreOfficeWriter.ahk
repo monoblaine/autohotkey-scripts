@@ -38,6 +38,18 @@ SendMode Input
 
     !Right::Send ^+{f15} ; StatefulJumpModule / JumpToLink
     !Left::Send ^+{f16}  ; StatefulJumpModule / ReturnFromJump
+
+    F3::
+        Send ^f
+        Send {Enter}
+        Send {Esc}
+    Return
+
+    +F3::
+        Send ^f
+        Send +{Enter}
+        Send {Esc}
+    Return
 #IfWinActive
 
 #IfWinActive Fields ahk_class SALSUBFRAME ahk_exe soffice.bin
