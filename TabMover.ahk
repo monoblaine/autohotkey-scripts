@@ -25,7 +25,7 @@ procHandle_Vs2019 := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiv
 procHandle_Vs2022 := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiveTabOnVs2022", Ptr)
 procHandle_Ssms18_1 := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiveTabOnSsms18", Ptr)
 procHandle_Ssms18_2 := DllCall("GetProcAddress", Ptr, hModule, AStr, "getSsms18ResultsGridActiveColumnCoords", Ptr)
-procHandle_Ssms18_3 := DllCall("GetProcAddress", Ptr, hModule, AStr, "isSsms18ResultsTabActiveAndFocused", Ptr)
+procHandle_Ssms18_3 := DllCall("GetProcAddress", Ptr, hModule, AStr, "getSsms18FocusedItem", Ptr)
 procHandle_Foobar2000 := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiveTabOnFoobar2000", Ptr)
 procHandle_WindowsTerminal := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiveTabOnWindowsTerminal", Ptr)
 procHandle_Cleanup := DllCall("GetProcAddress", Ptr, hModule, AStr, "cleanup", Ptr)
@@ -193,36 +193,36 @@ Exit:
 
     ~Esc::
         hWnd := WinExist("A")
-        ptr_isResultsTabActive := 0
-        DllCall(procHandle_Ssms18_3, Int, hWnd, Ptr, &ptr_isResultsTabActive)
-        isResultsTabActive := NumGet(&ptr_isResultsTabActive)
-        ptr_isResultsTabActive := ""
+        ptr_result := 0
+        DllCall(procHandle_Ssms18_3, Int, hWnd, Ptr, &ptr_result)
+        result := NumGet(&ptr_result)
+        ptr_result := ""
 
-        if (isResultsTabActive = 1) {
+        if (result = 2) {
             Send, +{f6}
         }
     Return
 
     ~^c::
         hWnd := WinExist("A")
-        ptr_isResultsTabActive := 0
-        DllCall(procHandle_Ssms18_3, Int, hWnd, Ptr, &ptr_isResultsTabActive)
-        isResultsTabActive := NumGet(&ptr_isResultsTabActive)
-        ptr_isResultsTabActive := ""
+        ptr_result := 0
+        DllCall(procHandle_Ssms18_3, Int, hWnd, Ptr, &ptr_result)
+        result := NumGet(&ptr_result)
+        ptr_result := ""
 
-        if (isResultsTabActive = 1) {
+        if (result = 2) {
             Send ^{Ins}
         }
     Return
 
     $^PgDn::
         hWnd := WinExist("A")
-        ptr_isResultsTabActive := 0
-        DllCall(procHandle_Ssms18_3, Int, hWnd, Ptr, &ptr_isResultsTabActive)
-        isResultsTabActive := NumGet(&ptr_isResultsTabActive)
-        ptr_isResultsTabActive := ""
+        ptr_result := 0
+        DllCall(procHandle_Ssms18_3, Int, hWnd, Ptr, &ptr_result)
+        result := NumGet(&ptr_result)
+        ptr_result := ""
 
-        if (isResultsTabActive = 1) {
+        if (result = 2) {
             Send ^+{F11}
         }
         else {
@@ -232,12 +232,12 @@ Exit:
 
     $^PgUp::
         hWnd := WinExist("A")
-        ptr_isResultsTabActive := 0
-        DllCall(procHandle_Ssms18_3, Int, hWnd, Ptr, &ptr_isResultsTabActive)
-        isResultsTabActive := NumGet(&ptr_isResultsTabActive)
-        ptr_isResultsTabActive := ""
+        ptr_result := 0
+        DllCall(procHandle_Ssms18_3, Int, hWnd, Ptr, &ptr_result)
+        result := NumGet(&ptr_result)
+        ptr_result := ""
 
-        if (isResultsTabActive = 1) {
+        if (result = 2) {
             Send ^+{F10}
         }
         else {
