@@ -343,6 +343,7 @@ return
 
 #IfWinActive ahk_exe ApplicationFrameHost.exe
     ~Numpad0::
+    ~NumpadIns::
         SetTitleMatchMode, 2
 
         if WinActive("Fotoğraflar") {
@@ -351,6 +352,7 @@ return
     return
 
     ~Numpad1::
+    ~NumpadEnd::
         SetTitleMatchMode, 2
 
         if WinActive("Fotoğraflar") {
