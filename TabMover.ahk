@@ -211,7 +211,9 @@ Exit:
         ptr_result := ""
 
         if (result = 2) {
-            Send ^{Ins}
+            if (WinExist("A") = hWnd) {
+                Send ^{Ins}
+            }
         }
     Return
 
