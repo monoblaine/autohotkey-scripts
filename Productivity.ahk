@@ -60,6 +60,21 @@ LastMouseCoordY := 0
 ScreenGridSizePrimary := 2.5
 ScreenGridSizeAlternate := 4
 
+MovementMethod := { unknown: 0, horizontal: 1, vertical: 2 }
+
+_L1 := Floor(A_ScreenWidth  / 2 - A_ScreenWidth  / ScreenGridSizePrimary)
+_L2 := Floor(A_ScreenWidth  / 2 - A_ScreenWidth  / ScreenGridSizeAlternate)
+_T1 := Floor(A_ScreenHeight / 2 - A_ScreenHeight / ScreenGridSizePrimary)
+_T2 := Floor(A_ScreenHeight / 2 - A_ScreenHeight / ScreenGridSizeAlternate)
+_CX := Floor(A_ScreenWidth  / 2)
+_CY := Floor(A_ScreenHeight / 2)
+_R1 := Floor(A_ScreenWidth  / 2 + A_ScreenWidth  / ScreenGridSizePrimary)
+_R2 := Floor(A_ScreenWidth  / 2 + A_ScreenWidth  / ScreenGridSizeAlternate)
+_B1 := Floor(A_ScreenHeight / 2 + A_ScreenHeight / ScreenGridSizePrimary)
+_B2 := Floor(A_ScreenHeight / 2 + A_ScreenHeight / ScreenGridSizeAlternate)
+
+LastMovement := MovementMethod.unknown
+
 shift_count := 0
 arrow_mousemove_enabled := 0
 
@@ -123,7 +138,12 @@ Return
 #If
 
 #Ins::
-CapsLock & Ins::MouseGetPos, SavedMouseCoordX, SavedMouseCoordY                   ; CapsLock + Insert            | Save current Mouse Coord
+CapsLock & Ins::                                                                  ; CapsLock + Insert            | Save current Mouse Coord
+    MouseGetPos, SavedMouseCoordX, SavedMouseCoordY
+    SavedMouseCoordX := Floor(SavedMouseCoordX)
+    SavedMouseCoordY := Floor(SavedMouseCoordY)
+Return
+
 #Home::                                                                           ; Win + Home
 CapsLock & Home::ToggleMousePos(SavedMouseCoordX, SavedMouseCoordY)               ; CapsLock + Home              | Go to saved Mouse Coord
 CapsLock & Space::SetCapsLockState % !GetKeyState("CapsLock", "T")                ; CapsLock + Space             | Toggle CapsLock state
@@ -136,108 +156,122 @@ CapsLock & Space::SetCapsLockState % !GetKeyState("CapsLock", "T")              
     CapsLock & Enter::Click, Right
 #If
 
-<#NumpadDiv::
-CapsLock & NumpadDiv::
-    ToggleMousePos(A_ScreenWidth  / 2 - A_ScreenWidth  / ScreenGridSizeAlternate, -1)
-return
-
-<#NumpadMult::
-CapsLock & NumpadMult::
-    ToggleMousePos(A_ScreenWidth  / 2 + A_ScreenWidth  / ScreenGridSizeAlternate, -1)
-return
-
-<#NumpadSub::
-CapsLock & NumpadSub::
-    ToggleMousePos(-1
-                 , A_ScreenHeight / 2 - A_ScreenHeight / ScreenGridSizeAlternate)
-return
-
-<#End::
-<#NumpadAdd::
-CapsLock & NumpadAdd::
-    ToggleMousePos(-1
-                 , A_ScreenHeight / 2 + A_ScreenHeight / ScreenGridSizeAlternate)
-return
-
-GetGridSize() {
-    global ScreenGridSizeAlternate
-    global ScreenGridSizePrimary
-
-    return GetKeyState("LAlt") ? ScreenGridSizeAlternate : ScreenGridSizePrimary
-}
+<#End::ToggleMousePos(-1, _B2)
 
 <#Numpad7::
 CapsLock & NumpadHome::
 CapsLock & Numpad7::
-    gridSize := GetGridSize()
-    ToggleMousePos(A_ScreenWidth  / 2 - A_ScreenWidth  / gridSize
-                 , A_ScreenHeight / 2 - A_ScreenHeight / gridSize)
+    if GetKeyState("LAlt") {
+        ToggleMousePos(_L1, _T1)
+    }
+    else {
+        ToggleMousePos(_L2, _T2)
+    }
 return
 
 <#Numpad8::
 CapsLock & NumpadUp::
 CapsLock & Numpad8::
-    ToggleMousePos(A_ScreenWidth  / 2
-                 , A_ScreenHeight / 2 - A_ScreenHeight / GetGridSize())
+    if GetKeyState("LAlt") {
+        ToggleMousePos(_CX, _T1)
+    }
+    else {
+        ToggleMousePos(-1,  _T2)
+    }
 return
 
 <#Numpad9::
 CapsLock & NumpadPgup::
 CapsLock & Numpad9::
-    gridSize := GetGridSize()
-    ToggleMousePos(A_ScreenWidth  / 2 + A_ScreenWidth  / gridSize
-                 , A_ScreenHeight / 2 - A_ScreenHeight / gridSize)
+    if GetKeyState("LAlt") {
+        ToggleMousePos(_R1, _T1)
+    }
+    else {
+        ToggleMousePos(_R2, _T2)
+    }
 return
 
 <#Numpad4::
 CapsLock & NumpadLeft::
 CapsLock & Numpad4::
-    ToggleMousePos(A_ScreenWidth  / 2 - A_ScreenWidth / GetGridSize()
-                 , A_ScreenHeight / 2)
+    if GetKeyState("LAlt") {
+        ToggleMousePos(_L1, _CY)
+    }
+    else {
+        ToggleMousePos(_L2,  -1)
+    }
 return
 
 <#Numpad5::
 CapsLock & NumpadClear::
 CapsLock & Numpad5::
-    ToggleMousePos(A_ScreenWidth  / 2
-                 , A_ScreenHeight / 2)
+    if GetKeyState("LAlt") {
+        ToggleMousePos(_CX, _CY)
+        Return
+    }
+
+    targetx := _CX
+    targety := _CY
+
+    if (LastMovement = MovementMethod.horizontal) {
+        targety := -1
+    }
+    else if (LastMovement = MovementMethod.vertical) {
+        targetx := -1
+    }
+
+    ToggleMousePos(targetx, targety)
 return
 
 <#Numpad6::
 CapsLock & NumpadRight::
 CapsLock & Numpad6::
-    ToggleMousePos(A_ScreenWidth  / 2 + A_ScreenWidth / GetGridSize()
-                 , A_ScreenHeight / 2)
+    if GetKeyState("LAlt") {
+        ToggleMousePos(_R1, _CY)
+    }
+    else {
+        ToggleMousePos(_R2,  -1)
+    }
 return
 
 <#Numpad1::
 CapsLock & NumpadEnd::
 CapsLock & Numpad1::
-    gridSize := GetGridSize()
-    ToggleMousePos(A_ScreenWidth  / 2 - A_ScreenWidth  / gridSize
-                 , A_ScreenHeight / 2 + A_ScreenHeight / gridSize)
+    if GetKeyState("LAlt") {
+        ToggleMousePos(_L1, _B1)
+    }
+    else {
+        ToggleMousePos(_L2, _B2)
+    }
 return
 
 <#Numpad2::
 CapsLock & NumpadDown::
 CapsLock & Numpad2::
-    ToggleMousePos(A_ScreenWidth  / 2
-                 , A_ScreenHeight / 2 + A_ScreenHeight / GetGridSize())
+    if GetKeyState("LAlt") {
+        ToggleMousePos(_CX, _B1)
+    }
+    else {
+        ToggleMousePos(-1,  _B2)
+    }
 return
 
 <#Numpad3::
 CapsLock & NumpadPgdn::
 CapsLock & Numpad3::
-    gridSize := GetGridSize()
-    ToggleMousePos(A_ScreenWidth  / 2 + A_ScreenWidth  / gridSize
-                 , A_ScreenHeight / 2 + A_ScreenHeight / gridSize)
+    if GetKeyState("LAlt") {
+        ToggleMousePos(_R1, _B1)
+    }
+    else {
+        ToggleMousePos(_R2, _B2)
+    }
 return
 
 ClickOnCenter:
 CapsLock & End::                                                                  ; CapsLock + end
 <!End::                                                                           ; lalt + end
     MouseGetPos, xpos, ypos
-    MouseMove, A_ScreenWidth / 2, A_ScreenHeight / 2
+    MouseMove, _CX, _CY
     Click
     MouseMove, %xpos%, %ypos%
 return
@@ -313,7 +347,7 @@ return
     ; Click "close this message" on StackOverflow
     CapsLock & x::
         MouseGetPos, xpos, ypos
-        MouseMove, A_ScreenWidth / 2, 140
+        MouseMove, _CX, 140
         Click
         MouseMove, %xpos%, %ypos%
     return
@@ -326,7 +360,7 @@ return
     ; Click "close this message" on StackOverflow
     CapsLock & x::
         MouseGetPos, xpos, ypos
-        MouseMove, A_ScreenWidth / 2, 140
+        MouseMove, _CX, 140
         Click
         MouseMove, %xpos%, %ypos%
     return
@@ -889,16 +923,16 @@ ProcessExist(Name) {
 }
 
 ToggleMousePos(targetx, targety) {
-    global LastMouseCoordX
-    global LastMouseCoordY
-
-    targetx := Floor(targetx)
-    targety := Floor(targety)
+    Global LastMouseCoordX
+    Global LastMouseCoordY
+    Global LastMovement
+    Global MovementMethod
 
     MouseGetPos, xpos, ypos
-
     xpos := Floor(xpos)
     ypos := Floor(ypos)
+
+    LastMovement := MovementMethod.unknown
 
     if (targetx = -1) {
         targetx := xpos
@@ -911,9 +945,23 @@ ToggleMousePos(targetx, targety) {
     ; MsgBox, last: %LastMouseCoordX%,%LastMouseCoordY%`ncurrent: %xpos%,%ypos%`ntarget: %targetx%,%targety%
 
     if (targetx = xpos) and (targety = ypos) {
+        if (LastMouseCoordX = xpos) {
+            LastMovement := MovementMethod.vertical
+        }
+        else if (LastMouseCoordY = ypos) {
+            LastMovement := MovementMethod.horizontal
+        }
+
         MouseMove, %LastMouseCoordX%, %LastMouseCoordY%
     }
     else {
+        if (targetx = xpos) {
+            LastMovement := MovementMethod.vertical
+        }
+        else if (targety = ypos) {
+            LastMovement := MovementMethod.horizontal
+        }
+
         LastMouseCoordX := xpos
         LastMouseCoordY := ypos
         MouseMove, %targetx%, %targety%
