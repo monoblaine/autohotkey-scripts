@@ -525,12 +525,14 @@ WrapTextWith(left, right) {
 #If
 
 #If !GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt") and WinActive("ahk_group Group_HScroll_HonorsScrollLockState")
+    NumpadLeft::
     <#Left::
         SetScrollLockState, On
         Send, {Left}
         SetScrollLockState, Off
     return
 
+    NumpadRight::
     <#Right::
         SetScrollLockState, On
         Send, {Right}
