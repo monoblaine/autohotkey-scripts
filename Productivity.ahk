@@ -467,6 +467,7 @@ return
 
 WrapTextWith(left, right) {
     Send, !{f17} ; disable copyq
+    Sleep 50
     clipboard := ""
     Send, ^c
     ClipWait, 0.25
@@ -482,6 +483,7 @@ WrapTextWith(left, right) {
     Send, ^v
     Sleep 250
     Send, !{f16} ; Enable copyq and activate first item
+    Sleep 50
 }
 
 ; Credits for the debouncer code: https://www.autohotkey.com/boards/viewtopic.php?p=117262#p117262
