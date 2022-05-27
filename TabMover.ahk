@@ -14,20 +14,22 @@ Process, Priority,, R
 MovementMethod := { mouseClickDrag: 1, sendEvent: 2, foobar2000: 3 }
 
 hModule := DllCall("LoadLibrary", Str, "ActiveTabSpy.dll", Ptr)
-procHandle_MsEdge1 := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiveTabOnMsEdge", Ptr)
-procHandle_MsEdge2 := DllCall("GetProcAddress", Ptr, hModule, AStr, "getMsEdgeThreeDotBtnStatus", Ptr)
-procHandle_Chromium1 := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiveTabOnChromium", Ptr)
-procHandle_Chromium2 := DllCall("GetProcAddress", Ptr, hModule, AStr, "getChromiumThreeDotBtnStatus", Ptr)
-procHandle_Catsxp1 := DllCall("GetProcAddress", Ptr, hModule, AStr, "getCatsxpThreeDotBtnStatus", Ptr)
-procHandle_Catsxp2 := DllCall("GetProcAddress", Ptr, hModule, AStr, "isCatsxpAddressBarFocused", Ptr)
-procHandle_Firefox := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiveTabOnFirefox", Ptr)
-procHandle_Vs2019 := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiveTabOnVs2019", Ptr)
-procHandle_Vs2022 := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiveTabOnVs2022", Ptr)
-procHandle_Ssms18_1 := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiveTabOnSsms18", Ptr)
-procHandle_Ssms18_2 := DllCall("GetProcAddress", Ptr, hModule, AStr, "getSsms18ResultsGridActiveColumnCoords", Ptr)
-procHandle_Ssms18_3 := DllCall("GetProcAddress", Ptr, hModule, AStr, "getSsms18FocusedItem", Ptr)
-procHandle_Foobar2000 := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiveTabOnFoobar2000", Ptr)
-procHandle_WindowsTerminal := DllCall("GetProcAddress", Ptr, hModule, AStr, "inspectActiveTabOnWindowsTerminal", Ptr)
+procHandle_MsEdge1 := DllCall("GetProcAddress", Ptr, hModule, AStr, "MsEdge_inspectActiveTab", Ptr)
+procHandle_MsEdge2 := DllCall("GetProcAddress", Ptr, hModule, AStr, "MsEdge_getThreeDotBtnStatus", Ptr)
+procHandle_Chromium1 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Chromium_inspectActiveTab", Ptr)
+procHandle_Chromium2 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Chromium_getThreeDotBtnStatus", Ptr)
+procHandle_Catsxp1 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Catsxp_getThreeDotBtnStatus", Ptr)
+procHandle_Catsxp2 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Catsxp_isAddressBarFocused", Ptr)
+procHandle_Firefox := DllCall("GetProcAddress", Ptr, hModule, AStr, "Firefox_inspectActiveTab", Ptr)
+procHandle_Vs2019 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Vs2019_inspectActiveTab", Ptr)
+procHandle_Vs2022 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Vs2022_inspectActiveTab", Ptr)
+procHandle_Ssms18_1 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Ssms18_inspectActiveTab", Ptr)
+procHandle_Ssms18_2 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Ssms18_getResultsGridActiveColumnCoords", Ptr)
+procHandle_Ssms18_3 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Ssms18_getActiveArea", Ptr)
+procHandle_Ssms18_4 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Ssms18_getCellContent", Ptr)
+procHandle_Ssms18_5 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Ssms18_getObjectExplorerNodeType", Ptr)
+procHandle_Foobar2000 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Foobar2000_inspectActiveTab", Ptr)
+procHandle_WindowsTerminal := DllCall("GetProcAddress", Ptr, hModule, AStr, "WindowsTerminal_inspectActiveTab", Ptr)
 procHandle_Cleanup := DllCall("GetProcAddress", Ptr, hModule, AStr, "cleanup", Ptr)
 
 CoordMode, Mouse, Screen
@@ -49,6 +51,8 @@ Exit:
    DllCall("CloseHandle", Ptr, procHandle_Ssms18_1)
    DllCall("CloseHandle", Ptr, procHandle_Ssms18_2)
    DllCall("CloseHandle", Ptr, procHandle_Ssms18_3)
+   DllCall("CloseHandle", Ptr, procHandle_Ssms18_4)
+   DllCall("CloseHandle", Ptr, procHandle_Ssms18_5)
    DllCall("CloseHandle", Ptr, procHandle_Foobar2000)
    DllCall("CloseHandle", Ptr, procHandle_WindowsTerminal)
    DllCall("CloseHandle", Ptr, procHandle_Cleanup)
@@ -64,13 +68,7 @@ Exit:
             return
         }
 
-        hWnd := WinExist("A")
-        ptr_isFocused := 0
-        DllCall(procHandle_MsEdge2, Int, hWnd, Ptr, &ptr_isFocused)
-        isFocused := NumGet(&ptr_isFocused)
-        ptr_isFocused := ""
-
-        if (isFocused = 1) {
+        if DllCall(procHandle_MsEdge2, Int, WinExist("A")) {
             Send, {f6}
         }
     return
@@ -85,13 +83,7 @@ Exit:
             return
         }
 
-        hWnd := WinExist("A")
-        ptr_isFocused := 0
-        DllCall(procHandle_Chromium2, Int, hWnd, Ptr, &ptr_isFocused)
-        isFocused := NumGet(&ptr_isFocused)
-        ptr_isFocused := ""
-
-        if (isFocused = 1) {
+        if DllCall(procHandle_Chromium2, Int, WinExist("A")) {
             Send, {Esc}
         }
     return
@@ -106,25 +98,13 @@ Exit:
             return
         }
 
-        hWnd := WinExist("A")
-        ptr_isFocused := 0
-        DllCall(procHandle_Catsxp1, Int, hWnd, Ptr, &ptr_isFocused)
-        isFocused := NumGet(&ptr_isFocused)
-        ptr_isFocused := ""
-
-        if (isFocused = 1) {
+        if DllCall(procHandle_Catsxp1, Int, WinExist("A")) {
             Send, {Esc}
         }
     return
 
     ~Esc::
-        hWnd := WinExist("A")
-        ptr_isFocused := 0
-        DllCall(procHandle_Catsxp2, Int, hWnd, Ptr, &ptr_isFocused)
-        isFocused := NumGet(&ptr_isFocused)
-        ptr_isFocused := ""
-
-        if (isFocused = 1) {
+        if DllCall(procHandle_Catsxp2, Int, WinExist("A")) {
             Send, +{f6}
         }
     Return
@@ -150,34 +130,24 @@ Exit:
     ^!PgDn::MoveTab(1, 1, procHandle_Ssms18_1, MovementMethod.mouseClickDrag)
 
     ^NumpadAdd::
-        hWnd := WinExist("A")
-        ptr_success := 0
         ptr_left := 0
         ptr_right := 0
         ptr_top := 0
         ptr_bottom := 0
-        DllCall(procHandle_Ssms18_2, Int, hWnd, Ptr, &ptr_success
-              , Ptr, &ptr_left, Ptr, &ptr_right
-              , Ptr, &ptr_top, Ptr, &ptr_bottom)
+        success := DllCall(procHandle_Ssms18_2, Int, WinExist("A")
+                         , Ptr, &ptr_left, Ptr, &ptr_right
+                         , Ptr, &ptr_top, Ptr, &ptr_bottom)
 
         if (A_LastError) {
             MsgBox, Error: %A_LastError%
         }
 
-        success := NumGet(&ptr_success)
-        left := NumGet(&ptr_left)
-        right := NumGet(&ptr_right)
-        top := NumGet(&ptr_top)
-        bottom := NumGet(&ptr_bottom)
-        ptr_success := ""
-        ptr_left := ""
-        ptr_right := ""
-        ptr_top := ""
-        ptr_bottom := ""
-
-        ; MsgBox, success: %success%, left: %left%, right: %right%, top: %top%, bottom: %bottom%
-
         if (success) {
+            left := NumGet(&ptr_left)
+            right := NumGet(&ptr_right)
+            top := NumGet(&ptr_top)
+            bottom := NumGet(&ptr_bottom)
+
             curX := 0
             curY := 0
             targetY := top + (bottom - top) // 2
@@ -189,42 +159,125 @@ Exit:
             Send, {Click 2}
             MouseMove, %curX%, %curY%
         }
+
+        ptr_left := ""
+        ptr_right := ""
+        ptr_top := ""
+        ptr_bottom := ""
     return
 
     ~Esc::
-        hWnd := WinExist("A")
-        ptr_result := 0
-        DllCall(procHandle_Ssms18_3, Int, hWnd, Ptr, &ptr_result)
-        result := NumGet(&ptr_result)
-        ptr_result := ""
-
-        if (result = 2) {
+        if (DllCall(procHandle_Ssms18_3, Int, WinExist("A")) = 2) {
             Send, +{f6}
         }
     Return
 
+    SsmsOpenCellContentInNewTab := 0
+
+    ~^t::
+        SsmsOpenCellContentInNewTab := 1
     ~^c::
-        hWnd := WinExist("A")
         ptr_result := 0
-        DllCall(procHandle_Ssms18_3, Int, hWnd, Ptr, &ptr_result)
+        cellContent := DllCall(procHandle_Ssms18_4, Ptr, &ptr_result, "WStr")
         result := NumGet(&ptr_result)
         ptr_result := ""
 
-        if (result = 2) {
-            if (WinExist("A") = hWnd) {
-                Send ^{Ins}
+        if (result) {
+            Clipboard := cellContent
+            cellContent := ""
+
+            if (SsmsOpenCellContentInNewTab) {
+                Send ^n
+                Sleep 50
+                Send ^v
+                Sleep 50
+                Send {Ctrl Down}{e Down}{r Down}{e Up}{r Up}{Ctrl Up}
+                Sleep 50
+                Send ^{Home}
+                Sleep 50
             }
         }
+
+        SsmsOpenCellContentInNewTab := 0
+    Return
+
+    ~^x::
+        result := DllCall(procHandle_Ssms18_5)
+
+        if (result) {
+            Send {Ctrl Up}{x Up}
+        }
+
+        Switch result {
+            Case 1: ; Tables
+                Send {AppsKey}
+                Sleep 50
+                Send s
+                Sleep 50
+                Send {Enter 3}
+                Sleep 50
+
+            Case 2, Case 4, Case 8: ; Views, Table-valued Functions, Triggers
+                Send {AppsKey}
+                Sleep 50
+                Send s
+                Sleep 50
+                Send a
+                Sleep 50
+                Send {Enter}
+                Sleep 50
+
+            Case 3, Case 5: ; Stored Procedures, Scalar-valued Functions
+                Send {AppsKey}
+                Sleep 50
+                Send {s 2}
+                Sleep 50
+                Send {Enter}
+                Sleep 50
+                Send a
+                Sleep 50
+                Send {Enter}
+                Sleep 50
+
+            Case 6, Case 7, Case 9: ; Keys, Constraints, Indexes
+                Send {AppsKey}
+                Sleep 50
+                Send s
+                Sleep 50
+                Send r
+                Sleep 50
+                Send {Enter}
+                Sleep 50
+
+            Default:
+                Return
+        }
+
+        SetTitleMatchMode, 1 ; A window's title must start with the specified WinTitle to be a match.
+        WinWait,, Creating script for, 3
+
+        if ErrorLevel {
+            Send {Esc}
+            Return
+        }
+
+        WinWaitClose
+        Sleep 50
+
+        Switch result {
+            Case 1, Case 6, Case 7, Case 9: ; Tables, Keys, Constraints, Indexes
+                Send ^+f
+                Sleep 50
+        }
+
+        Send {Ctrl Down}{e Down}{r Down}{e Up}{r Up}{Ctrl Up}
+        Sleep 50
+        Send ^{Home}
+        Sleep 50
     Return
 
     $^PgDn::
-        hWnd := WinExist("A")
-        ptr_result := 0
-        DllCall(procHandle_Ssms18_3, Int, hWnd, Ptr, &ptr_result)
-        result := NumGet(&ptr_result)
-        ptr_result := ""
-
-        if (result = 2) {
+        if (DllCall(procHandle_Ssms18_3, Int, WinExist("A")) = 2) {
             Send ^+{F11}
         }
         else {
@@ -233,13 +286,7 @@ Exit:
     Return
 
     $^PgUp::
-        hWnd := WinExist("A")
-        ptr_result := 0
-        DllCall(procHandle_Ssms18_3, Int, hWnd, Ptr, &ptr_result)
-        result := NumGet(&ptr_result)
-        ptr_result := ""
-
-        if (result = 2) {
+        if (DllCall(procHandle_Ssms18_3, Int, WinExist("A")) = 2) {
             Send ^+{F10}
         }
         else {
