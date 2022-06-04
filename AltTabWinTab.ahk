@@ -13,7 +13,7 @@ Process, Priority,, R
 #SingleInstance force
 #WinActivateForce
 
-!Tab::Send, ^+q ; ctrl + shift + q
+!Tab::Send, ^+{F24} ; ctrl + shift + F24
 
 #Tab::
     visibleWindows := GetVisibleWindows()
