@@ -625,7 +625,11 @@ WrapTextWith(left, right) {
     return
 #IfWinActive
 
-VS_Handle_CtrlF := 1
+; VS_Handle_CtrlF := 1
+; ResetFindInternalsOnNextFind := 0
+
+FinderIsOpen := 0
+FinderIsSearchingForward := 1
 
 ; Because Visual Studio 2019 broke my AltGr shortcuts!
 #IfWinActive ahk_exe devenv.exe
@@ -638,49 +642,97 @@ VS_Handle_CtrlF := 1
     <^>!+t::Send, ^!+t
     <^>!+u::Send, ^!+u
 
-    f3::
-        VS_Handle_CtrlF := 0
-        Send ^{f19}
-        Send {Enter}
-        Send {Esc}
-        VS_Handle_CtrlF := 1
+    ~^f::
+        FinderIsOpen := 1
+        FinderIsSearchingForward := 1
     return
 
-    +f3::
-        VS_Handle_CtrlF := 0
-        Send ^{f19}
-        Send +{Enter}
-        Send {Esc}
-        VS_Handle_CtrlF := 1
-    return
-
-    *^f::
-        if (VS_Handle_CtrlF = 0) {
-            return
+    ~Esc::
+        if FinderIsOpen {
+            FinderIsOpen := 0
+            FinderIsSearchingForward := 1
         }
+    Return
 
-        VS_Handle_CtrlF := 0
-        VS_ShiftPressed := GetKeyState("Shift")
-        Send, !{f17} ; disable copyq
-        clipboard := ""
-        Send ^c
-        ClipWait, 0.25
+    $+Enter::
+        if FinderIsOpen {
+            if FinderIsSearchingForward {
+                SendInput b
+                Send {Enter 2}
+            }
+            else {
+                SendInput {BackSpace}
+                Send {Enter}
+            }
 
-        if (VS_ShiftPressed) {
-            Send ^+{f19}
+            FinderIsSearchingForward := !FinderIsSearchingForward
         }
         else {
-            Send ^{f19}
+            Send +{Enter}
         }
+    Return
 
-        if StrLen(clipboard) {
-            Send ^v
-            Sleep 250
-        }
-
-        Send, !{f16} ; Enable copyq and activate first item
-        VS_Handle_CtrlF := 1
-    return
+    ; ~^Home::
+    ;     ResetFindInternalsOnNextFind := 1
+    ; return
+    ;
+    ; f3::
+    ;     VS_Handle_CtrlF := 0
+    ;     Send ^{f19}
+    ;
+    ;     if ResetFindInternalsOnNextFind {
+    ;         Send !e
+    ;         Send !e
+    ;         ResetFindInternalsOnNextFind := 0
+    ;     }
+    ;
+    ;     Send {Enter}
+    ;     Send {Esc}
+    ;     VS_Handle_CtrlF := 1
+    ; return
+    ;
+    ; +f3::
+    ;     VS_Handle_CtrlF := 0
+    ;     Send ^{f19}
+    ;
+    ;     if ResetFindInternalsOnNextFind {
+    ;         Send !e
+    ;         Send !e
+    ;         ResetFindInternalsOnNextFind := 0
+    ;     }
+    ;
+    ;     Send +{Enter}
+    ;     Send {Esc}
+    ;     VS_Handle_CtrlF := 1
+    ; return
+    ;
+    ; *^f::
+    ;     if (VS_Handle_CtrlF = 0) {
+    ;         return
+    ;     }
+    ;
+    ;     VS_Handle_CtrlF := 0
+    ;     VS_ShiftPressed := GetKeyState("Shift")
+    ;     Send, !{f17} ; disable copyq
+    ;     clipboard := ""
+    ;     Send ^c
+    ;     ClipWait, 0.25
+    ;
+    ;     if (VS_ShiftPressed) {
+    ;         Send ^+{f19}
+    ;     }
+    ;     else {
+    ;         Send ^{f19}
+    ;     }
+    ;
+    ;     if StrLen(clipboard) {
+    ;         Send ^v
+    ;         Sleep 250
+    ;     }
+    ;
+    ;     Send, !{f16} ; Enable copyq and activate first item
+    ;     VS_Handle_CtrlF := 1
+    ; return
 #IfWinActive
 
 #IfWinActive ahk_exe Ssms.exe                                                     ; SQL Server Management Studio
