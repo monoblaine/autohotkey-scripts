@@ -183,7 +183,7 @@ Exit:
         ptr_result := ""
 
         if (result) {
-            Clipboard := cellContent
+            Clipboard := Trim(cellContent, " `t`r`n") . "`r`ngo`r`n"
             cellContent := ""
 
             if (SsmsOpenCellContentInNewTab) {
