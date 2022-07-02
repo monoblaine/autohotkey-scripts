@@ -21,7 +21,6 @@ GroupAdd, Group_ZoomableByWheel, ahk_exe soffice.bin
 
 GroupAdd, Group_HScroll_SupportsShiftWheel, ahk_exe notepad++.exe
 GroupAdd, Group_HScroll_SupportsShiftWheel, ahk_exe devenv.exe
-GroupAdd, Group_HScroll_SupportsShiftWheel, ahk_exe WinMergeU.exe
 
 GroupAdd, Group_HScroll_SupportsNativeHWheel, ahk_class MMCMainFrame
 GroupAdd, Group_HScroll_SupportsNativeHWheel, ahk_exe GitExtensions.exe
