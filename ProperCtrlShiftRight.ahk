@@ -28,13 +28,28 @@ GroupAdd, ExcludedApps, ahk_exe soffice.bin
 #IfWinNotActive
 
 Selection_TrimRight:
-    Send !{f17} ; disable copyq
-    clipboard := ""
-    Send ^c
-    ClipWait 0.25 ; There may be no selection yet.
-    clipboard := clipboard
-    selection := clipboard
-    Send !{f16} ; Enable copyq and activate first item
+    ; WinActive("A")
+    ; ControlGetFocus, ctl
+    ; ControlGet, hede, Selected,, %ctl%
+    ; MsgBox %hede%
+    ; Return
+
+
+    ; https://stackoverflow.com/a/45722976/1396155
+    WinActive("A")
+    ControlGetFocus, ctl
+
+    if (RegExMatch(ctl, "Edit\d+")) {          ; attempt copying without clipboard
+        ControlGet, selection, Selected,, %ctl%
+    }
+    else {                                       ; fallback solution
+        Send !{f17}                              ; disable copyq
+        Clipboard := ""
+        Send, ^c                                 ; copy selected text to clipboard
+        ClipWait, 0, 1                           ; There may be no selection yet.
+        selection := Clipboard
+        Send !{f16}                              ; Enable copyq and activate first item
+    }
 
     if (StrLen(selection) = 0) {
         return
