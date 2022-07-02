@@ -894,6 +894,12 @@ return
     ^!+g::clipboard := RegExReplace(clipboard, "([^/]+\/+)+", "")    ; ctrl + alt + shift + g     | Get substring that comes after the last index of '/'. Useful for copying commit id's from a url
 #IfWinNotActive
 
+>#>+2::SendInput ’
+>#>+1::
+    SendInput “”
+    Send {Left}
+Return
+
 ;=============================================================================================
 ; Show a ToolTip that shows the current state of the lock keys (e.g. NumLock) when one is pressed
 ;=============================================================================================
