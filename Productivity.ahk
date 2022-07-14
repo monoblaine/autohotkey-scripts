@@ -523,50 +523,42 @@ WrapTextWith(left, right) {
 
 #If !GetKeyState("NumLock", "T") or (!GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt"))
     NumpadUp::
-    <#Up::
         Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}{Up up}{WheelUp}"
     Return
 
     NumpadClear::
-    <#Down::
         Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}{Down up}{WheelDown}"
     Return
 #If
 
 #If (!GetKeyState("NumLock", "T") or (!GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt"))) and WinActive("ahk_group Group_HScroll_SupportsShiftWheel")
     NumpadLeft::
-    <#Left::
         Send, +{WheelUp}
     Return
 
     NumpadRight::
-    <#Right::
         Send, +{WheelDown}
     Return
 #If
 
 #If (!GetKeyState("NumLock", "T") or (!GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt"))) and WinActive("ahk_group Group_HScroll_SupportsNativeHWheel")
     NumpadLeft::
-    <#Left::
         Send {Blind}{WheelLeft}
     Return
 
     NumpadRight::
-    <#Right::
         Send {Blind}{WheelRight}
     Return
 #If
 
 #If !GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt") and WinActive("ahk_group Group_HScroll_HonorsScrollLockState")
     NumpadLeft::
-    <#Left::
         SetScrollLockState, On
         Send, {Left}
         SetScrollLockState, Off
     return
 
     NumpadRight::
-    <#Right::
         SetScrollLockState, On
         Send, {Right}
         SetScrollLockState, Off
@@ -577,14 +569,12 @@ WrapTextWith(left, right) {
 
 #If (!GetKeyState("NumLock", "T") or (!GetKeyState("LControl") and !GetKeyState("LAlt"))) and !WinActive("ahk_group Group_HScroll_All")
     NumpadLeft::
-    <#Left::
         ControlGetFocus, fcontrol, A
         Loop 8
             PostMessage, 0x114, 0, 0, %fcontrol%, A  ; 0x114=WM_HSCROLL; 0=SB_LINELEFT
     return
 
     NumpadRight::
-    <#Right::
         ControlGetFocus, fcontrol, A
         Loop 8
             PostMessage, 0x114, 1, 0, %fcontrol%, A  ; 0x114=WM_HSCROLL; 1=SB_LINERIGHT
