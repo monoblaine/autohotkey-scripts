@@ -519,6 +519,14 @@ WrapTextWith(left, right) {
     Sleep 50
 }
 
+<#Left::
+    Send {Left 3}
+Return
+
+<#Right::
+    Send {Right 3}
+Return
+
 ; Credits for the debouncer code: https://www.autohotkey.com/boards/viewtopic.php?p=117262#p117262
 
 #If !GetKeyState("NumLock", "T") or (!GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt"))
