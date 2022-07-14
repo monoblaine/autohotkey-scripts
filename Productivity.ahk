@@ -923,6 +923,9 @@ return
     SendInput [%CurrentDateTime%]{Space}
 return
 
+:*:;;dfc::{Raw}[DefaultValueFactory(UseDefaultPropertyValue = true)]`n[ValidateReferenceType]
+:*:;;dfl::{Raw}[DefaultValueFactory(UseDefaultPropertyValue = true)]`n[ValidateReferenceTypeCollection]`n[LoyalReferenceTypeCollectionRange(Min = 1, ErrorMessage = "En az bir satır eklemeniz gereklidir.")]
+
 :*:;;pipe::{Raw}==============================================================================
 :*:;;dash::{Raw}------------------------------------------------------------------------------
 :*:;;mail::{Raw}zerhan@gmail.com
