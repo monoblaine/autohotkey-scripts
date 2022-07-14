@@ -274,6 +274,22 @@ Exit:
         Sleep 50
         Send ^{Home}
         Sleep 50
+        Switch result {
+            Case 6, Case 7, Case 9: ; Keys, Constraints, Indexes
+                Send ^a
+                Send !{f17} ; disable copyq
+                Clipboard := ""
+                Send, ^c
+                ClipWait
+                Clipboard := StrReplace(Clipboard, " drop constraint", "`r`ndrop constraint")
+                Clipboard := StrReplace(Clipboard, " foreign key(", "`r`nforeign key (")
+                Clipboard := StrReplace(Clipboard, " on delete cascade", "`r`non delete cascade")
+                Clipboard := StrReplace(Clipboard, " on update cascade", "`r`non update cascade")
+                Clipboard := RegexReplace(Clipboard, " references ([^(]+)", "`r`nreferences $1 ")
+                Send, ^v
+                Sleep 250
+                Send, !{f16} ; Enable copyq and activate first item
+        }
     Return
 
     $^PgDn::
