@@ -519,6 +519,8 @@ WrapTextWith(left, right) {
     Sleep 50
 }
 
+>#v::Send !{f20}
+
 <#Left::
     Send {Left 3}
 Return
