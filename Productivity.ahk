@@ -750,7 +750,7 @@ FinderIsSearchingForward := 1
         clipboard := ""
         Send, ^c
         ClipWait
-        clipboard := RegexReplace(clipboard, "^\[[^\]]+\]\.\[([^\]]+)\]$", "$1")
+        clipboard := RegexReplace(clipboard, "^(\[[^\]]+\]\.)?\[([^\]]+)\]$", "$2")
     return
 
     f3::
