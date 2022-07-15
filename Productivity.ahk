@@ -533,11 +533,11 @@ Return
 
 #If !GetKeyState("NumLock", "T") or (!GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt"))
     NumpadUp::
-        Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<15))?"":"{Blind}{Up up}{WheelUp}"
+        Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}{Up up}{WheelUp}"
     Return
 
     NumpadClear::
-        Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<15))?"":"{Blind}{Down up}{WheelDown}"
+        Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<5))?"":"{Blind}{Down up}{WheelDown}"
     Return
 #If
 
