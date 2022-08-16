@@ -382,6 +382,12 @@ return
     return
 #IfWinActive
 
+#IfWinActive ahk_exe devenv.exe
+    CapsLock::Send, (
+    !NumpadUp::Send {Blind}{WheelUp}
+    !NumpadClear::Send {Blind}{WheelDown}
+#IfWinActive
+
 *CapsLock:: return ; This forces CapsLock into a modifying key.
 RButton::RButton   ; restore the original RButton function
 
