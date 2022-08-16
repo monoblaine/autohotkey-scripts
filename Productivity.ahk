@@ -617,6 +617,7 @@ WrapTextWith(left, right) {
     <^>!+s::Send, ^!+s
     <^>!+t::Send, ^!+t
     <^>!+u::Send, ^!+u
+    +Enter::Send, (
 #IfWinActive
 
 #IfWinActive ahk_exe Ssms.exe                                                     ; SQL Server Management Studio
