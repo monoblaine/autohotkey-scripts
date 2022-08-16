@@ -50,6 +50,9 @@ SendMode Input
         Send +{Enter}
         Send {Esc}
     Return
+
+    >#>+j::Send ^!+{f12}
+    >#>+k::Send ^!+{f13}
 #IfWinActive
 
 #IfWinActive Fields ahk_class SALSUBFRAME ahk_exe soffice.bin
