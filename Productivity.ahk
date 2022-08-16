@@ -10,6 +10,7 @@ SetWinDelay, -1
 SetControlDelay, -1
 SendMode Input
 #SingleInstance force
+#MaxHotkeysPerInterval 2000
 
 GroupAdd, Group_CtrlRToF5, ahk_class CabinetWClass
 GroupAdd, Group_CtrlRToF5, ahk_exe GitExtensions.exe
