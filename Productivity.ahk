@@ -421,6 +421,13 @@ return
     clipboard := StrReplace(RegexReplace(clipboard, "\r?\n", " "), """", """""")
 return
 
+#IfWinNotActive ahk_exe soffice.bin
+    ^!+j::                                                                            ; ctrl + alt + shift + j
+        clipboard := RegexReplace(clipboard, "(\r?\n)", ",$1")
+        Send, ^v
+    return
+#IfWinNotActive
+
 <#ü::
     clipboard := ""
     Send, ^c
