@@ -16,6 +16,7 @@ GroupAdd, ExcludedApps, ahk_exe devenv.exe
 GroupAdd, ExcludedApps, ahk_exe Ssms.exe
 GroupAdd, ExcludedApps, ahk_exe soffice.bin
 GroupAdd, ExcludedApps, ahk_exe WinMergeU.exe
+GroupAdd, ExcludedApps, ahk_exe idea64.exe
 
 #IfWinActive ahk_exe WinMergeU.exe
     ^PgUp::
