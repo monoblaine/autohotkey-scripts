@@ -504,8 +504,11 @@ WrapTextWith(left, right) {
 }
 
 >#v::Send !{f20}
-
-
+<#Left::Send +{f13}
+<#Right::Send ^{f13}
+>#g::Send ^{f14}
+>#b::Send ^{f15}
+>#n::Send ^{f16}
 
 ; Credits for the debouncer code: https://www.autohotkey.com/boards/viewtopic.php?p=117262#p117262
 
