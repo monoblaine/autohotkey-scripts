@@ -676,6 +676,20 @@ WrapTextWith(left, right) {
     return
 
     <^>!+İ::Send ^!+{I}
+
+    <#+Ş::
+        Send ^+ü
+        Sleep 15
+        Send {Del}
+        Sleep 15
+        SendInput []
+        Send {Left}{Enter}{Up}{End}{Enter}{BackSpace 2}
+        Sleep 15
+        Run, ClipToQuotedLines.exe
+        Sleep 200
+        ClipBoard := RegExReplace(ClipBoard, "(\r?\n|^)([^\r\n]+)", "$1    $2")
+        Send ^v
+    Return
 #IfWinActive
 
 #IfWinActive ahk_exe soffice.bin
