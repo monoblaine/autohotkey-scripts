@@ -504,6 +504,7 @@ WrapTextWith(left, right) {
 
 ; Credits for the debouncer code: https://www.autohotkey.com/boards/viewtopic.php?p=117262#p117262
 
+#UseHook
 #If !GetKeyState("NumLock", "T") or (!GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt"))
     <#Up::
     NumpadUp::
@@ -515,6 +516,7 @@ WrapTextWith(left, right) {
         Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<17))?"":"{Blind}{Down up}{WheelDown}"
     Return
 #If
+#UseHook Off
 
 #If (!GetKeyState("NumLock", "T") or (!GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt"))) and WinActive("ahk_group Group_HScroll_SupportsShiftWheel")
     NumpadLeft::
