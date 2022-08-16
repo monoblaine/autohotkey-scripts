@@ -121,6 +121,7 @@ CapsLock & Space::SetCapsLockState % !GetKeyState("CapsLock", "T")              
 <#End::ToggleMousePos(-1, _B2)
 
 <#Numpad7::
+<#NumpadHome::
 CapsLock & NumpadHome::
 CapsLock & Numpad7::
     if GetKeyState("LAlt") {
@@ -132,6 +133,7 @@ CapsLock & Numpad7::
 return
 
 <#Numpad8::
+<#NumpadUp::
 CapsLock & NumpadUp::
 CapsLock & Numpad8::
     if GetKeyState("LAlt") {
@@ -143,6 +145,7 @@ CapsLock & Numpad8::
 return
 
 <#Numpad9::
+<#NumpadPgup::
 CapsLock & NumpadPgup::
 CapsLock & Numpad9::
     if GetKeyState("LAlt") {
@@ -154,6 +157,7 @@ CapsLock & Numpad9::
 return
 
 <#Numpad4::
+<#NumpadLeft::
 CapsLock & NumpadLeft::
 CapsLock & Numpad4::
     if GetKeyState("LAlt") {
@@ -165,6 +169,7 @@ CapsLock & Numpad4::
 return
 
 <#Numpad5::
+<#NumpadClear::
 CapsLock & NumpadClear::
 CapsLock & Numpad5::
     if GetKeyState("LAlt") {
@@ -186,6 +191,7 @@ CapsLock & Numpad5::
 return
 
 <#Numpad6::
+<#NumpadRight::
 CapsLock & NumpadRight::
 CapsLock & Numpad6::
     if GetKeyState("LAlt") {
@@ -197,6 +203,7 @@ CapsLock & Numpad6::
 return
 
 <#Numpad1::
+<#NumpadEnd::
 CapsLock & NumpadEnd::
 CapsLock & Numpad1::
     if GetKeyState("LAlt") {
@@ -208,6 +215,7 @@ CapsLock & Numpad1::
 return
 
 <#Numpad2::
+<#NumpadDown::
 CapsLock & NumpadDown::
 CapsLock & Numpad2::
     if GetKeyState("LAlt") {
@@ -219,6 +227,7 @@ CapsLock & Numpad2::
 return
 
 <#Numpad3::
+<#NumpadPgdn::
 CapsLock & NumpadPgdn::
 CapsLock & Numpad3::
     if GetKeyState("LAlt") {
@@ -496,10 +505,12 @@ WrapTextWith(left, right) {
 ; Credits for the debouncer code: https://www.autohotkey.com/boards/viewtopic.php?p=117262#p117262
 
 #If !GetKeyState("NumLock", "T") or (!GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt"))
+    <#Up::
     NumpadUp::
         Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<17))?"":"{Blind}{Up up}{WheelUp}"
     Return
 
+    <#Down::
     NumpadClear::
         Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<17))?"":"{Blind}{Down up}{WheelDown}"
     Return
