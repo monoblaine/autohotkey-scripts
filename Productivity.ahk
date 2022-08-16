@@ -74,9 +74,6 @@ _B2 := Floor(A_ScreenHeight / 2 + A_ScreenHeight / ScreenGridSizeAlternate)
 
 LastMovement := MovementMethod.unknown
 
-shift_count := 0
-arrow_mousemove_enabled := 0
-
 CoordMode, Mouse, Screen
 
 LWin & Enter::Send, {RWin Down}{Enter}{RWin Up}                                   ; lwin + Enter                 | Send rwin + Enter
@@ -98,38 +95,6 @@ CapsLock & Left::SavePosAndMouseMoveR(-14, 0)                                   
 CapsLock & Right::SavePosAndMouseMoveR(14, 0)                                     ; CapsLock + right arrow       | Move mouse pointer rightward
 CapsLock & Down::SavePosAndMouseMoveR(0, 14)                                      ; CapsLock + down arrow        | Move mouse pointer downward
 CapsLock & Up::SavePosAndMouseMoveR(0, -14)                                       ; CapsLock + up arrow          | Move mouse pointer upward
-
-~Shift::
-    if (shift_count > 0) {
-        shift_count += 1
-        Return
-    }
-
-    shift_count := 1
-    SetTimer, OnShiftPressed, -300
-Return
-
-OnShiftPressed:
-    if (shift_count > 1) {
-        arrow_mousemove_enabled := !arrow_mousemove_enabled
-
-        if (arrow_mousemove_enabled) {
-            ToolTip, Mouse moving!
-        }
-        else {
-            ToolTip
-        }
-    }
-
-    shift_count := 0
-Return
-
-#If arrow_mousemove_enabled
-    Left::SavePosAndMouseMoveR(-14, 0)
-    Right::SavePosAndMouseMoveR(14, 0)
-    Down::SavePosAndMouseMoveR(0, 14)
-    Up::SavePosAndMouseMoveR(0, -14)
-#If
 
 #If !GetKeyState("NumLock", "T")
     NumpadHome::Send, {Click 1}
