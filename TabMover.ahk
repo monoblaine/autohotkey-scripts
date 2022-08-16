@@ -23,6 +23,7 @@ procHandle_Catsxp2 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Catsxp_isAd
 procHandle_Firefox := DllCall("GetProcAddress", Ptr, hModule, AStr, "Firefox_inspectActiveTab", Ptr)
 procHandle_Vs2019 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Vs2019_inspectActiveTab", Ptr)
 procHandle_Vs2022_1 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Vs2022_inspectActiveTab", Ptr)
+procHandle_Vs2022_2 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Vs2022_isTextEditorFocused", Ptr)
 procHandle_Ssms18_1 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Ssms18_inspectActiveTab", Ptr)
 procHandle_Ssms18_2 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Ssms18_getResultsGridActiveColumnCoords", Ptr)
 procHandle_Ssms18_3 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Ssms18_getActiveArea", Ptr)
@@ -48,6 +49,7 @@ Exit:
    DllCall("CloseHandle", Ptr, procHandle_Firefox)
    DllCall("CloseHandle", Ptr, procHandle_Vs2019)
    DllCall("CloseHandle", Ptr, procHandle_Vs2022_1)
+   DllCall("CloseHandle", Ptr, procHandle_Vs2022_2)
    DllCall("CloseHandle", Ptr, procHandle_Ssms18_1)
    DllCall("CloseHandle", Ptr, procHandle_Ssms18_2)
    DllCall("CloseHandle", Ptr, procHandle_Ssms18_3)
@@ -123,6 +125,28 @@ Exit:
 #IfWinActive ahk_exe devenv.exe
     ^!PgUp::MoveVisualStudioTab(-1)
     ^!PgDn::MoveVisualStudioTab(1)
+
+    $PgDn::
+        isTextEditorFocused := DllCall(procHandle_Vs2022_2)
+        if (isTextEditorFocused) {
+            Send {Blind}{Alt Down}{WheelDown}
+            Send {Blind}{Alt Up}{Alt Down}{Alt Up}
+        }
+        else {
+            Send {PgDn}
+        }
+    Return
+
+    $PgUp::
+        isTextEditorFocused := DllCall(procHandle_Vs2022_2)
+        if (isTextEditorFocused) {
+            Send {Blind}{Alt Down}{WheelUp}
+            Send {Blind}{Alt Up}{Alt Down}{Alt Up}
+        }
+        else {
+            Send {PgUp}
+        }
+    Return
 #IfWinActive
 
 #IfWinActive ahk_exe Ssms.exe
