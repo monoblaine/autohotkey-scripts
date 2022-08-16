@@ -491,13 +491,7 @@ WrapTextWith(left, right) {
 
 >#v::Send !{f20}
 
-<#Left::
-    Send {Left 3}
-Return
 
-<#Right::
-    Send {Right 3}
-Return
 
 ; Credits for the debouncer code: https://www.autohotkey.com/boards/viewtopic.php?p=117262#p117262
 
