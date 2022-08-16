@@ -445,7 +445,12 @@ return
 ^'::
 Ctrl & ":: ;"
     if GetKeyState("RShift") {
-        WrapTextWith("'", "'")
+        if GetKeyState("RAlt") {
+            WrapTextWith("“", "”")
+        }
+        else {
+            WrapTextWith("'", "'")
+        }
     }
     else {
         WrapTextWith("""", """")
