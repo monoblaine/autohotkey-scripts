@@ -22,7 +22,7 @@ procHandle_Catsxp1 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Catsxp_getT
 procHandle_Catsxp2 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Catsxp_isAddressBarFocused", Ptr)
 procHandle_Firefox := DllCall("GetProcAddress", Ptr, hModule, AStr, "Firefox_inspectActiveTab", Ptr)
 procHandle_Vs2019 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Vs2019_inspectActiveTab", Ptr)
-procHandle_Vs2022 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Vs2022_inspectActiveTab", Ptr)
+procHandle_Vs2022_1 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Vs2022_inspectActiveTab", Ptr)
 procHandle_Ssms18_1 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Ssms18_inspectActiveTab", Ptr)
 procHandle_Ssms18_2 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Ssms18_getResultsGridActiveColumnCoords", Ptr)
 procHandle_Ssms18_3 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Ssms18_getActiveArea", Ptr)
@@ -47,7 +47,7 @@ Exit:
    DllCall("CloseHandle", Ptr, procHandle_Catsxp2)
    DllCall("CloseHandle", Ptr, procHandle_Firefox)
    DllCall("CloseHandle", Ptr, procHandle_Vs2019)
-   DllCall("CloseHandle", Ptr, procHandle_Vs2022)
+   DllCall("CloseHandle", Ptr, procHandle_Vs2022_1)
    DllCall("CloseHandle", Ptr, procHandle_Ssms18_1)
    DllCall("CloseHandle", Ptr, procHandle_Ssms18_2)
    DllCall("CloseHandle", Ptr, procHandle_Ssms18_3)
@@ -323,12 +323,12 @@ Exit:
 
 MoveVisualStudioTab(direction) {
     global procHandle_Vs2019
-    global procHandle_Vs2022
+    global procHandle_Vs2022_1
     global MovementMethod
 
     hWnd := WinExist("A")
     WinGet, pathToVsExe, ProcessPath
-    procHandle := InStr(pathToVsExe, "2022") ? procHandle_Vs2022 : procHandle_Vs2019
+    procHandle := InStr(pathToVsExe, "2022") ? procHandle_Vs2022_1 : procHandle_Vs2019
     MoveTab(1, direction, procHandle, MovementMethod.mouseClickDrag, hWnd)
 }
 
