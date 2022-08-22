@@ -395,7 +395,7 @@ return
 #IfWinActive
 
 #IfWinActive ahk_exe devenv.exe
-    CapsLock::Send, (
+    CapsLock::Send, (){Left}
     !NumpadUp::Send {Blind}{WheelUp}
     !NumpadClear::Send {Blind}{WheelDown}
 #IfWinActive
