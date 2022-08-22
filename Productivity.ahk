@@ -51,8 +51,6 @@ GroupAdd, Group_SendInputCheckBoxVariants, ahk_exe firefox.exe
 Shell := ComObjCreate("WScript.Shell")
 AutoHideMouseCursorRunning := ProcessExist("AutoHideMouseCursor_x64_p.exe")
 
-PauseKeyState := 0 ; As if it's a toggle key
-
 SavedMouseCoordX := -1
 SavedMouseCoordY := -1
 
@@ -78,15 +76,6 @@ _B2 := Floor(A_ScreenHeight / 2 + A_ScreenHeight / ScreenGridSizeAlternate)
 LastMovement := MovementMethod.unknown
 
 CoordMode, Mouse, Screen
-
-*Pause::
-    PauseKeyState := !PauseKeyState
-    Sleep, 10	; drastically improves reliability on slower systems (took a loooong time to figure this out)
-    msg := "Pause: " (PauseKeyState ? "ON" : "OFF")
-    ToolTip, %msg%
-    Sleep, 400	; SPECIFY DISPLAY TIME (ms)
-    ToolTip		; remove
-Return
 
 LWin & Enter::Send, {RWin Down}{Enter}{RWin Up}                                   ; lwin + Enter                 | Send rwin + Enter
 #w::Send, !{f15}                                                                  ; win + w                      | Send alt + f15

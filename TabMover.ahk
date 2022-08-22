@@ -11,6 +11,8 @@ SendMode Input
 Process, Priority,, R
 ;OPTIMIZATIONS END
 
+PauseKeyState := 0 ; As if it's a toggle key
+
 MovementMethod := { mouseClickDrag: 1, sendEvent: 2, foobar2000: 3 }
 
 hModule := DllCall("LoadLibrary", Str, "ActiveTabSpy.dll", Ptr)
@@ -60,6 +62,15 @@ Exit:
    DllCall("CloseHandle", Ptr, procHandle_Cleanup)
    DllCall("FreeLibrary", Ptr, hModule)
    ExitApp
+
+*Pause::
+    PauseKeyState := !PauseKeyState
+    Sleep, 10	; drastically improves reliability on slower systems (took a loooong time to figure this out)
+    msg := "Pause: " (PauseKeyState ? "ON" : "OFF")
+    ToolTip, %msg%
+    Sleep, 400	; SPECIFY DISPLAY TIME (ms)
+    ToolTip		; remove
+Return
 
 #IfWinActive ahk_exe msedge.exe
     ^!PgUp::MoveTab(1, -1, procHandle_MsEdge1, MovementMethod.mouseClickDrag)
@@ -122,12 +133,9 @@ Exit:
     ^!PgDn::MoveTab(1, 1, procHandle_Firefox, MovementMethod.sendEvent)
 #IfWinActive
 
-#IfWinActive ahk_exe devenv.exe
-    ^!PgUp::MoveVisualStudioTab(-1)
-    ^!PgDn::MoveVisualStudioTab(1)
-
+#If WinActive("ahk_exe devenv.exe") and !PauseKeyState
     $PgDn::
-        isTextEditorFocused := DllCall(procHandle_Vs2022_2)
+        isTextEditorFocused := DllCall(procHandle_Vs2022_2, Int, WinExist("A"))
         if (isTextEditorFocused) {
             Send {Blind}{Alt Down}{WheelDown}
             Send {Blind}{Alt Up}{Alt Down}{Alt Up}
@@ -138,7 +146,7 @@ Exit:
     Return
 
     $PgUp::
-        isTextEditorFocused := DllCall(procHandle_Vs2022_2)
+        isTextEditorFocused := DllCall(procHandle_Vs2022_2, Int, WinExist("A"))
         if (isTextEditorFocused) {
             Send {Blind}{Alt Down}{WheelUp}
             Send {Blind}{Alt Up}{Alt Down}{Alt Up}
@@ -147,6 +155,11 @@ Exit:
             Send {PgUp}
         }
     Return
+#If
+
+#IfWinActive ahk_exe devenv.exe
+    ^!PgUp::MoveVisualStudioTab(-1)
+    ^!PgDn::MoveVisualStudioTab(1)
 #IfWinActive
 
 #IfWinActive ahk_exe Ssms.exe
