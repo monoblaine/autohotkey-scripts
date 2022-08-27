@@ -26,6 +26,7 @@ procHandle_Firefox := DllCall("GetProcAddress", Ptr, hModule, AStr, "Firefox_ins
 procHandle_Vs2019 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Vs2019_inspectActiveTab", Ptr)
 procHandle_Vs2022_1 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Vs2022_inspectActiveTab", Ptr)
 procHandle_Vs2022_2 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Vs2022_isTextEditorFocused", Ptr)
+procHandle_Vs2022_3 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Vs2022_selectedIntelliSenseItemIsAMethod", Ptr)
 procHandle_Ssms18_1 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Ssms18_inspectActiveTab", Ptr)
 procHandle_Ssms18_2 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Ssms18_getResultsGridActiveColumnCoords", Ptr)
 procHandle_Ssms18_3 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Ssms18_getActiveArea", Ptr)
@@ -52,6 +53,7 @@ Exit:
    DllCall("CloseHandle", Ptr, procHandle_Vs2019)
    DllCall("CloseHandle", Ptr, procHandle_Vs2022_1)
    DllCall("CloseHandle", Ptr, procHandle_Vs2022_2)
+   DllCall("CloseHandle", Ptr, procHandle_Vs2022_3)
    DllCall("CloseHandle", Ptr, procHandle_Ssms18_1)
    DllCall("CloseHandle", Ptr, procHandle_Ssms18_2)
    DllCall("CloseHandle", Ptr, procHandle_Ssms18_3)
@@ -153,6 +155,16 @@ Return
         }
         else {
             Send {PgUp}
+        }
+    Return
+
+    $Tab::
+        selectedIntelliSenseItemIsAMethod := DllCall(procHandle_Vs2022_3, Int, WinExist("A"))
+        if (selectedIntelliSenseItemIsAMethod) {
+            Send (){Left}
+        }
+        else {
+            Send {Tab}
         }
     Return
 #If
