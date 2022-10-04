@@ -136,28 +136,6 @@ Return
 #IfWinActive
 
 #If WinActive("ahk_exe devenv.exe") and !PauseKeyState
-    $PgDn::
-        isTextEditorFocused := DllCall(procHandle_Vs2022_2, Int, WinExist("A"))
-        if (isTextEditorFocused) {
-            Send {Blind}{Alt Down}{WheelDown}
-            Send {Blind}{Alt Up}{Alt Down}{Alt Up}
-        }
-        else {
-            Send {PgDn}
-        }
-    Return
-
-    $PgUp::
-        isTextEditorFocused := DllCall(procHandle_Vs2022_2, Int, WinExist("A"))
-        if (isTextEditorFocused) {
-            Send {Blind}{Alt Down}{WheelUp}
-            Send {Blind}{Alt Up}{Alt Down}{Alt Up}
-        }
-        else {
-            Send {PgUp}
-        }
-    Return
-
     $Tab::
         selectedIntelliSenseItemIsAMethod := DllCall(procHandle_Vs2022_3, Int, WinExist("A"))
         if (selectedIntelliSenseItemIsAMethod) {
