@@ -706,6 +706,9 @@ WrapTextWith(left, right) {
         ClipBoard := RegExReplace(ClipBoard, "(\r?\n|^)([^\r\n]+)", "$1    $2")
         Send ^v
     Return
+
+    >#b::Send {F7}
+    >#g::Send {Esc}
 #IfWinActive
 
 #IfWinActive ahk_exe soffice.bin
