@@ -366,7 +366,7 @@ MoveVisualStudioTab(direction) {
     hWnd := WinExist("A")
     WinGet, pathToVsExe, ProcessPath
     procHandle := InStr(pathToVsExe, "2022") ? procHandle_Vs2022_1 : procHandle_Vs2019
-    MoveTab(0, direction, procHandle, MovementMethod.mouseClickDrag, hWnd)
+    MoveTab(1, direction, procHandle, MovementMethod.mouseClickDrag, hWnd)
 }
 
 MoveTab(horizontal, direction, procHandle, movementMethodId, maybeHWnd := 0, widthHeightFactor := 0) {
