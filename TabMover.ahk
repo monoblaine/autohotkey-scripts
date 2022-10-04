@@ -38,13 +38,6 @@ procHandle_Cleanup := DllCall("GetProcAddress", Ptr, hModule, AStr, "cleanup", P
 
 CoordMode, Mouse, Screen
 
-LastKeys := ""
-
-Loop {
-    Input, LastKey, L1 V
-    LastKeys := SubStr(LastKeys LastKey, -20)
-}
-
 OnExit, Exit
 return
 
@@ -144,15 +137,19 @@ Return
 
 #If WinActive("ahk_exe devenv.exe") and !PauseKeyState
     $Tab::
-        MsgBox, LastKeys: %LastKeys%
-        newWasTyped := InStr(LastKeys, " new ", true) ? 1 : 0
-        MsgBox, newWasTyped: %newWasTyped%
-        selectedIntelliSenseItemIsAMethod := DllCall(procHandle_Vs2022_3, Int, WinExist("A"), Int, newWasTyped)
-        if (selectedIntelliSenseItemIsAMethod) {
+        if (DllCall(procHandle_Vs2022_3, Int, WinExist("A"), Int, 0)) {
             Send (){Left}
         }
         else {
             Send {Tab}
+        }
+    Return
+    $+Enter::
+        if (DllCall(procHandle_Vs2022_3, Int, WinExist("A"), Int, 1)) {
+            Send (){Left}
+        }
+        else {
+            Send +{Enter}
         }
     Return
 #If
