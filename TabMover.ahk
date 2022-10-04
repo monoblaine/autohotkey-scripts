@@ -152,6 +152,18 @@ Return
             Send +{Enter}
         }
     Return
+    $^Enter::
+        Switch DllCall(procHandle_Vs2022_3, Int, WinExist("A"), Int, 1) {
+            Case 1:
+                Send (){;}
+
+            Case 2:
+                Send {;}
+
+            Default:
+                Send ^{Enter}
+        }
+    Return
 #If
 
 #IfWinActive ahk_exe devenv.exe
