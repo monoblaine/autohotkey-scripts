@@ -95,6 +95,17 @@ CapsLock & Right::SavePosAndMouseMoveR(14, 0)                                   
 CapsLock & Down::SavePosAndMouseMoveR(0, 14)                                      ; CapsLock + down arrow        | Move mouse pointer downward
 CapsLock & Up::SavePosAndMouseMoveR(0, -14)                                       ; CapsLock + up arrow          | Move mouse pointer upward
 
++NumpadHome::Send {Numpad7}
++NumpadUp::Send {Numpad8}
++NumpadPgup::Send {Numpad9}
++NumpadLeft::Send {Numpad4}
++NumpadClear::Send {Numpad5}
++NumpadRight::Send {Numpad6}
++NumpadEnd::Send {Numpad1}
++NumpadDown::Send {Numpad2}
++NumpadPgdn::Send {Numpad3}
++NumpadIns::Send {Numpad0}
+
 #If !GetKeyState("NumLock", "T")
     NumpadHome::Send, {Click 1}
     ^NumpadHome::Send, {MButton 1}
