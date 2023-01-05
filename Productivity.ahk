@@ -97,7 +97,7 @@ CapsLock & Up::SavePosAndMouseMoveR(0, -14)                                     
 
 #If !GetKeyState("NumLock", "T")
     NumpadHome::Send, {Click 1}
-    +NumpadHome::Send, {MButton 1}
+    ^NumpadHome::Send, {MButton 1}
     NumpadPgup::Click, Right
 #If
 
