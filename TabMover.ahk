@@ -138,7 +138,7 @@ Return
 #If WinActive("ahk_exe devenv.exe") and !PauseKeyState
     $Tab::
         if (DllCall(procHandle_Vs2022_3, Int, WinExist("A"), Int, 0)) {
-            Send (){Left}
+            Send ()
         }
         else {
             Send {Tab}
