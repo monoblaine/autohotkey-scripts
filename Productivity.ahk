@@ -855,6 +855,11 @@ return
     SendInput [%CurrentDateTime%]{Space}
 return
 
+:*:;;vnow::                                                    ; Replace ";;vnow" with current date and time without separators
+    FormatTime, CurrentDateTime,, yyyMMddHHmm                  ; 200910131057
+    SendInput %CurrentDateTime%
+return
+
 :*:;;dfc::{Raw}[DefaultValueFactory(UseDefaultPropertyValue = true)]`n[ValidateReferenceType]
 :*:;;dfl::{Raw}[DefaultValueFactory(UseDefaultPropertyValue = true)]`n[ValidateReferenceTypeCollection]`n[LoyalReferenceTypeCollectionRange(Min = 1, ErrorMessage = "En az bir satır eklemeniz gereklidir.")]
 
