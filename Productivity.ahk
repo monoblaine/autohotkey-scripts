@@ -120,7 +120,15 @@ CapsLock & Ins::                                                                
 Return
 
 #Home::                                                                           ; Win + Home
-CapsLock & Home::ToggleMousePos(SavedMouseCoordX, SavedMouseCoordY)               ; CapsLock + Home              | Go to saved Mouse Coord
+CapsLock & Home::                                                                 ; CapsLock + Home              | Go to saved Mouse Coord
+    if (LastMovement = MovementMethod.unknown) {
+        ToggleMousePos(_R1, _T1 + 14 * 9)
+    }
+    else {
+        ToggleMousePos(SavedMouseCoordX, SavedMouseCoordY)
+    }
+Return
+
 CapsLock & Space::SetCapsLockState % !GetKeyState("CapsLock", "T")                ; CapsLock + Space             | Toggle CapsLock state
 
 #If !GetKeyState("LAlt")
