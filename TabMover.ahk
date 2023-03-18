@@ -231,6 +231,8 @@ Return
         ptr_result := ""
 
         if (result) {
+            Send !{f17} ; disable copyq
+            Sleep 100
             Clipboard := Trim(cellContent, " `t`r`n") . "`r`ngo`r`n"
             cellContent := ""
 
@@ -242,8 +244,11 @@ Return
                 Send {Ctrl Down}{e Down}{r Down}{e Up}{r Up}{Ctrl Up}
                 Sleep 50
                 Send ^{Home}
-                Sleep 50
             }
+
+            Sleep 250
+            Send !{f16} ; Enable copyq and activate first item
+            Sleep 50
         }
 
         SsmsOpenCellContentInNewTab := 0
