@@ -714,6 +714,7 @@ WrapTextWith(left, right) {
     <^>!+İ::Send ^!+{I}
 
     <#+Ş::
+        Send, !{f17} ; disable copyq
         Send ^+ü
         Sleep 15
         Send {Del}
@@ -725,6 +726,8 @@ WrapTextWith(left, right) {
         Sleep 200
         ClipBoard := RegExReplace(ClipBoard, "(\r?\n|^)([^\r\n]+)", "$1    $2")
         Send ^v
+        Sleep 250
+        Send, !{f16} ; Enable copyq and activate first item
     Return
 
     >#b::Send {F7}
