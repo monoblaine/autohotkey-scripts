@@ -123,6 +123,11 @@ Return
         }
     return
 
+    ~<!Home::
+        Sleep 50
+        Send ^l
+    Return
+
     ~Esc::
         if DllCall(procHandle_Catsxp2, Int, WinExist("A")) {
             Send, +{f6}
