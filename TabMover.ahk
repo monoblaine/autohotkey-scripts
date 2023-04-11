@@ -118,6 +118,9 @@ Return
         if DllCall(procHandle_Catsxp1, Int, WinExist("A")) {
             Send, {Esc}
         }
+        else {
+            Send, {f10}
+        }
     return
 
     ~Esc::
