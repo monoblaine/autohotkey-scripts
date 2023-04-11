@@ -106,22 +106,32 @@ Return
     return
 #IfWinActive
 
-#IfWinActive ahk_exe catsxp.exe
-    ^!PgUp::Send, ^+{PgUp}
-    ^!PgDn::Send, ^+{PgDn}
+lalt_count := 0
 
-    ~LAlt::
-        if GetKeyState("Ctrl") {
-            return
-        }
-
+OnLAltPressed:
+    if (lalt_count > 1) {
         if DllCall(procHandle_Catsxp1, Int, WinExist("A")) {
             Send, {Esc}
         }
         else {
             Send, {f10}
         }
-    return
+    }
+    lalt_count := 0
+Return
+
+#IfWinActive ahk_exe catsxp.exe
+    ^!PgUp::Send, ^+{PgUp}
+    ^!PgDn::Send, ^+{PgDn}
+
+    ~LAlt::
+        if (lalt_count > 0) {
+            lalt_count += 1
+            Return
+        }
+        lalt_count := 1
+        SetTimer, OnLAltPressed, -300
+    Return
 
     ~<!Home::
         Sleep 50
