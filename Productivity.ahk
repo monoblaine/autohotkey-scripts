@@ -72,6 +72,8 @@ _R1 := Floor(A_ScreenWidth  / 2 + A_ScreenWidth  / ScreenGridSizePrimary)
 _R2 := Floor(A_ScreenWidth  / 2 + A_ScreenWidth  / ScreenGridSizeAlternate)
 _B1 := Floor(A_ScreenHeight / 2 + A_ScreenHeight / ScreenGridSizePrimary)
 _B2 := Floor(A_ScreenHeight / 2 + A_ScreenHeight / ScreenGridSizeAlternate)
+_RelativeHorizontalJump := Floor(A_ScreenWidth  / ScreenGridSizeAlternate / 2) ; _CX - _L2
+_RelativeVerticalJump   := Floor(A_ScreenHeight / ScreenGridSizeAlternate / 2) ;_CY - _T2
 
 LastMovement := MovementMethod.unknown
 
@@ -149,7 +151,7 @@ CapsLock & Numpad7::
         ToggleMousePos(_L1, _T1)
     }
     else {
-        ToggleMousePos(_L2, _T2)
+        ToggleMousePos(-_RelativeHorizontalJump, -_RelativeVerticalJump, 1)
     }
 return
 
@@ -161,7 +163,7 @@ CapsLock & Numpad8::
         ToggleMousePos(_CX, _T1)
     }
     else {
-        ToggleMousePos(-1,  _T2)
+        ToggleMousePos(0, -_RelativeVerticalJump, 1)
     }
 return
 
@@ -173,7 +175,7 @@ CapsLock & Numpad9::
         ToggleMousePos(_R1, _T1)
     }
     else {
-        ToggleMousePos(_R2, _T2)
+        ToggleMousePos(_RelativeHorizontalJump, -_RelativeVerticalJump, 1)
     }
 return
 
@@ -185,7 +187,7 @@ CapsLock & Numpad4::
         ToggleMousePos(_L1, _CY)
     }
     else {
-        ToggleMousePos(_L2,  -1)
+        ToggleMousePos(-_RelativeHorizontalJump, 0, 1)
     }
 return
 
@@ -198,17 +200,7 @@ CapsLock & Numpad5::
         Return
     }
 
-    targetx := _CX
-    targety := _CY
-
-    if (LastMovement = MovementMethod.horizontal) {
-        targety := -1
-    }
-    else if (LastMovement = MovementMethod.vertical) {
-        targetx := -1
-    }
-
-    ToggleMousePos(targetx, targety)
+    ToggleMousePos(0, _RelativeVerticalJump, 1)
 return
 
 <#Numpad6::
@@ -219,7 +211,7 @@ CapsLock & Numpad6::
         ToggleMousePos(_R1, _CY)
     }
     else {
-        ToggleMousePos(_R2,  -1)
+        ToggleMousePos(_RelativeHorizontalJump, 0, 1)
     }
 return
 
@@ -231,7 +223,7 @@ CapsLock & Numpad1::
         ToggleMousePos(_L1, _B1)
     }
     else {
-        ToggleMousePos(_L2, _B2)
+        ToggleMousePos(-_RelativeHorizontalJump, _RelativeVerticalJump, 1)
     }
 return
 
@@ -243,7 +235,7 @@ CapsLock & Numpad2::
         ToggleMousePos(_CX, _B1)
     }
     else {
-        ToggleMousePos(-1,  _B2)
+        ToggleMousePos(0, _RelativeVerticalJump, 1)
     }
 return
 
@@ -255,7 +247,7 @@ CapsLock & Numpad3::
         ToggleMousePos(_R1, _B1)
     }
     else {
-        ToggleMousePos(_R2, _B2)
+        ToggleMousePos(_RelativeHorizontalJump, _RelativeVerticalJump, 1)
     }
 return
 
@@ -920,7 +912,7 @@ ProcessExist(Name) {
     return Errorlevel
 }
 
-ToggleMousePos(targetx, targety) {
+ToggleMousePos(targetx, targety, isRelative := 0) {
     Global LastMouseCoordX
     Global LastMouseCoordY
     Global LastMovement
@@ -932,12 +924,18 @@ ToggleMousePos(targetx, targety) {
 
     LastMovement := MovementMethod.unknown
 
-    if (targetx = -1) {
-        targetx := xpos
+    if (isRelative = 1) {
+        targetx := xpos + targetx
+        targety := ypos + targety
     }
+    else {
+        if (targetx = -1) {
+            targetx := xpos
+        }
 
-    if (targety = -1) {
-        targety := ypos
+        if (targety = -1) {
+            targety := ypos
+        }
     }
 
     ; MsgBox, last: %LastMouseCoordX%,%LastMouseCoordY%`ncurrent: %xpos%,%ypos%`ntarget: %targetx%,%targety%
