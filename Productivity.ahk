@@ -455,10 +455,14 @@ return
 return
 
 ^!+n::                                                                            ; ctrl + alt + shift + n
+    Send, !{f17} ; disable copyq
     clipboard := ""
     Send, ^c
     ClipWait
-    clipboard := StrReplace(RegexReplace(clipboard, "\r?\n", " "), """", """""")
+    clipboard := RegexReplace(clipboard, " *\r?\n *", " ")
+    Send, ^v
+    Sleep 250
+    Send, !{f16} ; Enable copyq and activate first item
 return
 
 #IfWinNotActive ahk_exe soffice.bin
