@@ -404,6 +404,15 @@ return
 #IfWinActive ahk_exe devenv.exe
     !NumpadUp::Send {Blind}{WheelUp}
     !NumpadClear::Send {Blind}{WheelDown}
+    <!Backspace::
+        Send ^+ü
+        Sleep, 15
+        Send {Backspace}
+        Sleep, 15
+        SendInput ""
+        Sleep, 15
+        Send {Left}
+    Return
 #IfWinActive
 
 *CapsLock:: return ; This forces CapsLock into a modifying key.
