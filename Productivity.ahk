@@ -91,6 +91,12 @@ CapsLock & Del::Send, !{f4}                                                     
 ^!+Right::Media_Next                                                              ; ctrl + alt + shift + right   | Media_Next
 ^!+Down::Media_Play_Pause                                                         ; ctrl + alt + shift + down    | Media_Play_Pause
 ^!+Up::Media_Stop                                                                 ; ctrl + alt + shift + up      | Media_Stop
+^!+b::
+    clipboard := ""
+    Send, ^c
+    ClipWait
+    clipboard := SubStr(clipboard, 2, StrLen(clipboard) - 2)
+Return
 
 CapsLock & Left::SavePosAndMouseMoveR(-14, 0)                                     ; CapsLock + left arrow        | Move mouse pointer leftward
 CapsLock & Right::SavePosAndMouseMoveR(14, 0)                                     ; CapsLock + right arrow       | Move mouse pointer rightward
