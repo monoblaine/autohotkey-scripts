@@ -72,8 +72,8 @@ _R1 := Floor(A_ScreenWidth  / 2 + A_ScreenWidth  / ScreenGridSizePrimary)
 _R2 := Floor(A_ScreenWidth  / 2 + A_ScreenWidth  / ScreenGridSizeAlternate)
 _B1 := Floor(A_ScreenHeight / 2 + A_ScreenHeight / ScreenGridSizePrimary)
 _B2 := Floor(A_ScreenHeight / 2 + A_ScreenHeight / ScreenGridSizeAlternate)
-_RelativeHorizontalJump := Floor(A_ScreenWidth  / ScreenGridSizeAlternate / 2) ; _CX - _L2
-_RelativeVerticalJump   := Floor(A_ScreenHeight / ScreenGridSizeAlternate / 2) ;_CY - _T2
+_RelativeHorizontalJump := Floor(A_ScreenWidth  / ScreenGridSizeAlternate / 4) ; _CX - _L2
+_RelativeVerticalJump   := Floor(A_ScreenHeight / ScreenGridSizeAlternate / 4) ;_CY - _T2
 
 LastMovement := MovementMethod.unknown
 
@@ -98,10 +98,41 @@ CapsLock & Del::Send, !{f4}                                                     
     clipboard := SubStr(clipboard, 2, StrLen(clipboard) - 2)
 Return
 
-CapsLock & Left::SavePosAndMouseMoveR(-14, 0)                                     ; CapsLock + left arrow        | Move mouse pointer leftward
-CapsLock & Right::SavePosAndMouseMoveR(14, 0)                                     ; CapsLock + right arrow       | Move mouse pointer rightward
-CapsLock & Down::SavePosAndMouseMoveR(0, 14)                                      ; CapsLock + down arrow        | Move mouse pointer downward
-CapsLock & Up::SavePosAndMouseMoveR(0, -14)                                       ; CapsLock + up arrow          | Move mouse pointer upward
+CapsLock & Left::                                                                 ; CapsLock + left arrow        | Move mouse pointer leftward
+    if GetKeyState("LAlt") {
+        ToggleMousePos(-_RelativeHorizontalJump, 0, 1)
+    }
+    else {
+        SavePosAndMouseMoveR(-14, 0)
+    }
+Return
+CapsLock & Right::                                                                ; CapsLock + right arrow       | Move mouse pointer rightward
+    if GetKeyState("LAlt") {
+        ToggleMousePos(_RelativeHorizontalJump, 0, 1)
+    }
+    else {
+        SavePosAndMouseMoveR(14, 0)
+    }
+Return
+Return
+CapsLock & Down::                                                                 ; CapsLock + down arrow        | Move mouse pointer downward
+    if GetKeyState("LAlt") {
+        ToggleMousePos(0, _RelativeVerticalJump, 1)
+    }
+    else {
+        SavePosAndMouseMoveR(0, 14)
+    }
+Return
+Return
+CapsLock & Up::                                                                   ; CapsLock + up arrow          | Move mouse pointer upward
+    if GetKeyState("LAlt") {
+        ToggleMousePos(0, -_RelativeVerticalJump, 1)
+    }
+    else {
+        SavePosAndMouseMoveR(0, -14)
+    }
+Return
+Return
 
 +NumpadHome::Send {Numpad7}
 +NumpadUp::Send {Numpad8}
