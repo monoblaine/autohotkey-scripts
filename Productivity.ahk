@@ -188,7 +188,7 @@ CapsLock & Numpad7::
         ToggleMousePos(_L1, _T1)
     }
     else {
-        ToggleMousePos(-_RelativeHorizontalJump, -_RelativeVerticalJump, 1)
+        ToggleMousePos(_L2, _T2)
     }
 return
 
@@ -200,7 +200,7 @@ CapsLock & Numpad8::
         ToggleMousePos(_CX, _T1)
     }
     else {
-        ToggleMousePos(0, -_RelativeVerticalJump, 1)
+        ToggleMousePos(-1,  _T2)
     }
 return
 
@@ -212,7 +212,7 @@ CapsLock & Numpad9::
         ToggleMousePos(_R1, _T1)
     }
     else {
-        ToggleMousePos(_RelativeHorizontalJump, -_RelativeVerticalJump, 1)
+        ToggleMousePos(_R2, _T2)
     }
 return
 
@@ -224,7 +224,7 @@ CapsLock & Numpad4::
         ToggleMousePos(_L1, _CY)
     }
     else {
-        ToggleMousePos(-_RelativeHorizontalJump, 0, 1)
+        ToggleMousePos(_L2,  -1)
     }
 return
 
@@ -237,7 +237,17 @@ CapsLock & Numpad5::
         Return
     }
 
-    ToggleMousePos(0, _RelativeVerticalJump, 1)
+    targetx := _CX
+    targety := _CY
+
+    if (LastMovement = MovementMethod.horizontal) {
+        targety := -1
+    }
+    else if (LastMovement = MovementMethod.vertical) {
+        targetx := -1
+    }
+
+    ToggleMousePos(targetx, targety)
 return
 
 <#Numpad6::
@@ -248,7 +258,7 @@ CapsLock & Numpad6::
         ToggleMousePos(_R1, _CY)
     }
     else {
-        ToggleMousePos(_RelativeHorizontalJump, 0, 1)
+        ToggleMousePos(_R2,  -1)
     }
 return
 
@@ -260,7 +270,7 @@ CapsLock & Numpad1::
         ToggleMousePos(_L1, _B1)
     }
     else {
-        ToggleMousePos(-_RelativeHorizontalJump, _RelativeVerticalJump, 1)
+        ToggleMousePos(_L2, _B2)
     }
 return
 
@@ -272,7 +282,7 @@ CapsLock & Numpad2::
         ToggleMousePos(_CX, _B1)
     }
     else {
-        ToggleMousePos(0, _RelativeVerticalJump, 1)
+        ToggleMousePos(-1,  _B2)
     }
 return
 
@@ -284,7 +294,7 @@ CapsLock & Numpad3::
         ToggleMousePos(_R1, _B1)
     }
     else {
-        ToggleMousePos(_RelativeHorizontalJump, _RelativeVerticalJump, 1)
+        ToggleMousePos(_R2, _B2)
     }
 return
 
