@@ -1,0 +1,7 @@
+{
+	"dependencies": {
+		"clipboardy": "^3.0.0",
+		"eval": "^0.1.8",
+		"node-eval": "^2.0.0"
+	}
+}

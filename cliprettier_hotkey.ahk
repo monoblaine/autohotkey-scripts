@@ -36,6 +36,19 @@ SendMode Input
     Send, !{f16} ; Enable copyq and activate first item
 return
 
+;^!+e:: ; ctrl alt shift e (altgr shift e)
++f1::
+    if !StrLen(clipboard) {
+        return
+    }
+    Send, !{f17} ; disable copyq
+    Sleep 50
+    clipboard := cmdRet("cmd /c node """ . A_WorkingDir . "\jseval_clipboard\index.js""")
+    Send, ^v
+    Sleep 250
+    Send, !{f16} ; Enable copyq and activate first item
+return
+
 ; Credits: https://www.autohotkey.com/boards/viewtopic.php?p=369467&sid=8f629fbb868110d24a4db2545cd0fa08#p369467
 cmdRet(sCmd, callBackFuncObj := "", encoding := "CP0") {
    static HANDLE_FLAG_INHERIT := 0x00000001, flags := HANDLE_FLAG_INHERIT
