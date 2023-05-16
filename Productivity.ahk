@@ -879,6 +879,16 @@ WrapTextWith(left, right) {
     return
 #If
 
+#If WinActive("ahk_exe idea64.exe") && WinExist("ahk_class SunAwtWindow")
+    ; Up::Send {Esc}{Up}
+    ; Right::Send {Esc}{Right}
+    ; Down::Send {Esc}{Down}
+    ; Left::Send {Esc}{Left}
+    Home::Send {Esc}{Home}
+    End::Send {Esc}{End}
+    Ctrl::Send {Esc}
+#If
+
 ;==============================================================================
 ; Various SendInput commands
 ;==============================================================================
