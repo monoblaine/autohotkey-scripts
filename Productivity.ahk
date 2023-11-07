@@ -790,6 +790,7 @@ WrapTextWith(left, right) {
 
     >#b::Send {F7}
     >#g::Send {Esc}
+    >#w::Send {F6}
 #IfWinActive
 
 #IfWinActive ahk_exe soffice.bin
