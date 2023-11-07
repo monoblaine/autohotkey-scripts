@@ -12,6 +12,8 @@ SendMode Input
 #SingleInstance force
 #MaxHotkeysPerInterval 2000
 
+#include TrayIcon.ahk
+
 GroupAdd, Group_CtrlRToF5, ahk_class CabinetWClass
 GroupAdd, Group_CtrlRToF5, ahk_exe GitExtensions.exe
 GroupAdd, Group_CtrlRToF5, ahk_exe WinMergeU.exe
