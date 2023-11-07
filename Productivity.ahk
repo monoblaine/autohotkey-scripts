@@ -76,6 +76,8 @@ _B1 := Floor(A_ScreenHeight / 2 + A_ScreenHeight / ScreenGridSizePrimary)
 _B2 := Floor(A_ScreenHeight / 2 + A_ScreenHeight / ScreenGridSizeAlternate)
 _RelativeHorizontalJump := Floor(A_ScreenWidth  / ScreenGridSizeAlternate / 4) ; _CX - _L2
 _RelativeVerticalJump   := Floor(A_ScreenHeight / ScreenGridSizeAlternate / 4) ;_CY - _T2
+_DateTimeX := A_ScreenWidth - 71
+_DateTimeY := A_ScreenHeight - 15
 
 LastMovement := MovementMethod.unknown
 
@@ -489,6 +491,12 @@ return
 
 >#>+g::
     TrayIcon_Button("GoogleDriveFS.exe")
+Return
+
+>#>+d::
+    MouseGetPos, xpos, ypos
+    Click, %_DateTimeX%, %_DateTimeY%
+    MouseMove, %xpos%, %ypos%
 Return
 
 ; Text–only paste from clipboard (Trims leading and trailing whitespaces)
