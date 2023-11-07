@@ -481,7 +481,7 @@ return
             WinMinimize
         }
         else {
-            WinActivate
+            TrayIcon_Button("thunderbird.exe")
         }
     }
 return
