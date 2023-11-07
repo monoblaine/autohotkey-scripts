@@ -486,6 +486,10 @@ return
     }
 return
 
+>#>+g::
+    TrayIcon_Button("GoogleDriveFS.exe")
+Return
+
 ; Text–only paste from clipboard (Trims leading and trailing whitespaces)
 ^+v:: ; ctrl + shift + v
     originalClipboard := ClipBoardAll
