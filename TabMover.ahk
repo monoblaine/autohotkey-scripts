@@ -8,7 +8,6 @@ SetKeyDelay, -1, -1
 SetWinDelay, -1
 SetControlDelay, -1
 SendMode Input
-Process, Priority,, R
 ;OPTIMIZATIONS END
 
 PauseKeyState := 0 ; As if it's a toggle key

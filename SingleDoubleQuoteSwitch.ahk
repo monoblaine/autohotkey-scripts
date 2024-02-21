@@ -11,7 +11,6 @@ SetDefaultMouseSpeed, 0
 SetWinDelay, -1
 SetControlDelay, -1
 SendMode Input
-Process, Priority,, R
 #SingleInstance force
 
 "::'
