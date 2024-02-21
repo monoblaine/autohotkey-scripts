@@ -14,7 +14,7 @@ SendMode Input
 
 >#Tab::Send, ^+{f24}
 
-#Tab::
+<#Tab::
     visibleWindows := GetVisibleWindows()
     windowCount := visibleWindows.MaxIndex()
 
