@@ -26,6 +26,7 @@ procHandle_Vs2019 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Vs2019_inspe
 procHandle_Vs2022_1 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Vs2022_inspectActiveTab", Ptr)
 procHandle_Vs2022_2 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Vs2022_isTextEditorFocused", Ptr)
 procHandle_Vs2022_3 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Vs2022_selectedIntelliSenseItemIsAMethod", Ptr)
+procHandle_Vs2022_4 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Vs2022_popupWinExists", Ptr)
 procHandle_Ssms18_1 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Ssms18_inspectActiveTab", Ptr)
 procHandle_Ssms18_2 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Ssms18_getResultsGridActiveColumnCoords", Ptr)
 procHandle_Ssms18_3 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Ssms18_getActiveArea", Ptr)
@@ -54,6 +55,7 @@ Exit:
    DllCall("CloseHandle", Ptr, procHandle_Vs2022_1)
    DllCall("CloseHandle", Ptr, procHandle_Vs2022_2)
    DllCall("CloseHandle", Ptr, procHandle_Vs2022_3)
+   DllCall("CloseHandle", Ptr, procHandle_Vs2022_4)
    DllCall("CloseHandle", Ptr, procHandle_Ssms18_1)
    DllCall("CloseHandle", Ptr, procHandle_Ssms18_2)
    DllCall("CloseHandle", Ptr, procHandle_Ssms18_3)
@@ -181,6 +183,22 @@ Return
 
             Default:
                 Send ^{Enter}
+        }
+    Return
+    $End::
+        if (DllCall(procHandle_Vs2022_4, Int, WinExist("A"))) {
+            Send {Esc}
+        }
+        else {
+            Send {End}
+        }
+    Return
+    $Home::
+        if (DllCall(procHandle_Vs2022_4, Int, WinExist("A"))) {
+            Send {Esc}
+        }
+        else {
+            Send {Home}
         }
     Return
 #If
