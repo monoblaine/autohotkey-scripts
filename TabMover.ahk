@@ -185,6 +185,22 @@ Return
                 Send ^{Enter}
         }
     Return
+    $!Enter::
+        if (DllCall(procHandle_Vs2022_3, Int, WinExist("A"), Int, 1)) {
+            Send {{}{Left}{Space}
+        }
+        else {
+            Send !{Enter}
+        }
+    Return
+    $SC056::
+        if (DllCall(procHandle_Vs2022_3, Int, WinExist("A"), Int, 1)) {
+            Send <>{Left}
+        }
+        else {
+            Send <
+        }
+    Return
     $End::
         if (DllCall(procHandle_Vs2022_4, Int, WinExist("A"))) {
             Send {Esc}
