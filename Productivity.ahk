@@ -757,6 +757,17 @@ WrapTextWith(left, right) {
         Send {Right}{Left}
         Send +{f19}
     return
+
+    #+r::
+        Send, !{f17} ; disable copyq
+        clipboard := ""
+        Send, ^c
+        ClipWait
+        clipboard := RegexReplace(clipboard, """(varchar|nvarchar|int|tinyint|bit|date|datetimeoffset|datetime|decimal)""", "$1")
+        Send, ^v
+        Sleep 250
+        Send, !{f16} ; Enable copyq and activate first item
+    Return
 #IfWinActive
 
 #IfWinActive ahk_exe 7zFM.exe                                                     ; if it is 7-Zip
