@@ -17,10 +17,6 @@ MovementMethod := { mouseClickDrag: 1, sendEvent: 2, foobar2000: 3 }
 hModule := DllCall("LoadLibrary", Str, "ActiveTabSpy.dll", Ptr)
 procHandle_MsEdge1 := DllCall("GetProcAddress", Ptr, hModule, AStr, "MsEdge_inspectActiveTab", Ptr)
 procHandle_MsEdge2 := DllCall("GetProcAddress", Ptr, hModule, AStr, "MsEdge_getThreeDotBtnStatus", Ptr)
-procHandle_Chromium1 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Chromium_inspectActiveTab", Ptr)
-procHandle_Chromium2 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Chromium_getThreeDotBtnStatus", Ptr)
-procHandle_Catsxp1 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Catsxp_getThreeDotBtnStatus", Ptr)
-procHandle_Catsxp2 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Catsxp_isAddressBarFocused", Ptr)
 procHandle_Firefox := DllCall("GetProcAddress", Ptr, hModule, AStr, "Firefox_inspectActiveTab", Ptr)
 procHandle_Vs2019 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Vs2019_inspectActiveTab", Ptr)
 procHandle_Vs2022_1 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Vs2022_inspectActiveTab", Ptr)
@@ -46,10 +42,6 @@ Exit:
    DllCall(procHandle_Cleanup)
    DllCall("CloseHandle", Ptr, procHandle_MsEdge1)
    DllCall("CloseHandle", Ptr, procHandle_MsEdge2)
-   DllCall("CloseHandle", Ptr, procHandle_Chromium1)
-   DllCall("CloseHandle", Ptr, procHandle_Chromium2)
-   DllCall("CloseHandle", Ptr, procHandle_Catsxp1)
-   DllCall("CloseHandle", Ptr, procHandle_Catsxp2)
    DllCall("CloseHandle", Ptr, procHandle_Firefox)
    DllCall("CloseHandle", Ptr, procHandle_Vs2019)
    DllCall("CloseHandle", Ptr, procHandle_Vs2022_1)
@@ -90,60 +82,6 @@ Return
             Send, {f6}
         }
     return
-#IfWinActive
-
-#IfWinActive ahk_exe chrome.exe
-    ^!PgUp::MoveTab(1, -1, procHandle_Chromium1, MovementMethod.mouseClickDrag)
-    ^!PgDn::MoveTab(1, 1, procHandle_Chromium1, MovementMethod.mouseClickDrag)
-
-    ~LAlt::
-        if GetKeyState("Ctrl") {
-            return
-        }
-
-        if DllCall(procHandle_Chromium2, Int, WinExist("A")) {
-            Send, {Esc}
-        }
-    return
-#IfWinActive
-
-lalt_count := 0
-
-OnLAltPressed:
-    if (lalt_count > 1) {
-        if DllCall(procHandle_Catsxp1, Int, WinExist("A")) {
-            Send, {Esc}
-        }
-        else {
-            Send, {f10}
-        }
-    }
-    lalt_count := 0
-Return
-
-#IfWinActive ahk_exe catsxp.exe
-    ^!PgUp::Send, ^+{PgUp}
-    ^!PgDn::Send, ^+{PgDn}
-
-    ~LAlt::
-        if (lalt_count > 0) {
-            lalt_count += 1
-            Return
-        }
-        lalt_count := 1
-        SetTimer, OnLAltPressed, -300
-    Return
-
-    ~<!Home::
-        Sleep 50
-        Send ^l
-    Return
-
-    ~Esc::
-        if DllCall(procHandle_Catsxp2, Int, WinExist("A")) {
-            Send, +{f6}
-        }
-    Return
 #IfWinActive
 
 #IfWinActive ahk_exe thunderbird.exe
