@@ -16,7 +16,6 @@ PauseKeyState := 0 ; As if it's a toggle key
 MovementMethod := { mouseClickDrag: 1, sendEvent: 2, foobar2000: 3 }
 
 hModule := DllCall("LoadLibrary", Str, "ActiveTabSpy.dll", Ptr)
-procHandle_MsEdge1 := DllCall("GetProcAddress", Ptr, hModule, AStr, "MsEdge_inspectActiveTab", Ptr)
 procHandle_MsEdge2 := DllCall("GetProcAddress", Ptr, hModule, AStr, "MsEdge_getThreeDotBtnStatus", Ptr)
 procHandle_Firefox := DllCall("GetProcAddress", Ptr, hModule, AStr, "Firefox_inspectActiveTab", Ptr)
 procHandle_Vs2019 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Vs2019_inspectActiveTab", Ptr)
@@ -41,7 +40,6 @@ return
 
 Exit:
    DllCall(procHandle_Cleanup)
-   DllCall("CloseHandle", Ptr, procHandle_MsEdge1)
    DllCall("CloseHandle", Ptr, procHandle_MsEdge2)
    DllCall("CloseHandle", Ptr, procHandle_Firefox)
    DllCall("CloseHandle", Ptr, procHandle_Vs2019)
@@ -71,8 +69,8 @@ Exit:
 Return
 
 #IfWinActive ahk_exe msedge.exe
-    ^!PgUp::MoveTab(1, -1, procHandle_MsEdge1, MovementMethod.mouseClickDrag)
-    ^!PgDn::MoveTab(1, 1, procHandle_MsEdge1, MovementMethod.mouseClickDrag)
+    ^!PgUp::Send, ^+{PgUp}
+    ^!PgDn::Send, ^+{PgDn}
 
     ~LAlt::
         if GetKeyState("Ctrl") {
