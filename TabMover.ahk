@@ -138,6 +138,22 @@ Return
             Send <
         }
     Return
+    $+0::
+        if (DllCall(procHandle_Vs2022_4, Int, WinExist("A"))) {
+            Send {Space}={Space}
+        }
+        else {
+            Send {=}
+        }
+    Return
+    $+.::
+        if (DllCall(procHandle_Vs2022_4, Int, WinExist("A"))) {
+            Send :{Space}
+        }
+        else {
+            Send {:}
+        }
+    Return
 #If
 
 #IfWinActive ahk_exe devenv.exe
