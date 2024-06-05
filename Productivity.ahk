@@ -612,6 +612,7 @@ WrapTextWith(left, right) {
 !8::SendInput [
 !9::SendInput ]
 !0::SendInput {}}
+!*::SendInput {\}
 
 ; Credits for the debouncer code: https://www.autohotkey.com/boards/viewtopic.php?p=117262#p117262
 
