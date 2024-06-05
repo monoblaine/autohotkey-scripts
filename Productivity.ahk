@@ -607,9 +607,10 @@ WrapTextWith(left, right) {
 >#g::Send ^{f14}
 >#b::Send ^{f15}
 >#n::Send ^{f16}
+
+!7::SendInput {{}
 !8::SendInput [
 !9::SendInput ]
-!7::SendInput {{}
 !0::SendInput {}}
 
 ; Credits for the debouncer code: https://www.autohotkey.com/boards/viewtopic.php?p=117262#p117262
