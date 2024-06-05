@@ -388,7 +388,7 @@ return
     ; Click "close this message" on StackOverflow
     CapsLock & x::
         MouseGetPos, xpos, ypos
-        MouseMove, _CX, 150
+        MouseMove, _CX, 166
         Click
         MouseMove, %xpos%, %ypos%
     return
@@ -401,7 +401,7 @@ return
     ; Click "close this message" on StackOverflow
     CapsLock & x::
         MouseGetPos, xpos, ypos
-        MouseMove, _CX, 150
+        MouseMove, _CX, 166
         Click
         MouseMove, %xpos%, %ypos%
     return
