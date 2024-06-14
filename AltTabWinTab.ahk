@@ -12,7 +12,7 @@ SendMode Input
 #SingleInstance force
 #WinActivateForce
 
->#Tab::Send, ^+{f24}
+!Tab::Send, ^+{F24} ; ctrl + shift + F24
 
 #Tab::
     visibleWindows := GetVisibleWindows()
