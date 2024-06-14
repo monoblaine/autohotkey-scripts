@@ -28,7 +28,7 @@ SendMode Input
 return
 
 ; Go to MRU - 1
-<#>+Tab::
+#>+Tab::
     visibleWindows := GetVisibleWindows()
     windowCount := visibleWindows.MaxIndex()
 
