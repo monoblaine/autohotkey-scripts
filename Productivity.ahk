@@ -51,7 +51,6 @@ GroupAdd, Group_SendInputCheckBoxVariants, ahk_exe soffice.bin
 GroupAdd, Group_SendInputCheckBoxVariants, ahk_exe firefox.exe
 
 Shell := ComObjCreate("WScript.Shell")
-AutoHideMouseCursorRunning := ProcessExist("AutoHideMouseCursor_x64_p.exe")
 
 SavedMouseCoordX := -1
 SavedMouseCoordY := -1
@@ -334,29 +333,6 @@ CapsLock & PgUp::                                                               
             WinMinimize
 
         lastWindow := "" ; remove this line if you want minimize/toggle only one window
-    }
-return
-
-CapsLock & Backspace::                                                            ; CapsLock + Backspace
-RButton & LButton::                                                               ; RButton + LButton
-    if AutoHideMouseCursorRunning {
-        Process, Close, AutoHideMouseCursor_x64_p.exe
-        AutoHideMouseCursorRunning := 0
-        Sleep 15
-        MouseMove, 0, 5, 0, R
-        Sleep 15
-        MouseMove, 0, -5, 0, R
-    }
-    else {
-        activeWindow := WinExist("A")
-        Shell.Run("C:\Users\Serhan\Documents\.tools\AutoHideMouseCursor\AutoHideMouseCursor_x64_p.exe", 0)
-        AutoHideMouseCursorRunning := 1
-
-        if (activeWindow) {
-            Sleep 150
-            WinActivate
-            activeWindow := ""
-        }
     }
 return
 
