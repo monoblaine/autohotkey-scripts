@@ -903,6 +903,10 @@ WrapTextWith(left, right) {
     Ctrl::Send {Esc}
 #If
 
+#IfWinActive ahk_exe idea64.exe
+    #w::Send, ^!{BackSpace}
+#IfWinActive
+
 ;==============================================================================
 ; Various SendInput commands
 ;==============================================================================
