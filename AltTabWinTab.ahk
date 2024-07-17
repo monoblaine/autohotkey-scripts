@@ -11,6 +11,7 @@ SetControlDelay, -1
 SendMode Input
 #SingleInstance force
 #WinActivateForce
+Process, Priority,, R
 
 !Tab::Send, ^+{F24} ; ctrl + shift + F24
 
