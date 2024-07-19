@@ -907,6 +907,19 @@ WrapTextWith(left, right) {
     #w::Send, ^!{BackSpace}
 #IfWinActive
 
+#IfWinActive ahk_exe DB Browser for SQLite.exe
+    ^o::Send, ^+t
+    ^n::Send, ^t
+    ^+b::Send, {F5}
+    ^Pgdn::Send, ^{Tab}
+    ^Pgup::Send, ^+{Tab}
+#IfWinActive
+
+#IfWinActive ahk_exe Code.exe
+    !Pgdn::Send, ^!+{Pgdn}
+    !Pgup::Send, ^!+{Pgup}
+#IfWinActive
+
 ;==============================================================================
 ; Various SendInput commands
 ;==============================================================================
