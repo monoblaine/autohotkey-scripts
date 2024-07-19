@@ -920,6 +920,25 @@ WrapTextWith(left, right) {
     !Pgup::Send, ^!+{Pgup}
 #IfWinActive
 
+#IfWinActive ahk_exe WindowsTerminal.exe
+    ^!Pgup::
+        Send, ^+p
+        Sleep 50
+        SendInput move{Space}tab{Space}ward
+        Sleep 300
+        Send {Enter}
+    Return
+    ^!Pgdn::
+        Send, ^+p
+        Sleep 50
+        SendInput move{Space}tab{Space}ward
+        Sleep 300
+        Send {Down}
+        Sleep 100
+        Send {Enter}
+    Return
+#IfWinActive
+
 ;==============================================================================
 ; Various SendInput commands
 ;==============================================================================
