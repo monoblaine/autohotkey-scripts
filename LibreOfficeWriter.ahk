@@ -52,7 +52,9 @@ SendMode Input
     Return
 
     >#>+j::Send ^!+{f12}
+    <^>!>+j::Send {Blind}{RAlt up}{RShift up}{Ctrl down}{LAlt down}{Shift down}{f12}{Shift up}{LAlt up}{Ctrl up}
     >#>+k::Send ^!+{f13}
+    <^>!>+k::Send {Blind}{RAlt up}{RShift up}{Ctrl down}{LAlt down}{Shift down}{f13}{Shift up}{LAlt up}{Ctrl up}
     ^+SC056::Send ^+{f14}
 #IfWinActive
 
