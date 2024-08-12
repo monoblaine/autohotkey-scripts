@@ -440,6 +440,7 @@ return
         Sleep, 15
         Send {Left}
     Return
+    >#b::Send, {Esc}
 #IfWinActive
 
 *CapsLock:: return ; This forces CapsLock into a modifying key.
