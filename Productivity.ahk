@@ -441,7 +441,6 @@ return
         Send {Left}
     Return
     >#b::Send, {Esc}
-    <^>!b::Send, {Esc}
 #IfWinActive
 
 *CapsLock:: return ; This forces CapsLock into a modifying key.
@@ -473,12 +472,10 @@ return
 return
 
 >#>+g::
-;<^>!>+g::
     TrayIcon_Button("GoogleDriveFS.exe")
 Return
 
 >#>+d::
-;>!>+d::
     MouseGetPos, xpos, ypos
     Click, %_DateTimeX%, %_DateTimeY%
     MouseMove, %xpos%, %ypos%
@@ -582,19 +579,11 @@ WrapTextWith(left, right) {
 }
 
 >#v::Send !{f20}
-<^>!v::Send {Blind}{RAlt up}{LAlt down}{f20}{LAlt up}
 <#Left::Send +{f13}
 <#Right::Send ^{f13}
 >#g::Send ^{f14}
-
-#IfWinNotActive ahk_exe notepad++.exe
-    <^>!g::Send ^{f14}
-    <^>!b::Send ^{f15}
-#IfWinNotActive
-
 >#b::Send ^{f15}
 >#n::Send ^{f16}
-<^>!n::Send ^{f16}
 
 !7::SendInput {{}
 !8::SendInput [
@@ -808,11 +797,8 @@ WrapTextWith(left, right) {
     Return
 
     >#b::Send {F7}
-    <^>!b::Send {F7}
     >#g::Send {Esc}
-    <^>!g::Send {Esc}
     >#w::Send {F6}
-    <^>!w::Send {F6}
 #IfWinActive
 
 #IfWinActive ahk_exe soffice.bin
@@ -1014,9 +1000,7 @@ return
 #IfWinNotActive
 
 >#>+2::SendInput ’
-<^>!>+2::SendInput ’
 >#>+1::
-<^>!>+1::
     SendInput “”
     Send {Left}
 Return
