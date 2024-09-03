@@ -923,14 +923,14 @@ WrapTextWith(left, right) {
 
 #IfWinActive ahk_exe WindowsTerminal.exe
     ^!Pgup::
-        Send, ^+p
+        Send, ^+q
         Sleep 50
         SendInput move{Space}tab{Space}ward
         Sleep 300
         Send {Enter}
     Return
     ^!Pgdn::
-        Send, ^+p
+        Send, ^+q
         Sleep 50
         SendInput move{Space}tab{Space}ward
         Sleep 300
