@@ -949,9 +949,19 @@ WrapTextWith(left, right) {
     SendInput %CurrentDateTime%
 return
 
+:*:::today::                                                   ; Replace "::today" with [current date]
+    FormatTime, CurrentDateTime,, yyy-MM-dd                    ; [2009-10-13]
+    SendInput [%CurrentDateTime%]{Space}
+return
+
 :*:;;now::                                                     ; Replace ";;now" with current date and time
     FormatTime, CurrentDateTime,, yyy-MM-dd HH.mm              ; 2009-10-13 10.57
     SendInput %CurrentDateTime%
+return
+
+:*:::now::                                                     ; Replace "::now" with [current date and time]
+    FormatTime, CurrentDateTime,, yyy-MM-dd HH.mm              ; [2009-10-13 10.57]
+    SendInput [%CurrentDateTime%]{Space}
 return
 
 :*:;;snow::                                                    ; Replace ";;snow" with current date and time (with seconds)
@@ -959,9 +969,19 @@ return
     SendInput %CurrentDateTime%
 return
 
+:*:::snow::                                                    ; Replace "::snow" with [current date and time (with seconds)]
+    FormatTime, CurrentDateTime,, yyy-MM-dd HH:mm:ss           ; [2009-10-13 10:57:23]
+    SendInput [%CurrentDateTime%]{Space}
+return
+
 :*:;;vnow::                                                    ; Replace ";;vnow" with current date and time without separators
     FormatTime, CurrentDateTime,, yyyMMddHHmm                  ; 200910131057
     SendInput %CurrentDateTime%
+return
+
+:*:::vnow::                                                    ; Replace "::vnow" with [current date and time without separators]
+    FormatTime, CurrentDateTime,, yyyMMddHHmm                  ; [200910131057]
+    SendInput [%CurrentDateTime%]{Space}
 return
 
 :*:;;time::                                                    ; Replace ";;time" with current date, time and day of week
@@ -969,9 +989,19 @@ return
     SendInput %CurrentDateTime%
 return
 
+:*:::time::                                                    ; Replace "::time" with [current date, time and day of week]
+    FormatTime, CurrentDateTime, L1055, d MMMM yyy dddd, HH.mm ; [13 August 2013 Tuesday, 13.17]
+    SendInput [%CurrentDateTime%]{Space}
+return
+
 :*:;;date::                                                    ; Replace ";;date" with current date and day of week
     FormatTime, CurrentDateTime, L1055, d MMMM yyy dddd        ; 26 April 2010 Monday
     SendInput %CurrentDateTime%
+return
+
+:*:::date::                                                    ; Replace "::date" with [current date and day of week]
+    FormatTime, CurrentDateTime, L1055, d MMMM yyy dddd        ; [26 April 2010 Monday]
+    SendInput [%CurrentDateTime%]{Space}
 return
 
 :*:;;tm::                                                      ; Replace ";;tm" with current time surrounded by brackets
