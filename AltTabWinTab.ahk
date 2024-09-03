@@ -15,7 +15,7 @@ Process, Priority,, R
 
 >#Tab::Send, ^+{F24} ; ctrl + shift + F24
 
-#Tab::
+<#Tab::
     visibleWindows := GetVisibleWindows()
     windowCount := visibleWindows.MaxIndex()
 
