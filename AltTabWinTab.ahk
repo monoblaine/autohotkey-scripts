@@ -13,7 +13,7 @@ SendMode Input
 #WinActivateForce
 Process, Priority,, R
 
-!Tab::Send, ^+{F24} ; ctrl + shift + F24
+>#Tab::Send, ^+{F24} ; ctrl + shift + F24
 
 #Tab::
     visibleWindows := GetVisibleWindows()
