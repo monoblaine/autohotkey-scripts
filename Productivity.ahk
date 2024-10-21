@@ -117,7 +117,6 @@ CapsLock & Right::                                                              
         SavePosAndMouseMoveR(14, 0)
     }
 Return
-Return
 CapsLock & Down::                                                                 ; CapsLock + down arrow        | Move mouse pointer downward
     if GetKeyState("LAlt") {
         ToggleMousePos(0, _RelativeVerticalJump, 1)
@@ -126,7 +125,6 @@ CapsLock & Down::                                                               
         SavePosAndMouseMoveR(0, 14)
     }
 Return
-Return
 CapsLock & Up::                                                                   ; CapsLock + up arrow          | Move mouse pointer upward
     if GetKeyState("LAlt") {
         ToggleMousePos(0, -_RelativeVerticalJump, 1)
@@ -134,7 +132,6 @@ CapsLock & Up::                                                                 
     else {
         SavePosAndMouseMoveR(0, -14)
     }
-Return
 Return
 
 +NumpadHome::Send {Numpad7}
