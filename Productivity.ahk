@@ -183,7 +183,7 @@ CapsLock & Space::SetCapsLockState % !GetKeyState("CapsLock", "T")              
     CapsLock & Enter::Click, Right
 #If
 
-<#End::ToggleMousePos(-1, _B2)
+<#End::ToggleMousePos(_R1, _B2)
 
 <#Numpad7::
 <#NumpadHome::
@@ -205,7 +205,7 @@ CapsLock & Numpad8::
         ToggleMousePos(_CX, _T1)
     }
     else {
-        ToggleMousePos(-1,  _T2)
+        ToggleMousePos(_CX, _T2)
     }
 return
 
@@ -229,7 +229,7 @@ CapsLock & Numpad4::
         ToggleMousePos(_L1, _CY)
     }
     else {
-        ToggleMousePos(_L2,  -1)
+        ToggleMousePos(_L2, _CY)
     }
 return
 
@@ -263,7 +263,7 @@ CapsLock & Numpad6::
         ToggleMousePos(_R1, _CY)
     }
     else {
-        ToggleMousePos(_R2,  -1)
+        ToggleMousePos(_R2, _CY)
     }
 return
 
@@ -287,7 +287,7 @@ CapsLock & Numpad2::
         ToggleMousePos(_CX, _B1)
     }
     else {
-        ToggleMousePos(-1,  _B2)
+        ToggleMousePos(_CX, _B2)
     }
 return
 
