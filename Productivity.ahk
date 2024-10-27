@@ -73,8 +73,8 @@ _R1 := Floor(A_ScreenWidth  / 2 + A_ScreenWidth  / ScreenGridSizePrimary)
 _R2 := Floor(A_ScreenWidth  / 2 + A_ScreenWidth  / ScreenGridSizeAlternate)
 _B1 := Floor(A_ScreenHeight / 2 + A_ScreenHeight / ScreenGridSizePrimary)
 _B2 := Floor(A_ScreenHeight / 2 + A_ScreenHeight / ScreenGridSizeAlternate)
-_RelativeHorizontalJump := Floor(A_ScreenWidth  / ScreenGridSizeAlternate / 4) ; _CX - _L2
-_RelativeVerticalJump   := Floor(A_ScreenHeight / ScreenGridSizeAlternate / 4) ;_CY - _T2
+_RelativeHorizontalJump := 42
+_RelativeVerticalJump   := 42
 _DateTimeX := A_ScreenWidth - 71
 _DateTimeY := A_ScreenHeight - 15
 
