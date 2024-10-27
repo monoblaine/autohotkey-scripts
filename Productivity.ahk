@@ -61,6 +61,9 @@ LastMouseCoordY := 0
 ScreenGridSizePrimary := 2.5
 ScreenGridSizeAlternate := 4
 
+WheelScrollLines := 2
+RegRead, WheelScrollLines, HKCU\Control Panel\Desktop, WheelScrollLines
+
 MovementMethod := { unknown: 0, horizontal: 1, vertical: 2 }
 
 _L1 := Floor(A_ScreenWidth  / 2 - A_ScreenWidth  / ScreenGridSizePrimary)
@@ -423,6 +426,19 @@ return
         }
     return
 #IfWinActive
+
+<#NumpadDiv::
+	if (WheelScrollLines = 2) {
+		WheelScrollLines := 4
+	}
+    else if (WheelScrollLines = 4) {
+		WheelScrollLines := 6
+	}
+	else {
+		WheelScrollLines := 2
+	}
+    DllCall("SystemParametersInfoA", uint, 0x69, uint, WheelScrollLines, uintP, 0, uint, 1|2)
+return
 
 #IfWinActive ahk_exe devenv.exe
     !NumpadUp::Send {Blind}{WheelUp}
