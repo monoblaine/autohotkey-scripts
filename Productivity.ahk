@@ -82,16 +82,6 @@ LastMovement := MovementMethod.unknown
 
 CoordMode, Mouse, Screen
 
-; Disable that fucking office key shortcut
-; Source: https://www.autohotkey.com/boards/viewtopic.php?p=281853#p281853
-#^!Shift::
-#^+Alt::
-#!+Ctrl::
-^!+LWin::
-^!+RWin::
-Send {Blind}{vk07}
-return
-
 #w::Send, !{f15}                                                                  ; win + w                      | Send alt + f15
 #^a::Winset, Alwaysontop, , A                                                     ; win + ctrl + a               | Make the active window stay always on top
 <#<^<+Up::Volume_Up                                                               ; lwin + lctrl + lshift + up   | Increase volume
