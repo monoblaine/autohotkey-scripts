@@ -463,6 +463,12 @@ RButton::RButton   ; restore the original RButton function
     Run, C:\Program Files (x86)\Notepad++\notepad++.exe "%clipboard%"
 return
 
+<#v::
+    Run, C:\Program Files\CopyQ\copyq.exe toggle
+    Sleep 150
+    WinActivate, ahk_exe copyq.exe
+return
+
 >#>+f::                                                                           ; rwin + rshift + f            | open file path in clipboard with explorer
     clipboard := StrReplace(clipboard, "`/", "`\")
     Sleep 150
