@@ -61,6 +61,7 @@ LastMouseCoordY := 0
 ScreenGridSizePrimary := 2.5
 ScreenGridSizeAlternate := 4
 
+IsExternalMon := 1
 WheelScrollLines := 2
 RegRead, WheelScrollLines, HKCU\Control Panel\Desktop, WheelScrollLines
 
@@ -726,13 +727,23 @@ WrapTextWith(left, right) {
 
     ^!+s::                                                                        ; ctrl + alt + shift + s
         MouseGetPos, xpos, ypos
-        Click, 370, 121
+        if (IsExternalMon = 1) {
+            Click, 370, 121
+        }
+        else {
+            Click, 450, 150
+        }
         MouseMove, %xpos%, %ypos%
     return
 
     ^!+d::                                                                        ; ctrl + alt + shift + d
         MouseGetPos, xpos, ypos
-        Click, 370, 202
+        if (IsExternalMon = 1) {
+            Click, 370, 202
+        }
+        else {
+            Click, 450, 255
+        }
         MouseMove, %xpos%, %ypos%
     return
 
