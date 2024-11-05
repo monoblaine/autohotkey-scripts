@@ -148,6 +148,7 @@ Return
 +NumpadPgdn::Send {Numpad3}
 +NumpadIns::Send {Numpad0}
 +NumpadDel::Send .
+NumpadDel::Send, ,
 
 #If !GetKeyState("NumLock", "T")
     NumpadHome::Send, {Click 1}
