@@ -428,15 +428,15 @@ return
 #IfWinActive
 
 <#NumpadDiv::
-	if (WheelScrollLines = 2) {
-		WheelScrollLines := 4
-	}
+    if (WheelScrollLines = 2) {
+        WheelScrollLines := 4
+    }
     else if (WheelScrollLines = 4) {
-		WheelScrollLines := 6
-	}
-	else {
-		WheelScrollLines := 2
-	}
+        WheelScrollLines := 6
+    }
+    else {
+        WheelScrollLines := 2
+    }
     DllCall("SystemParametersInfoA", uint, 0x69, uint, WheelScrollLines, uintP, 0, uint, 1|2)
 return
 
