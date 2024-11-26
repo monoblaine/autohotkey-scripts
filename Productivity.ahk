@@ -386,6 +386,24 @@ return
     ^+n::^+p
     ^+b::^+o
 
+    ^+k::Send, !+d
+    ; Alternative:
+    ; ^+k::
+    ;     Send, ^l
+    ;     Sleep 75
+    ;     Send, +{Tab}
+    ;     Sleep 75
+    ;     Send, +{Tab}
+    ;     Sleep 75
+    ;     Send, +{Tab}
+    ;     Sleep 75
+    ;     Send, +{Tab}
+    ;     Sleep 75
+    ;     Send, {AppsKey}
+    ;     Sleep 100
+    ;     Send, o
+    ; Return
+
     >#+v::
         MouseGetPos, xpos, ypos
         MouseMove, 1644, 65
