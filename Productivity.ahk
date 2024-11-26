@@ -384,6 +384,7 @@ return
     return
 
     ^+n::^+p
+    ^+b::^+o
 
     >#+v::
         MouseGetPos, xpos, ypos
