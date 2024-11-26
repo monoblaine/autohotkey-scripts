@@ -84,9 +84,9 @@ Return
     ^!PgDn::MoveTab(1, 1, procHandle_Firefox, MovementMethod.sendEvent, 0, 1)
 #IfWinActive
 
-#IfWinActive ahk_class MozillaWindowClass
-    ^!PgUp::MoveTab(1, -1, procHandle_Firefox, MovementMethod.sendEvent)
-    ^!PgDn::MoveTab(1, 1, procHandle_Firefox, MovementMethod.sendEvent)
+#IfWinActive ahk_exe firefox.exe
+    ^!PgUp::Send, ^+{PgUp}
+    ^!PgDn::Send, ^+{PgDn}
 #IfWinActive
 
 #If WinActive("ahk_exe devenv.exe") and !PauseKeyState
