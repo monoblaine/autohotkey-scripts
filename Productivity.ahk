@@ -383,14 +383,6 @@ return
         MouseMove, %xpos%, %ypos%
     return
 
-    !f::!+f
-    !e::!+e
-    !v::!+v
-    !ı::!+ı
-    !o::!+o
-    !t::!+t
-    !n::!+n
-    !h::!+h
 #IfWinActive
 
 #IfWinActive ahk_exe ApplicationFrameHost.exe
