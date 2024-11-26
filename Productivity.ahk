@@ -414,6 +414,13 @@ return
         Sleep 100
         MouseMove, %xpos%, %ypos%
     Return
+
+    !f::
+        MouseGetPos, xpos, ypos
+        MouseMove, 1894, 56
+        Click
+        MouseMove, %xpos%, %ypos%
+    Return
 #IfWinActive
 
 #IfWinActive ahk_exe msedge.exe
