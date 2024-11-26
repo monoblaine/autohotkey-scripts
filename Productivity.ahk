@@ -431,9 +431,6 @@ return
 
 <#NumpadDiv::
     if (WheelScrollLines = 2) {
-        WheelScrollLines := 4
-    }
-    else if (WheelScrollLines = 4) {
         WheelScrollLines := 6
     }
     else {
