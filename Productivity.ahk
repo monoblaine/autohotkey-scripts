@@ -464,7 +464,7 @@ return
 
 <#v::
     Run, C:\Program Files\CopyQ\copyq.exe toggle
-    Sleep 150
+    Sleep 250
     WinActivate, ahk_exe copyq.exe
 return
 
