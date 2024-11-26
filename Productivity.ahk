@@ -383,6 +383,7 @@ return
         MouseMove, %xpos%, %ypos%
     return
 
+    ^+n::^+p
 #IfWinActive
 
 #IfWinActive ahk_exe ApplicationFrameHost.exe
