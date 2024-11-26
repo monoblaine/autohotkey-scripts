@@ -384,6 +384,30 @@ return
     return
 
     ^+n::^+p
+
+    >#+v::
+        MouseGetPos, xpos, ypos
+        MouseMove, 1644, 65
+        Click
+        Sleep 500
+        MouseMove, 1471, 266
+        Click
+        Sleep 100
+        MouseMove, %xpos%, %ypos%
+    Return
+#IfWinActive
+
+#IfWinActive ahk_exe msedge.exe
+    >#+v::
+        MouseGetPos, xpos, ypos
+        MouseMove, 1575, 54
+        Click
+        Sleep 500
+        MouseMove, 1407, 250
+        Click
+        Sleep 100
+        MouseMove, %xpos%, %ypos%
+    Return
 #IfWinActive
 
 #IfWinActive ahk_exe ApplicationFrameHost.exe
