@@ -764,7 +764,8 @@ WrapTextWith(left, right) {
 #IfWinActive
 
 #IfWinActive ahk_exe Ssms.exe                                                     ; SQL Server Management Studio
-    #w::Send, {Alt Down}w{Alt Up}1                                                ; win + w                      | Send alt + w + 1
+    >#w::Send, {F6}
+    >#+w::Send, {Blind}{F6}
 
     ^!+s::                                                                        ; ctrl + alt + shift + s
         MouseGetPos, xpos, ypos
