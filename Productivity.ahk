@@ -180,14 +180,6 @@ Return
 
 CapsLock & Space::SetCapsLockState % !GetKeyState("CapsLock", "T")                ; CapsLock + Space             | Toggle CapsLock state
 
-#If !GetKeyState("LAlt")
-    CapsLock & Enter::Send, {Click 1}
-#If
-
-#If GetKeyState("LAlt")
-    CapsLock & Enter::Click, Right
-#If
-
 <#End::ToggleMousePos(_R1, _B2)
 
 <#Numpad7::
