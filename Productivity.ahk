@@ -378,7 +378,6 @@ return
     ^+n::^+p
     ^+b::^+o
 
-    ^+k::Send, !+d
     ; Alternative:
     ; ^+k::
     ;     Send, ^l
