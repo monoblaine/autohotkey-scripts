@@ -13,7 +13,7 @@ Process, Priority,, R
 
 PauseKeyState := 0 ; As if it's a toggle key
 
-MovementMethod := { mouseClickDrag: 1, sendEvent: 2, foobar2000: 3 }
+MovementMethod := { mouseClickDrag: 1, sendEvent: 2, foobar2000: 3, mouseClickDrag2: 4 }
 
 hModule := DllCall("LoadLibrary", Str, "ActiveTabSpy.dll", Ptr)
 procHandle_MsEdge2 := DllCall("GetProcAddress", Ptr, hModule, AStr, "MsEdge_getThreeDotBtnStatus", Ptr)
@@ -350,7 +350,7 @@ MoveVisualStudioTab(direction) {
     hWnd := WinExist("A")
     WinGet, pathToVsExe, ProcessPath
     procHandle := InStr(pathToVsExe, "2022") ? procHandle_Vs2022_1 : procHandle_Vs2019
-    MoveTab(0, direction, procHandle, MovementMethod.mouseClickDrag, hWnd)
+    MoveTab(0, direction, procHandle, MovementMethod.mouseClickDrag2, hWnd)
 }
 
 MoveTab(horizontal, direction, procHandle, movementMethodId, maybeHWnd := 0, widthHeightFactor := 0) {
@@ -398,6 +398,14 @@ MoveTab(horizontal, direction, procHandle, movementMethodId, maybeHWnd := 0, wid
             SetMouseDelay, 1
             SetDefaultMouseSpeed, 1
             MouseClickDrag, Left, %pointX%, %pointY%, %targetX%, %targetY%
+
+        case MovementMethod.mouseClickDrag2:
+            foo := direction < 0 ? (-height * 2) : (height * 2)
+            SetMouseDelay, 1
+            SetDefaultMouseSpeed, 1
+            SendEvent {Click %pointX% %pointY% Down}
+            MouseMove 0, %foo%, "", R
+            SendEvent {Click %targetX% %targetY% Up}
 
         case MovementMethod.sendEvent:
             SetMouseDelay, 3
