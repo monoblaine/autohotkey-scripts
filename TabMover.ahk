@@ -87,6 +87,40 @@ Return
 #IfWinActive ahk_exe firefox.exe
     ^!PgUp::Send, ^+{PgUp}
     ^!PgDn::Send, ^+{PgDn}
+
+    ^+k::
+        curX := 0
+        curY := 0
+        pointX := 0
+        pointY := 0
+        left := 0
+        right := 0
+        top := 0
+        bottom := 0
+        width := 0
+        height := 0
+        prevPointX := 0
+        prevPointY := 0
+        nextPointX := 0
+        nextPointY := 0
+
+        CollectTabInfo(1, procHandle_Firefox, 0
+                     , curX, curY
+                     , pointX, pointY
+                     , left, right
+                     , top, bottom
+                     , width, height
+                     , prevPointX, prevPointY
+                     , nextPointX, nextPointY)
+
+        SetMouseDelay, -1
+        SetDefaultMouseSpeed, 0
+        MouseMove, %pointX%, %pointY%
+        Click, Right
+        Sleep 100
+        Send, o
+        MouseMove, %curX%, %curY%
+    Return
 #IfWinActive
 
 #If WinActive("ahk_exe devenv.exe") and !PauseKeyState
