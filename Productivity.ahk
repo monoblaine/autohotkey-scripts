@@ -489,6 +489,10 @@ return
     >#b::Send, {Esc}
 #IfWinActive
 
+#IfWinActive ahk_exe Ssms.exe
+    CapsLock & Enter::SendInput dbo.
+#IfWinActive
+
 *CapsLock:: return ; This forces CapsLock into a modifying key.
 RButton::RButton   ; restore the original RButton function
 
