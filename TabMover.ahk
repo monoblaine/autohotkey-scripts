@@ -18,6 +18,7 @@ MovementMethod := { mouseClickDrag: 1, sendEvent: 2, foobar2000: 3, mouseClickDr
 hModule := DllCall("LoadLibrary", Str, "ActiveTabSpy.dll", Ptr)
 procHandle_MsEdge2 := DllCall("GetProcAddress", Ptr, hModule, AStr, "MsEdge_getThreeDotBtnStatus", Ptr)
 procHandle_Firefox := DllCall("GetProcAddress", Ptr, hModule, AStr, "Firefox_inspectActiveTab", Ptr)
+procHandle_FirefoxDevTools := DllCall("GetProcAddress", Ptr, hModule, AStr, "FirefoxDevTools_inspectTabOn", Ptr)
 procHandle_Vs2019 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Vs2019_inspectActiveTab", Ptr)
 procHandle_Vs2022_1 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Vs2022_inspectActiveTab", Ptr)
 procHandle_Vs2022_2 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Vs2022_isTextEditorFocused", Ptr)
@@ -40,6 +41,7 @@ Exit:
    DllCall(procHandle_Cleanup)
    DllCall("CloseHandle", Ptr, procHandle_MsEdge2)
    DllCall("CloseHandle", Ptr, procHandle_Firefox)
+   DllCall("CloseHandle", Ptr, procHandle_FirefoxDevTools)
    DllCall("CloseHandle", Ptr, procHandle_Vs2019)
    DllCall("CloseHandle", Ptr, procHandle_Vs2022_1)
    DllCall("CloseHandle", Ptr, procHandle_Vs2022_2)
@@ -121,6 +123,18 @@ Return
         Send, o
         MouseMove, %curX%, %curY%
     Return
+#IfWinActive
+
+#IfWinActive Geliştirici Araçları —  ahk_exe firefox.exe
+    ^1::FirefoxDevToolsClickOnTab(1)
+    ^2::FirefoxDevToolsClickOnTab(2)
+    ^3::FirefoxDevToolsClickOnTab(3)
+    ^4::FirefoxDevToolsClickOnTab(4)
+    ^5::FirefoxDevToolsClickOnTab(5)
+    ^6::FirefoxDevToolsClickOnTab(6)
+    ^7::FirefoxDevToolsClickOnTab(7)
+    ^8::FirefoxDevToolsClickOnTab(8)
+    ^9::FirefoxDevToolsClickOnTab(9)
 #IfWinActive
 
 #If WinActive("ahk_exe devenv.exe") and !PauseKeyState
@@ -553,4 +567,28 @@ CollectTabInfo(horizontal, procHandle, maybeHWnd
     ptr_prevPointY := ""
     ptr_nextPointX := ""
     ptr_nextPointY := ""
+}
+
+FirefoxDevToolsClickOnTab(tabNumber) {
+    global procHandle_FirefoxDevTools
+    ptr_pointX := 0
+    ptr_pointY := 0
+    DllCall(procHandle_FirefoxDevTools, Int, WinExist("A")
+          , Int, (tabNumber + 1)
+          , Ptr, &ptr_pointX, Ptr, &ptr_pointY)
+    if (A_LastError) {
+        MsgBox, Error: %A_LastError%
+    }
+    else {
+        pointX := NumGet(&ptr_pointX)
+        pointY := NumGet(&ptr_pointY)
+        ; MsgBox, pointX: %pointX%, pointY: %pointY%
+        SetMouseDelay, -1
+        SetDefaultMouseSpeed, 0
+        MouseGetPos, xpos, ypos
+        Click, %pointX%, %pointY%
+        MouseMove, %xpos%, %ypos%
+    }
+    ptr_pointX := ""
+    ptr_pointY := ""
 }
