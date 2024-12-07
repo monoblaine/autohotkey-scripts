@@ -86,6 +86,7 @@ LastMovement := MovementMethod.unknown
 
 CoordMode, Mouse, Screen
 
+NumpadEnd::Esc
 #w::Send, !{f15}                                                                  ; win + w                      | Send alt + f15
 #^a::Winset, Alwaysontop, , A                                                     ; win + ctrl + a               | Make the active window stay always on top
 <#<^<+Up::Volume_Up                                                               ; lwin + lctrl + lshift + up   | Increase volume
@@ -431,7 +432,6 @@ return
     return
 
     ~Numpad1::
-    ~NumpadEnd::
         SetTitleMatchMode, 2
 
         if WinActive("Fotoğraflar") {
