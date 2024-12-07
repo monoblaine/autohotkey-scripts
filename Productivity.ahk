@@ -456,6 +456,8 @@ return
     return
 #IfWinActive
 
+<#NumpadUp::
+<#NumpadClear::
 <#NumpadDiv::
     if (WheelScrollLines = 1) {
         WheelScrollLines := 6
