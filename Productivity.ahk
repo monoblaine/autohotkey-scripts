@@ -152,11 +152,6 @@ NumpadDel::Send, ,
 
 #If !GetKeyState("NumLock", "T")
     NumpadHome::Send, {Click 1}
-    NumpadDown::
-        Send, {MButton 1}
-        Sleep 30
-        SavePosAndMouseMoveR(0, 14 * 3)
-    Return
     ^NumpadHome::Send, {MButton 1}
     NumpadPgup::Click, Right
 #If
