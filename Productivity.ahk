@@ -62,7 +62,7 @@ ScreenGridSizePrimary := 2.5
 ScreenGridSizeAlternate := 4
 
 IsExternalMon := 1
-WheelScrollLines := 2
+WheelScrollLines := 1
 RegRead, WheelScrollLines, HKCU\Control Panel\Desktop, WheelScrollLines
 
 MovementMethod := { unknown: 0, horizontal: 1, vertical: 2 }
@@ -457,11 +457,11 @@ return
 #IfWinActive
 
 <#NumpadDiv::
-    if (WheelScrollLines = 2) {
+    if (WheelScrollLines = 1) {
         WheelScrollLines := 6
     }
     else {
-        WheelScrollLines := 2
+        WheelScrollLines := 1
     }
     DllCall("SystemParametersInfoA", uint, 0x69, uint, WheelScrollLines, uintP, 0, uint, 1|2)
 return
