@@ -190,7 +190,6 @@ CapsLock & Numpad7::
 return
 
 <#Numpad8::
-<#NumpadUp::
 CapsLock & NumpadUp::
 CapsLock & Numpad8::
     if GetKeyState("LAlt") {
@@ -226,7 +225,6 @@ CapsLock & Numpad4::
 return
 
 <#Numpad5::
-<#NumpadClear::
 CapsLock & NumpadClear::
 CapsLock & Numpad5::
     if GetKeyState("LAlt") {
