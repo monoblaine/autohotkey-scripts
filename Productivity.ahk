@@ -487,6 +487,26 @@ return
     CapsLock & Enter::SendInput dbo.
 #IfWinActive
 
+#IfWinActive ahk_exe PROFILER.EXE
+    f4::^+Del
+
+    f5::
+        SetMouseDelay, -1
+        SetDefaultMouseSpeed, 0
+        MouseGetPos, xpos, ypos
+        Click, 180, 59
+        MouseMove, %xpos%, %ypos%
+    Return
+
+    +f5::
+        SetMouseDelay, -1
+        SetDefaultMouseSpeed, 0
+        MouseGetPos, xpos, ypos
+        Click, 226, 59
+        MouseMove, %xpos%, %ypos%
+    Return
+#IfWinActive
+
 *CapsLock:: return ; This forces CapsLock into a modifying key.
 RButton::RButton   ; restore the original RButton function
 
