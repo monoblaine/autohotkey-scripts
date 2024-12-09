@@ -510,6 +510,14 @@ return
         Click, 226, 59
         MouseMove, %xpos%, %ypos%
     Return
+
+    CapsLock & Enter::
+        SetMouseDelay, -1
+        SetDefaultMouseSpeed, 0
+        MouseGetPos, xpos, ypos
+        Click, 144 94 Left 2
+        MouseMove, %xpos%, %ypos%
+    Return
 #IfWinActive
 
 *CapsLock:: return ; This forces CapsLock into a modifying key.
