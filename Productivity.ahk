@@ -456,6 +456,7 @@ return
     return
 #IfWinActive
 
+RButton & LButton::
 <#NumpadUp::
 <#NumpadClear::
 <#NumpadDiv::
