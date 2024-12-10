@@ -67,16 +67,20 @@ RegRead, WheelScrollLines, HKCU\Control Panel\Desktop, WheelScrollLines
 
 MovementMethod := { unknown: 0, horizontal: 1, vertical: 2 }
 
+_L0 := Floor(A_ScreenWidth  / 2 - A_ScreenWidth  / ScreenGridSizeAlternate)
 _L1 := Floor(A_ScreenWidth  / 2 - A_ScreenWidth  / ScreenGridSizePrimary)
-_L2 := Floor(A_ScreenWidth  / 2 - A_ScreenWidth  / ScreenGridSizeAlternate)
+_T0 := Floor(A_ScreenHeight / 2 - A_ScreenHeight / ScreenGridSizeAlternate)
 _T1 := Floor(A_ScreenHeight / 2 - A_ScreenHeight / ScreenGridSizePrimary)
-_T2 := Floor(A_ScreenHeight / 2 - A_ScreenHeight / ScreenGridSizeAlternate)
 _CX := Floor(A_ScreenWidth  / 2)
 _CY := Floor(A_ScreenHeight / 2)
+_R0 := Floor(A_ScreenWidth  / 2 + A_ScreenWidth  / ScreenGridSizeAlternate)
 _R1 := Floor(A_ScreenWidth  / 2 + A_ScreenWidth  / ScreenGridSizePrimary)
-_R2 := Floor(A_ScreenWidth  / 2 + A_ScreenWidth  / ScreenGridSizeAlternate)
+_B0 := Floor(A_ScreenHeight / 2 + A_ScreenHeight / ScreenGridSizeAlternate)
 _B1 := Floor(A_ScreenHeight / 2 + A_ScreenHeight / ScreenGridSizePrimary)
-_B2 := Floor(A_ScreenHeight / 2 + A_ScreenHeight / ScreenGridSizeAlternate)
+
+_SafeX := Floor(A_ScreenWidth  / 2 + A_ScreenWidth  / 2.5)
+_SafeY := Floor(A_ScreenHeight / 2 - A_ScreenHeight / 2.5) + (14 * 9)
+
 _RelativeHorizontalJump := 42
 _RelativeVerticalJump   := 42
 _DateTimeX := A_ScreenWidth - 71
@@ -167,7 +171,7 @@ Return
 #Home::                                                                           ; Win + Home
 CapsLock & Home::                                                                 ; CapsLock + Home              | Go to saved Mouse Coord
     if (LastMovement = MovementMethod.unknown) {
-        ToggleMousePos(_R1, _T1 + 14 * 9)
+        ToggleMousePos(_SafeX, _SafeY)
     }
     else {
         ToggleMousePos(SavedMouseCoordX, SavedMouseCoordY)
@@ -176,7 +180,7 @@ Return
 
 CapsLock & Space::SetCapsLockState % !GetKeyState("CapsLock", "T")                ; CapsLock + Space             | Toggle CapsLock state
 
-<#End::ToggleMousePos(_R1, _B2)
+<#End::ToggleMousePos(_R1, _B0)
 
 <#Numpad7::
 <#NumpadHome::
@@ -186,7 +190,7 @@ CapsLock & Numpad7::
         ToggleMousePos(_L1, _T1)
     }
     else {
-        ToggleMousePos(_L2, _T2)
+        ToggleMousePos(_L0, _T0)
     }
 return
 
@@ -197,7 +201,7 @@ CapsLock & Numpad8::
         ToggleMousePos(_CX, _T1)
     }
     else {
-        ToggleMousePos(_CX, _T2)
+        ToggleMousePos(_CX, _T0)
     }
 return
 
@@ -209,7 +213,7 @@ CapsLock & Numpad9::
         ToggleMousePos(_R1, _T1)
     }
     else {
-        ToggleMousePos(_R2, _T2)
+        ToggleMousePos(_R0, _T0)
     }
 return
 
@@ -221,7 +225,7 @@ CapsLock & Numpad4::
         ToggleMousePos(_L1, _CY)
     }
     else {
-        ToggleMousePos(_L2, _CY)
+        ToggleMousePos(_L0, _CY)
     }
 return
 
@@ -254,7 +258,7 @@ CapsLock & Numpad6::
         ToggleMousePos(_R1, _CY)
     }
     else {
-        ToggleMousePos(_R2, _CY)
+        ToggleMousePos(_R0, _CY)
     }
 return
 
@@ -266,7 +270,7 @@ CapsLock & Numpad1::
         ToggleMousePos(_L1, _B1)
     }
     else {
-        ToggleMousePos(_L2, _B2)
+        ToggleMousePos(_L0, _B0)
     }
 return
 
@@ -278,7 +282,7 @@ CapsLock & Numpad2::
         ToggleMousePos(_CX, _B1)
     }
     else {
-        ToggleMousePos(_CX, _B2)
+        ToggleMousePos(_CX, _B0)
     }
 return
 
@@ -290,7 +294,7 @@ CapsLock & Numpad3::
         ToggleMousePos(_R1, _B1)
     }
     else {
-        ToggleMousePos(_R2, _B2)
+        ToggleMousePos(_R0, _B0)
     }
 return
 
