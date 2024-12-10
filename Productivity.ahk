@@ -58,8 +58,8 @@ SavedMouseCoordY := -1
 LastMouseCoordX := 0
 LastMouseCoordY := 0
 
-ScreenGridSizePrimary := 2.5
-ScreenGridSizeAlternate := 4
+ScreenGridSize0 := 0.25
+ScreenGridSize1 := 0.45
 
 IsExternalMon := 1
 WheelScrollLines := 1
@@ -67,16 +67,16 @@ RegRead, WheelScrollLines, HKCU\Control Panel\Desktop, WheelScrollLines
 
 MovementMethod := { unknown: 0, horizontal: 1, vertical: 2 }
 
-_L0 := Floor(A_ScreenWidth  / 2 - A_ScreenWidth  / ScreenGridSizeAlternate)
-_L1 := Floor(A_ScreenWidth  / 2 - A_ScreenWidth  / ScreenGridSizePrimary)
-_T0 := Floor(A_ScreenHeight / 2 - A_ScreenHeight / ScreenGridSizeAlternate)
-_T1 := Floor(A_ScreenHeight / 2 - A_ScreenHeight / ScreenGridSizePrimary)
+_L0 := Floor(A_ScreenWidth  / 2 - A_ScreenWidth  * ScreenGridSize0)
+_L1 := Floor(A_ScreenWidth  / 2 - A_ScreenWidth  * ScreenGridSize1)
+_T0 := Floor(A_ScreenHeight / 2 - A_ScreenHeight * ScreenGridSize0)
+_T1 := Floor(A_ScreenHeight / 2 - A_ScreenHeight * ScreenGridSize1)
 _CX := Floor(A_ScreenWidth  / 2)
 _CY := Floor(A_ScreenHeight / 2)
-_R0 := Floor(A_ScreenWidth  / 2 + A_ScreenWidth  / ScreenGridSizeAlternate)
-_R1 := Floor(A_ScreenWidth  / 2 + A_ScreenWidth  / ScreenGridSizePrimary)
-_B0 := Floor(A_ScreenHeight / 2 + A_ScreenHeight / ScreenGridSizeAlternate)
-_B1 := Floor(A_ScreenHeight / 2 + A_ScreenHeight / ScreenGridSizePrimary)
+_R0 := Floor(A_ScreenWidth  / 2 + A_ScreenWidth  * ScreenGridSize0)
+_R1 := Floor(A_ScreenWidth  / 2 + A_ScreenWidth  * ScreenGridSize1)
+_B0 := Floor(A_ScreenHeight / 2 + A_ScreenHeight * ScreenGridSize0)
+_B1 := Floor(A_ScreenHeight / 2 + A_ScreenHeight * ScreenGridSize1)
 
 _SafeX := Floor(A_ScreenWidth  / 2 + A_ScreenWidth  / 2.5)
 _SafeY := Floor(A_ScreenHeight / 2 - A_ScreenHeight / 2.5) + (14 * 9)
