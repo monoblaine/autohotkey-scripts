@@ -59,7 +59,7 @@ LastMouseCoordX := 0
 LastMouseCoordY := 0
 
 ScreenGridSize0 := 0.25
-ScreenGridSize1 := 0.45
+ScreenGridSize1 := 0.50
 
 IsExternalMon := 1
 WheelScrollLines := 1
@@ -67,16 +67,19 @@ RegRead, WheelScrollLines, HKCU\Control Panel\Desktop, WheelScrollLines
 
 MovementMethod := { unknown: 0, horizontal: 1, vertical: 2 }
 
-_L0 := Floor(A_ScreenWidth  / 2 - A_ScreenWidth  * ScreenGridSize0)
-_L1 := Floor(A_ScreenWidth  / 2 - A_ScreenWidth  * ScreenGridSize1)
-_T0 := Floor(A_ScreenHeight / 2 - A_ScreenHeight * ScreenGridSize0)
-_T1 := Floor(A_ScreenHeight / 2 - A_ScreenHeight * ScreenGridSize1)
+MouseMovableRegionMargin := 70
+MouseMovableRegionWidth  := A_ScreenWidth  - (MouseMovableRegionMargin * 2)
+MouseMovableRegionHeight := A_ScreenHeight - (MouseMovableRegionMargin * 2)
 _CX := Floor(A_ScreenWidth  / 2)
 _CY := Floor(A_ScreenHeight / 2)
-_R0 := Floor(A_ScreenWidth  / 2 + A_ScreenWidth  * ScreenGridSize0)
-_R1 := Floor(A_ScreenWidth  / 2 + A_ScreenWidth  * ScreenGridSize1)
-_B0 := Floor(A_ScreenHeight / 2 + A_ScreenHeight * ScreenGridSize0)
-_B1 := Floor(A_ScreenHeight / 2 + A_ScreenHeight * ScreenGridSize1)
+_L0 := Floor(_CX - MouseMovableRegionWidth  * ScreenGridSize0)
+_L1 := Floor(_CX - MouseMovableRegionWidth  * ScreenGridSize1)
+_T0 := Floor(_CY - MouseMovableRegionHeight * ScreenGridSize0)
+_T1 := Floor(_CY - MouseMovableRegionHeight * ScreenGridSize1)
+_R0 := Floor(_CX + MouseMovableRegionWidth  * ScreenGridSize0)
+_R1 := Floor(_CX + MouseMovableRegionWidth  * ScreenGridSize1)
+_B0 := Floor(_CY + MouseMovableRegionHeight * ScreenGridSize0)
+_B1 := Floor(_CY + MouseMovableRegionHeight * ScreenGridSize1)
 
 _SafeX := Floor(A_ScreenWidth  / 2 + A_ScreenWidth  / 2.5)
 _SafeY := Floor(A_ScreenHeight / 2 - A_ScreenHeight / 2.5) + (14 * 9)
@@ -180,7 +183,7 @@ Return
 
 CapsLock & Space::SetCapsLockState % !GetKeyState("CapsLock", "T")                ; CapsLock + Space             | Toggle CapsLock state
 
-<#End::ToggleMousePos(_R1, _B0)
+<#End::ToggleMousePos(_SafeX, _B0)
 
 <#Numpad7::
 <#NumpadHome::
