@@ -101,8 +101,19 @@ NumpadEnd::Esc
 CapsLock & Del::Send, !{f4}                                                       ; CapsLock + del               | Send alt + f4
 ^!+l::Run, ClipToQuotedLines.exe                                                  ; ctrl + alt + shift + l       | ClipToQuotedLines.exe
 ^!+h::clipboard := StrReplace(clipboard, "`\", "`/")                              ; ctrl + alt + shift + h       | Replace all the \ characters within the text in clipboard with /
-^!+Left::Media_Prev                                                               ; ctrl + alt + shift + left    | Media_Prev
-^!+Right::Media_Next                                                              ; ctrl + alt + shift + right   | Media_Next
+
+<#Left::
+    if !GetKeyState("LCtrl") {
+        Send, {Media_Prev}
+    }
+Return
+
+<#Right::
+    if !GetKeyState("LCtrl") {
+        Send, {Media_Next}
+    }
+Return
+
 ^!+Down::Media_Play_Pause                                                         ; ctrl + alt + shift + down    | Media_Play_Pause
 ^!+Up::Media_Stop                                                                 ; ctrl + alt + shift + up      | Media_Stop
 ^!+b::
@@ -656,8 +667,6 @@ WrapTextWith(left, right) {
 }
 
 >#v::Send !{f20}
-<#Left::Send +{f13}
-<#Right::Send ^{f13}
 >#g::Send ^{f14}
 >#b::Send ^{f15}
 >#n::Send ^{f16}
