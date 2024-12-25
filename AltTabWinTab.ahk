@@ -43,12 +43,8 @@ return
 return
 
 !Del::
-    activeWindow := WinExist("A")
-
-    if (activeWindow) {
-        WinClose, ahk_id %activeWindow%
-        WinWaitClose, ahk_id %activeWindow%,, 2
-        activeWindow := ""
+    if (WinExist("A")) {
+        WinClose
         Sleep 300
         visibleWindows := GetVisibleWindows()
 
