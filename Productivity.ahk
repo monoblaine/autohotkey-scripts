@@ -647,7 +647,6 @@ return
 
 WrapTextWith(left, right) {
     Send, !{f17} ; disable copyq
-    Sleep 50
     clipboard := ""
     Send, ^c
     ClipWait, 0.25
@@ -656,14 +655,13 @@ WrapTextWith(left, right) {
     if not StrLen(clipboard) {
         Send ^+{Left}
         Send, ^c
-        ClipWait, 0.25
+        ClipWait
     }
 
     clipboard := left . RegexReplace(clipboard, "[\r\n]+$", "") . right
     Send, ^v
     Sleep 250
     Send, !{f16} ; Enable copyq and activate first item
-    Sleep 50
 }
 
 >#v::Send !{f20}
