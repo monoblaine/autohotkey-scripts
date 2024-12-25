@@ -466,7 +466,7 @@ RButton & LButton::
 <#NumpadClear::
 <#NumpadDiv::
     if (WheelScrollLines = 1) {
-        WheelScrollLines := 6
+        WheelScrollLines := 4
     }
     else {
         WheelScrollLines := 1
