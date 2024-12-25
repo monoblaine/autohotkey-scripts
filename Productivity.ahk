@@ -235,22 +235,7 @@ return
 <#Numpad5::
 CapsLock & NumpadClear::
 CapsLock & Numpad5::
-    if GetKeyState("LAlt") {
-        ToggleMousePos(_CX, _CY)
-        Return
-    }
-
-    targetx := _CX
-    targety := _CY
-
-    if (LastMovement = MovementMethod.horizontal) {
-        targety := -1
-    }
-    else if (LastMovement = MovementMethod.vertical) {
-        targetx := -1
-    }
-
-    ToggleMousePos(targetx, targety)
+    ToggleMousePos(_CX, _CY)
 return
 
 <#Numpad6::
