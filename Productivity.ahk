@@ -686,14 +686,6 @@ WrapTextWith(left, right) {
 
 #UseHook
 #If !GetKeyState("NumLock", "T") or (!GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt"))
-    <#Up::
-        Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<17))?"":"{Blind}{Up up}{WheelUp}"
-    Return
-
-    <#Down::
-        Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<17))?"":"{Blind}{Down up}{WheelDown}"
-    Return
-
     NumpadUp::
         Send % ((A_PriorHotkey=A_ThisHotkey)&&(A_TimeSincePriorHotkey<17))?"":"{Blind}{WheelUp}"
     Return
