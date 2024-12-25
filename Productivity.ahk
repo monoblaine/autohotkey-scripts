@@ -96,11 +96,12 @@ CoordMode, Mouse, Screen
 NumpadEnd::Esc
 #w::Send, !{f15}                                                                  ; win + w                      | Send alt + f15
 #^a::Winset, Alwaysontop, , A                                                     ; win + ctrl + a               | Make the active window stay always on top
-<#<^<+Up::Volume_Up                                                               ; lwin + lctrl + lshift + up   | Increase volume
-<#<^<+Down::Volume_Down                                                           ; lwin + lctrl + lshift + down | Decrease volume
 CapsLock & Del::Send, !{f4}                                                       ; CapsLock + del               | Send alt + f4
 ^!+l::Run, ClipToQuotedLines.exe                                                  ; ctrl + alt + shift + l       | ClipToQuotedLines.exe
 ^!+h::clipboard := StrReplace(clipboard, "`\", "`/")                              ; ctrl + alt + shift + h       | Replace all the \ characters within the text in clipboard with /
+
+<#Up::Volume_Up
+<#Down::Volume_Down
 
 <#Left::
     if !GetKeyState("LCtrl") {
