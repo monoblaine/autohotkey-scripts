@@ -449,6 +449,7 @@ return
 #IfWinActive
 
 RButton & LButton::
+<#<+s::
 <#NumpadUp::
 <#NumpadClear::
 <#NumpadDiv::
