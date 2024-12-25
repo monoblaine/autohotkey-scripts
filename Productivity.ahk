@@ -471,11 +471,10 @@ RButton & LButton::
     else {
         WheelScrollLines := 1
     }
-    DllCall("SystemParametersInfoA", uint, 0x69, uint, WheelScrollLines, uintP, 0, uint, 1|2)
-    Sleep, 10	; drastically improves reliability on slower systems (took a loooong time to figure this out)
     msg := "WheelScrollLines: " . WheelScrollLines
     ToolTip, %msg%
-    Sleep, 400	; SPECIFY DISPLAY TIME (ms)
+    DllCall("SystemParametersInfoA", uint, 0x69, uint, WheelScrollLines, uintP, 0, uint, 1|2)
+    Sleep, 200	; SPECIFY DISPLAY TIME (ms)
     ToolTip		; remove
 return
 
