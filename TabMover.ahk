@@ -249,7 +249,7 @@ Return
         if (result) {
             Send !{f17} ; disable copyq
             Sleep 100
-            Clipboard := Trim(cellContent, " `t`r`n") . "`r`ngo`r`n"
+            Clipboard := RegexReplace(Trim(cellContent, " `t`r`n") . "`r`ngo`r`n", "i)^CREATE ", "alter ")
             cellContent := ""
 
             if (SsmsOpenCellContentInNewTab) {
