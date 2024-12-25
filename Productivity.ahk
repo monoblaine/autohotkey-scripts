@@ -13,6 +13,7 @@ SendMode Input
 #MaxHotkeysPerInterval 2000
 
 #include TrayIcon.ahk
+#include WinUtil.ahk
 
 GroupAdd, Group_CtrlRToF5, ahk_class CabinetWClass
 GroupAdd, Group_CtrlRToF5, ahk_exe GitExtensions.exe
@@ -561,6 +562,23 @@ return
 
 >#>+g::
     TrayIcon_Button("GoogleDriveFS.exe")
+Return
+
+^!+f::
+    if WinActive("ahk_exe Spotify.exe") {
+        WinClose
+        Sleep 300
+        visibleWindows := GetVisibleWindows()
+
+        if (visibleWindows.MaxIndex()) {
+            firstWin := visibleWindows[1]
+            WinActivate, ahk_id %firstWin%
+            firstWin := ""
+        }
+    }
+    else {
+        TrayIcon_Button("Spotify.exe", "L", True)
+    }
 Return
 
 >#>+d::
