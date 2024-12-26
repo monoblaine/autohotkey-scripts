@@ -30,6 +30,7 @@ procHandle_Ssms18_4 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Ssms18_get
 procHandle_Ssms18_5 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Ssms18_getObjectExplorerNodeType", Ptr)
 procHandle_Foobar2000 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Foobar2000_inspectActiveTab", Ptr)
 procHandle_CopyQ := DllCall("GetProcAddress", Ptr, hModule, AStr, "CopyQ_inspectActiveTab", Ptr)
+procHandle_WinMerge2011 := DllCall("GetProcAddress", Ptr, hModule, AStr, "WinMerge2011_switchTab", Ptr)
 procHandle_Cleanup := DllCall("GetProcAddress", Ptr, hModule, AStr, "cleanup", Ptr)
 
 CoordMode, Mouse, Screen
@@ -53,6 +54,7 @@ Exit:
    DllCall("CloseHandle", Ptr, procHandle_Ssms18_5)
    DllCall("CloseHandle", Ptr, procHandle_Foobar2000)
    DllCall("CloseHandle", Ptr, procHandle_CopyQ)
+   DllCall("CloseHandle", Ptr, procHandle_WinMerge2011)
    DllCall("CloseHandle", Ptr, procHandle_Cleanup)
    DllCall("FreeLibrary", Ptr, hModule)
    ExitApp
@@ -388,6 +390,24 @@ Return
 #IfWinActive ahk_exe copyq.exe
     ^!PgUp::MoveTab(1, -1, procHandle_CopyQ, MovementMethod.mouseClickDrag, 0, 0.3)
     ^!PgDn::MoveTab(1, 1, procHandle_CopyQ, MovementMethod.mouseClickDrag, 0, 0.3)
+#IfWinActive
+
+#IfWinActive ahk_exe WinMergeU.exe
+    ^PgDn::
+    ^Tab::
+        if (A_PriorHotkey = A_ThisHotkey and A_TimeSincePriorHotkey < 50) {
+            return
+        }
+        DllCall(procHandle_WinMerge2011, Int, WinExist("A"), Int, 1)
+    Return
+
+    ^PgUp::
+    ^+Tab::
+        if (A_PriorHotkey = A_ThisHotkey and A_TimeSincePriorHotkey < 50) {
+            return
+        }
+        DllCall(procHandle_WinMerge2011, Int, WinExist("A"), Int, 0)
+    Return
 #IfWinActive
 
 MoveVisualStudioTab(direction) {
