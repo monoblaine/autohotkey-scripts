@@ -1030,6 +1030,14 @@ WrapTextWith(left, right) {
 #IfWinActive ahk_exe Code.exe
     !Pgdn::Send, ^!+{Pgdn}
     !Pgup::Send, ^!+{Pgup}
+
+    ~^+d::
+        ; There's no option to make the new editor open maximized, so make sure the
+        ; window created on "workbench.action.copyEditorToNewWindow" gets maximized.
+        ; Idiots...
+        Sleep 150
+        WinMaximize, A
+    Return
 #IfWinActive
 
 #IfWinActive ahk_exe WindowsTerminal.exe
