@@ -17,6 +17,7 @@ MovementMethod := { mouseClickDrag: 1, sendEvent: 2, foobar2000: 3, mouseClickDr
 
 hModule := DllCall("LoadLibrary", Str, "ActiveTabSpy.dll", Ptr)
 procHandle_MsEdge2 := DllCall("GetProcAddress", Ptr, hModule, AStr, "MsEdge_getThreeDotBtnStatus", Ptr)
+procHandle_MsEdge3 := DllCall("GetProcAddress", Ptr, hModule, AStr, "MsEdgeDevTools_getLastMessage", Ptr)
 procHandle_Firefox := DllCall("GetProcAddress", Ptr, hModule, AStr, "Firefox_inspectActiveTab", Ptr)
 procHandle_FirefoxDevTools := DllCall("GetProcAddress", Ptr, hModule, AStr, "FirefoxDevTools_inspectTabOn", Ptr)
 procHandle_Vs2019 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Vs2019_inspectActiveTab", Ptr)
@@ -41,6 +42,7 @@ return
 Exit:
    DllCall(procHandle_Cleanup)
    DllCall("CloseHandle", Ptr, procHandle_MsEdge2)
+   DllCall("CloseHandle", Ptr, procHandle_MsEdge3)
    DllCall("CloseHandle", Ptr, procHandle_Firefox)
    DllCall("CloseHandle", Ptr, procHandle_FirefoxDevTools)
    DllCall("CloseHandle", Ptr, procHandle_Vs2019)
@@ -80,6 +82,21 @@ Return
         if DllCall(procHandle_MsEdge2, Int, WinExist("A")) {
             Send, {f6}
         }
+    return
+#IfWinActive
+
+#IfWinActive DevTools -  ahk_exe msedge.exe
+    >#c::
+        content := DllCall(procHandle_MsEdge3, Int, WinExist("A"), "WStr")
+        if (A_LastError) {
+            MsgBox, Error: %A_LastError%
+        }
+        Send !{f17} ; disable copyq
+        Sleep 100
+        Clipboard := content
+        content := ""
+        Sleep 250
+        Send !{f16} ; Enable copyq and activate first item
     return
 #IfWinActive
 
