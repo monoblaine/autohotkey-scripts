@@ -47,13 +47,14 @@ return
 !Del::
     if (WinExist("A")) {
         WinClose
-        Sleep 300
+        WinWaitClose
+        Sleep 100
         visibleWindows := GetVisibleWindows()
-
-        if (visibleWindows.MaxIndex()) {
-            firstWin := visibleWindows[1]
-            WinActivate, ahk_id %firstWin%
-            firstWin := ""
+        windowCount := visibleWindows.MaxIndex()
+        if (windowCount > 0) {
+            nextWin := visibleWindows[1]
+            WinActivate, ahk_id %nextWin%
+            nextWin := ""
         }
     }
 return
