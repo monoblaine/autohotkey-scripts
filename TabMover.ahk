@@ -91,12 +91,8 @@ Return
         if (A_LastError) {
             MsgBox, Error: %A_LastError%
         }
-        Send !{f17} ; disable copyq
-        Sleep 100
         Clipboard := content
         content := ""
-        Sleep 250
-        Send !{f16} ; Enable copyq and activate first item
     return
 #IfWinActive
 
