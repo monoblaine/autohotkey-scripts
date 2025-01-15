@@ -1040,6 +1040,28 @@ WrapTextWith(left, right) {
     Return
 #IfWinActive
 
+<#+F7::
+<#F7::
+    isVertical := GetKeyState("Shift")
+    MouseGetPos, curX, curY
+    targetX := isVertical ? curX : (curX - 42)
+    targetY := isVertical ? (curY - 42) : curY
+    SetMouseDelay, 3
+    SetDefaultMouseSpeed, 3
+    SendEvent {Click %curX% %curY% Down}{Click %targetX% %targetY% Up}
+Return
+
+<#+F8::
+<#F8::
+    isVertical := GetKeyState("Shift")
+    MouseGetPos, curX, curY
+    targetX := isVertical ? curX : (curX + 42)
+    targetY := isVertical ? (curY + 42) : curY
+    SetMouseDelay, 3
+    SetDefaultMouseSpeed, 3
+    SendEvent {Click %curX% %curY% Down}{Click %targetX% %targetY% Up}
+Return
+
 #IfWinActive ahk_exe WindowsTerminal.exe
     ^!Pgup::
         Send, ^+q
