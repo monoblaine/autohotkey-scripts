@@ -789,6 +789,8 @@ WrapTextWith(left, right) {
         }
         Run, C:\Program Files\Everything\Everything.exe -p "%RunPath%"            ; Launch "Everything"
     return
+
+    ^+r::Send, {f2}
 #IfWinActive
 
 ; Because Visual Studio 2019 broke my AltGr shortcuts!
