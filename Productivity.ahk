@@ -51,6 +51,11 @@ GroupAdd, Group_SendInputCheckBoxVariants, ahk_group Group_ChromiumBasedApp
 GroupAdd, Group_SendInputCheckBoxVariants, ahk_exe soffice.bin
 GroupAdd, Group_SendInputCheckBoxVariants, ahk_exe firefox.exe
 
+GroupAdd, Group_CtrlAltShiftGExcludedApps, ahk_exe devenv.exe
+GroupAdd, Group_CtrlAltShiftGExcludedApps, ahk_exe Code.exe
+GroupAdd, Group_CtrlAltShiftGExcludedApps, ahk_exe msedge.exe
+GroupAdd, Group_CtrlAltShiftGExcludedApps, ahk_exe chrome.exe
+
 Shell := ComObjCreate("WScript.Shell")
 
 SavedMouseCoordX := -1
@@ -1164,7 +1169,7 @@ return
 <#Space::SendInput {Space}{Space}{Space}{Space}                      ; lwin + space               | Send 4 spaces
 <#>+Space::SendInput {Backspace}{Backspace}{Backspace}{Backspace}    ; win + rshift + space       | Remove 4 spaces
 
-#IfWinNotActive ahk_exe devenv.exe                                   ;                            | Exclude Visual Studio
+#IfWinNotActive ahk_group Group_CtrlAltShiftGExcludedApps
     ^!+c::SendInput *{Space}                                         ; ctrl + alt + shift + c     | print *
     ^!+g::clipboard := RegExReplace(clipboard, "([^/]+\/+)+", "")    ; ctrl + alt + shift + g     | Get substring that comes after the last index of '/'. Useful for copying commit id's from a url
 #IfWinNotActive
