@@ -441,6 +441,28 @@ return
     ^!+g::Send, +{f6}
 #IfWinActive
 
+#IfWinActive ahk_exe Insomnia.exe
+    ^+s::
+        Send ^l
+        Sleep, 15
+        Send +{Tab}
+        Sleep, 15
+        Send +{Tab}
+        Sleep, 15
+        Send +{Tab}
+        Sleep, 15
+        Send +{Tab}
+        Sleep, 15
+        Send +{Tab}
+        Sleep, 15
+        Send +{Tab}
+        Sleep, 15
+        Send +{Tab}
+    Return
+
+    +Enter::Send, ^l
+#IfWinActive
+
 #IfWinActive ahk_exe ApplicationFrameHost.exe
     ~Numpad0::
     ~NumpadIns::
