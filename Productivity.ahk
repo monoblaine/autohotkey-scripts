@@ -433,6 +433,14 @@ return
     ^+r::Send, {f7}
 #IfWinActive
 
+#IfWinActive ahk_exe msedge.exe
+    ^!+g::Send, {f6}
+#IfWinActive
+
+#IfWinActive ahk_exe chrome.exe
+    ^!+g::Send, +{f6}
+#IfWinActive
+
 #IfWinActive ahk_exe ApplicationFrameHost.exe
     ~Numpad0::
     ~NumpadIns::
