@@ -32,6 +32,7 @@ procHandle_Ssms18_5 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Ssms18_get
 procHandle_Foobar2000 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Foobar2000_inspectActiveTab", Ptr)
 procHandle_CopyQ := DllCall("GetProcAddress", Ptr, hModule, AStr, "CopyQ_inspectActiveTab", Ptr)
 procHandle_WinMerge2011 := DllCall("GetProcAddress", Ptr, hModule, AStr, "WinMerge2011_switchTab", Ptr)
+procHandle_getFocusedElValue := DllCall("GetProcAddress", Ptr, hModule, AStr, "getFocusedElValue", Ptr)
 procHandle_Cleanup := DllCall("GetProcAddress", Ptr, hModule, AStr, "cleanup", Ptr)
 
 CoordMode, Mouse, Screen
@@ -57,6 +58,7 @@ Exit:
    DllCall("CloseHandle", Ptr, procHandle_Foobar2000)
    DllCall("CloseHandle", Ptr, procHandle_CopyQ)
    DllCall("CloseHandle", Ptr, procHandle_WinMerge2011)
+   DllCall("CloseHandle", Ptr, procHandle_getFocusedElValue)
    DllCall("CloseHandle", Ptr, procHandle_Cleanup)
    DllCall("FreeLibrary", Ptr, hModule)
    ExitApp
@@ -203,6 +205,19 @@ Return
     ^!PgUp::MoveVisualStudioTab(-1)
     ^!PgDn::MoveVisualStudioTab(1)
 #IfWinActive
+
+#IfWinNotActive ahk_exe Ssms.exe
+    ^+c::
+        ptr_result := 0
+        value := DllCall(procHandle_getFocusedElValue, Ptr, &ptr_result, "WStr")
+        result := NumGet(&ptr_result)
+        ptr_result := ""
+        if (result) {
+            Clipboard := value
+            value := ""
+        }
+    Return
+#IfWinNotActive
 
 #IfWinActive ahk_exe Ssms.exe
     ^!PgUp::MoveTab(1, -1, procHandle_Ssms18_1, MovementMethod.mouseClickDrag)
