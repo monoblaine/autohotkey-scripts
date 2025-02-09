@@ -413,7 +413,7 @@ return
     Return
 #IfWinActive
 
-#IfWinActive ahk_exe msedge.exe
+#IfWinActive ahk_group Group_ChromiumBasedApp
     >#+v::
         MouseGetPos, xpos, ypos
         MouseMove, 1575, 54
@@ -424,6 +424,8 @@ return
         Sleep 100
         MouseMove, %xpos%, %ypos%
     Return
+
+    ^+r::Send, {f7}
 #IfWinActive
 
 #IfWinActive ahk_exe ApplicationFrameHost.exe
