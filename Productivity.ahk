@@ -1039,6 +1039,7 @@ WrapTextWith(left, right) {
 #IfWinActive ahk_exe Code.exe
     !Pgdn::Send, ^!+{Pgdn}
     !Pgup::Send, ^!+{Pgup}
+    <^>!+g::Send, ^!+g
 
     ~^+d::
         ; There's no option to make the new editor open maximized, so make sure the
