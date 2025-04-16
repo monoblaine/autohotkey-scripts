@@ -183,8 +183,11 @@ NumpadDel::Send, ,
 #If
 
 #Home::                                                                           ; Win + Home
-CapsLock & Home::                                                                 ; CapsLock + Home              | Go to saved Mouse Coord
     ToggleMousePos(_SafeX, _SafeY)
+Return
+
+CapsLock & Home::
+    ToggleMousePos(A_ScreenWidth - 1, _SafeY)
 Return
 
 CapsLock & Space::SetCapsLockState % !GetKeyState("CapsLock", "T")                ; CapsLock + Space             | Toggle CapsLock state
