@@ -16,6 +16,7 @@ GroupAdd, Group_TombRaider, ahk_exe tomb123.exe
 GroupAdd, Group_TombRaider, ahk_exe tomb456.exe
 
 #IfWinActive ahk_group Group_TombRaider
+    CapsLock::.
     RShift::.
     RAlt::LAlt
 #IfWinActive
