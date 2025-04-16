@@ -464,6 +464,14 @@ return
         Send +{Tab}
         Sleep, 15
         Send +{Tab}
+        Sleep, 15
+        Send +{Tab}
+        Sleep, 15
+        Send +{Tab}
+        Sleep, 15
+        Send +{Tab}
+        Sleep, 15
+        Send +{Tab}
     Return
 
     +Enter::Send, ^l
