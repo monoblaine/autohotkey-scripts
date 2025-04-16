@@ -931,6 +931,7 @@ WrapTextWith(left, right) {
 
 #IfWinActive ahk_exe 7zFM.exe                                                     ; if it is 7-Zip
     Esc::
+    NumpadEnd::
         Send, !{f4}
     Return
 
