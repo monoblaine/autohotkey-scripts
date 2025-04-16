@@ -90,7 +90,7 @@ _B1 := Floor(_CY + MouseMovableRegionHeight * ScreenGridSize1)
 _SafeX := Floor(A_ScreenWidth  / 2 + A_ScreenWidth  / 2.5)
 _SafeY := Floor(A_ScreenHeight / 2 - A_ScreenHeight / 2.5) + (14 * 9)
 
-_RelativeHorizontalJump := 42
+_RelativeHorizontalJumpLarge := 42
 _RelativeVerticalJump   := 42
 _DateTimeX := A_ScreenWidth - 71
 _DateTimeY := A_ScreenHeight - 15
@@ -132,7 +132,7 @@ Return
 
 CapsLock & Left::                                                                 ; CapsLock + left arrow        | Move mouse pointer leftward
     if GetKeyState("LAlt") {
-        ToggleMousePos(-_RelativeHorizontalJump, 0, 1)
+        ToggleMousePos(-_RelativeHorizontalJumpLarge, 0, 1)
     }
     else {
         SavePosAndMouseMoveR(-14, 0)
@@ -140,7 +140,7 @@ CapsLock & Left::                                                               
 Return
 CapsLock & Right::                                                                ; CapsLock + right arrow       | Move mouse pointer rightward
     if GetKeyState("LAlt") {
-        ToggleMousePos(_RelativeHorizontalJump, 0, 1)
+        ToggleMousePos(_RelativeHorizontalJumpLarge, 0, 1)
     }
     else {
         SavePosAndMouseMoveR(14, 0)
