@@ -10,6 +10,7 @@ SetWinDelay, -1
 SetControlDelay, -1
 SendMode Input
 #SingleInstance force
+#MaxHotkeysPerInterval 200
 
 #IfWinActive ahk_exe tomb123.exe
     RShift::.
