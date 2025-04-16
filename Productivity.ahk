@@ -752,6 +752,9 @@ WrapTextWith(left, right) {
 !0::SendInput {}}
 !*::SendInput {\}
 
+; LAlt + ü
+<!SC01B::SendInput {=}
+
 ; Credits for the debouncer code: https://www.autohotkey.com/boards/viewtopic.php?p=117262#p117262
 
 #UseHook
