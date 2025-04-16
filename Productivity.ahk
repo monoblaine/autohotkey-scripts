@@ -640,16 +640,18 @@ Return
     MouseMove, %xpos%, %ypos%
 Return
 
-; Text–only paste from clipboard (Trims leading and trailing whitespaces)
-^+v:: ; ctrl + shift + v
-    originalClipboard := ClipBoardAll
-    clipboard := clipboard               ; Convert to text
-    clipboard := RegexReplace(clipboard, "^\s+|\s+$")
-    Send, ^v                             ; For best compatibility: SendPlay
-    Sleep 50                             ; Don't change clipboard while it is pasted! (Sleep > 0)
-    clipboard := originalClipboard       ; Restore original ClipBoard
-    VarSetCapacity(originalClipboard, 0) ; Free memory
-return
+#IfWinNotActive ahk_group Group_CtrlShiftVExcludedApps
+    ; Text–only paste from clipboard (Trims leading and trailing whitespaces)
+    ^+v:: ; ctrl + shift + v
+        originalClipboard := ClipBoardAll
+        clipboard := clipboard               ; Convert to text
+        clipboard := RegexReplace(clipboard, "^\s+|\s+$")
+        Send, ^v                             ; For best compatibility: SendPlay
+        Sleep 50                             ; Don't change clipboard while it is pasted! (Sleep > 0)
+        clipboard := originalClipboard       ; Restore original ClipBoard
+        VarSetCapacity(originalClipboard, 0) ; Free memory
+    return
+#IfWinNotActive
 
 ^!+n::                                                                            ; ctrl + alt + shift + n
     Send, !{f17} ; disable copyq
