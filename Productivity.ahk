@@ -1006,6 +1006,8 @@ WrapTextWith(left, right) {
             Send !{r}
         }
     return
+
+    ^+s::Send ^u
 #IfWinActive
 
 #IfWinActive ahk_exe EXCEL.EXE
