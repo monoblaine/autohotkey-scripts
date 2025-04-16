@@ -678,6 +678,10 @@ return
     Send, #+ü ; execute copyq action
 return
 
+#IfWinActive ahk_exe Be.HexEditor.exe
+    ^+v::SendInput "%clipboard%"
+#IfWinActive
+
 ^'::
 Ctrl & ":: ;"
     if GetKeyState("RShift") {
