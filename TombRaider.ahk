@@ -12,7 +12,10 @@ SendMode Input
 #SingleInstance force
 #MaxHotkeysPerInterval 200
 
-#IfWinActive ahk_exe tomb123.exe
+GroupAdd, Group_TombRaider, ahk_exe tomb123.exe
+GroupAdd, Group_TombRaider, ahk_exe tomb456.exe
+
+#IfWinActive ahk_group Group_TombRaider
     RShift::.
     RAlt::LAlt
 #IfWinActive
