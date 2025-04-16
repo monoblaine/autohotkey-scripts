@@ -372,6 +372,10 @@ return
     <#<+Down::WheelRight
 #IfWinActive
 
+#IfWinActive Google Çeviri ahk_group Group_ChromiumBasedApp
+    ^u::Send ^+s
+#IfWinActive
+
 #IfWinActive ahk_exe firefox.exe
     ; Click "close this message" on StackOverflow
     CapsLock & x::
