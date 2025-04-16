@@ -61,9 +61,6 @@ GroupAdd, Group_CtrlShiftVExcludedApps, ahk_exe Be.HexEditor.exe
 
 Shell := ComObjCreate("WScript.Shell")
 
-SavedMouseCoordX := -1
-SavedMouseCoordY := -1
-
 LastMouseCoordX := 0
 LastMouseCoordY := 0
 
@@ -185,21 +182,9 @@ NumpadDel::Send, ,
     NumpadPgup::Click, Right
 #If
 
-#Ins::
-CapsLock & Ins::                                                                  ; CapsLock + Insert            | Save current Mouse Coord
-    MouseGetPos, SavedMouseCoordX, SavedMouseCoordY
-    SavedMouseCoordX := Floor(SavedMouseCoordX)
-    SavedMouseCoordY := Floor(SavedMouseCoordY)
-Return
-
 #Home::                                                                           ; Win + Home
 CapsLock & Home::                                                                 ; CapsLock + Home              | Go to saved Mouse Coord
-    if (LastMovement = MovementMethod.unknown) {
-        ToggleMousePos(_SafeX, _SafeY)
-    }
-    else {
-        ToggleMousePos(SavedMouseCoordX, SavedMouseCoordY)
-    }
+    ToggleMousePos(_SafeX, _SafeY)
 Return
 
 CapsLock & Space::SetCapsLockState % !GetKeyState("CapsLock", "T")                ; CapsLock + Space             | Toggle CapsLock state
