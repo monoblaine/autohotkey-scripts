@@ -57,6 +57,8 @@ GroupAdd, Group_CtrlAltShiftGExcludedApps, ahk_exe Code.exe
 GroupAdd, Group_CtrlAltShiftGExcludedApps, ahk_exe msedge.exe
 GroupAdd, Group_CtrlAltShiftGExcludedApps, ahk_exe chrome.exe
 
+GroupAdd, Group_CtrlShiftVExcludedApps, ahk_exe Be.HexEditor.exe
+
 Shell := ComObjCreate("WScript.Shell")
 
 SavedMouseCoordX := -1
