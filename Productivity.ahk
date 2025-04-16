@@ -180,6 +180,19 @@ NumpadDel::Send, ,
     NumpadHome::Send, {Click 1}
     ^NumpadHome::Send, {MButton 1}
     NumpadPgup::Click, Right
+
+    <#NumpadHome::
+    <#NumpadPgup::
+        targetx := _SafeX
+        targety := _SafeY
+        MouseGetPos, xpos, ypos
+        xpos := Floor(xpos)
+        ypos := Floor(ypos)
+        if (targetx = xpos) {
+            targetx := A_ScreenWidth - 1
+        }
+        MouseMove, %targetx%, %targety%
+    Return
 #If
 
 #Home::                                                                           ; Win + Home
@@ -195,7 +208,6 @@ CapsLock & Space::SetCapsLockState % !GetKeyState("CapsLock", "T")              
 <#End::ToggleMousePos(_SafeX, _B0)
 
 <#Numpad7::
-<#NumpadHome::
 CapsLock & NumpadHome::
 CapsLock & Numpad7::
     if GetKeyState("LAlt") {
@@ -218,7 +230,6 @@ CapsLock & Numpad8::
 return
 
 <#Numpad9::
-<#NumpadPgup::
 CapsLock & NumpadPgup::
 CapsLock & Numpad9::
     if GetKeyState("LAlt") {
