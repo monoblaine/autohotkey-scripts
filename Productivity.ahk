@@ -991,6 +991,11 @@ WrapTextWith(left, right) {
             WrapTextWith("“", "”")
         }
     return
+
+    :*:;;bkz::
+        SendInput (bkz.{Space})
+        Send {Left}
+    Return
 #IfWinActive
 
 #IfWinActive ahk_exe WinMergeU.exe
