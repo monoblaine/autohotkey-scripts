@@ -936,6 +936,7 @@ WrapTextWith(left, right) {
     Return
 
     !Up::Send, {Backspace}                                                        ; alt + up                     | Send backspace
+    ^Enter::Send {f3}
 #IfWinActive
 
 #IfWinActive ahk_exe notepad++.exe
