@@ -930,7 +930,7 @@ WrapTextWith(left, right) {
 #IfWinActive
 
 #IfWinActive ahk_exe 7zFM.exe                                                     ; if it is 7-Zip
-    Esc::Send, !{f4}                                                              ; esc                          | Send alt + f4
+    Esc::Send, !{f4}
     !Up::Send, {Backspace}                                                        ; alt + up                     | Send backspace
 #IfWinActive
 
