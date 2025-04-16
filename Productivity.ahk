@@ -654,6 +654,7 @@ Return
         originalClipboard := ClipBoardAll
         clipboard := clipboard               ; Convert to text
         clipboard := RegexReplace(clipboard, "^\s+|\s+$")
+        Sleep 10
         Send, ^v                             ; For best compatibility: SendPlay
         Sleep 50                             ; Don't change clipboard while it is pasted! (Sleep > 0)
         clipboard := originalClipboard       ; Restore original ClipBoard
