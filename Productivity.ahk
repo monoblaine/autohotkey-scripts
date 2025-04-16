@@ -90,6 +90,7 @@ _B1 := Floor(_CY + MouseMovableRegionHeight * ScreenGridSize1)
 _SafeX := Floor(A_ScreenWidth  / 2 + A_ScreenWidth  / 2.5)
 _SafeY := Floor(A_ScreenHeight / 2 - A_ScreenHeight / 2.5) + (14 * 9)
 
+_RelativeHorizontalJumpNormal := 14
 _RelativeHorizontalJumpLarge := 42
 _RelativeVerticalJump   := 42
 _DateTimeX := A_ScreenWidth - 71
@@ -135,7 +136,7 @@ CapsLock & Left::                                                               
         ToggleMousePos(-_RelativeHorizontalJumpLarge, 0, 1)
     }
     else {
-        SavePosAndMouseMoveR(-14, 0)
+        SavePosAndMouseMoveR(-_RelativeHorizontalJumpNormal, 0)
     }
 Return
 CapsLock & Right::                                                                ; CapsLock + right arrow       | Move mouse pointer rightward
@@ -143,7 +144,7 @@ CapsLock & Right::                                                              
         ToggleMousePos(_RelativeHorizontalJumpLarge, 0, 1)
     }
     else {
-        SavePosAndMouseMoveR(14, 0)
+        SavePosAndMouseMoveR(_RelativeHorizontalJumpNormal, 0)
     }
 Return
 CapsLock & Down::                                                                 ; CapsLock + down arrow        | Move mouse pointer downward
@@ -151,7 +152,7 @@ CapsLock & Down::                                                               
         ToggleMousePos(0, _RelativeVerticalJump, 1)
     }
     else {
-        SavePosAndMouseMoveR(0, 14)
+        SavePosAndMouseMoveR(0, _RelativeHorizontalJumpNormal)
     }
 Return
 CapsLock & Up::                                                                   ; CapsLock + up arrow          | Move mouse pointer upward
@@ -159,7 +160,7 @@ CapsLock & Up::                                                                 
         ToggleMousePos(0, -_RelativeVerticalJump, 1)
     }
     else {
-        SavePosAndMouseMoveR(0, -14)
+        SavePosAndMouseMoveR(0, -_RelativeHorizontalJumpNormal)
     }
 Return
 
