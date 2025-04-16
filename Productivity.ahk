@@ -1014,6 +1014,16 @@ WrapTextWith(left, right) {
     F1::=
 #IfWinActive
 
+#IfWinActive ahk_exe thunderbird.exe
+    ^+c::
+        Send ^t
+        Sleep 75
+        Send ^u
+        Sleep 75
+        Send ^b
+    Return
+#IfWinActive
+
 ; Honor scroll lock state (may or may not work)
 #If !WinActive("ahk_exe EXCEL.EXE") and GetKeyState("ScrollLock", "T")
     ;==============================================================================
