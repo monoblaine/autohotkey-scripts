@@ -90,7 +90,7 @@ _B1 := Floor(_CY + MouseMovableRegionHeight * ScreenGridSize1)
 _SafeX := Floor(A_ScreenWidth  / 2 + A_ScreenWidth  / 2.5)
 _SafeY := Floor(A_ScreenHeight / 2 - A_ScreenHeight / 2.5) + (14 * 9)
 
-_RelativeHorizontalJumpNormal := 14
+_RelativeHorizontalJumpNormal := 6
 _RelativeHorizontalJumpLarge := 42
 _RelativeVerticalJump   := 42
 _DateTimeX := A_ScreenWidth - 71
