@@ -569,6 +569,12 @@ return
     Return
 #IfWinActive
 
+CapsLock & LButton::
+    Click
+    Sleep 15
+    Winset, Alwaysontop, , A
+Return
+
 *CapsLock:: return ; This forces CapsLock into a modifying key.
 RButton::RButton   ; restore the original RButton function
 
