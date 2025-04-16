@@ -589,6 +589,10 @@ return
     WinActivate, ahk_exe copyq.exe
 return
 
+#IfWinActive ahk_exe copyq.exe
+    ^+r::Send, {f2}
+#IfWinActive
+
 >#>+f::                                                                           ; rwin + rshift + f            | open file path in clipboard with explorer
     clipboard := StrReplace(clipboard, "`/", "`\")
     Sleep 150
