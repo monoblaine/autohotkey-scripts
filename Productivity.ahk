@@ -59,6 +59,15 @@ GroupAdd, Group_CtrlAltShiftGExcludedApps, ahk_exe chrome.exe
 
 GroupAdd, Group_CtrlShiftVExcludedApps, ahk_exe Be.HexEditor.exe
 
+GroupAdd, AltPgxExcludedApps, ahk_exe notepad++.exe
+GroupAdd, AltPgxExcludedApps, ahk_exe devenv.exe
+GroupAdd, AltPgxExcludedApps, ahk_exe Ssms.exe
+GroupAdd, AltPgxExcludedApps, ahk_exe soffice.bin
+GroupAdd, AltPgxExcludedApps, ahk_exe WinMergeU.exe
+GroupAdd, AltPgxExcludedApps, ahk_exe idea64.exe
+GroupAdd, AltPgxExcludedApps, ahk_exe studio64.exe
+GroupAdd, AltPgxExcludedApps, ahk_exe tomb123.exe
+
 Shell := ComObjCreate("WScript.Shell")
 
 LastMouseCoordX := 0
@@ -1018,6 +1027,18 @@ WrapTextWith(left, right) {
     return
 
     ^+s::Send ^u
+
+    ^PgUp::
+        Send {Blind}{Ctrl Up}
+        MoveCaretToPageTopBottom(1)
+        Send {Blind}{Ctrl Down}
+    return
+
+    ^PgDn::
+        Send {Blind}{Ctrl Up}
+        MoveCaretToPageTopBottom(0)
+        Send {Blind}{Ctrl Down}
+    return
 #IfWinActive
 
 #IfWinActive ahk_exe EXCEL.EXE
@@ -1177,6 +1198,11 @@ Return
         Send {Enter}
     Return
 #IfWinActive
+
+#IfWinNotActive ahk_group AltPgxExcludedApps
+    !PgUp::MoveCaretToPageTopBottom(1)
+    !PgDn::MoveCaretToPageTopBottom(0)
+#IfWinNotActive
 
 ;==============================================================================
 ; Various SendInput commands
@@ -1361,4 +1387,30 @@ SavePosAndMouseMoveR(xDiff, yDiff) {
     LastMouseCoordY := ypos
 
     MouseMove, %xDiff%, %yDiff%, 0, R
+}
+
+MoveCaretToPageTopBottom(isTop) {
+    ControlGetFocus, FocusedControl, A
+
+    if ErrorLevel {
+        return
+    }
+
+    ControlGetPos, controlTopLeft_X, controlTopLeft_Y
+                 , control_width, control_height
+                 , %FocusedControl%, A
+
+    if (controlTopLeft_X = "") {
+        return
+    }
+
+    ; MsgBox controlTopLeft_X: %controlTopLeft_X%, controlTopLeft_Y: %controlTopLeft_Y%, control_width: %control_width%, control_height: %control_height%
+
+    targetX := controlTopLeft_X + control_width / 2
+    targetY := isTop ? (controlTopLeft_Y + 20) : (controlTopLeft_Y + control_height - 40)
+
+    MouseGetPos, currentX, currentY
+    MouseMove, %targetX%, %targetY%
+    Click
+    MouseMove, %currentX%, %currentY%
 }
