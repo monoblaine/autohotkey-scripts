@@ -654,6 +654,16 @@ Return
     }
 Return
 
+#IfWinActive ahk_exe Spotify.exe
+    ;; Queue the selected song using "Spotify Windows App Enhancer"
+    ;; see https://github.com/monoblaine/Spotify-Windows-App-Enhancer/blob/main/patch_spotify_styles.sh
+    ^q::
+        Send, {AppsKey}
+        Sleep, 150
+        Send {End}
+    Return
+#IfWinActive
+
 >#>+d::
     MouseGetPos, xpos, ypos
     Click, %_DateTimeX%, %_DateTimeY%
