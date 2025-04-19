@@ -961,7 +961,7 @@ WrapTextWith(left, right) {
 #IfWinActive
 
 #IfWinActive ahk_exe notepad++.exe
-    ^+Tab::
+    ^q::
         Send, !w
         Send, w
     return
