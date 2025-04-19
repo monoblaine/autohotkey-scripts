@@ -15,6 +15,7 @@ Process, Priority,, R
 
 #include WinUtil.ahk
 
+!Tab::
 >#Tab::Send, ^+{F24} ; ctrl + shift + F24
 
 <#Tab::
