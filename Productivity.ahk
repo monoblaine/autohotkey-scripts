@@ -25,13 +25,16 @@ GroupAdd, Group_ZoomableByWheel, ahk_exe soffice.bin
 
 GroupAdd, Group_HScroll_SupportsShiftWheel, ahk_exe notepad++.exe
 
+GroupAdd, Group_IntelliJLike, ahk_exe idea64.exe
+GroupAdd, Group_IntelliJLike, ahk_exe studio64.exe
+
 GroupAdd, Group_HScroll_SupportsNativeHWheel, ahk_class MMCMainFrame
 GroupAdd, Group_HScroll_SupportsNativeHWheel, ahk_exe GitExtensions.exe
 GroupAdd, Group_HScroll_SupportsNativeHWheel, ahk_exe msedge.exe
 GroupAdd, Group_HScroll_SupportsNativeHWheel, ahk_exe chrome.exe
 GroupAdd, Group_HScroll_SupportsNativeHWheel, ahk_exe catsxp.exe
 GroupAdd, Group_HScroll_SupportsNativeHWheel, ahk_exe WINWORD.EXE
-GroupAdd, Group_HScroll_SupportsNativeHWheel, ahk_exe idea64.exe
+GroupAdd, Group_HScroll_SupportsNativeHWheel, ahk_group Group_IntelliJLike
 GroupAdd, Group_HScroll_SupportsNativeHWheel, ahk_class MozillaWindowClass
 GroupAdd, Group_HScroll_SupportsNativeHWheel, ahk_exe paintdotnet.exe
 GroupAdd, Group_HScroll_SupportsNativeHWheel, ahk_exe soffice.bin
@@ -64,8 +67,7 @@ GroupAdd, AltPgxExcludedApps, ahk_exe devenv.exe
 GroupAdd, AltPgxExcludedApps, ahk_exe Ssms.exe
 GroupAdd, AltPgxExcludedApps, ahk_exe soffice.bin
 GroupAdd, AltPgxExcludedApps, ahk_exe WinMergeU.exe
-GroupAdd, AltPgxExcludedApps, ahk_exe idea64.exe
-GroupAdd, AltPgxExcludedApps, ahk_exe studio64.exe
+GroupAdd, AltPgxExcludedApps, ahk_group Group_IntelliJLike
 GroupAdd, AltPgxExcludedApps, ahk_exe tomb123.exe
 
 Shell := ComObjCreate("WScript.Shell")
@@ -1122,7 +1124,7 @@ WrapTextWith(left, right) {
     return
 #If
 
-#If WinActive("ahk_exe idea64.exe") && WinExist("ahk_class SunAwtWindow")
+#If WinActive("ahk_group Group_IntelliJLike") && WinExist("ahk_class SunAwtWindow")
     ; Up::Send {Esc}{Up}
     ; Right::Send {Esc}{Right}
     ; Down::Send {Esc}{Down}
@@ -1132,7 +1134,7 @@ WrapTextWith(left, right) {
     Ctrl::Send {Esc}
 #If
 
-#IfWinActive ahk_exe idea64.exe
+#IfWinActive ahk_group Group_IntelliJLike
     #w::Send, ^!{BackSpace}
 #IfWinActive
 
