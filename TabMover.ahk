@@ -15,9 +15,9 @@ PauseKeyState := 0 ; As if it's a toggle key
 
 MovementMethod := { mouseClickDrag: 1, sendEvent: 2, foobar2000: 3, mouseClickDrag2: 4 }
 
-GroupAdd, Group_CtrlC_ExcludedApps, ahk_exe Ssms.exe
-GroupAdd, Group_CtrlC_ExcludedApps, ahk_exe soffice.bin
-GroupAdd, Group_CtrlC_ExcludedApps, ahk_exe devenv.exe
+GroupAdd, Group_CtrlShiftC_ExcludedApps, ahk_exe Ssms.exe
+GroupAdd, Group_CtrlShiftC_ExcludedApps, ahk_exe soffice.bin
+GroupAdd, Group_CtrlShiftC_ExcludedApps, ahk_exe devenv.exe
 
 hModule := DllCall("LoadLibrary", Str, "ActiveTabSpy.dll", Ptr)
 procHandle_MsEdge2 := DllCall("GetProcAddress", Ptr, hModule, AStr, "MsEdge_getThreeDotBtnStatus", Ptr)
@@ -210,7 +210,7 @@ Return
     ^!PgDn::MoveVisualStudioTab(1)
 #IfWinActive
 
-#IfWinNotActive ahk_group Group_CtrlC_ExcludedApps
+#IfWinNotActive ahk_group Group_CtrlShiftC_ExcludedApps
     ^+c::
         ptr_result := 0
         value := DllCall(procHandle_getFocusedElValue, Ptr, &ptr_result, "WStr")
