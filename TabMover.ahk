@@ -38,6 +38,7 @@ procHandle_CopyQ := DllCall("GetProcAddress", Ptr, hModule, AStr, "CopyQ_inspect
 procHandle_WinMerge2011 := DllCall("GetProcAddress", Ptr, hModule, AStr, "WinMerge2011_switchTab", Ptr)
 procHandle_getFocusedElValue := DllCall("GetProcAddress", Ptr, hModule, AStr, "getFocusedElValue", Ptr)
 procHandle_getFocusedElName := DllCall("GetProcAddress", Ptr, hModule, AStr, "getFocusedElName", Ptr)
+procHandle_getFocusedElCoords := DllCall("GetProcAddress", Ptr, hModule, AStr, "getFocusedElCoords", Ptr, Ptr, Ptr, Ptr, Ptr, Ptr, Ptr)
 procHandle_Cleanup := DllCall("GetProcAddress", Ptr, hModule, AStr, "cleanup", Ptr)
 
 CoordMode, Mouse, Screen
@@ -65,6 +66,7 @@ Exit:
    DllCall("CloseHandle", Ptr, procHandle_WinMerge2011)
    DllCall("CloseHandle", Ptr, procHandle_getFocusedElValue)
    DllCall("CloseHandle", Ptr, procHandle_getFocusedElName)
+   DllCall("CloseHandle", Ptr, procHandle_getFocusedElCoords)
    DllCall("CloseHandle", Ptr, procHandle_Cleanup)
    DllCall("FreeLibrary", Ptr, hModule)
    ExitApp
@@ -102,6 +104,53 @@ Return
         Clipboard := content
         content := ""
     return
+
+    AppsKey::
+        ptr_result := 0
+        ptr_pointX := 0
+        ptr_pointY := 0
+        ptr_left := 0
+        ptr_right := 0
+        ptr_top := 0
+        ptr_bottom := 0
+
+        DllCall(procHandle_getFocusedElCoords, Ptr, &ptr_result
+              , Ptr, &ptr_pointX, Ptr, &ptr_pointY
+              , Ptr, &ptr_left, Ptr, &ptr_right
+              , Ptr, &ptr_top, Ptr, &ptr_bottom)
+
+        if (A_LastError) {
+            MsgBox, Error: %A_LastError%
+        }
+
+        result := NumGet(&ptr_result)
+        pointX := NumGet(&ptr_pointX)
+        pointY := NumGet(&ptr_pointY)
+        left := NumGet(&ptr_left)
+        right := NumGet(&ptr_right)
+        top := NumGet(&ptr_top)
+        bottom := NumGet(&ptr_bottom)
+        width := right - left
+        height := bottom - top
+
+        ptr_result := ""
+        ptr_pointX := ""
+        ptr_pointY := ""
+        ptr_left := ""
+        ptr_right := ""
+        ptr_top := ""
+        ptr_bottom := ""
+
+        ; MsgBox, pointX: %pointX%, pointY: %pointY%
+
+        if (result == 1) {
+            SetMouseDelay, -1
+            SetDefaultMouseSpeed, 0
+            MouseGetPos, xpos, ypos
+            Click, %pointX% %pointY% Right
+            MouseMove, %xpos%, %ypos%
+        }
+    Return
 #IfWinActive
 
 #IfWinActive ahk_exe thunderbird.exe
