@@ -488,8 +488,6 @@ return
         Sleep, 15
         Send +{Tab}
     Return
-
-    +Enter::Send, ^l
 #IfWinActive
 
 #IfWinActive ahk_exe ApplicationFrameHost.exe
