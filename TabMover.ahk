@@ -174,7 +174,7 @@ Return
             Send (){Left}
         }
         else {
-            Send +{Enter}
+            Send ^l
         }
     Return
     $^Enter::
