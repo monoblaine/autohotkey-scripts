@@ -37,6 +37,7 @@ procHandle_Foobar2000 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Foobar20
 procHandle_CopyQ := DllCall("GetProcAddress", Ptr, hModule, AStr, "CopyQ_inspectActiveTab", Ptr)
 procHandle_WinMerge2011 := DllCall("GetProcAddress", Ptr, hModule, AStr, "WinMerge2011_switchTab", Ptr)
 procHandle_getFocusedElValue := DllCall("GetProcAddress", Ptr, hModule, AStr, "getFocusedElValue", Ptr)
+procHandle_getFocusedElName := DllCall("GetProcAddress", Ptr, hModule, AStr, "getFocusedElName", Ptr)
 procHandle_Cleanup := DllCall("GetProcAddress", Ptr, hModule, AStr, "cleanup", Ptr)
 
 CoordMode, Mouse, Screen
@@ -63,6 +64,7 @@ Exit:
    DllCall("CloseHandle", Ptr, procHandle_CopyQ)
    DllCall("CloseHandle", Ptr, procHandle_WinMerge2011)
    DllCall("CloseHandle", Ptr, procHandle_getFocusedElValue)
+   DllCall("CloseHandle", Ptr, procHandle_getFocusedElName)
    DllCall("CloseHandle", Ptr, procHandle_Cleanup)
    DllCall("FreeLibrary", Ptr, hModule)
    ExitApp
@@ -213,7 +215,7 @@ Return
 #IfWinNotActive ahk_group Group_CtrlShiftC_ExcludedApps
     ^+c::
         ptr_result := 0
-        value := DllCall(procHandle_getFocusedElValue, Ptr, &ptr_result, "WStr")
+        value := DllCall(procHandle_getFocusedElName, Ptr, &ptr_result, "WStr")
         result := NumGet(&ptr_result)
         ptr_result := ""
         if (result) {
