@@ -778,14 +778,30 @@ WrapTextWith(left, right) {
 >#b::Send ^{f15}
 >#n::Send ^{f16}
 
-!7::SendInput {{}
 !8::SendInput [
 !9::SendInput ]
-!0::SendInput {}}
 !*::SendInput {\}
 
-; LAlt + ü
-<!SC01B::SendInput {=}
+; SC01A: ğ
+; SC01B: ü
+; SC027: ş
+; SC028: i
+; SC02B: ,
+; SC033: ö
+; SC034: ç
+; SC035: .
+
+<!SC01A::SendInput [     ; LAlt + ğ
+<!SC01B::SendInput ]     ; LAlt + ü
+<!<+SC01A::SendInput {{} ; LAlt + LShift + ğ
+<!<+SC01B::SendInput {}} ; LAlt + LShift + ü
+<!SC027::SendInput (     ; LAlt + ş
+<!SC028::SendInput )     ; LAlt + i
+<!SC02B::SendInput {=}   ; LAlt + ,
+<!SC033::SendInput [     ; LAlt + ö
+<!SC034::SendInput ]     ; LAlt + ç
+<!SC035::SendInput {/}   ; LAlt + .
+<!<+SC035::SendInput {\} ; LAlt + LShift + .
 
 ; Credits for the debouncer code: https://www.autohotkey.com/boards/viewtopic.php?p=117262#p117262
 
