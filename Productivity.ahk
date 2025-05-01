@@ -70,6 +70,9 @@ GroupAdd, AltPgxExcludedApps, ahk_exe WinMergeU.exe
 GroupAdd, AltPgxExcludedApps, ahk_group Group_IntelliJLike
 GroupAdd, AltPgxExcludedApps, ahk_exe tomb123.exe
 
+GroupAdd, ItemWithCopiablePath, ahk_class CabinetWClass
+GroupAdd, ItemWithCopiablePath, ahk_exe Everything.exe
+
 Shell := ComObjCreate("WScript.Shell")
 
 LastMouseCoordX := 0
@@ -889,6 +892,15 @@ WrapTextWith(left, right) {
         Send, {AppsKey}
         Sleep, 50
         Send n
+    Return
+#IfWinActive
+
+#IfWinActive ahk_group ItemWithCopiablePath
+    +Enter::
+        clipboard := ""
+        Send, ^c
+        ClipWait
+        clipboard := StrReplace(clipboard, "`\", "`/")
     Return
 #IfWinActive
 
