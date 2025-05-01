@@ -1152,6 +1152,22 @@ WrapTextWith(left, right) {
 
 #IfWinActive ahk_group Group_IntelliJLike
     #w::Send, ^!{BackSpace}
+
+    ~^NumpadAdd::
+        SetTitleMatchMode, RegEx
+
+        if WinActive(".+\.jpe?g|png$") {
+            Send, ^*
+        }
+    return
+
+    ~^NumpadSub::
+        SetTitleMatchMode, RegEx
+
+        if WinActive(".+\.jpe?g|png$") {
+            Send, ^-
+        }
+    return
 #IfWinActive
 
 #IfWinActive ahk_exe DB Browser for SQLite.exe
