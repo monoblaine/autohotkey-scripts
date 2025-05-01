@@ -884,6 +884,12 @@ WrapTextWith(left, right) {
     return
 
     ^+r::Send, {f2}
+
+    ^e::
+        Send, {AppsKey}
+        Sleep, 50
+        Send n
+    Return
 #IfWinActive
 
 ; Because Visual Studio 2019 broke my AltGr shortcuts!
