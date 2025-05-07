@@ -385,6 +385,7 @@ return
 
     <#<+Up::WheelLeft
     <#<+Down::WheelRight
+    ^q::Send, ^l
 #IfWinActive
 
 #IfWinActive Google Çeviri ahk_group Group_ChromiumBasedApp
