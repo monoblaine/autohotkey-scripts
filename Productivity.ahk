@@ -1093,10 +1093,11 @@ WrapTextWith(left, right) {
 #IfWinActive ahk_exe thunderbird.exe
     ^+c::
         Send ^t
-        Sleep 75
+        Sleep 150
         Send ^u
-        Sleep 75
+        Sleep 150
         Send ^b
+        Sleep 150
     Return
 #IfWinActive
 
