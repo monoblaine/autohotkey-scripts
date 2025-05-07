@@ -70,8 +70,8 @@ GroupAdd, AltPgxExcludedApps, ahk_exe WinMergeU.exe
 GroupAdd, AltPgxExcludedApps, ahk_group Group_IntelliJLike
 GroupAdd, AltPgxExcludedApps, ahk_exe tomb123.exe
 
-GroupAdd, ItemWithCopiablePath, ahk_class CabinetWClass
-GroupAdd, ItemWithCopiablePath, ahk_exe Everything.exe
+GroupAdd, FileExplorerLike, ahk_class CabinetWClass
+GroupAdd, FileExplorerLike, ahk_exe Everything.exe
 
 Shell := ComObjCreate("WScript.Shell")
 
@@ -909,7 +909,7 @@ WrapTextWith(left, right) {
     Return
 #IfWinActive
 
-#IfWinActive ahk_group ItemWithCopiablePath
+#IfWinActive ahk_group FileExplorerLike
     +Enter::
         clipboard := ""
         Send, ^c
