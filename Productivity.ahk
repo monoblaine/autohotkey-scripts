@@ -903,12 +903,6 @@ WrapTextWith(left, right) {
     return
 
     ^+r::Send, {f2}
-
-    ^e::
-        Send, {AppsKey}
-        Sleep, 50
-        Send n
-    Return
 #IfWinActive
 
 #IfWinActive ahk_group FileExplorerLike
@@ -917,6 +911,12 @@ WrapTextWith(left, right) {
         Send, ^c
         ClipWait
         clipboard := StrReplace(clipboard, "`\", "`/")
+    Return
+
+    ^e::
+        Send, {AppsKey}
+        Sleep, 50
+        Send n
     Return
 #IfWinActive
 
