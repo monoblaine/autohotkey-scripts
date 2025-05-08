@@ -845,13 +845,13 @@ WrapTextWith(left, right) {
 #If (!GetKeyState("NumLock", "T") or (!GetKeyState("LControl") and !GetKeyState("LAlt"))) and !WinActive("ahk_group Group_HScroll_All")
     NumpadLeft::
         ControlGetFocus, fcontrol, A
-        Loop 8
+        Loop 4
             PostMessage, 0x114, 0, 0, %fcontrol%, A  ; 0x114=WM_HSCROLL; 0=SB_LINELEFT
     return
 
     NumpadRight::
         ControlGetFocus, fcontrol, A
-        Loop 8
+        Loop 4
             PostMessage, 0x114, 1, 0, %fcontrol%, A  ; 0x114=WM_HSCROLL; 1=SB_LINERIGHT
     return
 
