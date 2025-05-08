@@ -23,8 +23,6 @@ GroupAdd, Group_ZoomableByWheel, ahk_exe WINWORD.EXE
 GroupAdd, Group_ZoomableByWheel, ahk_exe EXCEL.EXE
 GroupAdd, Group_ZoomableByWheel, ahk_exe soffice.bin
 
-GroupAdd, Group_HScroll_SupportsShiftWheel, ahk_exe notepad++.exe
-
 GroupAdd, Group_IntelliJLike, ahk_exe idea64.exe
 GroupAdd, Group_IntelliJLike, ahk_exe studio64.exe
 
@@ -43,7 +41,6 @@ GroupAdd, Group_HScroll_SupportsNativeHWheel, ahk_exe Code.exe
 
 GroupAdd, Group_HScroll_HonorsScrollLockState, ahk_exe EXCEL.EXE
 
-GroupAdd, Group_HScroll_All, ahk_group Group_HScroll_SupportsShiftWheel
 GroupAdd, Group_HScroll_All, ahk_group Group_HScroll_SupportsNativeHWheel
 GroupAdd, Group_HScroll_All, ahk_group Group_HScroll_HonorsScrollLockState
 
@@ -818,16 +815,6 @@ WrapTextWith(left, right) {
     Return
 #If
 #UseHook Off
-
-#If (!GetKeyState("NumLock", "T") or (!GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt"))) and WinActive("ahk_group Group_HScroll_SupportsShiftWheel")
-    NumpadLeft::
-        Send, +{WheelUp}
-    Return
-
-    NumpadRight::
-        Send, +{WheelDown}
-    Return
-#If
 
 #If (!GetKeyState("NumLock", "T") or (!GetKeyState("LControl") and !GetKeyState("LShift") and !GetKeyState("LAlt"))) and WinActive("ahk_group Group_HScroll_SupportsNativeHWheel")
     NumpadLeft::
