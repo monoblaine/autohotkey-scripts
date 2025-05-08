@@ -702,7 +702,7 @@ return
     return
 #IfWinNotActive
 
-<#ü::
+<#SC01B::
     clipboard := ""
     Send, ^c
     ClipWait, 0.25
