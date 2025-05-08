@@ -459,6 +459,11 @@ return
     ^!+g::Send, +{f6}
 #IfWinActive
 
+; gitk
+#IfWinActive ahk_exe wish.exe
+    +Space::Send, {BackSpace}
+#IfWinActive
+
 #IfWinActive ahk_exe Insomnia.exe
     ^+s::
         Send ^l
