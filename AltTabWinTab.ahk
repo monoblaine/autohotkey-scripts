@@ -69,3 +69,14 @@ return
         firstWin := ""
     }
 return
+
+~^w::
+    Sleep 100
+    visibleWindows := GetVisibleWindows()
+
+    if (visibleWindows.MaxIndex()) {
+        firstWin := visibleWindows[1]
+        WinActivate, ahk_id %firstWin%
+        firstWin := ""
+    }
+return
