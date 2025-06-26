@@ -48,7 +48,7 @@ return
 !Del::
     if (WinExist("A")) {
         WinClose
-        WinWaitClose
+        WinWaitClose,,, 3
         Sleep 100
         visibleWindows := GetVisibleWindows()
         windowCount := visibleWindows.MaxIndex()
