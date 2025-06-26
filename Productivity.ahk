@@ -117,8 +117,8 @@ CapsLock & Del::Send, !{f4}                                                     
 ^!+l::Run, ClipToQuotedLines.exe                                                  ; ctrl + alt + shift + l       | ClipToQuotedLines.exe
 ^!+h::clipboard := StrReplace(clipboard, "`\", "`/")                              ; ctrl + alt + shift + h       | Replace all the \ characters within the text in clipboard with /
 
-<#Up::Volume_Up
-<#Down::Volume_Down
+<#Home::Volume_Up
+<#End::Volume_Down
 
 <#Left::
     if !GetKeyState("LCtrl") {
@@ -206,7 +206,7 @@ NumpadDel::Send, ,
     Return
 #If
 
-#Home::                                                                           ; Win + Home
+<#Up::                                                                            ; LWin + Up
     ToggleMousePos(_SafeX, _SafeY)
 Return
 
@@ -216,7 +216,7 @@ Return
 
 CapsLock & Space::SetCapsLockState % !GetKeyState("CapsLock", "T")                ; CapsLock + Space             | Toggle CapsLock state
 
-<#End::ToggleMousePos(_SafeX, _B0)
+<#Down::ToggleMousePos(_SafeX, _B0)
 
 <#Numpad7::
 CapsLock & NumpadHome::
