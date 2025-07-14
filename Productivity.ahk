@@ -187,6 +187,11 @@ Return
 +NumpadDel::Send .
 NumpadDel::Send, ,
 
+RAlt & Left::Send {Blind}{LCtrl Up}{RAlt Up}{Left Up}{RWin Down}{Left Down}{Left Up}{RWin Up}
+RAlt & Up::Send {Blind}{LCtrl Up}{RAlt Up}{Up Up}{RWin Down}{Up Down}{Up Up}{RWin Up}
+RAlt & Right::Send {Blind}{LCtrl Up}{RAlt Up}{Right Up}{RWin Down}{Right Down}{Right Up}{RWin Up}
+RAlt & Down::Send {Blind}{LCtrl Up}{RAlt Up}{Down Up}{RWin Down}{Down Down}{Down Up}{RWin Up}
+
 #If !GetKeyState("NumLock", "T")
     NumpadHome::Send, {Click 1}
     ^NumpadHome::Send, {MButton 1}
