@@ -446,6 +446,8 @@ return
         Click
         MouseMove, %xpos%, %ypos%
     Return
+
+    ^q::Send, ^l
 #IfWinActive
 
 #IfWinActive ahk_group Group_ChromiumBasedApp
