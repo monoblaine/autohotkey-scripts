@@ -146,10 +146,11 @@ Return
         ; MsgBox, pointX: %pointX%, pointY: %pointY%, left: %left%, right: %right%, top: %top%, bottom: %bottom%, width: %width%
 
         if (result == 1) {
+            targetX := left + 48
             SetMouseDelay, -1
             SetDefaultMouseSpeed, 0
             MouseGetPos, xpos, ypos
-            Click, %pointX% %pointY% Right
+            Click, %targetX% %pointY% Right
             MouseMove, %xpos%, %ypos%
         }
     Return
