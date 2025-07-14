@@ -143,7 +143,7 @@ Return
         ptr_top := ""
         ptr_bottom := ""
 
-        ; MsgBox, pointX: %pointX%, pointY: %pointY%
+        ; MsgBox, pointX: %pointX%, pointY: %pointY%, left: %left%, right: %right%, top: %top%, bottom: %bottom%, width: %width%
 
         if (result == 1) {
             SetMouseDelay, -1
