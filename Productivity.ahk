@@ -784,7 +784,7 @@ return
 #IfWinActive
 
 ^'::
-Ctrl & ":: ;"
+    Ctrl & ":: ;"
     if GetKeyState("RShift") {
         if GetKeyState("RAlt") {
             WrapTextWith("“", "”")
@@ -954,7 +954,7 @@ WrapTextWith(left, right) {
         isnotauserfolder := ":\"
         IfNotInString, RunPath, %isnotauserfolder%
         {
-           RunPath := "%UserProfile%" . "\" . RunPath . "\"
+            RunPath := "%UserProfile%" . "\" . RunPath . "\"
         }
         Run, C:\Program Files\Everything\Everything.exe -p "%RunPath%"            ; Launch "Everything"
     return
@@ -1105,7 +1105,7 @@ WrapTextWith(left, right) {
 
 #IfWinActive ahk_exe soffice.bin
     ^'::
-    Ctrl & ":: ;"
+        Ctrl & ":: ;"
         if GetKeyState("RShift") {
             WrapTextWith("‘", "’")
         }
@@ -1509,8 +1509,8 @@ MoveCaretToPageTopBottom(isTop) {
     }
 
     ControlGetPos, controlTopLeft_X, controlTopLeft_Y
-                 , control_width, control_height
-                 , %FocusedControl%, A
+        , control_width, control_height
+        , %FocusedControl%, A
 
     if (controlTopLeft_X = "") {
         return
