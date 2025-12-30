@@ -856,6 +856,25 @@ return
 ^+4::WrapTextWith("``", "``")
 ^+5::WrapTextWith("```````r`n", "`r`n``````")
 
+; ==============================================================================
+; Source: https://superuser.com/a/1833049/872554
+; ==============================================================================
+
+; Map AltGr+, from dead `(backtick / GRAVE ACCENT) to living `(backtick / GRAVE ACCENT)
+<^>!SC02B::SendInput, {U+0060}
+
+; Map AltGr+ş from dead ´(ACUTE ACCENT) to living ´(ACUTE ACCENT)
+<^>!SC027::SendInput, {U+00B4}
+
+; Map AltGr+ğ from dead ¨(DIAERESIS) to living ¨(DIAERESIS)
+<^>!SC01A::SendInput, {U+00A8}
+
+; Map Shift+3 from dead ^(caret / CIRCUMFLEX ACCENT) to living ^(caret / CIRCUMFLEX ACCENT)
++SC004::SendInput, {U+005E}
+
+; Map AltGr+ü from dead ~(tilde) to living ~(tilde)
+<^>!SC01B::SendInput, {U+007E}
+
 ^+6::
     Send, !{f17} ; disable copyq
     Sleep 100
