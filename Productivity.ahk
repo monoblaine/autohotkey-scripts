@@ -1412,6 +1412,11 @@ return
     SendInput %CurrentDateTime%
 return
 
+:*:;;nw::                                                      ; Replace ";;nw" with current date and time
+    FormatTime, CurrentDateTime,, dd/MM/yyy HH.mm              ; 13/10/2009 10.57
+    SendInput %CurrentDateTime%
+return
+
 :*:::now::                                                     ; Replace "::now" with [current date and time]
     FormatTime, CurrentDateTime,, yyy-MM-dd HH.mm              ; [2009-10-13 10.57]
     SendInput [%CurrentDateTime%]{Space}
