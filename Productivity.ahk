@@ -821,6 +821,8 @@ return
     ^+v::SendInput "%clipboard%"
 #IfWinActive
 
+AppsKey::RWin
+
 ^'::
     Ctrl & ":: ;"
     if GetKeyState("RShift") {
