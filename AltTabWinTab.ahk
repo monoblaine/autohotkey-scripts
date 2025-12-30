@@ -45,6 +45,20 @@ return
     winToActivate := ""
 return
 
+; Go to MRU - 2
+#>^Tab::
+    visibleWindows := GetVisibleWindows()
+    windowCount := visibleWindows.MaxIndex()
+
+    if (windowCount < 4) {
+        return
+    }
+
+    winToActivate := visibleWindows[4]
+    WinActivate, ahk_id %winToActivate%
+    winToActivate := ""
+return
+
 !Del::
     if (WinExist("A")) {
         WinClose
