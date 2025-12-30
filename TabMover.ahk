@@ -19,6 +19,9 @@ GroupAdd, Group_CtrlShiftC_ExcludedApps, ahk_exe Ssms.exe
 GroupAdd, Group_CtrlShiftC_ExcludedApps, ahk_exe soffice.bin
 GroupAdd, Group_CtrlShiftC_ExcludedApps, ahk_exe devenv.exe
 
+GroupAdd, Group_WinMerge, ahk_exe WinMergeU.exe
+GroupAdd, Group_WinMerge, ahk_exe wm
+
 hModule := DllCall("LoadLibrary", Str, "ActiveTabSpy.dll", Ptr)
 procHandle_MsEdge2 := DllCall("GetProcAddress", Ptr, hModule, AStr, "MsEdge_getThreeDotBtnStatus", Ptr)
 procHandle_MsEdge3 := DllCall("GetProcAddress", Ptr, hModule, AStr, "MsEdgeDevTools_getLastMessage", Ptr)
@@ -480,7 +483,7 @@ Return
     ^!PgDn::MoveTab(1, 1, procHandle_CopyQ, MovementMethod.mouseClickDrag, 0, 0.3)
 #IfWinActive
 
-#IfWinActive ahk_exe WinMergeU.exe
+#IfWinActive ahk_group Group_WinMerge
     ^PgDn::
     ^Tab::
         if (A_PriorHotkey = A_ThisHotkey and A_TimeSincePriorHotkey < 50) {
