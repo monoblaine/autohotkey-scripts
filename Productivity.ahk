@@ -117,6 +117,42 @@ CapsLock & Del::Send, !{f4}                                                     
 ^!+l::Run, ClipToQuotedLines.exe                                                  ; ctrl + alt + shift + l       | ClipToQuotedLines.exe
 ^!+h::clipboard := StrReplace(clipboard, "`\", "`/")                              ; ctrl + alt + shift + h       | Replace all the \ characters within the text in clipboard with /
 
+!Del::
+    if (WinExist("A")) {
+        WinClose
+        WinWaitClose,,, 3
+        Sleep 100
+        visibleWindows := GetVisibleWindows()
+        windowCount := visibleWindows.MaxIndex()
+        if (windowCount > 0) {
+            nextWin := visibleWindows[1]
+            WinActivate, ahk_id %nextWin%
+            nextWin := ""
+        }
+    }
+return
+
+~!Home::
+    visibleWindows := GetVisibleWindows()
+
+    if (visibleWindows.MaxIndex()) {
+        firstWin := visibleWindows[1]
+        WinActivate, ahk_id %firstWin%
+        firstWin := ""
+    }
+return
+
+~^w::
+    Sleep 100
+    visibleWindows := GetVisibleWindows()
+
+    if (visibleWindows.MaxIndex()) {
+        firstWin := visibleWindows[1]
+        WinActivate, ahk_id %firstWin%
+        firstWin := ""
+    }
+return
+
 <#Home::Volume_Up
 <#End::Volume_Down
 

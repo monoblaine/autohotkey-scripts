@@ -58,39 +58,3 @@ return
     WinActivate, ahk_id %winToActivate%
     winToActivate := ""
 return
-
-!Del::
-    if (WinExist("A")) {
-        WinClose
-        WinWaitClose,,, 3
-        Sleep 100
-        visibleWindows := GetVisibleWindows()
-        windowCount := visibleWindows.MaxIndex()
-        if (windowCount > 0) {
-            nextWin := visibleWindows[1]
-            WinActivate, ahk_id %nextWin%
-            nextWin := ""
-        }
-    }
-return
-
-~!Home::
-    visibleWindows := GetVisibleWindows()
-
-    if (visibleWindows.MaxIndex()) {
-        firstWin := visibleWindows[1]
-        WinActivate, ahk_id %firstWin%
-        firstWin := ""
-    }
-return
-
-~^w::
-    Sleep 100
-    visibleWindows := GetVisibleWindows()
-
-    if (visibleWindows.MaxIndex()) {
-        firstWin := visibleWindows[1]
-        WinActivate, ahk_id %firstWin%
-        firstWin := ""
-    }
-return
