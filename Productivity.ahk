@@ -414,6 +414,17 @@ return
         }
     return
 
+    NumpadEnd::
+        SetTitleMatchMode, 2
+
+        if WinActive("— Yandex: ") {
+            Send, {NumpadDiv}
+        }
+        else {
+            Send, {Esc}
+        }
+    return
+
     ^h::
         Send, ^t
         Sleep, 200
