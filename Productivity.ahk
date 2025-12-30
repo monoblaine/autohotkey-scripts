@@ -945,6 +945,7 @@ WrapTextWith(left, right) {
 <!<+SC034::SendInput {&} ; LAlt + LShift + ç
 <!SC035::SendInput {/}   ; LAlt + .
 <!<+SC035::SendInput {\} ; LAlt + LShift + .
+<^>!e::SendInput {=}   ; RAlt + e
 
 ; Credits for the debouncer code: https://www.autohotkey.com/boards/viewtopic.php?p=117262#p117262
 
