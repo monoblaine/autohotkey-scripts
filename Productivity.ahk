@@ -766,6 +766,19 @@ return
     Send, #+ü ; execute copyq action
 return
 
+; Excess indent removal
+>#+v::                                                                            ; rwin + shift + v
+    originalClipboard := ClipBoardAll
+    RegExMatch(clipboard, "^([ \t]+)", Lw)
+    clipboard := RegexReplace(clipboard, "(?:(\r?\n)" . Lw . ")|(^" . Lw . ")", "$1")
+    clipboard := RegexReplace(clipboard, "\s+$") ; Remove the trailing spaces anyway
+    Send, ^v                                     ; For best compatibility: SendPlay
+    Sleep 50                                     ; Don't change clipboard while it is pasted! (Sleep > 0)
+    clipboard := originalClipboard               ; Restore original clipboard
+    VarSetCapacity(originalClipboard, 0)         ; Free memory
+    SetScrollLockState, Off
+return
+
 #IfWinActive ahk_exe Be.HexEditor.exe
     ^+v::SendInput "%clipboard%"
 #IfWinActive
@@ -1197,19 +1210,6 @@ WrapTextWith(left, right) {
         Sleep 50                             ; Don't change clipboard while it is pasted! (Sleep > 0)
         clipboard := originalClipboard       ; Restore original clipboard
         VarSetCapacity(originalClipboard, 0) ; Free memory
-        SetScrollLockState, Off
-    return
-
-    ; Excess indent removal
-    ^+v::                                                                         ; ctrl + shift + v
-        originalClipboard := ClipBoardAll
-        RegExMatch(clipboard, "^([ \t]+)", Lw)
-        clipboard := RegexReplace(clipboard, "(?:(\r?\n)" . Lw . ")|(^" . Lw . ")", "$1")
-        clipboard := RegexReplace(clipboard, "\s+$") ; Remove the trailing spaces anyway
-        Send, ^v                                     ; For best compatibility: SendPlay
-        Sleep 50                                     ; Don't change clipboard while it is pasted! (Sleep > 0)
-        clipboard := originalClipboard               ; Restore original clipboard
-        VarSetCapacity(originalClipboard, 0)         ; Free memory
         SetScrollLockState, Off
     return
 #If
