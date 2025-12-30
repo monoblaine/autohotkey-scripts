@@ -655,6 +655,12 @@ return
 
 #IfWinActive ahk_exe Ssms.exe
     CapsLock & Enter::SendInput dbo.
+
+    CapsLock & v::
+        clipboard := clipboard               ; Convert to text
+        object_name := RegexReplace(clipboard, "^""|""$", "")
+        SendInput dbo.%object_name%
+    Return
 #IfWinActive
 
 #IfWinActive ahk_exe PROFILER.EXE
