@@ -822,6 +822,7 @@ return
 #IfWinActive
 
 AppsKey::RWin
+>#Tab::Send, {AppsKey}
 
 ^'::
     Ctrl & ":: ;"
