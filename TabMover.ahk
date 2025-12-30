@@ -110,6 +110,8 @@ Return
         content := ""
     return
 
+    ^r::Send, {f2}
+
     AppsKey::
         ptr_result := 0
         ptr_pointX := 0
