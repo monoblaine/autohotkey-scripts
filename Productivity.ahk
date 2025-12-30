@@ -544,6 +544,8 @@ return
             Send, {Tab}
         }
     Return
+
+    ^+Tab::Send, ^+a
 #IfWinActive
 
 #IfWinActive ahk_exe chrome.exe
