@@ -440,9 +440,15 @@ return
         Coords := StrSplit(RegExReplace(Title, "screenX: (\d+), screenY: (\d+)", "$1 $2"), " ")
         X := Coords[1]
         Y := Coords[2]
-        MouseMove, %X%, %Y%
-        Sleep 50
-        Click, Right
+        MouseGetPos, xpos, ypos
+        if (X = xpos) and (Y = ypos) {
+            MouseMove, %_SafeX%, %_SafeY%
+        }
+        else {
+            MouseMove, %X%, %Y%
+            Sleep 50
+            Click, Right
+        }
     Return
 #IfWinActive
 
