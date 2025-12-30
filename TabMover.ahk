@@ -113,6 +113,7 @@ Return
     ^r::Send, {f2}
 
     AppsKey::
+    NumpadEnter::
         ptr_result := 0
         ptr_pointX := 0
         ptr_pointY := 0
