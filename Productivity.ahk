@@ -536,6 +536,14 @@ return
 
 #IfWinActive ahk_exe msedge.exe
     ^!+g::Send, {f6}
+
+    ^Tab::
+        Send, ^+a
+        if WinActive("WhatsApp") {
+            Sleep 15
+            Send, {Tab}
+        }
+    Return
 #IfWinActive
 
 #IfWinActive ahk_exe chrome.exe
