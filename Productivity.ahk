@@ -824,6 +824,7 @@ return
 AppsKey::RWin
 >#Tab::Send, {AppsKey}
 >#+Tab::Send, +{AppsKey}
+>#Enter::Send, {AppsKey}
 
 ^'::
     Ctrl & ":: ;"
