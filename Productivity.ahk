@@ -821,6 +821,10 @@ return
     ^+v::SendInput "%clipboard%"
 #IfWinActive
 
+#IfWinActive ahk_exe GitExtensions.exe
+    +Enter::Send ^4
+#IfWinActive
+
 AppsKey::RWin
 >#Tab::Send, {AppsKey}
 >#+Tab::Send, +{AppsKey}
