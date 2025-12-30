@@ -450,6 +450,8 @@ return
             Click, Right
         }
     Return
+
+    NumpadIns::Send, +{Down}
 #IfWinActive
 
 #IfWinActive Google Çeviri ahk_group Group_ChromiumBasedApp
