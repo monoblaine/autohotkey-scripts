@@ -343,8 +343,6 @@ Return
         ptr_result := ""
 
         if (result) {
-            Send !{f17} ; disable copyq
-            Sleep 100
             Clipboard := RegexReplace(Trim(cellContent, " `t`r`n") . "`r`ngo`r`n", "i)^CREATE ", "alter ")
             cellContent := ""
 
@@ -357,10 +355,6 @@ Return
                 Sleep 50
                 Send ^{Home}
             }
-
-            Sleep 250
-            Send !{f16} ; Enable copyq and activate first item
-            Sleep 50
         }
 
         SsmsOpenCellContentInNewTab := 0
