@@ -1120,7 +1120,7 @@ WrapTextWith(left, right) {
         clipboard := ""
         Send, ^c
         ClipWait
-        clipboard := RegexReplace(clipboard, """(varchar|nvarchar|char|int|tinyint|bit|date|datetimeoffset|datetime|time|decimal|varbinary|binary)""", "$1")
+        clipboard := RegexReplace(clipboard, """(tinyint|smallint|int|bigint|bit|decimal|numeric|money|smallmoney|float|real|date|time|datetime2|datetimeoffset|datetime|smalldatetime|char|varchar|text|nchar|nvarchar|ntext|binary|varbinary|image|cursor|geography|geometry|hierarchyid|json|vector|rowversion|sql_variant|table|uniqueidentifier|xml)""", "$1")
         Send, ^v
         Sleep 250
         Send, !{f16} ; Enable copyq and activate first item
