@@ -940,7 +940,7 @@ WrapTextWith(left, right) {
 <!SC028::SendInput )     ; LAlt + i
 <!SC02B::SendInput {=}   ; LAlt + ,
 <!SC033::SendInput $     ; LAlt + ö
-<!SC034::SendInput ]     ; LAlt + ç
+<!SC034::SendInput $     ; LAlt + ç
 <!SC035::SendInput {/}   ; LAlt + .
 <!<+SC035::SendInput {\} ; LAlt + LShift + .
 
