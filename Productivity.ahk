@@ -117,7 +117,6 @@ CoordMode, Mouse, Screen
 
 NumpadEnd::Esc
 #w::Send, !{f15}                                                                  ; win + w                      | Send alt + f15
-CapsLock & Del::Send, !{f4}                                                       ; CapsLock + del               | Send alt + f4
 ^!+l::Run, ClipToQuotedLines.exe                                                  ; ctrl + alt + shift + l       | ClipToQuotedLines.exe
 ^!+h::clipboard := StrReplace(clipboard, "`\", "`/")                              ; ctrl + alt + shift + h       | Replace all the \ characters within the text in clipboard with /
 
@@ -133,6 +132,15 @@ CapsLock & Del::Send, !{f4}                                                     
             WinActivate, ahk_id %nextWin%
             nextWin := ""
         }
+    }
+return
+
+CapsLock & Del::
+    if GetKeyState("LAlt") {
+        Send, ^{BackSpace}
+    }
+    else {
+        Send, {BackSpace}
     }
 return
 
