@@ -823,6 +823,7 @@ return
 
 #IfWinActive ahk_exe GitExtensions.exe
     +Enter::Send ^4
+    CapsLock & Enter::Send ^3
 #IfWinActive
 
 AppsKey::RWin
