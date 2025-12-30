@@ -745,6 +745,7 @@ Return
 
 ^!+n::                                                                            ; ctrl + alt + shift + n
     Send, !{f17} ; disable copyq
+    Sleep 100
     clipboard := ""
     Send, ^c
     ClipWait
@@ -809,6 +810,7 @@ return
 
 ^+6::
     Send, !{f17} ; disable copyq
+    Sleep 100
     clipboard := ""
     Send, ^c
     ClipWait
@@ -827,6 +829,7 @@ return
 
 WrapTextWith(left, right) {
     Send, !{f17} ; disable copyq
+    Sleep 100
     clipboard := ""
     Send, ^c
     ClipWait, 0.25
@@ -1043,6 +1046,7 @@ WrapTextWith(left, right) {
 
     #+r::
         Send, !{f17} ; disable copyq
+        Sleep 100
         clipboard := ""
         Send, ^c
         ClipWait
@@ -1085,6 +1089,7 @@ WrapTextWith(left, right) {
 
     <#+Ş::
         Send, !{f17} ; disable copyq
+        Sleep 100
         Send ^+ü
         Sleep 15
         Send {Del}
