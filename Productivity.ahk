@@ -21,6 +21,7 @@ GroupAdd, Group_WinMerge, ahk_exe wm
 GroupAdd, Group_CtrlRToF5, ahk_class CabinetWClass
 GroupAdd, Group_CtrlRToF5, ahk_exe GitExtensions.exe
 GroupAdd, Group_CtrlRToF5, ahk_group Group_WinMerge
+GroupAdd, Group_CtrlRToF5, ahk_exe thunderbird.exe
 
 GroupAdd, Group_ZoomableByWheel, ahk_exe WINWORD.EXE
 GroupAdd, Group_ZoomableByWheel, ahk_exe EXCEL.EXE
