@@ -1379,20 +1379,6 @@ Return
     !PgDn::MoveCaretToPageTopBottom(0)
 #IfWinNotActive
 
-; Cascade file explorer windows
-<#<+Enter::
-    WinGet windowList, List, ahk_class CabinetWClass
-    distance := 26
-    x        := 34 - distance
-    y        := 34 - distance
-    loop %windowList% {
-        x := x + distance
-        y := y + distance
-        winAhkId := windowList%A_Index%
-        WinMove, ahk_id %winAhkId%,, %x%, %y%
-    }
-Return
-
 ;==============================================================================
 ; Various SendInput commands
 ;==============================================================================

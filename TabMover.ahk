@@ -42,6 +42,7 @@ procHandle_WinMerge2011 := DllCall("GetProcAddress", Ptr, hModule, AStr, "WinMer
 procHandle_getFocusedElValue := DllCall("GetProcAddress", Ptr, hModule, AStr, "getFocusedElValue", Ptr)
 procHandle_getFocusedElName := DllCall("GetProcAddress", Ptr, hModule, AStr, "getFocusedElName", Ptr)
 procHandle_getFocusedElCoords := DllCall("GetProcAddress", Ptr, hModule, AStr, "getFocusedElCoords", Ptr, Ptr, Ptr, Ptr, Ptr, Ptr, Ptr)
+procHandle_rearrangeFileExplorerWindowsMruStates := DllCall("GetProcAddress", Ptr, hModule, AStr, "rearrangeFileExplorerWindowsMruStates", Ptr)
 procHandle_Cleanup := DllCall("GetProcAddress", Ptr, hModule, AStr, "cleanup", Ptr)
 
 CoordMode, Mouse, Screen
@@ -71,6 +72,7 @@ Exit:
    DllCall("CloseHandle", Ptr, procHandle_getFocusedElName)
    DllCall("CloseHandle", Ptr, procHandle_getFocusedElCoords)
    DllCall("CloseHandle", Ptr, procHandle_Cleanup)
+   DllCall("CloseHandle", Ptr, procHandle_rearrangeFileExplorerWindowsMruStates)
    DllCall("FreeLibrary", Ptr, hModule)
    ExitApp
 
@@ -81,6 +83,25 @@ Exit:
     ToolTip, %msg%
     Sleep, 400	; SPECIFY DISPLAY TIME (ms)
     ToolTip		; remove
+Return
+
+; Cascade file explorer windows
+<#Del::
+    DllCall(procHandle_rearrangeFileExplorerWindowsMruStates)
+    if (A_LastError) {
+        MsgBox, Error: %A_LastError%
+    }
+    Sleep, 50
+    WinGet windowList, List, ahk_class CabinetWClass
+    distance := 26
+    x        := 34 - distance
+    y        := 34 - distance
+    loop %windowList% {
+        x := x + distance
+        y := y + distance
+        winAhkId := windowList%A_Index%
+        WinMove, ahk_id %winAhkId%,, %x%, %y%
+    }
 Return
 
 #IfWinActive ahk_exe msedge.exe
