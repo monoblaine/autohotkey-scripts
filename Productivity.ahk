@@ -42,6 +42,7 @@ GroupAdd, Group_HScroll_SupportsNativeHWheel, ahk_exe paintdotnet.exe
 GroupAdd, Group_HScroll_SupportsNativeHWheel, ahk_exe soffice.bin
 GroupAdd, Group_HScroll_SupportsNativeHWheel, ahk_exe devenv.exe
 GroupAdd, Group_HScroll_SupportsNativeHWheel, ahk_exe Code.exe
+GroupAdd, Group_HScroll_SupportsNativeHWheel, ahk_exe gimp-3.exe
 
 GroupAdd, Group_HScroll_HonorsScrollLockState, ahk_exe EXCEL.EXE
 
