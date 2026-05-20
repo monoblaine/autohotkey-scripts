@@ -122,7 +122,7 @@ CoordMode, Mouse, Screen
 NumpadEnd::Esc
 #w::Send, !{f15}                                                                  ; win + w                      | Send alt + f15
 CapsLock & SC02B::SendInput, ?
-CapsLock & SC035::SendInput, -
+CapsLock & SC035::SendInput, - ; CapsLock + .
 ^!+l::Run, ClipToQuotedLines.exe                                                  ; ctrl + alt + shift + l       | ClipToQuotedLines.exe
 ^!+h::clipboard := StrReplace(clipboard, "`\", "`/")                              ; ctrl + alt + shift + h       | Replace all the \ characters within the text in clipboard with /
 
