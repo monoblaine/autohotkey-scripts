@@ -43,6 +43,7 @@ procHandle_getFocusedElValue := DllCall("GetProcAddress", Ptr, hModule, AStr, "g
 procHandle_getFocusedElName := DllCall("GetProcAddress", Ptr, hModule, AStr, "getFocusedElName", Ptr)
 procHandle_getFocusedElCoords := DllCall("GetProcAddress", Ptr, hModule, AStr, "getFocusedElCoords", Ptr, Ptr, Ptr, Ptr, Ptr, Ptr, Ptr)
 procHandle_rearrangeFileExplorerWindowsMruStates := DllCall("GetProcAddress", Ptr, hModule, AStr, "rearrangeFileExplorerWindowsMruStates", Ptr)
+procHandle_rearrangeLibreOfficeWriterWindowsMruStates := DllCall("GetProcAddress", Ptr, hModule, AStr, "rearrangeLibreOfficeWriterWindowsMruStates", Ptr)
 procHandle_Cleanup := DllCall("GetProcAddress", Ptr, hModule, AStr, "cleanup", Ptr)
 
 CoordMode, Mouse, Screen
@@ -73,6 +74,7 @@ Exit:
    DllCall("CloseHandle", Ptr, procHandle_getFocusedElCoords)
    DllCall("CloseHandle", Ptr, procHandle_Cleanup)
    DllCall("CloseHandle", Ptr, procHandle_rearrangeFileExplorerWindowsMruStates)
+   DllCall("CloseHandle", Ptr, procHandle_rearrangeLibreOfficeWriterWindowsMruStates)
    DllCall("FreeLibrary", Ptr, hModule)
    ExitApp
 
@@ -102,6 +104,25 @@ Return
         y := y + distance
         winAhkId := windowList%A_Index%
         WinMove, ahk_id %winAhkId%,, %x%, %y%
+    }
+Return
+
+; Cascade LibreOffice Writer windows
+<#Ins::
+    DllCall(procHandle_rearrangeLibreOfficeWriterWindowsMruStates)
+    if (A_LastError) {
+        MsgBox, Error: %A_LastError%
+        Return
+    }
+    Sleep, 50
+    WinGet windowList, List, ahk_exe soffice.bin
+    ; MsgBox, Num of windows is %windowList%
+    x     := 0
+    width := Floor(A_ScreenWidth  / windowList)
+    loop %windowList% {
+        winAhkId := windowList%A_Index%
+        WinMove, ahk_id %winAhkId%,, %x%,, %width%
+        x := x + width
     }
 Return
 
