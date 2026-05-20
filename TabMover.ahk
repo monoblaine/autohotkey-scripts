@@ -531,12 +531,12 @@ MoveTab(horizontal, direction, procHandle, movementMethodId, maybeHWnd := 0, wid
             MouseClickDrag, Left, %pointX%, %pointY%, %targetX%, %targetY%
 
         case MovementMethod.mouseClickDrag2:
-            foo := direction < 0 ? (-height * 2) : (height * 2)
+            foo := direction < 0 ? (-height * 2) : (height + 2)
             SetMouseDelay, 1
             SetDefaultMouseSpeed, 1
             SendEvent {Click %pointX% %pointY% Down}
             MouseMove 0, %foo%, "", R
-            SendEvent {Click %targetX% %targetY% Up}
+            SendEvent {Click Up}
 
         case MovementMethod.sendEvent:
             SetMouseDelay, 3
