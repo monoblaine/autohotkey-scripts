@@ -551,6 +551,8 @@ return
         MouseMove, %xpos%, %ypos%
     Return
 
+    ^+r::Send, {f7}
+
     !f::
         MouseGetPos, xpos, ypos
         MouseMove, 1894, 56
