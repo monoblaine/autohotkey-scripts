@@ -1425,7 +1425,7 @@ WrapTextWith(left, right) {
     isVertical := GetKeyState("Shift")
     MouseGetPos, curX, curY
     targetX := isVertical ? curX : (curX - 42)
-    targetY := isVertical ? (curY - 42) : curY
+    targetY := isVertical ? (curY + 42) : curY
     SetMouseDelay, 3
     SetDefaultMouseSpeed, 3
     SendEvent {Click %curX% %curY% Down}{Click %targetX% %targetY% Up}
@@ -1436,7 +1436,7 @@ Return
     isVertical := GetKeyState("Shift")
     MouseGetPos, curX, curY
     targetX := isVertical ? curX : (curX + 42)
-    targetY := isVertical ? (curY + 42) : curY
+    targetY := isVertical ? (curY - 42) : curY
     SetMouseDelay, 3
     SetDefaultMouseSpeed, 3
     SendEvent {Click %curX% %curY% Down}{Click %targetX% %targetY% Up}
