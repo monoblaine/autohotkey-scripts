@@ -541,6 +541,7 @@ return
     ^q::Send, ^l
 
     NumpadIns::Send, +{Down}
+    NumpadDel::Send, ^w
 
     >#+v::
         MouseGetPos, xpos, ypos
