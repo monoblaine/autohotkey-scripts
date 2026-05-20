@@ -1546,6 +1546,8 @@ return
 :*:;;pipe::{Raw}==============================================================================
 :*:;;dash::{Raw}------------------------------------------------------------------------------
 :*:;;mail::{Raw}zerhan@gmail.com
+:*:;;r::{Raw}\r\n
+:*:::r::{Raw}\r\n
 ^!+x::SendInput [ ]{Space}                                           ; ctrl + alt + shift + x     | print [ ]
 <#Space::SendInput {Space}{Space}{Space}{Space}                      ; lwin + space               | Send 4 spaces
 <#>+Space::SendInput {Backspace}{Backspace}{Backspace}{Backspace}    ; win + rshift + space       | Remove 4 spaces
