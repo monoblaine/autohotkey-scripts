@@ -192,15 +192,6 @@ Return
 #IfWinActive
 
 #IfWinActive Developer Tools —  ahk_exe firefox.exe
-    ^1::FirefoxDevToolsClickOnTab(1)
-    ^2::FirefoxDevToolsClickOnTab(2)
-    ^3::FirefoxDevToolsClickOnTab(3)
-    ^4::FirefoxDevToolsClickOnTab(4)
-    ^5::FirefoxDevToolsClickOnTab(5)
-    ^6::FirefoxDevToolsClickOnTab(6)
-    ^7::FirefoxDevToolsClickOnTab(7)
-    ^8::FirefoxDevToolsClickOnTab(8)
-    ^9::FirefoxDevToolsClickOnTab(9)
 #IfWinActive
 
 #If WinActive("ahk_exe devenv.exe") and !PauseKeyState
