@@ -1295,7 +1295,12 @@ WrapTextWith(left, right) {
 
 #IfWinActive ahk_exe EXCEL.EXE
     F1::=
-    ^r::Send, {F2}
+
+    ^r::
+        Send, {F2}
+        Sleep 15
+        Send +{Home}
+    Return
 #IfWinActive
 
 #IfWinActive ahk_exe thunderbird.exe
