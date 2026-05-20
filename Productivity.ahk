@@ -1033,6 +1033,7 @@ WrapTextWith(left, right) {
 <!SC035::SendInput {/}   ; LAlt + .
 <!<+SC035::SendInput {\} ; LAlt + LShift + .
 <^>!e::SendInput {=}   ; RAlt + e
++NumpadSub::SendInput _
 
 ; Credits for the debouncer code: https://www.autohotkey.com/boards/viewtopic.php?p=117262#p117262
 
