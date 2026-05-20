@@ -1443,6 +1443,10 @@ Return
     Return
 #IfWinActive
 
+#IfWinActive ahk_exe paintdotnet.exe
+    SC056::Send, ^ı
+#IfWinActive
+
 #IfWinNotActive ahk_group AltPgxExcludedApps
     !PgUp::MoveCaretToPageTopBottom(1)
     !PgDn::MoveCaretToPageTopBottom(0)
