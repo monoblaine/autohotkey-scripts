@@ -540,6 +540,8 @@ return
 
     ^q::Send, ^l
 
+    NumpadIns::Send, +{Down}
+
     >#+v::
         MouseGetPos, xpos, ypos
         MouseMove, 1644, 65
