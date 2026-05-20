@@ -487,6 +487,24 @@ return
     ^u::Send ^+s
 #IfWinActive
 
+#IfWinActive ahk_exe msedge.exe
+    ^!+g::Send, {f6}
+
+    ^Tab::
+        Send, ^+a
+        if WinActive("WhatsApp") {
+            Sleep 15
+            Send, {Tab}
+        }
+    Return
+
+    ^+Tab::Send, ^+a
+#IfWinActive
+
+#IfWinActive ahk_exe chrome.exe
+    ^!+g::Send, +{f6}
+#IfWinActive
+
 #IfWinActive ahk_exe firefox.exe
     ; Click "close this message" on StackOverflow
     CapsLock & x::
@@ -518,24 +536,6 @@ return
     Return
 
     ^q::Send, ^l
-#IfWinActive
-
-#IfWinActive ahk_exe msedge.exe
-    ^!+g::Send, {f6}
-
-    ^Tab::
-        Send, ^+a
-        if WinActive("WhatsApp") {
-            Sleep 15
-            Send, {Tab}
-        }
-    Return
-
-    ^+Tab::Send, ^+a
-#IfWinActive
-
-#IfWinActive ahk_exe chrome.exe
-    ^!+g::Send, +{f6}
 #IfWinActive
 
 ; gitk
