@@ -747,6 +747,13 @@ return
     Return
 #IfWinActive
 
+#IfWinNotActive ahk_exe Ssms.exe
+    CapsLock & v::
+        clipboard := clipboard               ; Convert to text
+        SendInput %clipboard%
+    Return
+#IfWinNotActive
+
 #IfWinActive ahk_exe PROFILER.EXE
     f4::^+Del
 
