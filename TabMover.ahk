@@ -192,6 +192,7 @@ Return
 #IfWinActive
 
 #IfWinActive Developer Tools —  ahk_exe firefox.exe
+    ^r::Send, {f2}
 #IfWinActive
 
 #If WinActive("ahk_exe devenv.exe") and !PauseKeyState
