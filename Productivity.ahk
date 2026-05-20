@@ -228,16 +228,16 @@ CapsLock & Up::                                                                 
     }
 Return
 
-+NumpadHome::Send {Numpad7}
-+NumpadUp::Send {Numpad8}
-+NumpadPgup::Send {Numpad9}
-+NumpadLeft::Send {Numpad4}
-+NumpadClear::Send {Numpad5}
-+NumpadRight::Send {Numpad6}
-+NumpadEnd::Send {Numpad1}
-+NumpadDown::Send {Numpad2}
-+NumpadPgdn::Send {Numpad3}
-+NumpadIns::Send {Numpad0}
++NumpadHome::SendInput 7
++NumpadUp::SendInput 8
++NumpadPgup::SendInput 9
++NumpadLeft::SendInput 4
++NumpadClear::SendInput 5
++NumpadRight::SendInput 6
++NumpadEnd::SendInput 1
++NumpadDown::SendInput 2
++NumpadPgdn::SendInput 3
++NumpadIns::SendInput 0
 +NumpadDel::Send .
 NumpadDel::Send, ,
 
