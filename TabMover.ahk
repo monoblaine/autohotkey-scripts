@@ -191,7 +191,7 @@ Return
     ^!PgDn::Send, ^+{PgDn}
 #IfWinActive
 
-#IfWinActive Geliştirici Araçları —  ahk_exe firefox.exe
+#IfWinActive Developer Tools —  ahk_exe firefox.exe
     ^1::FirefoxDevToolsClickOnTab(1)
     ^2::FirefoxDevToolsClickOnTab(2)
     ^3::FirefoxDevToolsClickOnTab(3)
