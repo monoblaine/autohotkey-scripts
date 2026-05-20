@@ -754,6 +754,16 @@ return
     Return
 #IfWinNotActive
 
+#IfWinActive ahk_exe HexFrame.exe
+    ^+g::
+        SetMouseDelay, 3
+        SetDefaultMouseSpeed, 3
+        MouseGetPos, xpos, ypos
+        SendEvent {Click 211 139}
+        MouseMove, %xpos%, %ypos%
+    Return
+#IfWinActive
+
 #IfWinActive ahk_exe PROFILER.EXE
     f4::^+Del
 
