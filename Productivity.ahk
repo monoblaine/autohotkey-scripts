@@ -468,6 +468,19 @@ return
     Return
 
     NumpadIns::Send, +{Down}
+
+    >#+v::
+        MouseGetPos, xpos, ypos
+        MouseMove, 1575, 54
+        Click
+        Sleep 500
+        MouseMove, 1407, 250
+        Click
+        Sleep 100
+        MouseMove, %xpos%, %ypos%
+    Return
+
+    ^+r::Send, {f7}
 #IfWinActive
 
 #IfWinActive Google Çeviri ahk_group Group_ChromiumBasedApp
@@ -505,21 +518,6 @@ return
     Return
 
     ^q::Send, ^l
-#IfWinActive
-
-#IfWinActive ahk_group Group_ChromiumBasedApp
-    >#+v::
-        MouseGetPos, xpos, ypos
-        MouseMove, 1575, 54
-        Click
-        Sleep 500
-        MouseMove, 1407, 250
-        Click
-        Sleep 100
-        MouseMove, %xpos%, %ypos%
-    Return
-
-    ^+r::Send, {f7}
 #IfWinActive
 
 #IfWinActive ahk_exe msedge.exe
