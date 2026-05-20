@@ -8,8 +8,10 @@ GetVisibleWindows() {
             continue
         }
         WinGet, winExStyle, ExStyle, ahk_id %winAhkId%
-        if (winExStyle & 0x8) {
-            continue ; I don't want always-on-top windows in this list
+        ; WS_EX_TOPMOST:    0x00000008
+        ; WS_EX_TOOLWINDOW: 0x00000080
+        if (winExStyle & 0x00000088) {
+            continue
         }
         WinGetClass winClass, ahk_id %winAhkId%
         WinGet, winStyle, Style, ahk_id %winAhkId%
