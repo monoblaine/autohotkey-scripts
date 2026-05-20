@@ -632,6 +632,10 @@ return
     Return
 #IfWinActive
 
+#IfWinActive Google Çeviri — ahk_exe firefox.exe
+    ^u::Send ^+s
+#IfWinActive
+
 ; gitk
 #IfWinActive ahk_exe wish.exe
     +Space::Send, {BackSpace}
