@@ -540,6 +540,24 @@ return
 
     ^q::Send, ^l
 
+    NumpadPgdn::
+        Send ^+q ; This writes the focused element's coords to page title using some Tampermonkey script
+        Sleep 250
+        WinGetActiveTitle, Title
+        Coords := StrSplit(RegExReplace(Title, "screenX: (\d+), screenY: (\d+)", "$1 $2"), " ")
+        X := Coords[1]
+        Y := Coords[2]
+        MouseGetPos, xpos, ypos
+        if (X = xpos) and (Y = ypos) {
+            MouseMove, %_SafeX%, %_SafeY%
+        }
+        else {
+            MouseMove, %X%, %Y%
+            Sleep 50
+            Click, Right
+        }
+    Return
+
     NumpadIns::Send, +{Down}
     NumpadDel::Send, ^w
 
