@@ -519,6 +519,17 @@ return
 #IfWinActive
 
 #IfWinActive ahk_exe firefox.exe
+    NumpadEnd::
+        SetTitleMatchMode, 2
+
+        if WinActive("Yandex — ") {
+            Send, {NumpadDiv}
+        }
+        else {
+            Send, {Esc}
+        }
+    return
+
     ; Click "close this message" on StackOverflow
     CapsLock & x::
         MouseGetPos, xpos, ypos
