@@ -1534,6 +1534,12 @@ return
     SendInput [%CurrentDateTime%]{Space}
 return
 
+:*:::nn::
+:*:::.::
+    SendInput nn <()
+    Send {Left}
+return
+
 :*:;;dfc::{Raw}[DefaultValueFactory(UseDefaultPropertyValue = true)]`n[ValidateReferenceType]
 :*:;;dfl::{Raw}[DefaultValueFactory(UseDefaultPropertyValue = true)]`n[ValidateReferenceTypeCollection]`n[LoyalReferenceTypeCollectionRange(Min = 1, ErrorMessage = "En az bir satır eklemeniz gereklidir.")]
 
