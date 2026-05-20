@@ -687,18 +687,20 @@ Return
 
 CapsLock & Backspace::Winset, Alwaysontop, , A
 
+CapsLock & j::
+<#j::
+>#v::
+    Run, C:\Program Files\CopyQ\copyq.exe toggle
+    Sleep 250
+    WinActivate, ahk_exe copyq.exe
+return
+
 *CapsLock:: return ; This forces CapsLock into a modifying key.
 RButton::RButton   ; restore the original RButton function
 
 >#>+e::                                                                           ; rwin + rshift + e            | open file path in clipboard with notepad++
     Sleep 150
     Run, C:\Program Files (x86)\Notepad++\notepad++.exe "%clipboard%"
-return
-
-<#v::
-    Run, C:\Program Files\CopyQ\copyq.exe toggle
-    Sleep 250
-    WinActivate, ahk_exe copyq.exe
 return
 
 #IfWinActive ahk_exe copyq.exe
