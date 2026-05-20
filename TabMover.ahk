@@ -90,6 +90,7 @@ Return
     DllCall(procHandle_rearrangeFileExplorerWindowsMruStates)
     if (A_LastError) {
         MsgBox, Error: %A_LastError%
+        Return
     }
     Sleep, 50
     WinGet windowList, List, ahk_class CabinetWClass
@@ -125,7 +126,9 @@ Return
         if (A_LastError) {
             MsgBox, Error: %A_LastError%
         }
-        Clipboard := content
+        else {
+            Clipboard := content
+        }
         content := ""
     return
 
@@ -149,16 +152,28 @@ Return
         if (A_LastError) {
             MsgBox, Error: %A_LastError%
         }
-
-        result := NumGet(&ptr_result)
-        pointX := NumGet(&ptr_pointX)
-        pointY := NumGet(&ptr_pointY)
-        left := NumGet(&ptr_left)
-        right := NumGet(&ptr_right)
-        top := NumGet(&ptr_top)
-        bottom := NumGet(&ptr_bottom)
-        width := right - left
-        height := bottom - top
+        else {
+            result := NumGet(&ptr_result)
+            pointX := NumGet(&ptr_pointX)
+            pointY := NumGet(&ptr_pointY)
+            left := NumGet(&ptr_left)
+            right := NumGet(&ptr_right)
+            top := NumGet(&ptr_top)
+            bottom := NumGet(&ptr_bottom)
+            width := right - left
+            height := bottom - top
+            
+            ; MsgBox, pointX: %pointX%, pointY: %pointY%, left: %left%, right: %right%, top: %top%, bottom: %bottom%, width: %width%
+            
+            if (result == 1) {
+                targetX := left + 48
+                SetMouseDelay, -1
+                SetDefaultMouseSpeed, 0
+                MouseGetPos, xpos, ypos
+                Click, %targetX% %pointY% Right
+                MouseMove, %xpos%, %ypos%
+            }
+        }
 
         ptr_result := ""
         ptr_pointX := ""
@@ -167,17 +182,6 @@ Return
         ptr_right := ""
         ptr_top := ""
         ptr_bottom := ""
-
-        ; MsgBox, pointX: %pointX%, pointY: %pointY%, left: %left%, right: %right%, top: %top%, bottom: %bottom%, width: %width%
-
-        if (result == 1) {
-            targetX := left + 48
-            SetMouseDelay, -1
-            SetDefaultMouseSpeed, 0
-            MouseGetPos, xpos, ypos
-            Click, %targetX% %pointY% Right
-            MouseMove, %xpos%, %ypos%
-        }
     Return
 #IfWinActive
 
@@ -278,23 +282,24 @@ Return
         if (A_LastError) {
             MsgBox, Error: %A_LastError%
         }
-
-        if (success) {
-            left := NumGet(&ptr_left)
-            right := NumGet(&ptr_right)
-            top := NumGet(&ptr_top)
-            bottom := NumGet(&ptr_bottom)
-
-            curX := 0
-            curY := 0
-            targetY := top + (bottom - top) // 2
-
-            MouseGetPos, curX, curY
-            SetMouseDelay, -1
-            SetDefaultMouseSpeed, 0
-            MouseMove, %right%, %targetY%
-            Send, {Click 2}
-            MouseMove, %curX%, %curY%
+        else {
+            if (success) {
+                left := NumGet(&ptr_left)
+                right := NumGet(&ptr_right)
+                top := NumGet(&ptr_top)
+                bottom := NumGet(&ptr_bottom)
+            
+                curX := 0
+                curY := 0
+                targetY := top + (bottom - top) // 2
+            
+                MouseGetPos, curX, curY
+                SetMouseDelay, -1
+                SetDefaultMouseSpeed, 0
+                MouseMove, %right%, %targetY%
+                Send, {Click 2}
+                MouseMove, %curX%, %curY%
+            }
         }
 
         ptr_left := ""
@@ -626,19 +631,20 @@ CollectTabInfo(horizontal, procHandle, maybeHWnd
     if (A_LastError) {
         MsgBox, Error: %A_LastError%
     }
-
-    pointX := NumGet(&ptr_pointX)
-    pointY := NumGet(&ptr_pointY)
-    left := NumGet(&ptr_left)
-    right := NumGet(&ptr_right)
-    top := NumGet(&ptr_top)
-    bottom := NumGet(&ptr_bottom)
-    width := right - left
-    height := bottom - top
-    prevPointX := NumGet(&ptr_prevPointX)
-    prevPointY := NumGet(&ptr_prevPointY)
-    nextPointX := NumGet(&ptr_nextPointX)
-    nextPointY := NumGet(&ptr_nextPointY)
+    else {
+        pointX := NumGet(&ptr_pointX)
+        pointY := NumGet(&ptr_pointY)
+        left := NumGet(&ptr_left)
+        right := NumGet(&ptr_right)
+        top := NumGet(&ptr_top)
+        bottom := NumGet(&ptr_bottom)
+        width := right - left
+        height := bottom - top
+        prevPointX := NumGet(&ptr_prevPointX)
+        prevPointY := NumGet(&ptr_prevPointY)
+        nextPointX := NumGet(&ptr_nextPointX)
+        nextPointY := NumGet(&ptr_nextPointY)
+    }
 
     ptr_pointX := ""
     ptr_pointY := ""
