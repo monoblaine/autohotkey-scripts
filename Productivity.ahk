@@ -1001,7 +1001,7 @@ WrapTextWith(left, right) {
     Send, !{f16} ; Enable copyq and activate first item
 }
 
->#v::Send !{f20}
+<#v::Send !{f20}
 >#g::Send ^{f14}
 >#b::Send ^{f15}
 >#n::Send ^{f16}
