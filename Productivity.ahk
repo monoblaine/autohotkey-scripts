@@ -844,6 +844,10 @@ Return
     }
 Return
 
+#IfWinActive ahk_exe Spotify.exe
+    NumpadDiv::Send ^k
+#IfWinActive
+
 >#>+d::
     MouseGetPos, xpos, ypos
     Click, %_DateTimeX%, %_DateTimeY%
