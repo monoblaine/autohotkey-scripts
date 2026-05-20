@@ -498,7 +498,20 @@ return
         }
     Return
 
-    ^+Tab::Send, ^+a
+    ^+Tab::
+        if WinActive("WhatsApp") {
+            Send, {Enter}
+            Sleep 150
+            Send +{Tab}
+            Sleep 50
+            Send +{Tab}
+            Sleep 50
+            Send +{Tab}
+        }
+        else {
+            Send, ^+a
+        }
+    Return
 #IfWinActive
 
 #IfWinActive ahk_exe chrome.exe
@@ -536,6 +549,37 @@ return
 
     ^+n::^+p
     ^+b::^+o
+
+    ~^Tab::
+        SetTitleMatchMode, 2
+
+        if WinActive("WhatsApp") {
+            Send, ^+a
+            Sleep 15
+            Send, {Tab}
+            Sleep 15
+            Send, {Down}
+            Sleep 15
+            Send, {Up}
+        }
+    Return
+
+    ^+Tab::
+        SetTitleMatchMode, 2
+
+        if WinActive("WhatsApp") {
+            Send, {Enter}
+            Sleep 150
+            Send +{Tab}
+            Sleep 50
+            Send +{Tab}
+            Sleep 50
+            Send +{Tab}
+        }
+        else {
+            Send, ^+Tab
+        }
+    Return
 #IfWinActive
 
 ; gitk
