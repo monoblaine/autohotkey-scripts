@@ -783,6 +783,9 @@ Return
 
 CapsLock & Backspace::Winset, Alwaysontop, , A
 
+; CapsLock + i
+CapsLock & SC028::SendInput {#}
+
 CapsLock & j::
 <#j::
 >#v::
