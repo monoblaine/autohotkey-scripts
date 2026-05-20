@@ -72,6 +72,8 @@ GroupAdd, AltPgxExcludedApps, ahk_exe soffice.bin
 GroupAdd, AltPgxExcludedApps, ahk_group Group_WinMerge
 GroupAdd, AltPgxExcludedApps, ahk_group Group_IntelliJLike
 GroupAdd, AltPgxExcludedApps, ahk_exe tomb123.exe
+GroupAdd, AltPgxExcludedApps, ahk_exe tomb456.exe
+GroupAdd, AltPgxExcludedApps, ahk_exe paintdotnet.exe
 
 GroupAdd, FileExplorerLike, ahk_class CabinetWClass
 GroupAdd, FileExplorerLike, ahk_exe Everything.exe
