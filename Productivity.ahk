@@ -114,6 +114,8 @@ _RelativeHorizontalJumpLarge := 42
 _RelativeVerticalJump   := 42
 _DateTimeX := A_ScreenWidth - 71
 _DateTimeY := A_ScreenHeight - 15
+PhotosExePrevBtnX := 47
+PhotosExeNextBtnX := A_ScreenWidth - 47
 
 LastMovement := MovementMethod.unknown
 
@@ -669,39 +671,29 @@ return
     Return
 #IfWinActive
 
-#IfWinActive ahk_exe ApplicationFrameHost.exe
+#IfWinActive ahk_exe Photos.exe
     ~Numpad0::
     ~NumpadIns::
-        SetTitleMatchMode, 2
-
-        if WinActive("Fotoğraflar") {
-            Send, ^0
-        }
+        Send, ^0
     return
 
-    ~Numpad1::
-        SetTitleMatchMode, 2
+    ~NumpadEnd::Send, ^1
+    ~NumpadAdd::Send, ^{NumpadAdd}
+    ~NumpadSub::Send, ^{NumpadSub}
 
-        if WinActive("Fotoğraflar") {
-            Send, ^1
-        }
-    return
+    PgDn::
+        MouseGetPos, xpos, ypos
+        MouseMove, PhotosExeNextBtnX, _CY
+        Click
+        MouseMove, %xpos%, %ypos%
+    Return
 
-    ~NumpadAdd::
-        SetTitleMatchMode, 2
-
-        if WinActive("Fotoğraflar") {
-            Send, ^{NumpadAdd}
-        }
-    return
-
-    ~NumpadSub::
-        SetTitleMatchMode, 2
-
-        if WinActive("Fotoğraflar") {
-            Send, ^{NumpadSub}
-        }
-    return
+    PgUp::
+        MouseGetPos, xpos, ypos
+        MouseMove, PhotosExePrevBtnX, _CY
+        Click
+        MouseMove, %xpos%, %ypos%
+    Return
 #IfWinActive
 
 RButton & LButton::
