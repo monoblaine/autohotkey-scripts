@@ -1244,24 +1244,6 @@ WrapTextWith(left, right) {
 
     <^>!+İ::Send ^!+{I}
 
-    <#+Ş::
-        Send, !{f17} ; disable copyq
-        Sleep 100
-        Send ^+ü
-        Sleep 15
-        Send {Del}
-        Sleep 15
-        SendInput []
-        Send {Left}{Enter}{Up}{End}{Enter}{BackSpace 2}
-        Sleep 15
-        Run, ClipToQuotedLines.exe
-        Sleep 200
-        ClipBoard := RegExReplace(ClipBoard, "(\r?\n|^)([^\r\n]+)", "$1    $2")
-        Send ^v
-        Sleep 250
-        Send, !{f16} ; Enable copyq and activate first item
-    Return
-
     >#b::Send {F7}
     >#g::Send {Esc}
     >#w::Send {F6}
