@@ -514,8 +514,7 @@ return
         MouseMove, %xpos%, %ypos%
     return
 
-    ^+n::^+p
-    ^+b::^+o
+    ^q::Send, ^l
 
     >#+v::
         MouseGetPos, xpos, ypos
@@ -535,7 +534,8 @@ return
         MouseMove, %xpos%, %ypos%
     Return
 
-    ^q::Send, ^l
+    ^+n::^+p
+    ^+b::^+o
 #IfWinActive
 
 ; gitk
