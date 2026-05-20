@@ -586,6 +586,10 @@ return
         Send, +{Tab}
     Return
 
+    ; ================
+    ; Firefox-specific
+    ; ================
+
     !f::
         MouseGetPos, xpos, ypos
         MouseMove, 1894, 56
