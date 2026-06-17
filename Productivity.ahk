@@ -1011,6 +1011,22 @@ return
     Send, !{f16} ; Enable copyq and activate first item
 return
 
+^+8::
+    Send, !{f17} ; disable copyq
+    clipboard := ""
+    Send, ^c
+    ClipWait
+    InputBox, textToWrap, Text to wrap, ,, 173, 108,,,,, **
+    if ErrorLevel {
+        Send, !{f16} ; Enable copyq and activate first item
+        return
+    }
+    clipboard := textToWrap . clipboard . textToWrap
+    Send, ^v
+    Sleep 250
+    Send, !{f16} ; Enable copyq and activate first item
+return
+
 WrapTextWith(left, right) {
     Send, !{f17} ; disable copyq
     clipboard := ""
