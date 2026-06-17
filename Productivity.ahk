@@ -92,19 +92,53 @@ RegRead, WheelScrollLines, HKCU\Control Panel\Desktop, WheelScrollLines
 
 MovementMethod := { unknown: 0, horizontal: 1, vertical: 2 }
 
-MouseMovableRegionMargin := 70
+MouseMovableRegionMargin := 10
 MouseMovableRegionWidth  := A_ScreenWidth  - (MouseMovableRegionMargin * 2)
 MouseMovableRegionHeight := A_ScreenHeight - (MouseMovableRegionMargin * 2)
 _CX := Floor(A_ScreenWidth  / 2)
 _CY := Floor(A_ScreenHeight / 2)
-_L0 := Floor(_CX - MouseMovableRegionWidth  * ScreenGridSize0)
-_L1 := Floor(_CX - MouseMovableRegionWidth  * ScreenGridSize1)
-_T0 := Floor(_CY - MouseMovableRegionHeight * ScreenGridSize0)
-_T1 := Floor(_CY - MouseMovableRegionHeight * ScreenGridSize1)
-_R0 := Floor(_CX + MouseMovableRegionWidth  * ScreenGridSize0)
-_R1 := Floor(_CX + MouseMovableRegionWidth  * ScreenGridSize1)
-_B0 := Floor(_CY + MouseMovableRegionHeight * ScreenGridSize0)
-_B1 := Floor(_CY + MouseMovableRegionHeight * ScreenGridSize1)
+_B0 := Floor(_CY + (A_ScreenHeight - (70 * 2)) * ScreenGridSize0)
+
+_TL_COORDS := [ [Floor(_CX - MouseMovableRegionWidth  * .1), Floor(_CY - MouseMovableRegionHeight * .1)]
+               ,[Floor(_CX - MouseMovableRegionWidth  * .2), Floor(_CY - MouseMovableRegionHeight * .2)]
+               ,[Floor(_CX - MouseMovableRegionWidth  * .3), Floor(_CY - MouseMovableRegionHeight * .3)]
+               ,[Floor(_CX - MouseMovableRegionWidth  * .4), Floor(_CY - MouseMovableRegionHeight * .4)]
+               ,[Floor(_CX - MouseMovableRegionWidth  * .5), Floor(_CY - MouseMovableRegionHeight * .5)] ]
+_TM_COORDS := [ [                                       _CX, Floor(_CY - MouseMovableRegionHeight * .1)]
+               ,[                                       _CX, Floor(_CY - MouseMovableRegionHeight * .2)]
+               ,[                                       _CX, Floor(_CY - MouseMovableRegionHeight * .3)]
+               ,[                                       _CX, Floor(_CY - MouseMovableRegionHeight * .4)]
+               ,[                                       _CX, Floor(_CY - MouseMovableRegionHeight * .5)] ]
+_TR_COORDS := [ [Floor(_CX + MouseMovableRegionWidth  * .1), Floor(_CY - MouseMovableRegionHeight * .1)]
+               ,[Floor(_CX + MouseMovableRegionWidth  * .2), Floor(_CY - MouseMovableRegionHeight * .2)]
+               ,[Floor(_CX + MouseMovableRegionWidth  * .3), Floor(_CY - MouseMovableRegionHeight * .3)]
+               ,[Floor(_CX + MouseMovableRegionWidth  * .4), Floor(_CY - MouseMovableRegionHeight * .4)]
+               ,[Floor(_CX + MouseMovableRegionWidth  * .5), Floor(_CY - MouseMovableRegionHeight * .5)] ]
+_ML_COORDS := [ [Floor(_CX - MouseMovableRegionWidth  * .1),                                        _CY]
+               ,[Floor(_CX - MouseMovableRegionWidth  * .2),                                        _CY]
+               ,[Floor(_CX - MouseMovableRegionWidth  * .3),                                        _CY]
+               ,[Floor(_CX - MouseMovableRegionWidth  * .4),                                        _CY]
+               ,[Floor(_CX - MouseMovableRegionWidth  * .5),                                        _CY] ]
+_MR_COORDS := [ [Floor(_CX + MouseMovableRegionWidth  * .1),                                        _CY]
+               ,[Floor(_CX + MouseMovableRegionWidth  * .2),                                        _CY]
+               ,[Floor(_CX + MouseMovableRegionWidth  * .3),                                        _CY]
+               ,[Floor(_CX + MouseMovableRegionWidth  * .4),                                        _CY]
+               ,[Floor(_CX + MouseMovableRegionWidth  * .5),                                        _CY] ]
+_BL_COORDS := [ [Floor(_CX - MouseMovableRegionWidth  * .1), Floor(_CY + MouseMovableRegionHeight * .1)]
+               ,[Floor(_CX - MouseMovableRegionWidth  * .2), Floor(_CY + MouseMovableRegionHeight * .2)]
+               ,[Floor(_CX - MouseMovableRegionWidth  * .3), Floor(_CY + MouseMovableRegionHeight * .3)]
+               ,[Floor(_CX - MouseMovableRegionWidth  * .4), Floor(_CY + MouseMovableRegionHeight * .4)]
+               ,[Floor(_CX - MouseMovableRegionWidth  * .5), Floor(_CY + MouseMovableRegionHeight * .5)] ]
+_BM_COORDS := [ [                                       _CX, Floor(_CY + MouseMovableRegionHeight * .1)]
+               ,[                                       _CX, Floor(_CY + MouseMovableRegionHeight * .2)]
+               ,[                                       _CX, Floor(_CY + MouseMovableRegionHeight * .3)]
+               ,[                                       _CX, Floor(_CY + MouseMovableRegionHeight * .4)]
+               ,[                                       _CX, Floor(_CY + MouseMovableRegionHeight * .5)] ]
+_BR_COORDS := [ [Floor(_CX + MouseMovableRegionWidth  * .1), Floor(_CY + MouseMovableRegionHeight * .1)]
+               ,[Floor(_CX + MouseMovableRegionWidth  * .2), Floor(_CY + MouseMovableRegionHeight * .2)]
+               ,[Floor(_CX + MouseMovableRegionWidth  * .3), Floor(_CY + MouseMovableRegionHeight * .3)]
+               ,[Floor(_CX + MouseMovableRegionWidth  * .4), Floor(_CY + MouseMovableRegionHeight * .4)]
+               ,[Floor(_CX + MouseMovableRegionWidth  * .5), Floor(_CY + MouseMovableRegionHeight * .5)] ]
 
 _SafeX := Floor(A_ScreenWidth  / 2 + A_ScreenWidth  / 2.5)
 _SafeY := Floor(A_ScreenHeight / 2 - A_ScreenHeight / 2.5) + (14 * 9)
@@ -278,46 +312,26 @@ CapsLock & Space::SetCapsLockState % !GetKeyState("CapsLock", "T")              
 <#Numpad7::
 CapsLock & NumpadHome::
 CapsLock & Numpad7::
-    if GetKeyState("LAlt") {
-        ToggleMousePos(_L1, _T1)
-    }
-    else {
-        ToggleMousePos(_L0, _T0)
-    }
+    ToggleMousePosPredefined(_TL_COORDS)
 return
 
 <#Numpad8::
 CapsLock & NumpadUp::
 CapsLock & Numpad8::
-    if GetKeyState("LAlt") {
-        ToggleMousePos(_CX, _T1)
-    }
-    else {
-        ToggleMousePos(_CX, _T0)
-    }
+    ToggleMousePosPredefined(_TM_COORDS)
 return
 
 <#Numpad9::
 CapsLock & NumpadPgup::
 CapsLock & Numpad9::
-    if GetKeyState("LAlt") {
-        ToggleMousePos(_R1, _T1)
-    }
-    else {
-        ToggleMousePos(_R0, _T0)
-    }
+    ToggleMousePosPredefined(_TR_COORDS)
 return
 
 <#Numpad4::
 <#NumpadLeft::
 CapsLock & NumpadLeft::
 CapsLock & Numpad4::
-    if GetKeyState("LAlt") {
-        ToggleMousePos(_L1, _CY)
-    }
-    else {
-        ToggleMousePos(_L0, _CY)
-    }
+    ToggleMousePosPredefined(_ML_COORDS)
 return
 
 <#Numpad5::
@@ -330,48 +344,28 @@ return
 <#NumpadRight::
 CapsLock & NumpadRight::
 CapsLock & Numpad6::
-    if GetKeyState("LAlt") {
-        ToggleMousePos(_R1, _CY)
-    }
-    else {
-        ToggleMousePos(_R0, _CY)
-    }
+    ToggleMousePosPredefined(_MR_COORDS)
 return
 
 <#Numpad1::
 <#NumpadEnd::
 CapsLock & NumpadEnd::
 CapsLock & Numpad1::
-    if GetKeyState("LAlt") {
-        ToggleMousePos(_L1, _B1)
-    }
-    else {
-        ToggleMousePos(_L0, _B0)
-    }
+    ToggleMousePosPredefined(_BL_COORDS)
 return
 
 <#Numpad2::
 <#NumpadDown::
 CapsLock & NumpadDown::
 CapsLock & Numpad2::
-    if GetKeyState("LAlt") {
-        ToggleMousePos(_CX, _B1)
-    }
-    else {
-        ToggleMousePos(_CX, _B0)
-    }
+    ToggleMousePosPredefined(_BM_COORDS)
 return
 
 <#Numpad3::
 <#NumpadPgdn::
 CapsLock & NumpadPgdn::
 CapsLock & Numpad3::
-    if GetKeyState("LAlt") {
-        ToggleMousePos(_R1, _B1)
-    }
-    else {
-        ToggleMousePos(_R0, _B0)
-    }
+    ToggleMousePosPredefined(_BR_COORDS)
 return
 
 ClickOnCenter:
@@ -1636,6 +1630,50 @@ return
 ProcessExist(Name) {
     Process, Exist, %Name%
     return Errorlevel
+}
+
+ToggleMousePosPredefined(coordPairs) {
+    ; firstItem := coordPairs[1]
+    ; x := firstItem[1]
+    ; y := firstItem[2]
+    ; MsgBox x: %x% y: %y%
+    MouseGetPos, xpos, ypos
+    xpos := Floor(xpos)
+    ypos := Floor(ypos)
+    targetx := 0
+    targety := 0
+    numOfCoordPairs := coordPairs.MaxIndex()
+    direction := 1
+    if GetKeyState("LAlt") {
+        direction := -1
+    }
+    for ix, coordPair in coordPairs {
+        currentX := coordPair[1]
+        currentY := coordPair[2]
+        if (currentX = xpos and currentY = ypos) {
+            nextPairIx := ix + direction
+            if (nextPairIx > numOfCoordPairs) {
+                nextPairIx := 1
+            }
+            else if (nextPairIx < 1) {
+                nextPairIx := numOfCoordPairs
+            }
+            targetPair := coordPairs[nextPairIx]
+            targetx := targetPair[1]
+            targety := targetPair[2]
+            break
+        }
+    }
+    if (targetx = 0 and targety = 0) {
+        targetPairIx := 1
+        if (direction < 0) {
+            targetPairIx := numOfCoordPairs
+        }
+        targetPair := coordPairs[targetPairIx]
+        targetx := targetPair[1]
+        targety := targetPair[2]
+    }
+    ToggleMousePos(targetx, targety)
 }
 
 ToggleMousePos(targetx, targety, isRelative := 0) {
