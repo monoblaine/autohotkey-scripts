@@ -1574,6 +1574,8 @@ return
     Send {Left}
 Return
 
+>#c::Send !{f21}
+
 ;=============================================================================================
 ; Show a ToolTip that shows the current state of the lock keys (e.g. NumLock) when one is pressed
 ;=============================================================================================
