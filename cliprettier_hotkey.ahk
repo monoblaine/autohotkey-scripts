@@ -27,6 +27,7 @@ SendMode Input
     InputBox, fileExtension, File extension, ,, 173, 108,,,,, %match1%
 
     if ErrorLevel {
+        Send, !{f16} ; Enable copyq and activate first item
         return
     }
 
