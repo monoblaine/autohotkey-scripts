@@ -54,6 +54,8 @@ SendMode Input
     >#>+j::Send ^!+{f12}
     >#>+k::Send ^!+{f13}
     ^+SC056::Send ^+{f14}
+    ^+NumpadAdd::Send ^+{f2}
+    ^+NumpadSub::Send ^+{f1}
 #IfWinActive
 
 #IfWinActive Fields ahk_class SALSUBFRAME ahk_exe soffice.bin
