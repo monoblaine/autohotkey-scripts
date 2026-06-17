@@ -994,6 +994,23 @@ return
     Send, !{f16} ; Enable copyq and activate first item
 return
 
+^+7::
+    Send, !{f17} ; disable copyq
+    clipboard := ""
+    Send, ^c
+    ClipWait
+    InputBox, fileExtension, File extension, ,, 173, 108,,,,, cs
+    if ErrorLevel {
+        Send, !{f16} ; Enable copyq and activate first item
+        return
+    }
+    clipboard := "``````" . fileExtension . "`n" . RegexReplace(clipboard, "[\r\n]+$", "") . "`n``````"
+    RunWait %ComSpec% /c clipemdown | MarkdownForClipboard.exe,, Hide
+    Send, ^v
+    Sleep 250
+    Send, !{f16} ; Enable copyq and activate first item
+return
+
 WrapTextWith(left, right) {
     Send, !{f17} ; disable copyq
     clipboard := ""
