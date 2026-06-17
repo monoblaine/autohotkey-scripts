@@ -1595,6 +1595,7 @@ return
 ^!+x::SendInput [ ]{Space}                                           ; ctrl + alt + shift + x     | print [ ]
 <#Space::SendInput {Space}{Space}{Space}{Space}                      ; lwin + space               | Send 4 spaces
 <#>+Space::SendInput {Backspace}{Backspace}{Backspace}{Backspace}    ; win + rshift + space       | Remove 4 spaces
+:*:;;task::,`n[href="/tasks/"]:after{Space}
 
 #IfWinNotActive ahk_group Group_CtrlAltShiftGExcludedApps
     ^!+c::SendInput *{Space}                                         ; ctrl + alt + shift + c     | print *
