@@ -647,18 +647,6 @@ return
 
     ^+r::Send, {f7}
 
-    ^!+g::
-        Send, ^l
-        Sleep 100
-        Send, +{Tab}
-        Sleep 100
-        Send, +{Tab}
-        Sleep 100
-        Send, +{Tab}
-        Sleep 100
-        Send, +{Tab}
-    Return
-
     ; ================
     ; Firefox-specific
     ; ================
