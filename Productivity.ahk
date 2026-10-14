@@ -593,6 +593,8 @@ return
 #IfWinActive
 
 #IfWinActive ahk_exe firefox.exe
+    NumpadDown::Tab
+
     NumpadEnd::
         SetTitleMatchMode, 2
 
@@ -993,7 +995,6 @@ AppsKey::RWin
 >#+Tab::Send, +{AppsKey}
 >#Enter::Send, {AppsKey}
 >#+Enter::Send, +{AppsKey}
-NumpadDown::Tab
 
 ^'::
     Ctrl & ":: ;"
