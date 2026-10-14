@@ -181,9 +181,9 @@ Return
             bottom := NumGet(&ptr_bottom)
             width := right - left
             height := bottom - top
-            
+
             ; MsgBox, pointX: %pointX%, pointY: %pointY%, left: %left%, right: %right%, top: %top%, bottom: %bottom%, width: %width%
-            
+
             if (result == 1) {
                 targetX := left + 48
                 SetMouseDelay, -1
@@ -302,11 +302,11 @@ Return
                 right := NumGet(&ptr_right)
                 top := NumGet(&ptr_top)
                 bottom := NumGet(&ptr_bottom)
-            
+
                 curX := 0
                 curY := 0
                 targetY := top + (bottom - top) // 2
-            
+
                 MouseGetPos, curX, curY
                 SetMouseDelay, -1
                 SetDefaultMouseSpeed, 0
