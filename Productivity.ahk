@@ -1597,6 +1597,11 @@ return
     Send {Left}
 return
 
+:*:;;fq::
+    SendRaw, '"FullyQualifiedName~"'
+    Send {Left}{Left}
+return
+
 :*:;;dfc::{Raw}[DefaultValueFactory(UseDefaultPropertyValue = true)]`n[ValidateReferenceType]
 :*:;;dfl::{Raw}[DefaultValueFactory(UseDefaultPropertyValue = true)]`n[ValidateReferenceTypeCollection]`n[LoyalReferenceTypeCollectionRange(Min = 1, ErrorMessage = "En az bir satır eklemeniz gereklidir.")]
 
