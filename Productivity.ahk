@@ -75,6 +75,7 @@ GroupAdd, AltPgxExcludedApps, ahk_group Group_IntelliJLike
 GroupAdd, AltPgxExcludedApps, ahk_exe tomb123.exe
 GroupAdd, AltPgxExcludedApps, ahk_exe tomb456.exe
 GroupAdd, AltPgxExcludedApps, ahk_exe paintdotnet.exe
+GroupAdd, AltPgxExcludedApps, ahk_exe Code.exe
 
 GroupAdd, FileExplorerLike, ahk_class CabinetWClass
 GroupAdd, FileExplorerLike, ahk_exe Everything.exe
