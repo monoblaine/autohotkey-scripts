@@ -27,7 +27,6 @@ procHandle_MsEdge2 := DllCall("GetProcAddress", Ptr, hModule, AStr, "MsEdge_getT
 procHandle_MsEdge3 := DllCall("GetProcAddress", Ptr, hModule, AStr, "MsEdgeDevTools_getLastMessage", Ptr)
 procHandle_Firefox := DllCall("GetProcAddress", Ptr, hModule, AStr, "Firefox_inspectActiveTab", Ptr)
 procHandle_FirefoxDevTools := DllCall("GetProcAddress", Ptr, hModule, AStr, "FirefoxDevTools_inspectTabOn", Ptr)
-procHandle_Vs2026_1 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Vs2026_inspectActiveTab", Ptr)
 procHandle_Vs2026_2 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Vs2026_isTextEditorFocused", Ptr)
 procHandle_Vs2026_3 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Vs2026_selectedIntelliSenseItemIsAMethod", Ptr)
 procHandle_Vs2026_4 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Vs2026_getFocusedElementType", Ptr)
@@ -57,7 +56,6 @@ Exit:
    DllCall("CloseHandle", Ptr, procHandle_MsEdge3)
    DllCall("CloseHandle", Ptr, procHandle_Firefox)
    DllCall("CloseHandle", Ptr, procHandle_FirefoxDevTools)
-   DllCall("CloseHandle", Ptr, procHandle_Vs2026_1)
    DllCall("CloseHandle", Ptr, procHandle_Vs2026_2)
    DllCall("CloseHandle", Ptr, procHandle_Vs2026_3)
    DllCall("CloseHandle", Ptr, procHandle_Vs2026_4)
@@ -268,11 +266,6 @@ Return
         }
     Return
 #If
-
-#IfWinActive ahk_exe devenv.exe
-    ^!PgUp::MoveVisualStudioTab(-1)
-    ^!PgDn::MoveVisualStudioTab(1)
-#IfWinActive
 
 #IfWinNotActive ahk_group Group_CtrlShiftC_ExcludedApps
     ^+c::
@@ -500,15 +493,6 @@ Return
         DllCall(procHandle_WinMerge2011, Int, WinExist("A"), Int, 0)
     Return
 #IfWinActive
-
-MoveVisualStudioTab(direction) {
-    global procHandle_Vs2026_1
-    global MovementMethod
-
-    hWnd := WinExist("A")
-    procHandle := procHandle_Vs2026_1
-    MoveTab(0, direction, procHandle, MovementMethod.mouseClickDrag2, hWnd)
-}
 
 MoveTab(horizontal, direction, procHandle, movementMethodId, maybeHWnd := 0, widthHeightFactor := 0) {
     global MovementMethod
