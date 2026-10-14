@@ -1452,8 +1452,6 @@ WrapTextWith(left, right) {
 #IfWinActive
 
 #IfWinActive ahk_exe Code.exe
-    !Pgdn::Send, ^!+{Pgdn}
-    !Pgup::Send, ^!+{Pgup}
     <^>!+g::Send, ^!+g
 
     ~^+d::
