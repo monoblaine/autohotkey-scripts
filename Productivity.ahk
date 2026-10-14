@@ -1408,45 +1408,6 @@ WrapTextWith(left, right) {
     Return
 #IfWinActive
 
-; Honor scroll lock state (may or may not work)
-#If !WinActive("ahk_exe EXCEL.EXE") and GetKeyState("ScrollLock", "T")
-    ;==============================================================================
-    ; SCROLL USING ARROW KEYS
-    ;==============================================================================
-    Up::
-        ControlGetFocus, fcontrol, A
-        SendMessage, 0x115, 0, 0, %fcontrol%, A  ; 0x115=WM_VSCROLL; 0=SB_LINEUP
-    return
-
-    Down::
-        ControlGetFocus, fcontrol, A
-        SendMessage, 0x115, 1, 0, %fcontrol%, A  ; 0x115=WM_VSCROLL; 1=SB_LINEDOWN
-    return
-
-    Left::
-        ControlGetFocus, fcontrol, A
-        SendMessage, 0x114, 0, 0, %fcontrol%, A  ; 0x114=WM_HSCROLL; 0=SB_LINELEFT
-    return
-
-    Right::
-        ControlGetFocus, fcontrol, A
-        SendMessage, 0x114, 1, 0, %fcontrol%, A  ; 0x114=WM_HSCROLL; 1=SB_LINERIGHT
-    return
-
-    ;==============================================================================
-    ; SCROLL USING PgUp & PgDown
-    ;==============================================================================
-    PgUp::
-        ControlGetFocus, fcontrol, A
-        SendMessage, 0x115, 2, 0, %fcontrol%, A  ; 0x115=WM_VSCROLL; 2=SB_PAGEUP
-    return
-
-    PgDn::
-        ControlGetFocus, fcontrol, A
-        SendMessage, 0x115, 3, 0, %fcontrol%, A  ; 0x115=WM_VSCROLL; 3=SB_PAGEDOWN
-    return
-#If
-
 ; if scroll lock is on
 #If GetKeyState("ScrollLock", "T")
     ; Convert a bower.json url to npm-friendly url
