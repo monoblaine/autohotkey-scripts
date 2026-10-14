@@ -1606,11 +1606,6 @@ return
     Send {Left}{Left}
 return
 
-:*:;;dd::
-    clipboard := StrReplace(clipboard, "-", "")
-    SendInput %clipboard%0000{Space}-{Space}
-return
-
 :*:::nb::
     clipboard := RegExReplace(clipboard, "[.,]", "")
     SendInput %clipboard%
