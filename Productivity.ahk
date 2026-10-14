@@ -1421,6 +1421,9 @@ WrapTextWith(left, right) {
         VarSetCapacity(originalClipboard, 0) ; Free memory
         SetScrollLockState, Off
     return
+
+    Up::Volume_Up
+    Down::Volume_Down
 #If
 
 #IfWinActive ahk_group Group_IntelliJLike
