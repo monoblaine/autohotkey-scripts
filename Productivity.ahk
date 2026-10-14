@@ -789,6 +789,14 @@ return
         Send {Left}
     Return
     >#b::Send, {Esc}
+
+    ^+g::
+        Send ^!+g
+        Sleep, 15
+        Send, {Tab}
+        Sleep, 15
+        Send, {Tab}
+    Return
 #IfWinActive
 
 #IfWinActive ahk_exe Ssms.exe
