@@ -27,9 +27,9 @@ procHandle_MsEdge2 := DllCall("GetProcAddress", Ptr, hModule, AStr, "MsEdge_getT
 procHandle_MsEdge3 := DllCall("GetProcAddress", Ptr, hModule, AStr, "MsEdgeDevTools_getLastMessage", Ptr)
 procHandle_Firefox := DllCall("GetProcAddress", Ptr, hModule, AStr, "Firefox_inspectActiveTab", Ptr)
 procHandle_FirefoxDevTools := DllCall("GetProcAddress", Ptr, hModule, AStr, "FirefoxDevTools_inspectTabOn", Ptr)
-procHandle_Vs2026_2 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Vs2026_isTextEditorFocused", Ptr)
-procHandle_Vs2026_3 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Vs2026_selectedIntelliSenseItemIsAMethod", Ptr)
-procHandle_Vs2026_4 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Vs2026_getFocusedElementType", Ptr)
+procHandle_Vs2026_1 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Vs2026_isTextEditorFocused", Ptr)
+procHandle_Vs2026_2 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Vs2026_selectedIntelliSenseItemIsAMethod", Ptr)
+procHandle_Vs2026_3 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Vs2026_getFocusedElementType", Ptr)
 procHandle_Ssms18_1 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Ssms18_inspectActiveTab", Ptr)
 procHandle_Ssms18_2 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Ssms18_getResultsGridActiveColumnCoords", Ptr)
 procHandle_Ssms18_3 := DllCall("GetProcAddress", Ptr, hModule, AStr, "Ssms18_getActiveArea", Ptr)
@@ -56,9 +56,9 @@ Exit:
    DllCall("CloseHandle", Ptr, procHandle_MsEdge3)
    DllCall("CloseHandle", Ptr, procHandle_Firefox)
    DllCall("CloseHandle", Ptr, procHandle_FirefoxDevTools)
+   DllCall("CloseHandle", Ptr, procHandle_Vs2026_1)
    DllCall("CloseHandle", Ptr, procHandle_Vs2026_2)
    DllCall("CloseHandle", Ptr, procHandle_Vs2026_3)
-   DllCall("CloseHandle", Ptr, procHandle_Vs2026_4)
    DllCall("CloseHandle", Ptr, procHandle_Ssms18_1)
    DllCall("CloseHandle", Ptr, procHandle_Ssms18_2)
    DllCall("CloseHandle", Ptr, procHandle_Ssms18_3)
@@ -220,7 +220,7 @@ Return
 
 #If WinActive("ahk_exe devenv.exe") and !PauseKeyState
     $Tab::
-        if (DllCall(procHandle_Vs2026_3, Int, WinExist("A"), Int, 0)) {
+        if (DllCall(procHandle_Vs2026_2, Int, WinExist("A"), Int, 0)) {
             Send {Tab}()
         }
         else {
@@ -228,7 +228,7 @@ Return
         }
     Return
     $+Enter::
-        Switch DllCall(procHandle_Vs2026_4, Int, WinExist("A")) {
+        Switch DllCall(procHandle_Vs2026_3, Int, WinExist("A")) {
             Case 1:
                 Send (){Left}
             Case 2:
@@ -238,7 +238,7 @@ Return
         }
     Return
     $^Enter::
-        Switch DllCall(procHandle_Vs2026_3, Int, WinExist("A"), Int, 1) {
+        Switch DllCall(procHandle_Vs2026_2, Int, WinExist("A"), Int, 1) {
             Case 1:
                 Send (){;}
 
@@ -250,7 +250,7 @@ Return
         }
     Return
     $!Enter::
-        if (DllCall(procHandle_Vs2026_3, Int, WinExist("A"), Int, 1)) {
+        if (DllCall(procHandle_Vs2026_2, Int, WinExist("A"), Int, 1)) {
             Send {{}{Left}{Space}
         }
         else {
@@ -258,7 +258,7 @@ Return
         }
     Return
     $SC056::
-        if (DllCall(procHandle_Vs2026_3, Int, WinExist("A"), Int, 1)) {
+        if (DllCall(procHandle_Vs2026_2, Int, WinExist("A"), Int, 1)) {
             Send <>{Left}
         }
         else {
