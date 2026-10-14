@@ -101,6 +101,10 @@ _CX := Floor(A_ScreenWidth  / 2)
 _CY := Floor(A_ScreenHeight / 2)
 _B0 := Floor(_CY + (A_ScreenHeight - (70 * 2)) * ScreenGridSize0)
 
+_LAST_YX_COORDS         := []
+_LAST_YX_COORDS_PAIR    := [0, 0]
+_LAST_YX_COORDS_PAIR_IX := -1
+
 _TL_COORDS := [ [Floor(_CX - MouseMovableRegionWidth  * .1), Floor(_CY - MouseMovableRegionHeight * .1)]
                ,[Floor(_CX - MouseMovableRegionWidth  * .2), Floor(_CY - MouseMovableRegionHeight * .2)]
                ,[Floor(_CX - MouseMovableRegionWidth  * .3), Floor(_CY - MouseMovableRegionHeight * .3)]
@@ -376,16 +380,16 @@ NumpadDel::Send, ,
 #If
 
 <#Up::                                                                            ; LWin + Up
-    ToggleMousePos(_SafeX, _SafeY)
+    ToggleMousePos(_SafeX, _SafeY, 0, 1)
 Return
 
 CapsLock & Home::
-    ToggleMousePos(A_ScreenWidth - 1, _SafeY)
+    ToggleMousePos(A_ScreenWidth - 1, _SafeY, 0, 1)
 Return
 
 CapsLock & Space::SetCapsLockState % !GetKeyState("CapsLock", "T")                ; CapsLock + Space             | Toggle CapsLock state
 
-<#Down::ToggleMousePos(_SafeX, _B0)
+<#Down::ToggleMousePos(_SafeX, _B0, 0, 1)
 
 <#Numpad7::
 CapsLock & NumpadHome::
@@ -415,7 +419,7 @@ return
 <#Numpad5::
 CapsLock & NumpadClear::
 CapsLock & Numpad5::
-    ToggleMousePos(_CX, _CY)
+    ToggleMousePos(_CX, _CY, 0, 1)
 return
 
 <#Numpad6::
@@ -1664,58 +1668,77 @@ ProcessExist(Name) {
 }
 
 ToggleMousePosPredefined(coordPairs) {
-    ; firstItem := coordPairs[1]
-    ; x := firstItem[1]
-    ; y := firstItem[2]
-    ; MsgBox x: %x% y: %y%
-    MouseGetPos, xpos, ypos
-    xpos := Floor(xpos)
-    ypos := Floor(ypos)
-    targetx := 0
-    targety := 0
+    Global _TL_COORDS
+    Global _TM_COORDS
+    Global _TR_COORDS
+    Global _ML_COORDS
+    Global _MR_COORDS
+    Global _BL_COORDS
+    Global _BM_COORDS
+    Global _BR_COORDS
+    Global _LAST_YX_COORDS
+    Global _LAST_YX_COORDS_PAIR
+    Global _LAST_YX_COORDS_PAIR_IX
+    Global _SafeX
+    Global _SafeY
     numOfCoordPairs := coordPairs.MaxIndex()
     direction := 1
     if GetKeyState("LAlt") {
         direction := -1
     }
-    for ix, coordPair in coordPairs {
-        currentX := coordPair[1]
-        currentY := coordPair[2]
-        if (currentX = xpos and currentY = ypos) {
-            nextPairIx := ix + direction
-            if (nextPairIx > numOfCoordPairs) {
-                nextPairIx := 1
-            }
-            else if (nextPairIx < 1) {
-                nextPairIx := numOfCoordPairs
-            }
-            targetPair := coordPairs[nextPairIx]
-            targetx := targetPair[1]
-            targety := targetPair[2]
-            break
+    MouseGetPos, xpos, ypos
+    xpos := Floor(xpos)
+    ypos := Floor(ypos)
+    ; MsgBox, direction: %direction%`xpos: %xpos%`nypos: %ypos%`n_SafeX: %_SafeX%`n_SafeY: %_SafeY%
+    if (direction = 1 and xpos = _SafeX and ypos = _SafeY and coordPairs = _TR_COORDS) {
+        _LAST_YX_COORDS_PAIR_IX := 3
+    }
+    else if (_LAST_YX_COORDS_PAIR_IX = -1) {
+        if (direction = -1) {
+            _LAST_YX_COORDS_PAIR_IX := numOfCoordPairs - 1
+        }
+        else {
+            _LAST_YX_COORDS_PAIR_IX := 0
         }
     }
-    if (targetx = 0 and targety = 0) {
-        targetPairIx := 1
-        if (direction < 0) {
-            targetPairIx := numOfCoordPairs
+    else {
+        if (_LAST_YX_COORDS = coordPairs) {
+            _LAST_YX_COORDS_PAIR_IX := Mod(_LAST_YX_COORDS_PAIR_IX + direction + numOfCoordPairs, numOfCoordPairs)
         }
-        targetPair := coordPairs[targetPairIx]
-        targetx := targetPair[1]
-        targety := targetPair[2]
     }
-    ToggleMousePos(targetx, targety)
+    _LAST_YX_COORDS_PAIR := coordPairs[_LAST_YX_COORDS_PAIR_IX + 1]
+    _LAST_YX_COORDS := coordPairs
+    ToggleMousePos(_LAST_YX_COORDS_PAIR[1], _LAST_YX_COORDS_PAIR[2], 0, 0, xpos, ypos)
 }
 
-ToggleMousePos(targetx, targety, isRelative := 0) {
+ToggleMousePos(targetx, targety, isRelative := 0, shouldResetLastYxCoords := 0, maybeXPos := 0, maybeYPos := 0) {
+    Global _LAST_YX_COORDS
+    Global _LAST_YX_COORDS_PAIR
+    Global _LAST_YX_COORDS_PAIR_IX
     Global LastMouseCoordX
     Global LastMouseCoordY
     Global LastMovement
     Global MovementMethod
 
-    MouseGetPos, xpos, ypos
-    xpos := Floor(xpos)
-    ypos := Floor(ypos)
+    if (isRelative = 1 or shouldResetLastYxCoords = 1) {
+        _LAST_YX_COORDS         := []
+        _LAST_YX_COORDS_PAIR    := [0, 0]
+        _LAST_YX_COORDS_PAIR    := [0, 0]
+        _LAST_YX_COORDS_PAIR_IX := -1
+    }
+
+    xpos := 0
+    ypos := 0
+
+    if (maybeXPos != 0 and maybeYPos != 0) {
+        xpos = maybeXPos
+        ypos = maybeYPos
+    }
+    else {
+        MouseGetPos, xpos, ypos
+        xpos := Floor(xpos)
+        ypos := Floor(ypos)
+    }
 
     LastMovement := MovementMethod.unknown
 
